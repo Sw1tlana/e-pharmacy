@@ -1,0 +1,15 @@
+:root {
+    --primary-color: #1D1E2166;
+    --secondary-color: #93939A;
+    --white-color: #ffffff;
+    --bg-color: #F7F8FA;
+    --green-accent-color: #59B17A;
+    --btn-green-accent-color: #3F945F;
+    --btn-bg-red-color: #E85050;
+    --btn-accentbg-red-color: #E850501A;
+    --yellow-color: #FFC531;
+
+    
+    --bg-green-color: rgba(89, 177, 122, 0.1);
+
+} 

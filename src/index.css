@@ -1,0 +1,79 @@
+@import url('./shared/style/_variables.css');
+@import url('./shared/style/_variables.css');
+
+@font-face {
+    font-family: 'Inter';
+    src: url('./font/Inter-SemiBold.woff2') format('woff2'),
+        url('./font/Inter-SemiBold.woff') format('woff'),
+        url('./font/Inter-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('./font/Inter-Regular.woff2') format('woff2'),
+        url('./font/Inter-Regular.woff') format('woff'),
+        url('./font/Inter-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('./font/Inter-Medium.woff2') format('woff2'),
+        url('./font/Inter-Medium.woff') format('woff'),
+        url('./font/Inter-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Inter',  sans-serif;
+    font-weight: 400;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}

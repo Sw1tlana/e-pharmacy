@@ -1,0 +1,5 @@
+.homeSection {
+    height: 812px;
+    background-color: var(--green-accent-color);
+    position: relative;
+}

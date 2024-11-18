@@ -1,7 +1,7 @@
 .homeSection {
-    height: 812px;
+    max-height: 812px;
+    height: 100%;
     background-color: var(--green-accent-color);
-    position: relative;
 }
 
 .customer {
@@ -12,10 +12,87 @@
     height: 100%;
 }
 
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.imagesHome {
+    width: 100%;
+    display: block;
+    min-width: 331px;
+    min-height: 312px;
+}
+
 .titleHome {
     font-size: 50px;
     font-weight: 600;
+    width: 92px;
     line-height: 1;
-    letter-spacing: 0%;
-    color: var(--white-color)
+    color: var(--white-color);
+    position: absolute;
+    top: 19px;
+    left: 0;
+}
+
+.subTextHome {
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--white-color);
+    position: absolute;
+    top: 188px; 
+    left: 140px; 
+    width: 200px; 
+    text-align: left; 
+    white-space: normal; 
+    word-wrap: break-word; 
+}
+
+@media (min-width: 768px) {
+    .homeSection {
+        max-height: 1024px;
+    }
+
+    .customer {
+        padding: 258px 16px 258px 16px;
+        max-width: 704px;
+        max-height: 508px;
+    }
+
+    .imagesHome {
+        min-width: 704px;
+        min-height: 508px;
+    }
+
+    .titleHome {
+        font-size: 74px;
+        width: 609px;
+        line-height: 1;
+        color: var(--white-color);
+        position: absolute;
+        top: 140px;
+        left: 31px;
+    }
+
+    .subTextHome {
+        position: absolute;
+        top: 312px; 
+        left: 414px; 
+    }
+}
+
+@media (min-width: 1440px) {
+    .homeSection {
+        max-height: 800px;
+    }
+
+    .customer {
+        padding: 146px 346px 146px 346px;
+        max-width: 749px;
+    }
+
+    .imagesHome {
+        min-width: 749px;
+    }
 }

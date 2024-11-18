@@ -7,8 +7,13 @@ function Home() {
     <section className={style.homeSection}>
       <Container>
         <div className={style.customer}>
-          <h1 className={style.titleHome}>Your medication delivered</h1>
-          <img src={exampleImage} alt="example" />
+          <div className={style.imageWrapper}>
+            <h1 className={style.titleHome}>Your medication delivered</h1>
+            <img className={style.imagesHome} src={exampleImage} alt="example" />
+            <p className={style.subTextHome}>
+            Say goodbye to all your healthcare worries with us
+            </p>
+          </div>
         </div>
       </Container>
     </section>

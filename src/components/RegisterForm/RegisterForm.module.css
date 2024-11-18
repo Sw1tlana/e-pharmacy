@@ -1,0 +1,27 @@
+.sectionRegisterForm {
+    max-height: 812px;
+    height: 100%;
+    padding: 163px 20px 190px 20px;
+    background-color: var(--bg-color);
+}
+
+.formRegister {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0;
+    gap: 10px;
+}
+
+.formInput {
+    gap: 10px;
+    border: 1px solid var(--bg-green-color);
+    border-radius: 60px;
+    background-color: var(--white-color);
+    color: var(--secondary-color);
+    font-size: 12px;
+    line-height: 1.5;
+    max-width: 335px;
+    width: 100%;
+    padding: 13px 18px;
+}

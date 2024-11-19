@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import style from './RegisterForm.module.css';
+import exampleImage from '../../shared/images/authorizePage/tablet@2x.png';
+import shadowImage from '../../shared/images/authorizePage/shadow-form.png';
 
 function RegisterForm() {
 
@@ -10,6 +12,12 @@ function RegisterForm() {
     
   return (
     <section className={style.sectionRegisterForm}>
+        <div className={style.containerFormHomeInfo}>
+        <img className={style.imagesFormRegister} src={exampleImage} alt="example" />
+        <h2 className={style.titleFormRegister}>
+            Your medication,  delivered Say goodbye to all<span className={style.spanColor}>your healthcare</span> worries with us
+        </h2>
+        </div>
         <form className={style.formRegister} onSubmit={handleSubmit}>
             <div className={style.containerInput}>
             <div>
@@ -59,6 +67,7 @@ function RegisterForm() {
             </div>
             <button className={style.registerBtn} type="submit">Register</button>
             <p className={style.textForm}>Already have an account?</p>
+            <img className={style.imagesShadow} src={shadowImage} alt="shadow" />
         </form>
     </section>
   )

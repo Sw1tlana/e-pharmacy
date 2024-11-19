@@ -1,8 +1,37 @@
 .sectionRegisterForm {
     max-height: 812px;
     height: 100%;
-    padding: 113px 20px 190px 20px;
+    padding: 163px 20px 190px 20px;
     background-color: var(--bg-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.containerFormHomeInfo {
+    position: relative;
+    max-width: 335px;
+    width: 100%;
+}
+
+.titleFormRegister {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    width: 100%;
+    white-space: normal;
+}
+
+.spanColor {
+    color: var(--btn-green-accent-color);
+}
+
+.imagesFormRegister {
+    position: absolute;
+    top: -56px; 
+    left: 220px;
+    max-width: 95px;
+    max-height: 93px;
 }
 
 .formRegister {
@@ -25,6 +54,7 @@
     font-size: 12px;
     line-height: 1.5;
     width: 100%;
+    max-width: 335px;
     padding: 13px 18px;
     transition: border-color 0.3s ease;
 }
@@ -52,6 +82,7 @@
     justify-content: center;
     align-items: center;
     padding: 13px 112px 13px 112px;
+    max-width: 335px;
     width: 100%;
     background-color: var(--btn-green-accent-color);
     color: var(--white-color);
@@ -77,10 +108,36 @@
     text-align: center;
 }
 
+.imagesShadow {
+  position: absolute;
+  top: 540px;
+  left: 159px;
+}
+
 @media (min-width: 768px) {
     .sectionRegisterForm {
         max-height: 1024px;
-        padding: 132px 32px 250px 32px;
+        padding: 240px 32px 250px 32px;
+    }
+
+    .containerFormHomeInfo {
+        position: relative;
+        max-width: 614px;
+        width: 100%;
+    }
+    
+    .titleFormRegister {
+        font-size: 54px;
+        line-height: 1.1;
+        margin-bottom: 54px;
+    }
+
+    .imagesFormRegister {
+        position: absolute;
+        top: -104px; 
+        left: 420px;
+        max-width: 179px;
+        max-height: 179px;
     }
 
     .formRegister {
@@ -88,17 +145,43 @@
     }
 
     .containerInput {
-       max-width: 564px;
-       flex-direction: row;
-       flex-wrap: wrap;
-       gap: 14px;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 14px;
+        max-width: 574px;
     }
 
     .formInput {
+        flex-grow: 1;
+        width: 280px;
         box-sizing: border-box;
-        flex: 1 1 280px;
-        max-width: 280px;
-        width: 100%;
     }
 
+    .registerBtn {
+        max-width: 280px;
+        margin-top: 58px;
+    }
+
+    .textForm {
+       text-align: start;
+       padding-left: 67px;
+    }
+
+    .imagesShadow {
+        top: 540px;
+        left: 400px;
+      }
+}
+
+@media (min-width: 1440px) {
+    .sectionRegisterForm{
+       display: flex;
+       gap: 54px;
+       padding: 298px 98px 262px 100px;
+    }
+
+    .imagesShadow {
+        top: 540px;
+        left: 1160px;
+      }
 }

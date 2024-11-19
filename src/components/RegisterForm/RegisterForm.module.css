@@ -1,27 +1,104 @@
 .sectionRegisterForm {
     max-height: 812px;
     height: 100%;
-    padding: 163px 20px 190px 20px;
+    padding: 113px 20px 190px 20px;
     background-color: var(--bg-color);
 }
 
 .formRegister {
-    display: flex;
-    flex-direction: column;
     margin: 0 auto;
     padding: 0;
+}
+
+.containerInput {
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+    max-width: 335px;
+    width: 100%; 
 }
 
 .formInput {
-    gap: 10px;
     border: 1px solid var(--bg-green-color);
     border-radius: 60px;
     background-color: var(--white-color);
-    color: var(--secondary-color);
     font-size: 12px;
     line-height: 1.5;
-    max-width: 335px;
     width: 100%;
     padding: 13px 18px;
+    transition: border-color 0.3s ease;
+}
+
+.formInput::placeholder {
+    color: var(--secondary-color);
+}
+
+.formInput:focus {
+    outline: none;
+    border-color: var(--green-accent-color);
+}
+
+.formInput:active {
+    background-color: var(--green-accent-color);
+}
+
+.errorMsg {
+    color: var(----btn-bg-red-color);
+}
+
+.registerBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 112px 13px 112px;
+    width: 100%;
+    background-color: var(--btn-green-accent-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 60px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 10px;
+    margin-bottom: 14px;
+    transition: var(--animation);
+}
+
+.registerBtn:hover,
+.registerBtn:active {
+    background-color: var(--green-accent-color);
+}
+
+.textForm {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .sectionRegisterForm {
+        max-height: 1024px;
+        padding: 132px 32px 250px 32px;
+    }
+
+    .formRegister {
+        margin: 0;
+    }
+
+    .containerInput {
+       max-width: 564px;
+       flex-direction: row;
+       flex-wrap: wrap;
+       gap: 14px;
+    }
+
+    .formInput {
+        box-sizing: border-box;
+        flex: 1 1 280px;
+        max-width: 280px;
+        width: 100%;
+    }
+
 }

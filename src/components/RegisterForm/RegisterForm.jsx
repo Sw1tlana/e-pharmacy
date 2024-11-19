@@ -10,7 +10,8 @@ function RegisterForm() {
     
   return (
     <section className={style.sectionRegisterForm}>
-        <form onSubmit={handleSubmit}>
+        <form className={style.formRegister} onSubmit={handleSubmit}>
+            <div className={style.containerInput}>
             <div>
                 <input 
                 id="name"
@@ -54,6 +55,7 @@ function RegisterForm() {
                 />
                 {errors.password && 
                 <p className={style.errorMsg}>{errors.password.message}</p>}
+            </div>
             </div>
             <button className={style.registerBtn} type="submit">Register</button>
             <p className={style.textForm}>Already have an account?</p>

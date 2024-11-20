@@ -5,6 +5,7 @@
     background-color: var(--bg-color);
     position: relative;
     overflow: hidden;
+    margin-bottom: 8px;
 }
 
 .containerFormHomeInfo {
@@ -133,7 +134,6 @@
     }
 
     .imagesFormRegister {
-        position: absolute;
         top: -104px; 
         left: 420px;
         max-width: 179px;
@@ -168,7 +168,7 @@
     }
 
     .imagesShadow {
-        top: 540px;
+        top: 640px;
         left: 400px;
       }
 }
@@ -181,7 +181,7 @@
     }
 
     .imagesShadow {
-        top: 540px;
-        left: 1160px;
+        top: 500px;
+        left: 1100px;
       }
 }

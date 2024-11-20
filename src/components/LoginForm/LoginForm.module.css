@@ -1,0 +1,189 @@
+.sectionLoginForm {
+    max-height: 812px;
+    height: 100%;
+    padding: 163px 20px 190px 20px;
+    background-color: var(--bg-color);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.containerLoginHomeInfo {
+    position: relative;
+    max-width: 335px;
+    width: 100%;
+}
+
+.titleLoginRegister {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    width: 100%;
+    white-space: normal;
+}
+
+.spanColor {
+    color: var(--btn-green-accent-color);
+}
+
+.imagesFormLogin {
+    position: absolute;
+    top: -56px; 
+    left: 220px;
+    max-width: 95px;
+    max-height: 93px;
+}
+
+.formLogin {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.containerInput {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 335px;
+    width: 100%; 
+    margin-bottom: 118px;
+}
+
+.formInput {
+    border: 1px solid var(--bg-green-color);
+    border-radius: 60px;
+    background-color: var(--white-color);
+    font-size: 12px;
+    line-height: 1.5;
+    width: 100%;
+    max-width: 335px;
+    padding: 13px 18px;
+    transition: border-color 0.3s ease;
+}
+
+.formInput::placeholder {
+    color: var(--secondary-color);
+}
+
+.formInput:focus {
+    outline: none;
+    border-color: var(--green-accent-color);
+}
+
+.formInput:active {
+    background-color: var(--green-accent-color);
+}
+
+.errorMsg {
+    color: var(----btn-bg-red-color);
+}
+
+.loginBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 112px 13px 112px;
+    width: 100%;
+    background-color: var(--btn-green-accent-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 60px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-top: 10px;
+    margin-bottom: 14px;
+    transition: var(--animation);
+}
+
+.loginBtn:hover,
+.loginBtn:active {
+    background-color: var(--green-accent-color);
+}
+
+.textForm {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+.imagesShadow {
+    position: absolute;
+    top: 590px;
+    left: 159px;
+}
+
+@media (min-width: 768px) {
+    .sectionLoginForm {
+        max-height: 1024px;
+        padding: 240px 32px 250px 32px;
+    }
+
+    .containerFormHomeInfo {
+        position: relative;
+        max-width: 614px;
+        width: 100%;
+    }
+    
+    .titleFormLogin {
+        font-size: 54px;
+        line-height: 1.1;
+        margin-bottom: 54px;
+    }
+
+    .imagesFormLogin {
+        top: -104px; 
+        left: 420px;
+        max-width: 179px;
+        max-height: 179px;
+    }
+
+    .formLogin {
+        margin: 0;
+    }
+
+    .containerInput {
+        gap: 14px;
+        max-width: 323px;
+        margin-bottom: 52px;
+    }
+
+    .formInput {
+        flex-grow: 1;
+        box-sizing: border-box;
+    }
+
+    .loginBtn {
+        max-width: 323px;
+    }
+
+    .textForm {
+       text-align: start;
+       padding-left: 95px;
+    }
+
+    .imagesShadow {
+        top: 640px;
+        left: 400px;
+      }
+}
+
+@media (min-width: 1440px) {
+    .sectionLoginForm{
+       display: flex;
+       gap: 150px;
+       padding: 298px 98px 262px 100px;
+    }
+
+    .imagesShadow {
+        top: 500px;
+        left: 1100px;
+      }
+
+      .textForm {
+        text-align: center;
+        padding-left: 0;
+     }
+}

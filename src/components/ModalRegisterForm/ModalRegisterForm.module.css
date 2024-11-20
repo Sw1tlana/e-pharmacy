@@ -1,0 +1,53 @@
+.sectionModal {
+    max-width: 320px;
+    width: 100%;
+    padding: 40px 30px;
+    background-color: burlywood;
+}
+
+.titleModalAuthorization {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.textModalAuthorization {
+    text-align: center;
+    width: 250px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--subprimary-color);
+}
+
+.formInput {
+    display: block;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid var(--bg-green-color);
+    border-radius: 60px;
+    background-color: var(--white-color);
+    font-size: 12px;
+    line-height: 1.5;
+    width: 280px;
+    padding: 13px 18px;
+    transition: var(--animation);
+}
+
+.formInput::placeholder {
+    color: var(--secondary-color);
+}
+
+.formInput:focus {
+    outline: none;
+    border-color: var(--green-accent-color);
+}
+
+.formInput:active {
+    background-color: var(--green-accent-color);
+}
+
+.errorMsg {
+    color: var(----btn-bg-red-color);
+}

@@ -2,7 +2,7 @@ import style from './ModalRegisterForm.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-export default function ModalRegisterForm() {
+function ModalRegisterForm() {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver()
@@ -12,7 +12,7 @@ export default function ModalRegisterForm() {
     <section className={style.sectionModal}>
         <h3 className={style.titleModalAuthorization}>Sign Up</h3>
         <p className={style.textModalAuthorization}>Before proceeding, please register on our site.</p>
-    <form onSubmit={handleSubmit}>
+    <form className={style.containerInput} onSubmit={handleSubmit}>
     <div>
         <input 
         id="name"
@@ -62,4 +62,6 @@ export default function ModalRegisterForm() {
 </form>
 </section>
   )
-}
+};
+
+export default ModalRegisterForm;

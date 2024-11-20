@@ -46,6 +46,7 @@
     gap: 10px;
     max-width: 335px;
     width: 100%; 
+    margin-bottom: 10px;
 }
 
 .formInput {
@@ -110,9 +111,9 @@
 }
 
 .imagesShadow {
-  position: absolute;
-  top: 590px;
-  left: 159px;
+    position: absolute;
+    top: 620px;
+    left: 138px;
 }
 
 @media (min-width: 768px) {
@@ -181,7 +182,7 @@
     }
 
     .imagesShadow {
-        top: 500px;
-        left: 1100px;
+        top: 480px;
+        left: 1060px;
       }
 }

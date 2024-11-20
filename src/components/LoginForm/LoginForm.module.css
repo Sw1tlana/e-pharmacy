@@ -8,13 +8,13 @@
     margin-bottom: 8px;
 }
 
-.containerLoginHomeInfo {
+.containerFormHomeInfo {
     position: relative;
     max-width: 335px;
     width: 100%;
 }
 
-.titleLoginRegister {
+.titleFormLogin {
     font-size: 28px;
     font-weight: 600;
     line-height: 1.2;
@@ -58,7 +58,7 @@
     width: 100%;
     max-width: 335px;
     padding: 13px 18px;
-    transition: border-color 0.3s ease;
+    transition: var(--animation);
 }
 
 .formInput::placeholder {
@@ -84,6 +84,7 @@
     justify-content: center;
     align-items: center;
     padding: 13px 112px 13px 112px;
+    max-width: 335px;
     width: 100%;
     background-color: var(--btn-green-accent-color);
     color: var(--white-color);
@@ -97,7 +98,7 @@
 }
 
 .loginBtn:hover,
-.loginBtn:active {
+.registerBtn:active {
     background-color: var(--green-accent-color);
 }
 
@@ -111,8 +112,8 @@
 
 .imagesShadow {
     position: absolute;
-    top: 590px;
-    left: 159px;
+    top: 620px;
+    left: 138px;
 }
 
 @media (min-width: 768px) {
@@ -146,22 +147,23 @@
 
     .containerInput {
         gap: 14px;
-        max-width: 323px;
-        margin-bottom: 52px;
+        max-width: 574px;
     }
 
     .formInput {
         flex-grow: 1;
+        width: 280px;
         box-sizing: border-box;
     }
 
     .loginBtn {
-        max-width: 323px;
+        max-width: 280px;
+        margin-top: 58px;
     }
 
     .textForm {
        text-align: start;
-       padding-left: 95px;
+       padding-left: 67px;
     }
 
     .imagesShadow {
@@ -173,17 +175,12 @@
 @media (min-width: 1440px) {
     .sectionLoginForm{
        display: flex;
-       gap: 150px;
+       gap: 54px;
        padding: 298px 98px 262px 100px;
     }
 
     .imagesShadow {
-        top: 500px;
-        left: 1100px;
+        top: 480px;
+        left: 1060px;
       }
-
-      .textForm {
-        text-align: center;
-        padding-left: 0;
-     }
 }

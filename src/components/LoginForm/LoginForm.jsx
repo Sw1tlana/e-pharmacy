@@ -43,7 +43,7 @@ function LoginForm() {
                 <p className={style.errorMsg}>{errors.password.message}</p>}
             </div>
             </div>
-            <button className={style.loginBtn} type="submit">Log in</button>
+            <button className={style.loginBtn} type="submit">Log In</button>
             <p className={style.textForm}>Don't have an account?</p>
             <img className={style.imagesShadow} src={shadowImage} alt="shadow" />
         </form>

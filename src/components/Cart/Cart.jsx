@@ -95,30 +95,34 @@ function Cart() {
                 <p className={`${style.textCart} ${style.textCartPay}`}>
                 You can pay us in a multiple way in our payment gateway system.
                 </p>
-
-                <div className={style.radioGroup}>
-                <label className={style.radioLabel}>
-                Cash On Delivery
-                </label> 
-                <input
-                    type="radio"
-                    value="cash"
-                    checked={selectedOption === "cash"}
-                    onChange={handleOptionChange}
-                    className={style.radioInput}
-                />
                 
+                <div className={style.radioGroup}>
+                    <div className={style.radioContainer}>
+                    <input
+                        type="radio"
+                        value="cash"
+                        checked={selectedOption === "cash"}
+                        onChange={handleOptionChange}
+                        className={style.radioInput}
+                    />
                 <label className={style.radioLabel}>
-                Bank
+                    Cash On Delivery
                 </label>
-                <input
-                    type="radio"
-                    value="bank"
-                    checked={selectedOption === "bank"}
-                    onChange={handleOptionChange}
-                    className={style.radioInput}
-                />
                 </div>
+
+                 <div className={style.radioContainer}>
+                    <input
+                        type="radio"
+                        value="bank"
+                        checked={selectedOption === "bank"}
+                        onChange={handleOptionChange}
+                        className={style.radioInput}
+                    />
+                <label className={style.radioLabel}>
+                    Bank
+                </label>
+                </div>
+            </div>
             </div>
 
             <div>

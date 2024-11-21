@@ -2,6 +2,7 @@
     --primary-color: #1D1E21;
     --subprimary-color: #6A6A6F;
     --secondary-color: #93939A;
+    --grey-secondary-color: 
     --white-color: #ffffff;
     --bg-color: #F7F8FA;
     --green-accent-color: #59B17A;
@@ -12,5 +13,6 @@
 
     
     --bg-green-color: rgba(89, 177, 122, 0.1);
+    --grey-secondary-color: rgba(18, 20, 23, 0.2);
 
 } 

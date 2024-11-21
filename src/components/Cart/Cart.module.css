@@ -96,14 +96,56 @@
     background-color: var(--green-accent-color);
 }
 
-/* .radioGroup {
-   
+.radioGroup {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+}
+
+.radioContainer {
+    display: flex;
 }
 
 .radioLabel {
-   display: block;
+    display: flex;
+    align-items: center;
+    line-height: 1.2; 
+    color: var(--subprimary-color);
 }
 
 .radioInput {
-    
-} */
+    margin-right: 10px; 
+    appearance: none; 
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(18, 20, 23, 0.2);
+    border-radius: 50%;
+    background-color: var(--white-color);
+    position: relative;
+}
+
+.radioInput:checked::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: var(--green-accent-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 48%;
+    left: 48%;
+    transform: translate(-48%, -48%);
+}
+
+.radioInput:checked + .radioLabel {
+    color: var(--primary-color);
+}
+
+.radioInput:checked {
+    border: 2px solid var(--bg-green-color); 
+}
+
+
+.radioLabel:active {
+    color: var(--primary-color);
+}

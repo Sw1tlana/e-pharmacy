@@ -97,7 +97,9 @@ function Cart() {
                 </p>
 
                 <div className={style.radioGroup}>
-                <label className={style.radioLabel}> 
+                <label className={style.radioLabel}>
+                Cash On Delivery
+                </label> 
                 <input
                     type="radio"
                     value="cash"
@@ -105,10 +107,10 @@ function Cart() {
                     onChange={handleOptionChange}
                     className={style.radioInput}
                 />
-                Cash On Delivery
-                </label>
-
+                
                 <label className={style.radioLabel}>
+                Bank
+                </label>
                 <input
                     type="radio"
                     value="bank"
@@ -116,9 +118,7 @@ function Cart() {
                     onChange={handleOptionChange}
                     className={style.radioInput}
                 />
-                Bank
-                </label>
-            </div>
+                </div>
             </div>
 
             <div>

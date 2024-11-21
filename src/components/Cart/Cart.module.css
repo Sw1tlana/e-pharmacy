@@ -96,16 +96,14 @@
     background-color: var(--green-accent-color);
 }
 
-.radioGroup {
-    display: flex; 
-    gap: 16px; 
-    align-items: center;
+/* .radioGroup {
+   
 }
 
 .radioLabel {
-
+   display: block;
 }
 
 .radioInput {
     
-}
+} */

@@ -4,6 +4,7 @@ import RegisterForm from '../RegisterForm/RegisterForm.jsx';
 import LoginForm from '../LoginForm/LoginForm.jsx';
 import ModalRegisterForm from '../ModalRegisterform/ModalRegisterForm.jsx';
 import ModalLoginForm from '../ModalLoginForm/ModalLoginForm.jsx';
+import Cart from '../Cart/Cart.jsx';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
      <LoginForm/>
      <ModalRegisterForm/>
      <ModalLoginForm />
+     <Cart/>
     </>
   )
 }

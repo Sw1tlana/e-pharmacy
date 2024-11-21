@@ -1,0 +1,111 @@
+.sectionCart {
+    min-width: 320px;
+    max-width: 375px;
+    height: auto;
+    padding: 194px 20px 194px 20px;
+    background-color: var(--bg-color);
+}
+
+.titleCart {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 40px;
+}
+
+.containerCart {
+    max-width: 1022px;
+    height: 100%;
+    border-radius: 27px;
+    background-color:var(--white-color);
+    padding: 20px 20px 40px 20px;
+}
+
+.subTitleCart {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.textCart {
+    line-height: 1.2;
+    color: var(--subprimary-color);
+    margin-bottom: 40px;
+}
+
+.containerInput {
+    max-width: 295px;
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.label {
+    display: block;
+    margin-left: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 1.2; 
+}
+ 
+.formInput {
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid var(--bg-green-color);
+    border-radius: 60px;
+    background-color: var(--white-color);
+    font-size: 12px;
+    line-height: 1.5;
+    width: 100%;
+    padding: 13px 18px;
+    transition: var(--animation);
+}
+
+.formInput:focus {
+    outline: none;
+    border-color: var(--green-accent-color);
+}
+
+.formInput:active {
+    background-color: var(--green-accent-color);
+}
+
+.errorMsg {
+    color: var(----btn-bg-red-color);
+}
+
+.textCartPay {
+    margin-bottom: 20px;
+}
+
+.buttonCart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8;
+    border: none;
+    border-radius: 60px;
+    padding: 13px 32px 13px 32px;
+    font-weight: 500;
+    line-height: 1.2;
+    background-color: var(--btn-green-accent-color);
+    color: var(--white-color);
+}
+
+.buttonCart:hover,
+.buttonCart:active {
+    background-color: var(--green-accent-color);
+}
+
+.radioGroup {
+    display: flex; 
+    gap: 16px; 
+    align-items: center;
+}
+
+.radioLabel {
+
+}
+
+.radioInput {
+    
+}

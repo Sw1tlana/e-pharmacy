@@ -89,6 +89,9 @@ function Cart() {
             </div>
 
             <div>
+
+            <div className={style.horizontalLine}></div>
+
                 <h3 className={style.subTitleCart}>
                 Payment method
                 </h3>
@@ -123,21 +126,21 @@ function Cart() {
                 </label>
                 </div>
             </div>
-            </div>
 
-            <div>
+            <div className={style.horizontalLine}></div>
+
                 <h3 className={style.subTitleCart}>
                 Order details 
                 </h3>
-                <p className={`${style.textCart} ${style.textCartPay}`}>
+                <p className={style.textCart}>
                 Shipping and additionnal costs are calculated 
                 based on values you have entered.
                 </p>
-
+                </div>
+                
                 <div className={style.containerTotal}></div>
 
                 <button type='submit' className={style.buttonCart}>Place order</button>
-            </div>
       </form>
       </div>
 

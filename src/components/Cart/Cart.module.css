@@ -17,7 +17,7 @@
     max-width: 1022px;
     height: 100%;
     border-radius: 27px;
-    background-color:var(--white-color);
+    background-color: var(--white-color);
     padding: 20px 20px 40px 20px;
 }
 
@@ -55,6 +55,7 @@
     background-color: var(--white-color);
     font-size: 12px;
     line-height: 1.5;
+    max-width: 295px;
     width: 100%;
     padding: 13px 18px;
     transition: var(--animation);
@@ -100,6 +101,7 @@
     display: flex;
     flex-direction: column; 
     gap: 15px; 
+    margin-bottom: 80px;
 }
 
 .radioContainer {
@@ -122,13 +124,14 @@
     border-radius: 50%;
     background-color: var(--white-color);
     position: relative;
+    transition: var(--animation);
 }
 
 .radioInput:checked::before {
     content: "";
     display: block;
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background-color: var(--green-accent-color);
     border-radius: 50%;
     position: absolute;
@@ -141,11 +144,64 @@
     color: var(--primary-color);
 }
 
-.radioInput:checked {
-    border: 2px solid var(--bg-green-color); 
+.radioInput:focus {
+    outline: 1px solid var(--green-accent-color);
 }
 
+.radioInput:active,
+.radioInput:checked {
+    border: 1px solid var(--green-accent-color);
+}
 
-.radioLabel:active {
-    color: var(--primary-color);
+.containerTotal {
+    max-width: 295px;
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 8px;
+    background-color: var(--bg-green-lite);
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+
+    .sectionCart {
+        min-width: 768px;
+        padding: 216px 32px 490px 32px;
+    }
+
+    .titleCart {
+        margin-bottom: 32px;
+    }
+
+    .containerCart {
+        max-width: 704px;
+        height: 100%;
+        border-radius: 27px;
+        background-color: var(--white-color);
+        padding: 40px 78px;
+    }
+
+    .subTitleCart {
+        font-size: 20px;
+    }
+
+    .textCart {
+        font-size: 16px;
+    }
+
+    .containerInput {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 574px;
+    }
+
+    .label {
+        margin-left: 14px;
+    }
+
+    .formInput {
+        width: 280px;
+        flex-grow: 1;
+        box-sizing: border-box;
+    }
 }

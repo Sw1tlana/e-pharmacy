@@ -133,7 +133,9 @@ function Cart() {
                 Shipping and additionnal costs are calculated 
                 based on values you have entered.
                 </p>
-                <div></div>
+
+                <div className={style.containerTotal}></div>
+
                 <button type='submit' className={style.buttonCart}>Place order</button>
             </div>
       </form>

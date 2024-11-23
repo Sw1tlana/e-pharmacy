@@ -1,5 +1,5 @@
 import style from './Logo.module.css';
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Logo({className}) {
 
@@ -11,7 +11,7 @@ function Logo({className}) {
         alt="E-pharmacy Logo" 
         className={style.logoImage} 
         />
-        AquaTrack
+        E-Pharmacy
       </NavLink>
     </>
   )

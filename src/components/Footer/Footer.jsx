@@ -16,6 +16,12 @@ const getTextLinkClass = ({ isActive }) => {
   })
 };
 
+const getSocialLinkClass = ({ isActive }) => {
+  return clsx(style.iconSocial, {
+    [style.activeIcon]: isActive,
+  })
+};
+
 
 function Footer() {
   return (
@@ -23,7 +29,15 @@ function Footer() {
      <div className={style.containerFooter}>
 
       <div className={style.containerLogo}>
-      <Logo/>
+
+       <div className={style.containerLogoImg}>
+      <img 
+        src="/public/logo-white.png" 
+        alt="E-pharmacy Logo" 
+        className={style.logoImage} 
+        />
+        <Logo/>
+      </div>
 
       <div className={style.socialInfo}>
       <p className={style.footerText}>
@@ -32,21 +46,27 @@ function Footer() {
       </p>
 
       <div className={style.socialNetworks}>
-      <svg width={28} height={24}>
-          <use xlinkHref={`${sprite}#icon-facebook`} />
-      </svg>
+        <NavLink className={getSocialLinkClass} to="https://www.facebook.com/goITclub/">
+            <svg width={28} height={24} className={style.icon}>
+                <use xlinkHref={`${sprite}#icon-facebook`}/>
+            </svg>
+      </NavLink>
 
-      <svg width={28} height={24}>
-          <use xlinkHref={`${sprite}#icon-instagram`} />
-      </svg>
+      <NavLink className={getSocialLinkClass} to="https://www.instagram.com/goitclub/">
+            <svg width={28} height={24}>
+                <use xlinkHref={`${sprite}#icon-instagram`} className={style.icon} />
+            </svg>
+      </NavLink>
 
-      <svg width={28} height={24}>
-           <use xlinkHref={`${sprite}#icon-youtube`} />
-      </svg>
-      </div>
-      </div>
-
+      <NavLink className={getSocialLinkClass} to="https://www.youtube.com/c/GoIT ">
+            <svg width={28} height={24}>
+                <use xlinkHref={`${sprite}#icon-youtube`} className={style.icon} />
+            </svg>
+      </NavLink>
       </div> 
+           
+      </div>
+      </div>
       
       <div className={style.containerFooterLink}>
         <NavLink className={getNavLinkClass} to="/">Home</NavLink>

@@ -7,6 +7,7 @@ import ModalLoginForm from '../ModalLoginForm/ModalLoginForm.jsx';
 import Cart from '../Cart/Cart.jsx';
 import Footer from '../Footer/Footer.jsx';
 import AddMedicines from '../AddMedicines/AddMedicines.jsx';
+import PromoBanners from '../PromoBanners/PromoBanners.jsx';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
      <ModalLoginForm />
      <Cart/>
      <AddMedicines/>
+     <PromoBanners/>
      <Footer />
     </>
   )

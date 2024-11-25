@@ -1,0 +1,72 @@
+.sectionBanners {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 375px;
+    width: 100%;
+    height: auto;
+    background-color: var(--bg-color);
+    padding: 40px 20px 80px 20px;
+}
+
+.containerBanners {
+    padding: 14px 18px;
+    border: 1px solid var(--white-color);
+    border-radius: 27px;
+    box-shadow: 0 -1px 13.86px 0px rgba(29, 30, 33, 0.02);
+    background-color: var(--bg-white-color);
+}
+
+.containerBanners:last-child {
+    margin-bottom: 80px;
+}
+
+.containerBannersMini {
+   display: flex;
+   align-items: center;
+   gap: 14px;
+   margin-bottom: 14px;
+}
+
+.bannersNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 54px;
+    height: 54px;
+    padding: 13px 22px;
+    border-radius: 50%;
+    background-color: var(--bg-green-lite);
+}
+
+.bannersTitle {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.containerBannersMini {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+}
+
+.bannersText {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.bannersBtn {
+    border: none;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--secondary-color);
+    background-color: transparent;
+}
+
+.bannersBtn:hover,
+.bannersBtn:active {
+  color: var(--grey-secondary-color);
+}

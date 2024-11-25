@@ -32,7 +32,7 @@ function Footer() {
 
        <div className={style.containerLogoImg}>
       <img 
-        src="/public/logo-white.png" 
+        src="/logo-white.png" 
         alt="E-pharmacy Logo" 
         className={style.logoImage} 
         />

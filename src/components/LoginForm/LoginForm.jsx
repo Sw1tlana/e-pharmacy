@@ -1,8 +1,8 @@
 import style from './LoginForm.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import exampleImage from '../../shared/images/authorizePage/tablet@2x.png';
-import shadowImage from '../../shared/images/authorizePage/shadow-form.png';
+import { tablet2x } from '../../shared/images/authorizePage/index';
+import { shadow } from '../../shared/images/shadow/index';
 
 function LoginForm() {
 
@@ -13,7 +13,7 @@ function LoginForm() {
   return (
     <section className={style.sectionLoginForm}>
         <div className={style.containerFormHomeInfo}>
-        <img className={style.imagesFormLogin} src={exampleImage} alt="example" />
+        <img className={style.imagesFormLogin} src={tablet2x} alt="tablet2x" />
         <h2 className={style.titleFormLogin}>
             Your medication,  delivered Say goodbye to all<span className={style.spanColor}>your healthcare</span> worries with us
         </h2>
@@ -45,7 +45,7 @@ function LoginForm() {
             </div>
             <button className={style.loginBtn} type="submit">Log In</button>
             <p className={style.textForm}>Don't have an account?</p>
-            <img className={style.imagesShadow} src={shadowImage} alt="shadow" />
+            <img className={style.imagesShadow} src={shadow} alt="shadow" />
         </form>
     </section>
   )

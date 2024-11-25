@@ -1,0 +1,131 @@
+.sectionAddMedicines {
+    max-width: 335px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 32px;
+    background-color: var(--green-accent-color);
+    color: var(--light-grey-color);
+}
+
+.containerAddMedicines {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.titleAddMedicines {
+    font-size: 28px;
+    font-weight: 600;
+    max-width: 288px;
+    width: 100%;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.textAddMedicines {
+    font-size: 16px;
+    line-height: 1.2;
+    letter-spacing: 0%;
+    max-width: 290px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.btnAddMedicines {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    max-width: 154px;
+    width: 100%;
+    padding: 14px 32px;
+    background-color: transparent;
+    color: var(--light-grey-color);
+    border: 1px solid var(--light-grey-color);
+    border-radius: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    transition: var(--animation);
+    position: relative;
+    overflow: hidden; 
+}
+
+.btnAddMedicines::before {
+    content: '';
+    position: absolute;
+    inset: 0; 
+    border-radius: 60px; 
+    border: 10px solid transparent; 
+    transition: var(--animation);
+    pointer-events: none; 
+}
+
+.btnAddMedicines:hover::before,
+.btnAddMedicines:active::before {
+    border-color: var(--light-grey-color); 
+}
+
+.imgAddMedicines {
+    max-width: 310px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .sectionAddMedicines {
+        max-width: 704px;
+        padding: 40px 48px;
+    }
+
+    .titleAddMedicines {
+        font-size: 48px;
+        max-width: 608px;
+        margin-bottom: 24px;
+        margin-top: 64px;
+    }
+    
+    .textAddMedicines {
+        max-width: 448px;
+        margin-bottom: 40px;
+    }
+    
+    .btnAddMedicines {
+        padding: 14px 50px;
+        max-width: 190px;
+    }
+    
+    .imgAddMedicines {
+        max-width: 634px;    
+    }
+}
+
+@media (min-width: 1440px) { 
+    .sectionAddMedicines {
+        max-width: 1248px;
+        padding: 40px 80px;
+    }
+
+    .containerAddMedicines {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .titleAddMedicines {
+        max-width: 500px;
+    }
+    
+    .btnAddMedicines {
+        padding: 14px 50px;
+        max-width: 190px;
+    }
+    
+    .imgAddMedicines {
+        max-width: 634px;    
+    }
+}
+
+ 

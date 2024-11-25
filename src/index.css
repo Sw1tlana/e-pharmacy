@@ -22,8 +22,8 @@
 @font-face {
     font-family: 'Inter';
     src: url('./font/Inter-Medium.woff2') format('woff2'),
-        url('./font/Inter-Medium.woff') format('woff'),
-        url('./font/Inter-Medium.ttf') format('truetype');
+         url('./font/Inter-Medium.woff') format('woff'),
+         url('./font/Inter-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }

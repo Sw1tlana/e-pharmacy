@@ -6,6 +6,7 @@ import ModalRegisterForm from '../ModalRegisterform/ModalRegisterForm.jsx';
 import ModalLoginForm from '../ModalLoginForm/ModalLoginForm.jsx';
 import Cart from '../Cart/Cart.jsx';
 import Footer from '../Footer/Footer.jsx';
+import AddMedicines from '../AddMedicines/AddMedicines.jsx';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
      <ModalRegisterForm/>
      <ModalLoginForm />
      <Cart/>
+     <AddMedicines/>
      <Footer />
     </>
   )

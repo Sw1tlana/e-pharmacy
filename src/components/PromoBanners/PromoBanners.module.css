@@ -1,6 +1,8 @@
 .sectionBanners {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 16px;
     max-width: 375px;
     width: 100%;
@@ -10,6 +12,8 @@
 }
 
 .containerBanners {
+    max-width: 335px;
+    width: 100%;
     padding: 14px 18px;
     border: 1px solid var(--white-color);
     border-radius: 27px;
@@ -69,4 +73,49 @@
 .bannersBtn:hover,
 .bannersBtn:active {
   color: var(--grey-secondary-color);
+}
+
+@media (min-width: 768px) {
+    .sectionBanners {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 28px;
+        max-width: 768px;
+    }
+    
+    .containerBanners {
+        max-width: 321px;
+    }
+    
+    .bannersNumber {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 54px;
+        height: 54px;
+        padding: 13px 22px;
+        border-radius: 50%;
+        background-color: var(--bg-green-lite);
+    }
+    
+    .bannersTitle {
+        font-size: 20px;
+    }
+    
+    .bannersText {
+        font-size: 36px;
+    }
+    
+    .bannersBtn {
+        border: none;
+        font-size: 13px;
+        line-height: 1.4;
+        color: var(--secondary-color);
+        background-color: transparent;
+    }
+    
+    .bannersBtn:hover,
+    .bannersBtn:active {
+      color: var(--grey-secondary-color);
+    }
 }

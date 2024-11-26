@@ -3,6 +3,7 @@ import style from './PromoBanners.module.css';
 function PromoBanners() {
   return (
     <section className={style.sectionBanners}>
+        <div>
         <div className={style.containerBanners}>
             <div className={style.containerBannersMini}>
                 <div className={style.bannersNumber}>1</div>
@@ -35,10 +36,14 @@ function PromoBanners() {
                 <button type='submit'className={style.bannersBtn}>Shop now</button>
             </div>
         </div>
+        </div>
 
-        <h2 className={style.titleStore}>Your Nearest Medicine Store</h2>
-        <p className={style.textStore}>Search for Medicine, Filter by your location</p>
+        <div>
+            <h2 className={style.titleStore}>Your Nearest Medicine Store</h2>
+            <p className={style.textStore}>Search for Medicine, Filter by your location</p>
+            </div>
     </section>
+
   )
 };
 

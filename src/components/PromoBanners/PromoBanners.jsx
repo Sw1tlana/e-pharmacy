@@ -3,7 +3,7 @@ import style from './PromoBanners.module.css';
 function PromoBanners() {
   return (
     <section className={style.sectionBanners}>
-        <div>
+        <div className={style.bannersWrapper}>
         <div className={style.containerBanners}>
             <div className={style.containerBannersMini}>
                 <div className={style.bannersNumber}>1</div>
@@ -41,7 +41,7 @@ function PromoBanners() {
         <div>
             <h2 className={style.titleStore}>Your Nearest Medicine Store</h2>
             <p className={style.textStore}>Search for Medicine, Filter by your location</p>
-            </div>
+        </div>
     </section>
 
   )

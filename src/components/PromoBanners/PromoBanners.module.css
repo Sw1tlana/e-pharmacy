@@ -11,6 +11,14 @@
     padding: 40px 20px 80px 20px;
 }
 
+.bannersWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 335px;
+    width: 100%;
+}
+
 .containerBanners {
     max-width: 335px;
     width: 100%;
@@ -41,6 +49,9 @@
     padding: 13px 22px;
     border-radius: 50%;
     background-color: var(--bg-green-lite);
+    font-size: 24px;
+    line-height: 1;
+    color: var(--green-accent-color);
 }
 
 .bannersTitle {
@@ -76,46 +87,86 @@
 }
 
 @media (min-width: 768px) {
+
     .sectionBanners {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 28px;
+        gap: 46px;
+        max-width: 768px;
+    }
+
+    .sectionBanners {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 46px;
         max-width: 768px;
     }
     
+    .bannersWrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 670px;
+    }
+
     .containerBanners {
         max-width: 321px;
     }
-    
+
     .bannersNumber {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 54px;
-        height: 54px;
-        padding: 13px 22px;
-        border-radius: 50%;
-        background-color: var(--bg-green-lite);
+        width: 74px;
+        height: 74px;
+        padding: 14px 18px;
+        font-size: 28px;
+        line-height: 1;
     }
     
     .bannersTitle {
         font-size: 20px;
-    }
-    
-    .bannersText {
-        font-size: 36px;
-    }
-    
-    .bannersBtn {
-        border: none;
-        font-size: 13px;
+        font-weight: 500;
         line-height: 1.4;
-        color: var(--secondary-color);
-        background-color: transparent;
+    }
+
+}
+
+@media (min-width: 1440px) {
+
+    .sectionBanners {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 46px;
+        max-width: 1440px;
+    }
+
+    .sectionBanners {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 46px;
+        max-width: 1000px;
     }
     
-    .bannersBtn:hover,
-    .bannersBtn:active {
-      color: var(--grey-secondary-color);
+    .bannersWrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 670px;
     }
-}
+
+    .containerBanners {
+        max-width: 321px;
+    }
+
+    .bannersNumber {
+        width: 74px;
+        height: 74px;
+        padding: 14px 18px;
+        font-size: 28px;
+        line-height: 1;
+    }
+    
+    .bannersTitle {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+} 

@@ -13,10 +13,12 @@
     --btn-accentbg-red-color: #E850501A;
     --yellow-color: #FFC531;
     --bg-green-lite: #E7F1ED;
+    
 
     
     --bg-green-color: rgba(89, 177, 122, 0.1);
     --border-grey-color: rgba(29, 30, 33, 0.1);
     --grey-secondary-color: rgba(18, 20, 23, 0.2);
+    --placeholder-color: rgba(29, 30, 33, 0.4);
 
 } 

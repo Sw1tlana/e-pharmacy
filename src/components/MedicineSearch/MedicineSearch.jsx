@@ -1,30 +1,41 @@
 import style from './MedicineSearch.module.css';
 import { useState } from 'react';
 import Select from 'react-select';
+import { icons as sprite } from '../../shared/icons';
 
 function MedicineSearch() {
 
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    const form = evt.target;
-    const query = form.elements.query.value.trim();
-    if (query !== '') {
-      onSubmit(query);
-    } else {
-      toast.error('Please enter a search query!');
-    }
-    form.reset();
-  }
+  const categoryOption = [
+    { value: "Medicine", label: "Medicine" },
+    { value: "Heart", label: "Heart" },
+    { value: "Head", label: "Head" },
+    { value: "Hand", label: "Hand" },
+    { value: "Leg", label: "Leg" },
+    { value: "Dental Care", label: "Dental Care" },
+    { value: "Skin Care", label: "Skin Care" }
+  ];
+    
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+    // логіку для фільтрації
+  };
+
+  const filteredCategories = categoryOption.filter((option) =>
+    option.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const customStyles = {
     control: (base) => ({
       ...base,
+      boxSizing: 'border-box',
       border: '1px solid rgba(29, 30, 33, 0.1)',
-      backgroundColor: 'ffffff',
+      backgroundColor: '#ffffff',
       borderRadius: '60px',
-      boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)',
+      boxShadow: '0 0 0 rgba(0, 0, 0, 0.2)',
       '&:hover': {
         borderColor: '#E850501A',
       },
@@ -44,25 +55,31 @@ function MedicineSearch() {
       padding: 10,
       cursor: 'pointer',
     }),
+    placeholder: (base) => ({
+      ...base,
+      color: 'rgba(29, 30, 33, 0.4)', 
+      fontSize: '12px',
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: 'rgba(29, 30, 33, 0.7)', 
+      '&:hover': {
+        color: 'rgba(29, 30, 33, 1)', 
+        width: '7px',
+      },
+    }),
   };
 
   const handleCategoryChange = (selectedOption) => {
     setSelectedCategory(selectedOption);
   };
 
-  const categoryOption = [
-    { value: "Medicine", label: "Medicine" },
-    { value: "Heart", label: "Heart" },
-    { value: "Head", label: "Head" },
-    { value: "Hand", label: "Hand" },
-    { value: "Leg", label: "Leg" },
-    { value: "Dental Care", label: "Dental Care" },
-    { value: "Skin Care", label: "Skin Care" }
-  ];
-    
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={style.containerSelectCategory}>
+    <section className={style.sectionSearch}>
+      <h2 className={style.titleMedicine}>Medicine</h2>
+    <form onSubmit={(e) => e.preventDefault()}>
+
+      <div className={style.containerSearchCategory}>
         <Select
           id="categoryFilter"
           value={selectedCategory}
@@ -70,9 +87,25 @@ function MedicineSearch() {
           options={categoryOption}
           styles={customStyles}
           menuPosition="fixed"
+          placeholder="Product category"
         />
-      </div>
+
+      <div className={style.containerSearch}>
+      <input
+          type="text"
+          id="searchInput"
+          placeholder="Search medicine"
+          value={searchQuery}  
+          onChange={handleSearchChange}   
+          className={style.searchInput}   
+      />
+        <svg width={28} height={24} className={style.iconSearch}>
+            <use xlinkHref={`${sprite}#icon-search`} />
+        </svg>
+    </div>
+    </div>
     </form>
+    </section>
   )
 };
 

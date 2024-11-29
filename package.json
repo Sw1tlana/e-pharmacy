@@ -23,7 +23,9 @@
     "react-hook-form": "^7.53.2",
     "react-modal": "^3.16.1",
     "react-router-dom": "^7.0.1",
+    "react-select": "^5.8.3",
     "redux-persist": "^6.0.0",
+    "toast": "^0.5.4",
     "yup": "^1.4.0"
   },
   "devDependencies": {

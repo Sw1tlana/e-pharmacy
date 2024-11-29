@@ -38,7 +38,7 @@ function PromoBanners() {
         </div>
         </div>
 
-        <div>
+        <div className={style.storeInfo}>
             <h2 className={style.titleStore}>Your Nearest Medicine Store</h2>
             <p className={style.textStore}>Search for Medicine, Filter by your location</p>
         </div>

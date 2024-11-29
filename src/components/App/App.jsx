@@ -8,6 +8,7 @@ import Cart from '../Cart/Cart.jsx';
 import Footer from '../Footer/Footer.jsx';
 import AddMedicines from '../AddMedicines/AddMedicines.jsx';
 import PromoBanners from '../PromoBanners/PromoBanners.jsx';
+import MedicineSearch from '../MedicineSearch/MedicineSearch.jsx';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
      <Cart/>
      <AddMedicines/>
      <PromoBanners/>
+     <MedicineSearch/>
      <Footer />
     </>
   )

@@ -17,20 +17,103 @@
 }
 
 .containerSearch {
-   
+    position: relative;
+    width: 100%;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
 }
 
 .searchInput {
     border: 1px solid var(--border-grey-color);
     border-radius: 60px;
     background-color: var(--white-color);
-    width: 100%;
-    padding: 13px 18px;
-    position: relative;
+    width: 335px;
+    padding: 13px 18px; 
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.searchInput::placeholder {
+    color: var(--placeholder-color);
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--green-accent-color);
 }
 
 .iconSearch {
     position: absolute;
-    top: 0;
-    right: -20px;
+    top: 50%;
+    right: 16px; 
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    fill: var(--grey-color); 
+    pointer-events: none; 
+}
+
+.icon {
+    fill: transparent;
+    stroke: var(--primary-color);
+}
+
+.btnMedicine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    max-width: 116px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    border-radius: 60px;
+    padding: 13px 30px;
+    background: var(--green-accent-color);
+    border: none;
+    color: var(--white-color);
+    margin-bottom: 40px;
+    transition: var(--animate);
+}
+
+.iconFilter {
+    fill: transparent;
+    stroke: var(--white-color);
+}
+
+.btnMedicine:active,
+.btnMedicine:hover {
+    background-color: var(--btn-green-accent-color);
+}
+
+@media (min-width: 768px) {
+    .sectionSearch {
+        padding: 152px 32px 120px 32px;
+    }
+    
+    .titleMedicine {
+        margin-bottom: 32px;
+    }
+
+    .containerSearchCategory {
+        max-width: 582px;
+        width: 100%;
+        flex-direction: row;
+        gap: 14px;
+    }
+
+    .searchInput {
+        width: 224px;
+    }
+
+    .iconSearch {
+        right: 28px; 
+        width: 16px;
+        height: 16px;   
+    }
 }

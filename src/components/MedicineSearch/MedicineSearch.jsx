@@ -28,13 +28,18 @@ function MedicineSearch() {
     option.label.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const isMobile = window.innerWidth <= 768;
+
   const customStyles = {
-    control: (base) => ({
+    control: (base, state) => ({
       ...base,
       boxSizing: 'border-box',
-      border: '1px solid rgba(29, 30, 33, 0.1)',
+      height: '44px',
+      width: isMobile ? '335px' : '214px',
+      border: `1px solid ${state.isFocused ? 'var(--green-accent-color)' : 'rgba(29, 30, 33, 0.1)'}`, 
       backgroundColor: '#ffffff',
       borderRadius: '60px',
+      padding: '0 6px', 
       boxShadow: '0 0 0 rgba(0, 0, 0, 0.2)',
       '&:hover': {
         borderColor: '#E850501A',
@@ -64,7 +69,7 @@ function MedicineSearch() {
       ...base,
       color: 'rgba(29, 30, 33, 0.7)', 
       '&:hover': {
-        color: 'rgba(29, 30, 33, 1)', 
+        color: '#1D1E21', 
         width: '7px',
       },
     }),
@@ -80,29 +85,37 @@ function MedicineSearch() {
     <form onSubmit={(e) => e.preventDefault()}>
 
       <div className={style.containerSearchCategory}>
-        <Select
-          id="categoryFilter"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-          options={categoryOption}
-          styles={customStyles}
-          menuPosition="fixed"
-          placeholder="Product category"
-        />
+              <Select
+                id="categoryFilter"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                options={categoryOption}
+                styles={customStyles}
+                menuPosition="fixed"
+                placeholder="Product category"
+              />
 
       <div className={style.containerSearch}>
-      <input
-          type="text"
-          id="searchInput"
-          placeholder="Search medicine"
-          value={searchQuery}  
-          onChange={handleSearchChange}   
-          className={style.searchInput}   
-      />
-        <svg width={28} height={24} className={style.iconSearch}>
-            <use xlinkHref={`${sprite}#icon-search`} />
-        </svg>
+          <div className={style.inputWrapper}>
+              <svg width={18} height={18} className={style.iconSearch}>
+                  <use xlinkHref={`${sprite}#icon-search`} className={style.icon}/>
+              </svg>
+              <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Search medicine"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className={style.searchInput}
+              />
+          </div>
     </div>
+    <button className={style.btnMedicine}>
+        <svg width={18} height={18} className={style.iconFilter}>
+            <use xlinkHref={`${sprite}#icon-filter`} />
+        </svg>
+        Filter
+    </button>
     </div>
     </form>
     </section>

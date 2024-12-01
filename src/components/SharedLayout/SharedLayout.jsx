@@ -1,4 +1,4 @@
-import AppBar from "../AppBar/AppBar";
+import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 
 function SharedLayout({ children }) {

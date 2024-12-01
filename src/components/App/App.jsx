@@ -5,7 +5,7 @@
 // import ModalRegisterForm from '../ModalRegisterform/ModalRegisterForm.jsx';
 // import ModalLoginForm from '../ModalLoginForm/ModalLoginForm.jsx';
 // import Cart from '../Cart/Cart.jsx';
-// import Footer from '../Footer/Footer.jsx';
+import Footer from '../Footer/Footer.jsx';
 // import AddMedicines from '../AddMedicines/AddMedicines.jsx';
 // import PromoBanners from '../PromoBanners/PromoBanners.jsx';
 // import MedicineSearch from '../MedicineSearch/MedicineSearch.jsx';
@@ -21,12 +21,12 @@ import SharedLayout from '../SharedLayout/SharedLayout';
 import MedicineSearch from '../MedicineSearch/MedicineSearch';
 
 function App() {
-
+  const isWhiteBackground = false;
   return (
     <>
-    <Header/>
+    <Header isWhiteBackground={isWhiteBackground}/>
     <MedicineSearch/>
-
+    <Footer />
 
 
      {/* <Home/>

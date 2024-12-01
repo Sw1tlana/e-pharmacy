@@ -55,7 +55,7 @@ function MedicineSearch() {
     }),
     option: (base, { isFocused, isSelected }) => ({
       ...base,
-      backgroundColor: isFocused ? '#ffffff' : isSelected ? '#93939A' : '#ffffff',  // зміна кольору фону
+      backgroundColor: isFocused ? '#93939A' : isSelected ? '#93939A' : '#ffffff', 
       color: isSelected ? '#ffffff' : '12141733',
       padding: 10,
       cursor: 'pointer',

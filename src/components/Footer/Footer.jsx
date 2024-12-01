@@ -1,14 +1,10 @@
 import style from './Footer.module.css';
-import Logo from '../../shared/components/Logo/Logo';
 import { NavLink } from "react-router-dom";
 import { icons as sprite } from '../../shared/icons';
 import clsx from 'clsx';
 
-const getNavLinkClass = ({ isActive }) => {
-    return clsx(style.footerLink, {
-      [style.active]: isActive,
-    })
-};
+import NavLinks from '../NavLinks/NavLinks';
+import Logo from '../../shared/components/Logo/Logo';
 
 const getTextLinkClass = ({ isActive }) => {
   return clsx(style.textBottom, {
@@ -31,12 +27,7 @@ function Footer() {
       <div className={style.containerLogo}>
 
        <div className={style.containerLogoImg}>
-      <img 
-        src="/logo-white.png" 
-        alt="E-pharmacy Logo" 
-        className={style.logoImage} 
-        />
-        <Logo/>
+          <Logo className="logo" variant="white"/>
       </div>
 
       <div className={style.socialInfo}>
@@ -68,11 +59,7 @@ function Footer() {
       </div>
       </div>
       
-      <div className={style.containerFooterLink}>
-        <NavLink className={getNavLinkClass} to="/">Home</NavLink>
-        <NavLink  className={getNavLinkClass} to="/store">Medicine store</NavLink>
-        <NavLink  className={getNavLinkClass} to="/medicine">Medicine</NavLink>
-      </div>
+      <NavLinks context="footer" />
 
       </div>
 

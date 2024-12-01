@@ -1,19 +1,16 @@
 import style from './Header.module.css';
 import Logo from '../../shared/components/Logo/Logo';
+import NavLinks from '../NavLinks/NavLinks';
 
-function Header() {
+function Header({ background = "white" }) {
 
   return (
-    <div>
-       <div className={style.containerLogoImg}>
-      <img 
-        src="/logo-green.png" 
-        alt="E-pharmacy Logo" 
-        className={style.logoImage} 
-        />
-        <Logo/>
-      </div>
-    </div>
+    <header
+     className={background === "green" ? style.headerGreen : style.headerWhite}
+     >
+        <Logo className="logoGreen" variant="green"/>
+        <NavLinks context="header" />
+      </header>
   )
 };
 

@@ -24,9 +24,6 @@
 }
 
 .containerLogoImg {
-    display: flex;
-    align-items: center;
-    gap: 14px;
     margin-bottom: 20px;
 }
 
@@ -44,19 +41,6 @@
 
 .socialNetworks {
     display: none;
-}
-
-.containerFooterLink {
-    display: flex;
-    gap: 32px;
-    margin-bottom: 80px;
-}
-
-.footerLink {
-    font-weight: 600;
-    line-height: 1.1;
-    color: var(--white-color);
-    transition: var(--animation);
 }
 
 .horisontalLine {
@@ -99,7 +83,7 @@
 
   @media (min-width: 768px) {
     .footer {
-        max-width: 768px;
+        min-width: 768px;
         padding: 32px;  
     }
 
@@ -157,15 +141,6 @@
         transform: scale(1.1);
         background-color: var(--grey-secondary-color); 
     }
-  
-    .footerLink {
-        font-size: 16px;
-        line-height: 1.2;
-    }
-
-    .active {
-        color: var(--yellow-color);
-    }
 
     .horisontalLine {
         margin-bottom: 30px;
@@ -185,34 +160,29 @@
 
   @media (min-width: 1440px) {
     .footer {
-        max-width: 1440px;
-        padding: 40px 128px;  
+      min-width: 1440px;
+      padding: 40px 128px;  
     }
-
+  
     .logoImage {
-        width: 44px;
-        height: 44px;
+      width: 44px;
+      height: 44px;
     }
-
+  
     .containerFooter {
-        max-width: 1096px;
+      max-width: 1180px;
     }
-
+  
     .containerLogo {
-        margin-right: 150px;
+      margin-right: 0;
     }
-
-    .socialInfo {
-        display: flex;
-        align-items: flex-start; 
-    }
-    
+  
     .socialNetworks {
-        display: flex;
-        gap: 12px;
-        position: absolute;
-        top: 0;
-        right: 0;
+      display: flex;
+      gap: 12px;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
   }
 

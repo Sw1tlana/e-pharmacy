@@ -71,7 +71,7 @@
 
     .subTextHome {
         position: absolute;
-        top: 312px; 
+        top: 280px; 
         left: 414px; 
     }
 }
@@ -88,5 +88,10 @@
 
     .imagesHome {
         min-width: 749px;
+    }
+
+    .subTextHome {
+        top: 290px; 
+        left: 414px; 
     }
 }

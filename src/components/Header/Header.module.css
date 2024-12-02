@@ -17,3 +17,13 @@
    transform: translateX(-50%); 
    z-index: 9;
 }
+
+.whiteHeader {
+   background-color: var(--white-color);
+   color: var(--primary-color);
+ }
+ 
+ .greenHeader {
+   background-color: var(--green-accent-color);
+   color: var(--white-color);
+ }

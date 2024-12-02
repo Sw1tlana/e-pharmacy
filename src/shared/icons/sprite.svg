@@ -57,5 +57,10 @@
 <symbol id="icon-paragraph" viewBox="0 0 32 32">
 <path d="M0 2h32v4h-32zM0 8h32v4h-32zM0 14h32v4h-32zM0 20h32v4h-32zM0 26h32v4h-32z"></path>
 </symbol>
+<symbol id="icon-burger" viewBox="0 0 39 32">
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4615" d="M34.868 16.246h-29.538"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4615" d="M34.868 9.846h-29.538"></path>
+<path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.4615" d="M34.868 22.646h-29.538"></path>
+</symbol>
 </defs>
 </svg>

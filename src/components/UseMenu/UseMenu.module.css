@@ -1,0 +1,18 @@
+.logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10;
+    padding: 16px 32px;
+    border: 1px solid var(--border-button-color);
+    border-radius: 60px;
+    line-height: 1;
+    color: var(--green-accent-color);
+    transition: var(--animation);
+}
+
+.logout:active,
+.logout:hover {
+    color: var(--white-color);
+    background-color: var(--green-accent-color);
+}

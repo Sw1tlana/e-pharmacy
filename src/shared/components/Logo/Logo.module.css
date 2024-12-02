@@ -10,7 +10,7 @@
 }
 
 .logoGreen {
-    color: var(--green-accent-color); 
+    color: var(--primary-color); 
 }
 
 @media(min-width: 1440px) {

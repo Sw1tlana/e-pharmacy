@@ -79,6 +79,7 @@
 @media (min-width: 1440px) {
     .homeSection {
         max-height: 800px;
+        position: relative;
     }
 
     .customer {

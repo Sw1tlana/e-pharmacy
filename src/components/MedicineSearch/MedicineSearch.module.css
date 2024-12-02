@@ -93,7 +93,8 @@
 
 @media (min-width: 768px) {
     .sectionSearch {
-        padding: 152px 32px 120px 32px;
+        padding: 152px 128px 120px 128px;
+        position: relative;
     }
     
     .titleMedicine {

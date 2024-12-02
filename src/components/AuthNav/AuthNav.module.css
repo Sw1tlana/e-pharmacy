@@ -1,0 +1,23 @@
+.containerNav {
+    display: flex;
+}
+
+.headerLink {
+    border-radius: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10;
+    padding: 16px 32px;
+    line-height: 1;
+    color: var(--white-color);
+    text-decoration: underline;
+}
+
+.headerLink:hover,
+.headerLink:focus,
+.headerLink:active,
+.headerLink.activeHeader { 
+    border: 1px solid var(--border-authorisation-color);
+    text-decoration: none;
+}

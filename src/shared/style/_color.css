@@ -20,5 +20,6 @@
     --border-grey-color: rgba(29, 30, 33, 0.1);
     --grey-secondary-color: rgba(18, 20, 23, 0.2);
     --placeholder-color: rgba(29, 30, 33, 0.4);
-
+    --border-button-color: rgba(89, 177, 122, 0.5);
+    --border-authorisation-color:  rgba(241, 241, 241, 0.5);
 } 

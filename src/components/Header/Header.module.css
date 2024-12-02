@@ -1,3 +1,19 @@
-.headerWhite  {
-    
+.header  {
+   display: flex; 
+   align-items: center;
+   max-width: 1440px; 
+   width: 100%; 
+}
+
+.nav {
+   display: flex; 
+   align-items: center;
+   justify-content: space-between; 
+   max-width: 1184px; 
+   width: calc(100% - 128px); 
+   position: absolute;
+   top: 28px; 
+   left: 50%; 
+   transform: translateX(-50%); 
+   z-index: 9;
 }

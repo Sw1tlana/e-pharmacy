@@ -21,11 +21,16 @@
    position: relative; 
    z-index: 10;
    margin-left: auto; 
+   stroke: var(--white-color);
+   background: none; 
+   border: none;
 }
 
 .iconBurger {
-   width: 24px;
-   height: 24px;
+   width: 32px;
+   height: 32px;
+   background: transparent; 
+   fill: none;
 }
 
 @media (min-width: 768px) {

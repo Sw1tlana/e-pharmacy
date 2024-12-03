@@ -6,9 +6,14 @@ import { icons as sprite } from '../../shared/icons/index';
 import { useModalContext } from '../../context/useModalContext';
 
 function Header({ isWhiteBackground }) {
-  const { closeModal } = useModalContext();
+  const { openModal } = useModalContext();
 
   const headerClass = isWhiteBackground ? style.whiteHeader : style.greenHeader;
+
+  const handleClick = () => {
+    console.log("Burger clicked");
+    openModal(<div>Тут може бути вміст модалки</div>);
+  };
 
   return (
 <header className={`${style.header} ${headerClass}`}>
@@ -19,8 +24,8 @@ function Header({ isWhiteBackground }) {
   </nav>
   <AppBar/>
   
-  <button className={style.burgerMenu} onClick={closeModal}>
-    <svg width={24} height={24} className={style.iconBurger}>
+  <button className={style.burgerMenu} onClick={handleClick}>
+    <svg width={32} height={32} className={style.iconBurger}>
       <use xlinkHref={`${sprite}#icon-burger`} />
     </svg>
   </button>

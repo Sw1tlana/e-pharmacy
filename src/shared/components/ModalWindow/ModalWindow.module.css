@@ -16,7 +16,7 @@
     width: 24px;
     height: 24px;
 
-    stroke: var(--dark);
+    stroke: var(--primary-color);
     transition: stroke var(--animation);
 }
 
@@ -29,14 +29,14 @@
 
 .closeButton:hover .iconClose,
 .closeButton:active .iconClose {
-    stroke: var(--accent);
+    stroke: var(--primary-color);
 }
 
 .modalContent {
     position: relative;
 
     opacity: 0;
-    background-color: var(--white);
+    background-color: var(--white-color);
     border-radius: 15px;
 
     z-index: 15;

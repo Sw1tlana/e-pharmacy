@@ -11,18 +11,20 @@ function Header({ isWhiteBackground }) {
   const headerClass = isWhiteBackground ? style.whiteHeader : style.greenHeader;
 
   return (
-    <header className={`${style.header} ${headerClass}`}>
-      <nav className={style.nav}>
-        <Logo className="logo" variant={isWhiteBackground ? 'white' : 'green'}/>
-        <NavLinks context="header" />
-        <AppBar/>
-      </nav>
-      <button className={style.burgerMenu} onClick={closeModal}>
-      <svg width={18} height={18} className={style.iconFilter}>
-            <use xlinkHref={`${sprite}#icon-burger`} />
-        </svg>
-      </button>
-    </header>
+<header className={`${style.header} ${headerClass}`}>
+  <Logo className={style.logo} variant={isWhiteBackground ? 'white' : 'green'} />
+  
+  <nav className={style.nav}>
+    <NavLinks context="header" />
+  </nav>
+  <AppBar/>
+  
+  <button className={style.burgerMenu} onClick={closeModal}>
+    <svg width={24} height={24} className={style.iconBurger}>
+      <use xlinkHref={`${sprite}#icon-burger`} />
+    </svg>
+  </button>
+</header>
   )
 };
 

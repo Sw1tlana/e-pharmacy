@@ -5,7 +5,7 @@ import AuthNav from '../AuthNav/AuthNav';
 
 function AppBar() {
   return (
-    <div>
+    <div className={style.appBar}>
       {<Loader/>? <AuthNav/> : <UserMenu/>}
     </div>
   )

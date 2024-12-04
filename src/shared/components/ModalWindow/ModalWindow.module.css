@@ -15,9 +15,12 @@
 .iconClose {
     width: 24px;
     height: 24px;
-
-    stroke: var(--primary-color);
+    stroke: var(--white-color);
     transition: stroke var(--animation);
+}
+
+.iconClose:hover {
+    stroke: var(--yellow-color);
 }
 
 @media screen and (min-width: 768px) {
@@ -33,16 +36,14 @@
 }
 
 .modalContent {
-    position: relative;
-
+    position: absolute;
+    top: 0;
+    right: 0;
     opacity: 0;
     background-color: var(--white-color);
     border-radius: 15px;
-
     z-index: 15;
     transition: opacity var(--animation), transform var(--animation);
-
-    margin: 20px auto;
 }
 
 .modalContentOpen {

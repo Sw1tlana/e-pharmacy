@@ -1,13 +1,13 @@
+import AppBar from '../../AppBar/AppBar';
+import NavLinks from '../../NavLinks/NavLinks';
 import style from './ModalBurger.module.css';
-import { useModalContext } from '../../../context/useModalContext';
 
 function ModalBurger() {
-    const { closeModal } = useModalContext();
 
   return (
-    <div>
-            <h2>Модальне меню</h2>
-            <button onClick={closeModal}>Закрити</button>
+    <div className={style.burgerContainer}>
+     <NavLinks/>
+     <AppBar/>
     </div>
   )
 };

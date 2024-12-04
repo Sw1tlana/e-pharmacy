@@ -2,7 +2,6 @@ import { lazy } from 'react';
 import { Suspense } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-
 import Loader from '../../shared/components/Loader/Loader';
 import SharedLayout from '../SharedLayout/SharedLayout';
 

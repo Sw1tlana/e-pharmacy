@@ -9,7 +9,9 @@ const Modals = () => {
   console.log("modalContent:", modalContent); 
 
   return (
-    <ModalWindow isOpen={isOpen} onRequestClose={closeModal}>
+    <ModalWindow 
+    isOpen={isOpen} 
+    onRequestClose={closeModal}>
       {modalContent}
     </ModalWindow>
   );

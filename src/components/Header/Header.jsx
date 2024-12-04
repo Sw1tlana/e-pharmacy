@@ -4,15 +4,17 @@ import NavLinks from '../NavLinks/NavLinks';
 import AppBar from '../AppBar/AppBar';
 import { icons as sprite } from '../../shared/icons/index';
 import { useModalContext } from '../../context/useModalContext';
+import ModalBurger from '../Modals/ModalBurger/ModalBurger';
 
 function Header({ isWhiteBackground }) {
   const { openModal } = useModalContext();
+  console.log('openModal:', openModal); 
 
   const headerClass = isWhiteBackground ? style.whiteHeader : style.greenHeader;
 
   const handleClick = () => {
     console.log("Burger clicked");
-    openModal(<div>Тут може бути вміст модалки</div>);
+    openModal(<ModalBurger/>);
   };
 
   return (

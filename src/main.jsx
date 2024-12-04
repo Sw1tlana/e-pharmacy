@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
-import { ModalProvider } from './context/ModalContext.jsx';
+import { ModalProvider } from './context/ModalContext';
 import 'modern-normalize';
 import './index.css';
 import App from './components/App/App';

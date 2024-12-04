@@ -1,4 +1,5 @@
 import { createContext, useState, useCallback } from 'react';
+import ModalWindow from '../shared/components/ModalWindow/ModalWindow';
 
 const ModalContext = createContext();
 
@@ -21,6 +22,9 @@ export const ModalProvider = ({ children }) => {
       value={{ isOpen, openModal, closeModal, modalContent }}
     >
       {children}
+      <ModalWindow isOpen={isOpen} onRequestClose={closeModal}>
+        {modalContent}
+      </ModalWindow>
     </ModalContext.Provider>
   );
 };

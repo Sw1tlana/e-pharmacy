@@ -2,11 +2,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 300px;
     align-items: center;
-    padding: 0 38px;
+    padding: 204px 38px 40px 38px;
     max-width: 210px;
     width: 100%;
     height: 812px;
     background-color: var(--green-accent-color);
 }
+
+@media (min-width: 768px) {
+
+    .burgerContainer {
+        padding: 286px 110px 64px 110px;
+        max-width: 334px;
+        height: 1024px;
+    }  
+}
+
 

@@ -53,3 +53,10 @@
 .beforeClose {
     opacity: 0;
 }
+
+@media (min-width: 768px) {
+
+    .modalContent {
+        right: 16%;
+    }
+}

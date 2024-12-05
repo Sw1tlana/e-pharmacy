@@ -1,9 +1,17 @@
 .appBar {
-    display: none;
+    display: none;   
+}
+
+.burgerAppBar {
+    display: flex;
 }
 
 @media (min-width: 1440px) {
     .appBar {
         display: block;
+    }
+
+    .burgerAppBar {
+        display: none;
     }
 }

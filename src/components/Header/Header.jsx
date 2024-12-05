@@ -13,25 +13,26 @@ function Header({ isWhiteBackground }) {
   const headerClass = isWhiteBackground ? style.whiteHeader : style.greenHeader;
 
   const handleClick = () => {
-    console.log("Burger clicked");
     openModal(<ModalBurger/>);
   };
 
   return (
-<header className={`${style.header} ${headerClass}`}>
-  <Logo className={style.logo} variant={isWhiteBackground ? 'white' : 'green'} />
-  
-  <nav className={style.nav}>
-    <NavLinks context="header" />
-  </nav>
-  <AppBar/>
-  
-  <button className={style.burgerMenu} onClick={handleClick}>
-    <svg width={32} height={32} className={style.iconBurger}>
-      <use xlinkHref={`${sprite}#icon-burger`} />
-    </svg>
-  </button>
-</header>
+    <div className={style.pageContainer}>
+      <header className={`${style.header} ${headerClass}`}>
+        <Logo className={style.logo} variant={isWhiteBackground ? 'white' : 'green'} />
+        
+        <nav className={style.nav}>
+          <NavLinks context="header" />
+        </nav>
+        <AppBar/>
+        
+        <button className={style.burgerMenu} onClick={handleClick}>
+          <svg width={32} height={32} className={style.iconBurger}>
+            <use xlinkHref={`${sprite}#icon-burger`} />
+          </svg>
+        </button>
+      </header>
+</div>
   )
 };
 

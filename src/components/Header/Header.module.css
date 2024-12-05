@@ -49,6 +49,11 @@
 }
 
 @media (min-width: 1440px) {
+   .pageContainer {
+      position: relative;
+      max-height: 100vh; 
+    }
+
    .header {
       max-width: 1440px; 
       padding: 28px 128px; 

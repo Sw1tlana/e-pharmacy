@@ -7,7 +7,7 @@ function ModalBurger() {
   return (
     <div className={style.burgerContainer}>
      <NavLinks/>
-     <AppBar/>
+     <AppBar isBurgerMenu={true}/>
     </div>
   )
 };

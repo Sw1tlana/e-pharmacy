@@ -6,12 +6,15 @@
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.03em;
-    color: var(--white-color);
 }
 
-.logoGreen {
+.logoGreenText {
     color: var(--primary-color); 
-}
+  }
+  
+.logoBlackText {
+    color: var(--white-color);
+  }
 
 @media(min-width: 1440px) {
 

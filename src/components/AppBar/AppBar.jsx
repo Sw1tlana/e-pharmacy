@@ -1,23 +1,16 @@
 import style from './AppBar.module.css';
-import { useState } from 'react';
 import UserMenu from '../../components/UseMenu/UseMenu';
 import Loader from '../../shared/components/Loader/Loader';
 import AuthNav from '../AuthNav/AuthNav';
+import { useModalContext } from '../../context/useModalContext';
 
 function AppBar({ isBurgerMenu }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-   const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const { openModal } = useModalContext();
 
   return (
     <div className={isBurgerMenu ? style.burgerAppBar : style.appBar}>
-      {<Loader/>? <AuthNav onCloseMenu={toggleMenu} /> : <UserMenu/>}
+      {<Loader/>? <AuthNav/> : <UserMenu/>}
     </div>
   )
 };

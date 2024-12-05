@@ -1,9 +1,6 @@
 import style from './AuthNav.module.css';
 import { NavLink } from "react-router-dom";
-// import { useModalContext } from '../../context/useModalContext';
 import clsx from 'clsx';
-// import ModalLoginForm from '../Modals/ModalLoginForm/ModalLoginForm';
-import LoginForm from '../LoginForm/LoginForm';
 
 const getNavLinkClass = ({ isActive }) => {
     return clsx(style.headerLink, {
@@ -11,14 +8,12 @@ const getNavLinkClass = ({ isActive }) => {
     })
   };
 
-function AuthNav({onCloseMenu}) {
-
-  // const { openModal } = useModalContext();
+function AuthNav() {
 
   return (
         <div className={style.containerNav}>
           <NavLink to="/register"  className={getNavLinkClass}>Register</NavLink>
-          <NavLink to="/login" onClick={onCloseMenu} className={getNavLinkClass}>Log In</NavLink>
+          <NavLink to="/login" className={getNavLinkClass}>Log In</NavLink>
         </div>
 
   )

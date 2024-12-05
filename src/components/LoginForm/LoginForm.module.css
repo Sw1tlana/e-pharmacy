@@ -176,7 +176,8 @@
     .sectionLoginForm{
        display: flex;
        gap: 54px;
-       padding: 298px 98px 262px 100px;
+       padding: 298px 400px 262px 100px;
+       width: 100%;
     }
 
     .imagesShadow {

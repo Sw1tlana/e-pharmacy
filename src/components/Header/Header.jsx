@@ -6,11 +6,11 @@ import { icons as sprite } from '../../shared/icons/index';
 import { useModalContext } from '../../context/useModalContext';
 import ModalBurger from '../Modals/ModalBurger/ModalBurger';
 
-function Header({ isWhiteBackground }) {
+function Header({ isWhiteBackground, isLogoOnly, isBlackText, hideMenu  }) {
   const { openModal } = useModalContext();
   console.log('openModal:', openModal); 
 
-  const headerClass = isWhiteBackground ? style.whiteHeader : style.greenHeader;
+  const headerClass = isWhiteBackground ? style.white: style.greenHeader;
 
   const handleClick = () => {
     openModal(<ModalBurger/>);
@@ -19,18 +19,25 @@ function Header({ isWhiteBackground }) {
   return (
     <div className={style.pageContainer}>
       <header className={`${style.header} ${headerClass}`}>
-        <Logo className={style.logo} variant={isWhiteBackground ? 'white' : 'green'} />
+        <Logo           
+          className={style.logo} 
+          variant={isWhiteBackground ? 'white' : 'green'} 
+          isBlackText={isBlackText}/>
         
-        <nav className={style.nav}>
-          <NavLinks context="header" />
-        </nav>
-        <AppBar/>
-        
-        <button className={style.burgerMenu} onClick={handleClick}>
-          <svg width={32} height={32} className={style.iconBurger}>
-            <use xlinkHref={`${sprite}#icon-burger`} />
-          </svg>
-        </button>
+        {!isLogoOnly && !hideMenu && (
+          <>
+            <nav className={style.nav}>
+              <NavLinks context="header" />
+            </nav>
+            <AppBar />
+            <button className={style.burgerMenu} onClick={handleClick}>
+              <svg width={32} height={32} className={style.iconBurger}>
+                <use xlinkHref={`${sprite}#icon-burger`} />
+              </svg>
+            </button>
+          </>
+        )}
+
       </header>
 </div>
   )

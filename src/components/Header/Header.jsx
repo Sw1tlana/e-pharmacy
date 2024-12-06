@@ -10,7 +10,7 @@ function Header({ isWhiteBackground, isLogoOnly, isBlackText, hideMenu  }) {
   const { openModal } = useModalContext();
   console.log('openModal:', openModal); 
 
-  const headerClass = isWhiteBackground ? style.white: style.greenHeader;
+  const headerClass = isWhiteBackground ? style.white: style.green;
 
   const handleClick = () => {
     openModal(<ModalBurger/>);

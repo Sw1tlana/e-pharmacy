@@ -27,7 +27,7 @@ function Footer() {
       <div className={style.containerLogo}>
 
        <div className={style.containerLogoImg}>
-          <Logo className="logo" variant="white"/>
+          <Logo className="logo" variant="white" isBlackText={true}/>
       </div>
 
       <div className={style.socialInfo}>

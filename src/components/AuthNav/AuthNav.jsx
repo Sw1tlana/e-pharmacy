@@ -36,7 +36,7 @@ function AuthNav() {
           onClick={(e) => {
             if (isMobile) {
               e.preventDefault(); 
-              openModal(<ModalRegisterForm />);
+              openModal(<ModalRegisterForm/>, { color: 'black' });
             }
           }}>
             Register
@@ -48,7 +48,7 @@ function AuthNav() {
           onClick={(e) => {
           if (isMobile) {
             e.preventDefault(); 
-            openModal(<ModalLoginForm />);
+            openModal(<ModalLoginForm />, { color: 'black' });
           }
         }}>
             Log In

@@ -15,13 +15,24 @@
 .iconClose {
     width: 24px;
     height: 24px;
-    stroke: var(--white-color);
     transition: stroke var(--animation);
-}
-
-.iconClose:hover {
-    stroke: var(--yellow-color);
-}
+  }
+  
+  .closeWhite {
+    stroke: var(--white-color);
+  }
+  
+  .closeBlack {
+    stroke: var(--primary-color);
+  }
+  
+  .closeButton:hover .closeWhite {
+    stroke: var(--primary-color);
+  }
+  
+  .closeButton:hover .closeBlack {
+    stroke: var(--white-color);
+  }
 
 @media screen and (min-width: 768px) {
     .iconClose {
@@ -39,12 +50,13 @@
     position: absolute;
     top: 0;
     right: 0;
-    opacity: 0;
+    opacity: 20%;
     background-color: var(--white-color);
     border-radius: 15px;
     z-index: 15;
     transition: opacity var(--animation), transform var(--animation);
 }
+
 
 .modalContentOpen {
     opacity: 1;

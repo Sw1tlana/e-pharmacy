@@ -10,6 +10,7 @@ const ModalWindow = ({
   onRequestClose,
   children,
   shouldCloseOnOverlayClick = true,
+  color = 'white',
 }) => {
   useEffect(() => {
     if (isOpen) {
@@ -21,6 +22,8 @@ const ModalWindow = ({
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  const closeButtonClass = color === 'white' ? style.closeWhite : style.closeBlack;
 
   return (
     <Modal
@@ -42,7 +45,7 @@ const ModalWindow = ({
         beforeClose: style.beforeClose,
       }}
     >
-      <button onClick={onRequestClose} className={style.closeButton}>
+      <button onClick={onRequestClose} className={`${style.closeButton} ${closeButtonClass}`}>
         <svg className={`${style.iconClose}`}>
           <use xlinkHref={`${sprite}#icon-x`} />
         </svg>

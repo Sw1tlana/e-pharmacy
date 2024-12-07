@@ -4,9 +4,9 @@ import { requestSingUp,
          requestSingIn,
          requestLogOut,
          clearAuthHeader
- } from '../services/authServices';
+ } from '../services/authServices.js';
 
-export const register = createAsyncThunk(
+export const registerUser = createAsyncThunk(
     "auth/register",
     async(formData, thunkAPI) => {
         try {
@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
     }
 );
 
-export const login = createAsyncThunk(
+export const loginUser = createAsyncThunk(
     "auth/login",
     async(formData, thunkAPI) => {
         try {

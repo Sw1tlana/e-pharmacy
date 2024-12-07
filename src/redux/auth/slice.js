@@ -1,8 +1,8 @@
 import { toast } from 'react-hot-toast';
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
-    register,
-    login,
+    registerUser,
+    loginUser,
     logout} from './operations';
 
 
@@ -13,7 +13,6 @@ const INITIAL_STATE = {
     },
     token: null,
     isLoggedIn: false,
-    isRefreshing: false,
     error: false,
   };
 
@@ -23,13 +22,13 @@ const INITIAL_STATE = {
   
     extraReducers: (builder) => {
     builder
-    .addCase(register.fulfilled, (state, action) => {
+    .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
         toast.success('You have registered✅');
       })
-    .addCase(login.fulfilled, (state, action) => {
+    .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
@@ -39,12 +38,12 @@ const INITIAL_STATE = {
         return INITIAL_STATE;
     })
         .addMatcher(isAnyOf(
-        register.pending, login.pending, logout.pending),
+        registerUser.pending, loginUser.pending, logout.pending),
         (state) => {
         state.error = false;
         })
         .addMatcher(isAnyOf(
-            register.rejected, login.rejected, logout.rejected),
+            registerUser.rejected, loginUser.rejected, logout.rejected),
             (state) => {
               state.error = true;
               toast.error('Oops! Something went wrong ❌');

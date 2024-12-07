@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import { useModalContext } from '../../context/useModalContext';
 import ModalRegisterForm from '../Modals/ModalRegisterForm/ModalRegisterForm';
 import ModalLoginForm from '../Modals/ModalLoginForm/ModalLoginForm';
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 
@@ -13,6 +15,8 @@ const getNavLinkClass = ({ isActive }) => {
 }
 
 function AuthNav() {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   const { openModal } = useModalContext();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -30,6 +34,8 @@ function AuthNav() {
 
   return (
         <div className={style.containerNav}>
+          {!isLoggedIn && (
+            <>
           <NavLink 
           to="/register"  
           className={getNavLinkClass}
@@ -53,6 +59,8 @@ function AuthNav() {
         }}>
             Log In
             </NavLink>
+            </>
+            )}
         </div>
 
   )

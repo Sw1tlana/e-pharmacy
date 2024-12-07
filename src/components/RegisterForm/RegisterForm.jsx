@@ -1,14 +1,53 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import style from './RegisterForm.module.css';
+
+import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
+
+import { signUpSchema } from '../../shemas/singUpShema';
+import { formValuesSignUp } from '../../helpers/constants';
+import { registerUser } from '../../redux/auth/operations';
+
 import { tablet2x } from '../../shared/images/authorizePage/index';
 import { shadow } from '../../shared/images/shadow/index';
 
 function RegisterForm() {
+    const dispatch = useDispatch();
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        resolver: yupResolver()
+        defaultValues: formValuesSignUp,
+        resolver: yupResolver(signUpSchema),
+        mode: 'onTouched'
     });
+
+    const onSubmit = (data) => {
+        const userData = { ...data };
+        delete userData.repeatPassword;
+    
+        try {
+          dispatch(registerUser(userData));
+          reset();
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      useEffect(() => {
+        const errorMessages = {
+          password: ('signUpPage.passwordSpanError'),
+          email: ('signUpPage.emailSpanError'),
+          name: ('signUpPage.nameSpanError'),
+          phone: ('Invalid phone number'),
+        };
+      
+        for (const field in errorMessages) {
+          if (errors[field]) {
+            toast.error(errorMessages[field]);
+            break;
+          }
+        }
+      }, [errors]);
     
   return (
     <section className={style.sectionRegisterForm}>
@@ -18,7 +57,7 @@ function RegisterForm() {
             Your medication,  delivered Say goodbye to all<span className={style.spanColor}>your healthcare</span> worries with us
         </h2>
         </div>
-        <form className={style.formRegister} onSubmit={handleSubmit}>
+        <form className={style.formRegister} onSubmit={handleSubmit(onSubmit)}>
             <div className={style.containerInput}>
             <div>
                 <input 

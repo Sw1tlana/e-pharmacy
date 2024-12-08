@@ -9,9 +9,15 @@ export const clearAuthHeader = () => {
 };
 
 export const requestSingUp = async(formData) => {
+    console.log('Request data:', formData);
  const { data } = await axios.post('/user/register', formData);
- setAuthHeader(data.token);
- return data
+ console.log('Response data:', data);
+ if (data.user && data.token) {
+    setAuthHeader(data.token);
+    return data; 
+  } else {
+    throw new Error('Invalid API response: missing user or token');
+  }
 };
 
 export const requestSingIn = async(formData) => {

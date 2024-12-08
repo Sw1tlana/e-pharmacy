@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
 import style from './RegisterForm.module.css';
 
 import { useDispatch } from 'react-redux';
@@ -22,15 +23,8 @@ function RegisterForm() {
     });
 
     const onSubmit = (data) => {
-        const userData = { ...data };
-        delete userData.repeatPassword;
-    
-        try {
-          dispatch(registerUser(userData));
+          dispatch(registerUser(data));
           reset();
-        } catch (error) {
-          console.error(error);
-        }
       };
 
       useEffect(() => {

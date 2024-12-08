@@ -1,4 +1,5 @@
 export const selectUser = ((state) => state.auth.user);
+console.log('Current User:', selectUser);
 
 export const selectEmail = ((state) => state.auth.email);
 

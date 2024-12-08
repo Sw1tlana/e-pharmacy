@@ -23,6 +23,7 @@ const INITIAL_STATE = {
     extraReducers: (builder) => {
     builder
     .addCase(registerUser.fulfilled, (state, action) => {
+      console.log('Payload:', action.payload);
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;

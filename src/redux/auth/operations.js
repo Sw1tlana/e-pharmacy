@@ -9,10 +9,13 @@ import { requestSingUp,
 export const registerUser = createAsyncThunk(
     "auth/register",
     async(formData, thunkAPI) => {
+        console.log('Data sent to API:', formData);
         try {
             const response = await requestSingUp(formData);
+            console.log('API Response:', response);
             return response;
         }catch(error) {
+            console.error('API Error:', error);
             return thunkAPI.rejectWithValue(error.message);
         }
     }

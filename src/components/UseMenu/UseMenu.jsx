@@ -8,20 +8,17 @@ function UseMenu() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
   
-  console.log('isLoggedIn:', isLoggedIn);  
-console.log('user:', user);
-
   const onLogOut = () => {
     dispatch(logout());
   };
 
   return (
     <div>
-      {!isLoggedIn && user ? (
+      {isLoggedIn && user && (
         <button type="button" className={style.logout} onClick={onLogOut}>
             Log out
         </button>
-        ) : null}
+        )}
     </div>
   )
 };

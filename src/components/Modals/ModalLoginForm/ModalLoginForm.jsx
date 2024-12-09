@@ -1,12 +1,39 @@
 import style from './ModalLoginForm.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom'; 
+
+import { signInSchema } from '../../../shemas/signInShema.js';
+import { formValuesSignIn } from '../../../helpers/constants.js';
+import { loginUser } from '../../../redux/auth/operations.js';
 
 function ModalLoginForm() {
 
+    const dispatch = useDispatch();
+
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        resolver: yupResolver()
+        defaultValues: formValuesSignIn,
+        resolver: yupResolver(signInSchema),
+        mode: 'onTouched'
     });
+    
+console.log('Form errors:', errors);
+
+
+    const onSubmit = async (data) => {
+        console.log("Submitted data:", data); 
+        try {
+          await dispatch(loginUser(data)).unwrap();
+          console.log('Submitted data:', data);
+          reset();  
+          toast.success("Logged in successfully!");
+        } catch (error) {
+            console.error('Login error:', error); 
+          toast.error("Login failed. Please try again.");
+        }
+      };
 
   return (
     <section className={style.sectionModal}>
@@ -16,7 +43,7 @@ function ModalLoginForm() {
         <p className={style.textModalAuthorization}>
             Please login to your account before continuing.
         </p>
-    <form className={style.containerInput} onSubmit={handleSubmit}>
+    <form className={style.containerInput} onSubmit={handleSubmit(onSubmit)}>
     <div>
         <input
         id="email"
@@ -40,7 +67,7 @@ function ModalLoginForm() {
         <p className={style.errorMsg}>{errors.password.message}</p>}
     </div>
     <button className={style.authorizationBtn} type="submit">Sing in</button>
-    <p className={style.textForm}>Don't have an account?</p>
+    <Link className={style.textForm} to="/register">Don't have an account?</Link>
 </form>
 </section>
   )

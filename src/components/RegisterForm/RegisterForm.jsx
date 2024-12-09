@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import style from './RegisterForm.module.css';
 
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom'; 
 import toast from 'react-hot-toast';
 
 import { signUpSchema } from '../../shemas/singUpShema';
@@ -99,7 +100,7 @@ function RegisterForm() {
             </div>
             </div>
             <button className={style.registerBtn} type="submit">Register</button>
-            <p className={style.textForm}>Already have an account?</p>
+            <Link className={style.textForm} to="/login">Already have an account?</Link>
             <img className={style.imagesShadow} src={shadow} alt="shadow" />
         </form>
     </section>

@@ -30,3 +30,10 @@ export const requestLogOut = async() => {
     const { data } = await axios.post('/user/logout');
     return data;
 };
+
+// stores
+
+export const getStores = async() => {
+  const { data } = await axios.get('/stores');
+  return data;
+}

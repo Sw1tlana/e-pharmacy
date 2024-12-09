@@ -27,9 +27,9 @@ export const storeSlice = createSlice({
       .addCase(fetchStores.pending, handlePending)
       .addCase(fetchStores.fulfilled, (state, action) => {
         console.log('Payload:', action.payload);
-          state.stores = action.payload.stores;
+          state.stores = action.payload;
           state.isLoggedIn = true;
-          toast.success('You have registered✅');
+          toast.success('You have stores✅');
         })
         .addCase(fetchStores.rejected, handleRejected)
 

@@ -34,6 +34,6 @@ export const requestLogOut = async() => {
 // stores
 
 export const getStores = async() => {
-  const { data } = await axios.get('/stores');
+  const { data } = await axios.get('/stores/list');
   return data;
 }

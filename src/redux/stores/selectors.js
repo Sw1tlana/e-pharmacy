@@ -1,4 +1,4 @@
-export const selectStores = ((state) => state.stores.stores);
+export const selectStores = (state) => state.stores.stores;
 
 export const selectLoading = (state) => state.stores.loading;
 

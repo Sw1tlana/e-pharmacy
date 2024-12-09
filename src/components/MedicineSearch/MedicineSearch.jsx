@@ -21,7 +21,6 @@ function MedicineSearch() {
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
-    // логіку для фільтрації
   };
 
   const filteredCategories = categoryOption.filter((option) =>

@@ -1,5 +1,4 @@
 .sectionStore {
-    max-width: 375px;
     padding: 120px 20px 80px 20px;
     background-color: var(--bg-color);
 }
@@ -9,11 +8,15 @@
     font-weight: 600;
     line-height: 1.1;
     margin-bottom: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .listStores {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    position: relative;
     gap: 20px;
 }
 
@@ -34,16 +37,50 @@
    z-index: 9;
 }
 
+.containerLocation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;  
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.textCity {
+    margin-left: 26px;
+}
+
+.iconMap {
+    fill: transparent;
+    stroke: var(--green-accent-color);
+}
+
+.containerPhone {
+    display: flex;
+    gap: 10px;
+}
+
+.iconPhone {
+    fill: var(--green-accent-color);
+}
+
 .nameStores {
+    display: block;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.4;
     margin-bottom: 32px;
 }
 
-.rating {
+.ratingContainer {
     display: flex;
     align-items: center;
+    position: absolute;
+    top: 30px;
+    right: 40px;
 }
 
 .textStores {
@@ -55,7 +92,117 @@
     fill: var(--yellow-color);
 }
 
-.containerRating {
+.btnStore {
     display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 8px 16px;
+    background-color: var(--bg-green-color);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    margin-left: 8px;
 }
+
+.openStore {
+    color: var(--green-accent-color);
+  }
+  
+  .closedStore {
+    color: var(--btn-bg-red-color);
+  }
+
+
+  @media (min-width: 768px) {
+    .sectionStore {
+        padding: 152px 32px 120px 32px;
+    }
+    
+    .titleStore {
+        margin-bottom: 32px;
+    }
+    
+    .listStores {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 32px 16px;
+    }
+    
+    .itemStores {
+        max-width: 344px;
+    }
+    
+    .containerLocation {
+        margin-bottom: 14px;  
+    }
+
+    .textCity {
+        margin-left: 26px;
+    }
+    
+    .iconMap {
+        fill: transparent;
+        stroke: var(--green-accent-color);
+    }
+    
+    .containerPhone {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .iconPhone {
+        fill: var(--green-accent-color);
+    }
+    
+    .nameStores {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.4;
+        margin-bottom: 32px;
+    }
+    
+    .ratingContainer {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 30px;
+        right: 40px;
+    }
+    
+    .textStores {
+        font-size: 14px;
+        line-height: 1.2;
+    }
+    
+    .iconRating {
+        fill: var(--yellow-color);
+    }
+    
+    .btnStore {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 16px;
+        background-color: var(--bg-green-color);
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: -0.02em;
+        margin-left: 8px;
+    }
+    
+    .openStore {
+        color: var(--green-accent-color);
+      }
+      
+      .closedStore {
+        color: var(--btn-bg-red-color);
+      }
+  }
+

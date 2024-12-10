@@ -3,12 +3,14 @@ import Loader from '../../shared/components/Loader/Loader';
 import { shadow } from '../../shared/images/shadow';
 import { icons as sprite } from '../../shared/icons';
 
+import EllipsisText from "react-ellipsis-text";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchStores } from '../../redux/stores/operation';
 
-import { selectStores, selectError, selectLoading } from '../../redux/stores/selectors';
-
+import { selectStores, 
+         selectError, 
+         selectLoading } from '../../redux/stores/selectors';
 
 function MedicineStore() {
 
@@ -46,19 +48,44 @@ function MedicineStore() {
           {stores.map((store, index) => (
             <li key={`${store.id}-${index}`}
             className={style.itemStores}>  
-              <h3 className={style.nameStores}>{store.name}</h3>
-              <p className={style.textStores}>{store.address}</p>
-              <p className={style.textStores}>{store.city}</p>
-              <p className={style.textStores}>{store.phone}</p>
+               <EllipsisText 
+               className={style.nameStores} 
+               text={store.name} 
+               length={12} 
+               />
 
-              <p className={`${style.textStores} ${style.rating}`}>
+              <div className={style.containerLocation}>
+                <div className={style.row}>
+                  <svg width={18} height={18} className={style.iconMap}>
+                      <use xlinkHref={`${sprite}#icon-map-pin`} />
+                  </svg>
+                  <p className={style.textStores}>{store.address}</p>
+                </div>
+               <p className={`${style.textStores} ${style.textCity}`}>{store.city}</p>
+              </div>
+
+              <div className={style.containerPhone}>
+              <svg width={18} height={18} className={style.iconPhone}>
+                  <use xlinkHref={`${sprite}#icon-phone`} />
+              </svg>
+              <p className={style.textStores}>{store.phone}</p>
+              </div>
+
+              <div className={`${style.textStores} ${style.ratingContainer}`}>
               <svg width={18} height={18} className={style.iconRating}>
                   <use xlinkHref={`${sprite}#icon-star`} />
              </svg>
                  {store.rating}
-              </p>
+                 <p
+                  className={`
+                    ${style.btnStore} ${isStoreOpen() ?
+                       style.openStore : 
+                       style.closedStore}`}
+                >
+                  {isStoreOpen() ? "Open" : "Closed"}
+                </p>
+              </div>
 
-              <p>{isStoreOpen() ? "Open" : "Closed"}</p>
               <img 
               className={style.imagesShadow} 
               src={shadow} 

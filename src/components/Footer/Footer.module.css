@@ -1,5 +1,4 @@
 .footer {
-    max-width: 375px;
     padding: 20px;
     background-color: var(--green-accent-color);
     color: var(--white-color);
@@ -83,7 +82,6 @@
 
   @media (min-width: 768px) {
     .footer {
-        min-width: 768px;
         padding: 32px;  
     }
 
@@ -160,7 +158,6 @@
 
   @media (min-width: 1440px) {
     .footer {
-      min-width: 1440px;
       padding: 40px 128px;  
     }
   

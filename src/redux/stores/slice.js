@@ -1,6 +1,7 @@
-import { toast } from 'react-hot-toast';
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchStores } from './operation';
+import { fetchStores,
+         nearestStores
+ } from './operation';
 
 const handlePending = (state) => {
     state.loading = true;
@@ -29,9 +30,15 @@ export const storeSlice = createSlice({
         console.log('Payload:', action.payload);
           state.stores = action.payload;
           state.isLoggedIn = true;
-          toast.success('You have stores✅');
         })
         .addCase(fetchStores.rejected, handleRejected)
+        .addCase(nearestStores.pending, handlePending)
+        .addCase(nearestStores.fulfilled, (state, action) => {
+          console.log('Payload:', action.payload);
+            state.stores = action.payload;
+            state.isLoggedIn = true;
+          })
+          .addCase(nearestStores.rejected, handleRejected)
 
     },});
 

@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getStores } from "../services/authServices";
+import { getStores,
+         getNearestStores
+ } from "../services/authServices";
 
 export const fetchStores = createAsyncThunk(
     "stores/fetchStores", 
@@ -9,6 +11,18 @@ export const fetchStores = createAsyncThunk(
          return response;
         }catch(error) {
             return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
+export const nearestStores = createAsyncThunk(
+    "stores/nearestStores",
+    async(_, thunkAPI ) => {
+        try {
+        const response = await getNearestStores();
+        return response;
+        }catch(error) {
+            return thunkAPI.rejectWithValue(error.message); 
         }
     }
 );

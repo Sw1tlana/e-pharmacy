@@ -1,4 +1,6 @@
 .sectionStore {
+    max-width: 375px;
+    width: 100%;
     padding: 120px 20px 80px 20px;
     background-color: var(--bg-color);
 }
@@ -84,7 +86,6 @@
 }
 
 .textStores {
-    font-size: 14px;
     line-height: 1.2;
 }
 
@@ -97,7 +98,6 @@
     justify-content: center;
     align-items: center;
     padding: 8px 16px;
-    background-color: var(--bg-green-color);
     border-radius: 8px;
     font-size: 12px;
     font-weight: 600;
@@ -108,15 +108,43 @@
 
 .openStore {
     color: var(--green-accent-color);
+    background-color: var(--bg-green-color);
   }
   
   .closedStore {
     color: var(--btn-bg-red-color);
+    background-color: var(--bg-red-color);
   }
 
+  .btnVisit {
+    display: none;
+  }
+
+  .containerNotification {
+    width: 768px;
+  }
+
+  .notification {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      var(--green-accent-color) 20%, 
+      var(--btn-green-accent-color) 40%,
+      var(--yellow-color) 60%, 
+      var(--btn-bg-red-color) 80% 
+    );
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+  }
 
   @media (min-width: 768px) {
     .sectionStore {
+        max-width: 768px;
         padding: 152px 32px 120px 32px;
     }
     
@@ -125,7 +153,6 @@
     }
     
     .listStores {
-        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
@@ -144,65 +171,97 @@
         margin-left: 26px;
     }
     
-    .iconMap {
-        fill: transparent;
-        stroke: var(--green-accent-color);
-    }
-    
     .containerPhone {
-        display: flex;
-        gap: 10px;
-    }
-    
-    .iconPhone {
-        fill: var(--green-accent-color);
+        margin-bottom: 36px;
     }
     
     .nameStores {
-        display: block;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 1.4;
+        font-size: 20px;
         margin-bottom: 32px;
     }
     
     .ratingContainer {
-        display: flex;
-        align-items: center;
-        position: absolute;
-        top: 30px;
+        bottom: -140px;
         right: 40px;
     }
-    
+
     .textStores {
-        font-size: 14px;
-        line-height: 1.2;
+        font-size: 16px;
     }
     
-    .iconRating {
-        fill: var(--yellow-color);
-    }
-    
-    .btnStore {
+    .btnVisit {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 8px 16px;
-        background-color: var(--bg-green-color);
-        border-radius: 8px;
-        font-size: 12px;
-        font-weight: 600;
-        line-height: 1.5;
-        letter-spacing: -0.02em;
-        margin-left: 8px;
+        gap: 10;
+        padding: 10px 16px;
+        border: none;
+        font-weight: 500;
+        line-height: 1;
+        color: var(--white-color);
+        border-radius: 24px;
+        background-color: var(--btn-green-accent-color);
+        transition: var(--animate);
+    }
+
+    .btnVisit:active,
+    .btnVisit:hover {
+    background-color: var(--green-accent-color);
+}
+
+.imagesShadow {
+    top: -40px;
+    left: 220px;
+    z-index: 9;
+ }  
+}
+
+@media (min-width: 1440px) {
+    .sectionStore {
+        max-width: 1440px;
+        padding: 172px 128px 120px 128px;
     }
     
-    .openStore {
-        color: var(--green-accent-color);
-      }
-      
-      .closedStore {
-        color: var(--btn-bg-red-color);
-      }
-  }
+    .titleStore {
+        margin-bottom: 32px;
+    }
+    
+    .listStores {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 32px 16px;
+    }
+    
+    .itemStores {
+        max-width: 380px;
+    }
+    
+    .containerLocation {
+        margin-bottom: 14px;  
+    }
+
+    .textCity {
+        margin-left: 26px;
+    }
+    
+    .containerPhone {
+        margin-bottom: 36px;
+    }
+    
+    .nameStores {
+        margin-bottom: 20px;
+    }
+    
+    .ratingContainer {
+        bottom: -150px;
+        right: 40px;
+    }
+
+    .imagesShadow {
+        top: -40px;
+        left: 240px;
+        z-index: 9;
+    }  
+}
 

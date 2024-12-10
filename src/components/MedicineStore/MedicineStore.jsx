@@ -51,12 +51,12 @@ function MedicineStore() {
                <EllipsisText 
                className={style.nameStores} 
                text={store.name} 
-               length={12} 
+               length={16} 
                />
 
               <div className={style.containerLocation}>
                 <div className={style.row}>
-                  <svg width={18} height={18} className={style.iconMap}>
+                  <svg width={14} height={16} className={style.iconMap}>
                       <use xlinkHref={`${sprite}#icon-map-pin`} />
                   </svg>
                   <p className={style.textStores}>{store.address}</p>
@@ -65,14 +65,18 @@ function MedicineStore() {
               </div>
 
               <div className={style.containerPhone}>
-              <svg width={18} height={18} className={style.iconPhone}>
+              <svg width={14} height={16} className={style.iconPhone}>
                   <use xlinkHref={`${sprite}#icon-phone`} />
               </svg>
               <p className={style.textStores}>{store.phone}</p>
               </div>
 
+              <button className={style.btnVisit} type='button'>
+                Visit Store
+              </button>
+
               <div className={`${style.textStores} ${style.ratingContainer}`}>
-              <svg width={18} height={18} className={style.iconRating}>
+              <svg width={16} height={16} className={style.iconRating}>
                   <use xlinkHref={`${sprite}#icon-star`} />
              </svg>
                  {store.rating}
@@ -82,7 +86,7 @@ function MedicineStore() {
                        style.openStore : 
                        style.closedStore}`}
                 >
-                  {isStoreOpen() ? "Open" : "Closed"}
+                    {isStoreOpen() ? "Open" : "Closed"}
                 </p>
               </div>
 
@@ -95,7 +99,9 @@ function MedicineStore() {
           ))}
         </ul>
       ) : (
+        <div className={style.containerNotification}>
         <p className={style.notification}>No stores available</p>
+        </div>
       )}
     </section>
   )

@@ -1,6 +1,19 @@
 import style from './PromoBanners.module.css';
+import Loader from '../../shared/components/Loader/Loader';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { nearestStores } from '../../redux/stores/operation';
+import { selectStores, selectLoading } from '../../redux/stores/selectors';
 
 function PromoBanners() {
+    const dispatch = useDispatch();
+    const stores = useSelector(selectStores);
+    const loading = useSelector(selectLoading);
+
+    useEffect(() => {
+        dispatch(nearestStores());
+    }, [dispatch]);
+
   return (
     <section className={style.sectionBanners}>
         <div className={style.bannersWrapper}>
@@ -42,6 +55,23 @@ function PromoBanners() {
             <h2 className={style.titleStore}>Your Nearest Medicine Store</h2>
             <p className={style.textStore}>Search for Medicine, Filter by your location</p>
         </div>
+        {Array.isArray(stores) && stores.length > 0 ? (
+            <ul>
+                {stores.map((store, index) => (
+                    <li key={`${store.id}-${index}`}>
+                     <p>{store.name}</p>
+                     <p>{store.address}</p>
+                     <p>{store.city}</p>
+                     <p>{store.phone}</p>
+                     <p>{store.rating}</p>
+                    </li>
+                ))}
+            </ul>
+                  ) : (
+                    <div className={style.containerNotification}>
+                    <p className={style.notification}>No stores available</p>
+                    </div>
+                  )}
     </section>
 
   )

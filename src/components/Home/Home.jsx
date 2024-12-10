@@ -1,6 +1,7 @@
 import style from './Home.module.css';
 import Container from '../../shared/components/Container/Container';
 import { capsule2x } from '../../shared/images/homePage/index';
+import PromoBanners from '../PromoBanners/PromoBanners';
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
             </p>
           </div>
         </div>
+        <PromoBanners/>
       </Container>
     </section>
   )

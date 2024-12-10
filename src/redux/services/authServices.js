@@ -36,4 +36,9 @@ export const requestLogOut = async() => {
 export const getStores = async() => {
   const { data } = await axios.get('/stores/list');
   return data;
-}
+};
+
+export const getNearestStores = async() => {
+  const { data } = await axios.get('/stores/nearest');
+  return data;
+};

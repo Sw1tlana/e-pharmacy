@@ -51,6 +51,7 @@ function PromoBanners() {
         </div>
         </div>
 
+    <div className={style.storesNearest}>
         <div className={style.storeInfo}>
             <h2 className={style.titleStore}>Your Nearest Medicine Store</h2>
             <p className={style.textStore}>Search for Medicine, Filter by your location</p>
@@ -71,7 +72,8 @@ function PromoBanners() {
                     <div className={style.containerNotification}>
                     <p className={style.notification}>No stores available</p>
                     </div>
-                  )}
+                  )};
+            </div>
     </section>
 
   )

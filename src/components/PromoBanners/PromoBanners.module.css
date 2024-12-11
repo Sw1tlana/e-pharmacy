@@ -103,6 +103,10 @@
     line-height: 1.2;
     color: var(--secondary-color);
 }
+.storesNearest {
+    display: flex;
+    flex-direction: column;
+}
 
 @media (min-width: 768px) {
 

@@ -11,7 +11,6 @@ import { selectFilters,
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import toast from 'react-hot-toast';
 
 function Medicine() {
   const dispatch = useDispatch();
@@ -28,6 +27,7 @@ function Medicine() {
   
     dispatch(fetchMedicines({ page, limit, filters }));
   }, [dispatch, page, limit, filters]);
+  
 
   return (
     <section className={style.sectionMedicine}>
@@ -43,7 +43,7 @@ function Medicine() {
             >
             <img 
             className={style.imgMedicine}
-            src={medicine.photo} 
+            src={medicine.photo}
             alt={medicine.name}
             width={335} 
             />
@@ -60,7 +60,7 @@ function Medicine() {
           ) : (
             <div className={style.containerNotification}>
                <p className={style.notification}>
-               {loading ? 'Loading...' : 'No products available'}
+               No products available
               </p>
             </div>   
       )}

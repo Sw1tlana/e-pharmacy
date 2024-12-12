@@ -34,11 +34,18 @@ export const requestLogOut = async() => {
 // stores
 
 export const getStores = async() => {
-  const { data } = await axios.get('/stores/list');
+  const { data } = await axios.get('/stores');
   return data;
 };
 
 export const getNearestStores = async() => {
   const { data } = await axios.get('/stores/nearest');
   return data;
+};
+
+// medicines
+
+export const getMedicines = async() => {
+   const { data } = await axios.get('/products');
+   return data;
 };

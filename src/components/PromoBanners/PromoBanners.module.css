@@ -88,6 +88,7 @@
     text-align: center;
     max-width: 290px;
     width: 100%;
+    margin-bottom: 40px;
 }
 
 .titleStore {
@@ -103,10 +104,140 @@
     line-height: 1.2;
     color: var(--secondary-color);
 }
+
 .storesNearest {
     display: flex;
     flex-direction: column;
 }
+
+.wrapperList {
+    max-width: 375px;
+    width: 100%; 
+}
+
+.listStores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 20px;
+}
+
+.itemStores {
+    max-width: 335px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 26px;
+    background-color: var(--bg-green-lite);
+    position: relative;
+    overflow: hidden;
+}
+
+.imagesShadow {
+   position: absolute;
+   top: 100px;
+   left: 220px;
+   z-index: 9;
+}
+
+.containerLocation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;  
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.textCity {
+    margin-left: 26px;
+}
+
+.iconMap {
+    fill: transparent;
+    stroke: var(--green-accent-color);
+}
+
+.containerPhone {
+    display: flex;
+    gap: 10px;
+}
+
+.iconPhone {
+    fill: var(--green-accent-color);
+}
+
+.nameStores {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 32px;
+}
+
+.ratingContainer {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 34px;
+    right: 30px;
+}
+
+.textStores {
+    line-height: 1.2;
+}
+
+.iconRating {
+    fill: var(--yellow-color);
+}
+
+.btnStore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    margin-left: 8px;
+}
+
+.openStore {
+    color: var(--green-accent-color);
+    background-color: var(--bg-green-color);
+  }
+  
+  .closedStore {
+    color: var(--btn-bg-red-color);
+    background-color: var(--bg-red-color);
+  }
+
+  .containerNotification {
+    width: 768px;
+  }
+
+  .notification {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      var(--green-accent-color) 20%, 
+      var(--btn-green-accent-color) 40%,
+      var(--yellow-color) 60%, 
+      var(--btn-bg-red-color) 80% 
+    );
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+  }
 
 @media (min-width: 768px) {
 
@@ -117,12 +248,10 @@
         max-width: 768px;
     }
 
-    .sectionBanners {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 46px;
-        max-width: 768px;
-    }
+    .imagesShadow {
+        top: 150px;
+        left: 230px;
+     }
     
     .bannersWrapper {
         display: flex;
@@ -164,6 +293,42 @@
         font-size: 14px;
     }
 
+    .wrapperList {
+        max-width: 768px;
+    }
+
+    .listStores {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 32px 16px;
+    }
+    
+    .itemStores {
+        max-width: 344px;
+    }
+    
+    .containerLocation {
+        margin-bottom: 14px;  
+    }
+
+    .textCity {
+        margin-left: 26px;
+    }
+    
+    .containerPhone {
+        margin-bottom: 36px;
+    }
+    
+    .nameStores {
+        font-size: 20px;
+        margin-bottom: 32px;
+    }
+
+    .textStores {
+        font-size: 16px;
+    }
+    
 }
 
 @media (min-width: 1440px) {
@@ -181,5 +346,9 @@
     .containerBanners {
         max-width: 321px;
         max-height: 166px;
+    }
+
+    .wrapperList {
+        max-width: 1440px;
     }
 } 

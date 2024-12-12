@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/slice";
 import { storeReducer } from "./stores/slice";
+import { medicinesReducer } from "./medicine/slice";
 
 import {
   persistStore,
@@ -23,7 +24,8 @@ const authConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authConfig, authReducer),
-    stores: storeReducer
+    stores: storeReducer,
+    medicines: medicinesReducer
   },
   
    middleware: (getDefaultMiddleware) =>

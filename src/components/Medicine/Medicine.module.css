@@ -1,0 +1,25 @@
+.sectionMedicine {
+    max-width: 375px;
+    width: 100%;
+    padding: 40px 20px 80px 20px;
+    background-color: var(--bg-color);
+}
+
+.listMedicine {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.listMedicine {
+    max-width: 335px;
+    width: 100%;
+
+}
+
+.imgMedicine {
+    max-width: 335px;
+    border: 1px solid var(--border-button-color);
+    border-radius: 20px;
+    background: url(image), var(--bg-grey-img);
+}

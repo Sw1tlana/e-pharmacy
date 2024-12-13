@@ -17,7 +17,7 @@ const INITIAL_STATE = {
     error: null,
     filters: {},
     page: 1,
-    limit: 4,
+    limit: 12,
     totalPages: 0
   };
 

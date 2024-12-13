@@ -3,22 +3,24 @@ import { getMedicines } from '../services/authServices';
 
 export const fetchMedicines = createAsyncThunk(
     "medicine/fetchMedicines",
-    async({ page, limit, filters = {} }, thunkAPI) => {
+    async ({ page, limit, filters = {} }, thunkAPI) => {
         try {
-            console.log('Preparing query parameters...');
-            const queryParams = new URLSearchParams({
-                page,
-                limit,
-                ...filters,
-            }).toString();
-
-            console.log(`Fetching medicines from API with params: ${queryParams}`); 
+            const queryParams = new URLSearchParams({ page, limit, ...filters }).toString();
             const response = await getMedicines(`?${queryParams}`);
 
-            console.log('Fetched medicines successfully:', response); 
+            if (!response || !response.products || response.products.length === 0) {
+                throw new Error('No products found');
+            }
             return response;
-        }catch(error) {
-        return thunkAPI.rejectWithValue(error.message);
+        } catch (error) {
+
+            const errorDetails = {
+                message: error.response?.data?.message || error.message,
+                status: error.response?.status,
+                data: error.response?.data || null,
+            };
+
+            return thunkAPI.rejectWithValue(errorDetails);
         }
     }
 );

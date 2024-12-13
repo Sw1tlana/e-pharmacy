@@ -3,6 +3,7 @@ import { selectMedicine, selectLoading } from '../../redux/medicine/selectors';
 import MedicineSearch from '../../components/MedicineSearch/MedicineSearch';
 import { fetchMedicines } from '../../redux/medicine/operations';
 import Loader from '../../shared/components/Loader/Loader';
+import { tablet2x } from '../../shared/images/authorizePage/index';
 import { selectFilters,
          selectLimit,
          selectTotalPages,
@@ -26,6 +27,7 @@ function Medicine() {
     console.log('Before fetch: medicines =', medicines);
   
     dispatch(fetchMedicines({ page, limit, filters }));
+
   }, [dispatch, page, limit, filters]);
   
 
@@ -43,7 +45,7 @@ function Medicine() {
             >
             <img 
             className={style.imgMedicine}
-            src={medicine.photo}
+            src={medicine.photo ? medicine.photo : tablet2x}
             alt={medicine.name}
             width={335} 
             />

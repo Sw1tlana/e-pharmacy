@@ -45,7 +45,7 @@ export const getNearestStores = async() => {
 
 // medicines
 
-export const getMedicines = async() => {
-   const { data } = await axios.get('/products');
+export const getMedicines = async(queryParams = '') => {
+   const { data } = await axios.get(`/products${queryParams}`);
    return data;
 };

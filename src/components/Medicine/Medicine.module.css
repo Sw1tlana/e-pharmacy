@@ -31,9 +31,14 @@
 }
 
 .infoText {
-   display: flex;
-   align-items: center;
-   gap: 144px;
+    display: flex;             
+    align-items: center;      
+    justify-content: space-between;
+    flex-wrap: nowrap;           
+    width: 100%;                
+    overflow: hidden; 
+    position: relative;
+    margin-bottom: 16px;
 }
 
 .textInfo {
@@ -43,12 +48,126 @@
 }
 
 .iconParagrapf {
-    fill: transparent;
-    stroke: var(--primary-color);
-    
+    position: absolute;
+    top: 0;
+    right: 36px;
+    z-index: 10;
+    fill: var(--primary-color);   
 }
  
 .infobtn {
     display: flex; 
     align-items: center; 
+    justify-content: space-between;
+    width: 100%;                
+    overflow: hidden; 
+}
+
+.addToCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10;
+    padding: 10px 16px;
+    border-radius: 24px;
+    background: var(--green-accent-color);
+    border: none;
+    color: var(--white-color);
+    font-weight: 500;
+    line-height: 1;
+    transition: var(--animation);
+}
+
+.addToCard:active,
+.addToCard:hover {
+    background-color: var(--btn-green-accent-color);
+}
+
+.linkDetails {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .sectionMedicine {
+        max-width: 768px;
+        padding: 0px 32px 120px 32px;
+    }
+    
+    .listMedicine {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 32px 13px;
+    }
+    
+    .listMedicine {
+        max-width: 704px;
+    }
+    
+    .imgMedicine {
+        max-width: 226px;
+        width: 100%;
+    }
+    
+    .infoContainer {
+        max-width: 226px;
+        width: 100%;
+    }
+    
+    .infoText {
+        margin-bottom: 14px;
+    }
+    
+    .textInfo {
+        font-size: 18px;
+    }
+    
+    .iconParagrapf {
+        top: 2px;
+    }    
+}
+
+@media (min-width: 1440px) {
+
+    .sectionMedicine {
+        max-width: 1440px;
+        padding: 40px 128px 120px 128px;
+    }
+    
+    .listMedicine {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 32px 13px;
+    }
+    
+    .listMedicine {
+        max-width: 704px;
+    }
+    
+    .imgMedicine {
+        max-width: 226px;
+        width: 100%;
+    }
+    
+    .infoContainer {
+        max-width: 226px;
+        width: 100%;
+    }
+    
+    .infoText {
+        margin-bottom: 14px;
+    }
+    
+    .textInfo {
+        font-size: 18px;
+    }
+    
+    .iconParagrapf {
+        top: 2px;
+    } 
 }

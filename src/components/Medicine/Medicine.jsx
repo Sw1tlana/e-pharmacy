@@ -12,7 +12,8 @@ import { selectFilters,
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { Link } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import EllipsisText from "react-ellipsis-text";
 
 function Medicine() {
   const dispatch = useDispatch();
@@ -55,17 +56,21 @@ function Medicine() {
           />
             <div className={style.infoContainer }>
               <div className={style.infoText}>
-            <p className={style.textInfo}>{medicine.name}</p>
-            <p>{medicine.price}</p>
+              <EllipsisText 
+              className={style.textInfo}
+               text={medicine.name}
+               length={12} 
+               />
               <svg width={18} height={18} className={style.iconParagrapf}>
                 <use xlinkHref={`${sprite}#icon-paragraph`} />
               </svg>
+            <p>{medicine.price}</p>
               </div>
-              <div>
-              
+
+              <div>             
               <div className={style.infobtn}>
-            <button type='button'>Add to cart</button>
-             <Link>Details</Link>
+            <button className={style.addToCard} type='button'>Add to cart</button>
+             <NavLink className={style.linkDetails}>Details</NavLink>
                </div>
              </div>
             </div>
@@ -79,7 +84,7 @@ function Medicine() {
                No products available
               </p>
             </div>   
-      )}        
+      )}       
     </section>
   )
 };

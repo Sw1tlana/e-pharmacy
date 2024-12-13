@@ -18,19 +18,18 @@
 
 .containerSearch {
     position: relative;
-    width: 100%;
 }
 
 .inputWrapper {
     position: relative;
-    width: 100%;
+    width: 335px;
 }
 
 .searchInput {
     border: 1px solid var(--border-grey-color);
     border-radius: 60px;
+    width: 100%;
     background-color: var(--white-color);
-    width: 335px;
     padding: 13px 18px; 
     font-size: 12px;
     font-weight: 400;

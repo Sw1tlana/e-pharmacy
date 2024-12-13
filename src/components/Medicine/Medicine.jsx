@@ -25,11 +25,14 @@ function Medicine() {
   useEffect(() => {
     console.log('Fetching medicines with params:', { page, limit, filters });
     console.log('Before fetch: medicines =', medicines);
+
+    console.log('Filters:', filters);
+    console.log('Page:', page);
+    console.log('Limit:', limit);
   
     dispatch(fetchMedicines({ page, limit, filters }));
 
   }, [dispatch, page, limit, filters]);
-  
 
   return (
     <section className={style.sectionMedicine}>
@@ -43,12 +46,12 @@ function Medicine() {
             className={style.itemMedicine} 
             key={`${medicine.id}-${index}`}
             >
-            <img 
+          <img 
             className={style.imgMedicine}
-            src={medicine.photo ? medicine.photo : tablet2x}
+            src={medicine.photo}
             alt={medicine.name}
             width={335} 
-            />
+          />
             <div>
             <p>{medicine.name}</p>
             <p>{medicine.suppliers}</p>

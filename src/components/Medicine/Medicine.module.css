@@ -18,8 +18,9 @@
 }
 
 .imgMedicine {
-    max-width: 335px;
-    border: 1px solid var(--border-button-color);
-    border-radius: 20px;
-    background: url(image), var(--bg-grey-img);
+    background-image: url('/path/to/default/image.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 335px;
+    height: 335px;
 }

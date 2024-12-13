@@ -3,7 +3,7 @@ import { selectMedicine, selectLoading } from '../../redux/medicine/selectors';
 import MedicineSearch from '../../components/MedicineSearch/MedicineSearch';
 import { fetchMedicines } from '../../redux/medicine/operations';
 import Loader from '../../shared/components/Loader/Loader';
-import { tablet2x } from '../../shared/images/authorizePage/index';
+import { icons as sprite } from '../../shared/icons/index';
 import { selectFilters,
          selectLimit,
          selectTotalPages,
@@ -12,6 +12,7 @@ import { selectFilters,
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { Link } from '@mui/material';
 
 function Medicine() {
   const dispatch = useDispatch();
@@ -52,13 +53,23 @@ function Medicine() {
             alt={medicine.name}
             width={335} 
           />
-            <div>
-            <p>{medicine.name}</p>
-            <p>{medicine.suppliers}</p>
-            <p>{medicine.stock}</p>
+            <div className={style.infoContainer }>
+              <div className={style.infoText}>
+            <p className={style.textInfo}>{medicine.name}</p>
             <p>{medicine.price}</p>
-            <p>{medicine.category}</p>
+              <svg width={18} height={18} className={style.iconParagrapf}>
+                <use xlinkHref={`${sprite}#icon-paragraph`} />
+              </svg>
+              </div>
+              <div>
+              
+              <div className={style.infobtn}>
+            <button type='button'>Add to cart</button>
+             <Link>Details</Link>
+               </div>
+             </div>
             </div>
+
           </li>
           ))}
         </ul>
@@ -68,8 +79,7 @@ function Medicine() {
                No products available
               </p>
             </div>   
-      )}
-        
+      )}        
     </section>
   )
 };

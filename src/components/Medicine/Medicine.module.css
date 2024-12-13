@@ -18,9 +18,37 @@
 }
 
 .imgMedicine {
-    background-image: url('/path/to/default/image.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 335px;
-    height: 335px;
+    border: 1px solid var(--green-accent-color);
+    border-radius: 20px;
+    background: url(image),var(--bg-grey-img);
+    margin-bottom: 8px;
+}
+
+.infoContainer {
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--white-color);
+}
+
+.infoText {
+   display: flex;
+   align-items: center;
+   gap: 144px;
+}
+
+.textInfo {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.iconParagrapf {
+    fill: transparent;
+    stroke: var(--primary-color);
+    
+}
+ 
+.infobtn {
+    display: flex; 
+    align-items: center; 
 }

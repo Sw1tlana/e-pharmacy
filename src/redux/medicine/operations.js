@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getMedicines } from '../services/authServices';
+import { getMedicines,
+        getMedicinesId
+ } from '../services/authServices';
 
 export const fetchMedicines = createAsyncThunk(
     "medicine/fetchMedicines",
@@ -16,8 +18,20 @@ export const fetchMedicines = createAsyncThunk(
                 data: error.response?.data || null,
             };
 
-            return thunkAPI.rejectWithValue(errorDetails);
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
 );
 
+export const fetchMedicinesId = createAsyncThunk(
+    "medicine/fetchMedicinesId",
+    async(id, thunkAPI) => {
+        try {
+            const response = await getMedicinesId(id);
+            return response; 
+
+        }catch(error) {
+          return thunkAPI.rejectWithValue(error.message);  
+        }
+    }
+);

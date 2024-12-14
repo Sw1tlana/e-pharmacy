@@ -49,3 +49,8 @@ export const getMedicines = async(queryParams = '') => {
    const { data } = await axios.get(`/products${queryParams}`);
    return data;
 };
+
+export const getMedicinesId = async (id) => {
+  const { data } = await axios.get(`/api/products/${id}`); 
+  return data;
+};

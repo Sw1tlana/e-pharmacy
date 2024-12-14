@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import EllipsisText from "react-ellipsis-text";
 
-function Medicine() {
+function Medicine({ products }) {
   const dispatch = useDispatch();
   const totalPages = useSelector(selectTotalPages);
   const page = useSelector(selectPage);
@@ -71,7 +71,9 @@ function Medicine() {
               <div>             
               <div className={style.infobtn}>
             <button className={style.addToCard} type='button'>Add to cart</button>
-              <NavLink className={style.linkDetails} to={'/products/${id}'}>Details</NavLink>
+            <NavLink className={style.linkDetails} to={`/products/${medicine.id}`}>
+              Details
+            </NavLink>
                </div>
              </div>
             </div>

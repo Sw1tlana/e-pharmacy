@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMedicines } from "./operations";
+import { fetchMedicines,
+         fetchMedicinesId
+ } from "./operations";
 
 const handlePending = (state) => {
    state.loading = true;
@@ -53,6 +55,13 @@ const INITIAL_STATE = {
           state.totalPages = Math.ceil(action.payload.total / state.limit);
           })
           .addCase(fetchMedicines.rejected, handleRejected)
+          .addCase(fetchMedicinesId.pending, handlePending)
+          .addCase(fetchMedicinesId.fulfilled, (state, action) => {
+            console.log('Payload:', action.payload); 
+            state.loading = false;
+            state.medicines = action.payload.products || []; 
+            })
+            .addCase(fetchMedicinesId.rejected, handleRejected)
       },});
   
       export const medicinesReducer = medicinesSlice.reducer;

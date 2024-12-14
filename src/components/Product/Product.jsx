@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectMedicine, selectLoading } from '../../redux/medicine/selectors';
-import { fetchMedicines } from '../../redux/medicine/operations';
+import { fetchMedicinesId } from '../../redux/medicine/operations';
 import { useEffect } from 'react';
 
 function Product() {
@@ -13,33 +13,34 @@ function Product() {
     const loading = useSelector(selectLoading);
 
     useEffect(() => {
-       dispatch(fetchMedicines(id));
-    }, [dispatch])
+       dispatch(fetchMedicinesId(id));
+    }, [dispatch, id]);
+
+    const product = products.find(product => product.id === id); 
+
+    if (loading) {
+      return <div>Loading...</div>; 
+  }
 
   return (
     <section className={style.sectionProduct}>
-        {Array.isArray(products) && products.length > 0 ? (
-            <ul>
-            {products.map((product, index) => (
-                <li key={`${product.id}-${index}`}>
-                    <img 
-                    className={style.imgMedicine}
-                    src={product.photo}
-                    alt={product.name}
-                    width={335} 
-                    />
-                    </li>
-                )) }
-            </ul>
-                      ) : (
-                        <div className={style.containerNotification}>
-                           <p className={style.notification}>
-                           No products available
-                          </p>
-                        </div> 
-         )} 
-
-    </section>
+    {product ? (
+        <div>
+            <img 
+                className={style.imgMedicine} 
+                src={product.photo} 
+                alt={product.name} 
+                width={335} 
+            />
+            <p>{product.name}</p>
+            <p>{product.description}</p>
+        </div>
+    ) : (
+        <div className={style.containerNotification}>
+            <p className={style.notification}>No product available</p>
+        </div>
+    )}
+</section>
   )
 };
 

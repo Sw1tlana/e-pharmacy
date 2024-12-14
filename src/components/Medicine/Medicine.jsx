@@ -37,8 +37,9 @@ function Medicine() {
   }, [dispatch, page, limit, filters]);
 
   return (
+    <>
+    <MedicineSearch/>
     <section className={style.sectionMedicine}>
-      <MedicineSearch/>
       {loading && <Loader/>}
 
       {Array.isArray(medicines) && medicines.length > 0 ? (
@@ -64,7 +65,7 @@ function Medicine() {
               <svg width={18} height={18} className={style.iconParagrapf}>
                 <use xlinkHref={`${sprite}#icon-paragraph`} />
               </svg>
-            <p>{medicine.price}</p>
+              <p>{medicine.price}</p>
               </div>
 
               <div>             
@@ -86,6 +87,7 @@ function Medicine() {
             </div>   
       )}       
     </section>
+    </>
   )
 };
 

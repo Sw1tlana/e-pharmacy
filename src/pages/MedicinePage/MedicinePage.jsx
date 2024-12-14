@@ -1,8 +1,9 @@
+import style from './MedicinePage.module.css';
 import Medicine from '../../components/Medicine/Medicine';
 
 function MedicinePage() {
   return (
-    <div>
+    <div className={style.wrapper}>
      <Medicine/>   
     </div>
   )

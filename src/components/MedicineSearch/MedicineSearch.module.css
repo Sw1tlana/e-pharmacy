@@ -22,15 +22,16 @@
 
 .inputWrapper {
     position: relative;
-    width: 335px;
+    width: 100%;
 }
 
 .searchInput {
     border: 1px solid var(--border-grey-color);
     border-radius: 60px;
+    max-width: 335px;
     width: 100%;
     background-color: var(--white-color);
-    padding: 13px 18px; 
+    padding: 12px 18px; 
     font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
@@ -90,28 +91,41 @@
     background-color: var(--btn-green-accent-color);
 }
 
-@media (min-width: 768px) {
+
+@media (min-width: 768px) { 
     .sectionSearch {
-        padding: 152px 128px 120px 128px;
+        max-width: 1440px;
+        padding-left: 32px; 
         position: relative;
     }
-    
+
     .titleMedicine {
         margin-bottom: 32px;
     }
 
     .containerSearchCategory {
         max-width: 582px;
-        width: 100%;
-        flex-direction: row;
+       
+        flex-direction: row; 
         gap: 14px;
     }
 
     .searchInput {
-        width: 224px;
+      width: 224px;
     }
 
     .iconSearch {
         right: 22px;  
     }
 }
+
+@media (min-width: 1440px) { 
+    .sectionSearch {
+        padding-left: 128px;
+    }
+
+    .titleMedicine {
+        margin-top: 80px;
+    }
+}
+

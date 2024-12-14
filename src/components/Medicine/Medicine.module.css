@@ -135,27 +135,20 @@
 
     .sectionMedicine {
         max-width: 1440px;
-        padding: 40px 128px 120px 128px;
+        padding: 0 128px 120px 128px;
     }
     
     .listMedicine {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 32px 13px;
+        gap: 40px 21px;
+        max-width: none; 
+        width: 100%;    
     }
     
-    .listMedicine {
-        max-width: 704px;
-    }
-    
-    .imgMedicine {
-        max-width: 226px;
-        width: 100%;
-    }
-    
-    .infoContainer {
-        max-width: 226px;
+    .imgMedicine, .infoContainer {
+        max-width: 280px;
         width: 100%;
     }
     

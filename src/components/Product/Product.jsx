@@ -16,7 +16,7 @@ function Product() {
        dispatch(fetchMedicinesId(id));
     }, [dispatch, id]);
 
-    const product = products.find(product => product.id === id); 
+    const product = products.find(product => product._id === id); 
 
     if (loading) {
       return <div>Loading...</div>; 

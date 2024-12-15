@@ -15,7 +15,7 @@ import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import EllipsisText from "react-ellipsis-text";
 
-function Medicine({ products }) {
+function Medicine() {
   const dispatch = useDispatch();
   const totalPages = useSelector(selectTotalPages);
   const page = useSelector(selectPage);
@@ -47,7 +47,7 @@ function Medicine({ products }) {
           {medicines.map((medicine, index) => (
             <li 
             className={style.itemMedicine} 
-            key={`${medicine.id}-${index}`}
+            key={`${medicine._id}-${index}`}
             >
           <img 
             className={style.imgMedicine}
@@ -71,7 +71,7 @@ function Medicine({ products }) {
               <div>             
               <div className={style.infobtn}>
             <button className={style.addToCard} type='button'>Add to cart</button>
-            <NavLink className={style.linkDetails} to={`/products/${medicine.id}`}>
+            <NavLink className={style.linkDetails} to={`/products/${medicine._id}`}>
               Details
             </NavLink>
                </div>

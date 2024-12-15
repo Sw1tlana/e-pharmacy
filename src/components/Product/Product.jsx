@@ -1,10 +1,10 @@
 import style from './Product.module.css';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import { selectMedicine, selectLoading } from '../../redux/medicine/selectors';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
-import { useEffect } from 'react';
 
 function Product() {
     const { id } = useParams(); 

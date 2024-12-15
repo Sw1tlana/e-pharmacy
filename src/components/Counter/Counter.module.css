@@ -1,0 +1,37 @@
+.counterContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border-grey-color);
+    border-radius: 60px;
+    padding: 12px 18px;
+    max-width: 108px;
+    width: 100%;
+}
+
+.buttonCounter {
+   border: none;
+   background: none;
+}
+
+.iconIncrement {
+    fill: transparent;
+    stroke: var(--green-accent-color);
+}
+
+.iconDecrement {
+    padding-top: 4px;
+    fill: transparent;
+    stroke: var(--green-accent-color); 
+}
+
+.iconIncrement:active,
+.iconIncrement:hover {
+    stroke: var(--yellow-color); 
+}
+
+.iconDecrement:active,
+.iconDecrement:hover {
+    stroke: var(--yellow-color); 
+}

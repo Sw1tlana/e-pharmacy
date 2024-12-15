@@ -2,7 +2,10 @@ import style from './Product.module.css';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import EllipsisText from "react-ellipsis-text";
 
+import Counter from '../../components/Counter/Counter';
+import { icons as sprite } from '../../shared/icons/index';
 import { selectMedicine, selectLoading } from '../../redux/medicine/selectors';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
 
@@ -25,16 +28,33 @@ function Product() {
   return (
     <section className={style.sectionProduct}>
     {product ? (
-        <div>
-            <img 
-                className={style.imgMedicine} 
-                src={product.photo} 
-                alt={product.name} 
-                width={335} 
-            />
-            <p>{product.name}</p>
-            <p>{product.description}</p>
-        </div>
+        <div className={style.itemMedicine}>
+          <img 
+            className={style.imgMedicine}
+            src={product.photo}
+            alt={product.name}
+            width={335} 
+          />
+          <div className={style.infoContainer }>
+          <div className={style.infoText}>
+              <EllipsisText 
+              className={style.textInfo}
+               text={product.name}
+               length={12} 
+               />
+            <div className={style.containerParagraph}>
+                <svg width={18} height={18} className={style.iconParagrapf}>
+                   <use xlinkHref={`${sprite}#icon-paragraph`} />
+                </svg>
+                  <p className={style.price}>{product.price}</p>
+            </div>
+         </div>
+         <div className={style.containerButton}>
+            <Counter/>
+            <button className={style.addToCard} type='button'>Add to cart</button>
+         </div>
+         </div>
+         </div>
     ) : (
         <div className={style.containerNotification}>
             <p className={style.notification}>No product available</p>

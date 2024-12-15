@@ -1,7 +1,224 @@
 .sectionProduct {
     max-width: 375px;
     width: 100%;
-    padding: 0 20px 80px 20px;
-    background-color: var(--bg-color);
-    margin-top: 60px;
+    padding: 120px 20px 80px 20px;
+    background-color: var(--bg-color);   
 }
+
+.itemMedicine {
+    display: flex;
+    flex-direction: column;
+    max-width: 335px;
+    width: 100%;
+    gap: 8px;
+}
+
+.imgMedicine {
+    border: 1px solid var(--green-accent-color);
+    border-radius: 20px;
+    background: url(image),var(--bg-grey-img);
+}
+
+.infoContainer {
+    padding: 20px;
+    border-radius: 20px;
+    background: var(--white-color);
+}
+
+.infoText {
+    display: flex;             
+    align-items: center;      
+    justify-content: space-between;
+    flex-wrap: nowrap;           
+    width: 100%;                
+    overflow: hidden; 
+    margin-bottom: 16px;
+}
+
+.textInfo {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.containerParagraph {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+} 
+
+.iconParagrapf {
+    position: absolute;
+    top: -2px;
+    right: 36px;
+    z-index: 10;
+    fill: var(--primary-color);   
+}
+
+.price {
+    /* padding-left: 20px; */
+}
+ 
+.infobtn {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    width: 100%;                
+    overflow: hidden; 
+}
+
+.addToCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10;
+    max-width: 140px;
+    width: 100%;
+    padding: 12px 32px;
+    border-radius: 24px;
+    background: var(--green-accent-color);
+    border: none;
+    color: var(--white-color);
+    font-weight: 500;
+    line-height: 1;
+    transition: var(--animation);
+}
+
+.addToCard:active,
+.addToCard:hover {
+    background-color: var(--btn-green-accent-color);
+}
+
+.containerButton {
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerNotification {
+    width: 768px;
+  }
+
+  .notification {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      var(--green-accent-color) 20%, 
+      var(--btn-green-accent-color) 40%,
+      var(--yellow-color) 60%, 
+      var(--btn-bg-red-color) 80% 
+    );
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+  }
+
+  @media (min-width: 768px) {
+    .sectionProduct {
+        max-width: 768px;
+        padding: 132px 32px 120px 32px;
+    }
+    
+    .itemMedicine {
+        flex-direction: row;
+        max-width: 704px;
+        gap: 16px;
+    }
+    
+    .imgMedicine {
+        max-width: 364px;
+    }
+    
+    .infoContainer {
+        width: 324px;
+        padding: 32px;
+    }
+    
+    .infoText {
+        display: flex;                   
+        flex-direction: column;
+        align-items: normal;
+        justify-content: flex-start;
+        gap: 54px;        
+        padding-left: 0;
+        margin-bottom: 16px;
+    }
+    
+    .textInfo {
+        font-size: 20px;
+    }
+
+    .containerParagraph {
+        position: relative;
+    }
+    
+    .iconParagrapf {
+        position: absolute;
+        top: -20px;
+        left: 0;
+        z-index: 10;
+        fill: var(--primary-color);   
+    }
+     
+    .infobtn {
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+        width: 100%;                
+        overflow: hidden; 
+    }
+    
+    .addToCard {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10;
+        max-width: 140px;
+        width: 100%;
+        padding: 12px 32px;
+        border-radius: 24px;
+        background: var(--green-accent-color);
+        border: none;
+        color: var(--white-color);
+        font-weight: 500;
+        line-height: 1;
+        transition: var(--animation);
+    }
+    
+    .addToCard:active,
+    .addToCard:hover {
+        background-color: var(--btn-green-accent-color);
+    }
+    
+    .containerButton {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .containerNotification {
+        width: 768px;
+      }
+    
+      .notification {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.5;
+        color: transparent;
+        background-image: linear-gradient(
+          90deg,
+          var(--green-accent-color) 20%, 
+          var(--btn-green-accent-color) 40%,
+          var(--yellow-color) 60%, 
+          var(--btn-bg-red-color) 80% 
+        );
+        background-clip: text; 
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent; 
+      }
+  }
+

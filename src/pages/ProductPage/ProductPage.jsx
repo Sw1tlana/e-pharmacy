@@ -4,7 +4,7 @@ import style from './ProductPage.module.css';
 function ProductPage() {
 
   return (
-    <div className={style.sectionProduct}>
+    <div className={style.pageProduct}>
       <Product/>
     </div>
   )

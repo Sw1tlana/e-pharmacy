@@ -71,7 +71,7 @@ function Medicine() {
               <div>             
               <div className={style.infobtn}>
             <button className={style.addToCard} type='button'>Add to cart</button>
-            <NavLink className={style.linkDetails} to={`/products/${medicine._id}`}>
+            <NavLink className={style.linkDetails} to={`/products/${medicine.id}`}>
               Details
             </NavLink>
                </div>

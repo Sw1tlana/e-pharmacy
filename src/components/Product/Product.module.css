@@ -1,4 +1,7 @@
 .sectionProduct {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     max-width: 375px;
     width: 100%;
     padding: 120px 20px 80px 20px;
@@ -51,13 +54,14 @@
 .iconParagrapf {
     position: absolute;
     top: -2px;
-    right: 36px;
+    right: 42px;
     z-index: 10;
     fill: var(--primary-color);   
 }
 
 .price {
-    /* padding-left: 20px; */
+    font-size: 16px;
+    font-weight: 600;
 }
  
 .infobtn {
@@ -93,6 +97,36 @@
 .containerButton {
     display: flex;
     justify-content: space-between;
+}
+
+/* descr/rew */
+
+.tabsContainer {
+    display: flex;
+    gap: 8px;
+    max-width: 375px;
+    width: 100%;
+    padding: 20px 20px 80px 20px;
+    border-radius: 27px;
+    background-color: var(--white-color);
+}
+
+.tabsBtn {
+    border-radius: 40px;
+    background: var(--bg-green-color);
+    padding: 8px 25px;
+    border: none;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+    color: var(--green-accent-color);
+    margin-bottom: 20px;
+}
+
+.tabsBtn:active,
+.tabsBtn:hover {
+    background: var(--green-accent-color);
+    color: var(--white-color);
 }
 
 .containerNotification {
@@ -132,10 +166,13 @@
     .imgMedicine {
         max-width: 364px;
     }
-    
+
     .infoContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 140px;
         width: 324px;
-        padding: 32px;
+        padding: 32px;       
     }
     
     .infoText {
@@ -143,82 +180,100 @@
         flex-direction: column;
         align-items: normal;
         justify-content: flex-start;
-        gap: 54px;        
-        padding-left: 0;
-        margin-bottom: 16px;
+        gap: 34px;        
     }
-    
+
     .textInfo {
         font-size: 20px;
     }
 
     .containerParagraph {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         position: relative;
     }
-    
+   
     .iconParagrapf {
         position: absolute;
-        top: -20px;
-        left: 0;
+        top: -4px;
+        left: -10px;
         z-index: 10;
-        fill: var(--primary-color);   
+        fill: var(--primary-color); 
+        height: 28px; 
+        width: 28px; 
     }
-     
-    .infobtn {
-        display: flex; 
-        align-items: center; 
-        justify-content: space-between;
-        width: 100%;                
-        overflow: hidden; 
-    }
-    
-    .addToCard {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10;
-        max-width: 140px;
-        width: 100%;
-        padding: 12px 32px;
-        border-radius: 24px;
-        background: var(--green-accent-color);
-        border: none;
-        color: var(--white-color);
-        font-weight: 500;
-        line-height: 1;
-        transition: var(--animation);
-    }
-    
-    .addToCard:active,
-    .addToCard:hover {
-        background-color: var(--btn-green-accent-color);
-    }
-    
-    .containerButton {
-        display: flex;
-        justify-content: space-between;
+
+    .price {
+        padding-left: 20px;
+        font-size: 20px;
+        font-weight: 600;
     }
     
     .containerNotification {
         width: 768px;
       }
     
-      .notification {
-        text-align: center;
-        font-size: 16px;
+  }
+
+  @media (min-width: 1440px) {
+    .sectionProduct {
+        max-width: 1440px;
+        padding: 170px 128px 120px 128px;
+    }
+    
+    .itemMedicine {
+        flex-direction: column;
+        max-width: 364px;
+        gap: 20px;
+    }
+    
+    .imgMedicine {
+        width: 364px;
+    }
+
+    .infoContainer {
+        flex-direction: column;
+        gap: 62px;
+        width: 364px;
+        padding: 20px;       
+    }
+    
+    .infoText { 
+        align-items: center;                
+        flex-direction: row;
+        gap: 130px;        
+    }
+
+    .textInfo {
+        font-size: 20px;
+    }
+
+    .containerParagraph {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+    }
+   
+    .iconParagrapf {
+        position: absolute;
+        top: -4px;
+        left: -10px;
+        z-index: 10;
+        fill: var(--primary-color); 
+        height: 28px; 
+        width: 28px; 
+    }
+
+    .price {
+        padding-left: 20px;
+        font-size: 20px;
         font-weight: 600;
-        line-height: 1.5;
-        color: transparent;
-        background-image: linear-gradient(
-          90deg,
-          var(--green-accent-color) 20%, 
-          var(--btn-green-accent-color) 40%,
-          var(--yellow-color) 60%, 
-          var(--btn-bg-red-color) 80% 
-        );
-        background-clip: text; 
-        -webkit-background-clip: text; 
-        -webkit-text-fill-color: transparent; 
+    }
+    
+    .containerNotification {
+        width: 768px;
       }
   }
 

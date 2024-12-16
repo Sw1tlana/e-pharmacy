@@ -19,13 +19,14 @@ function Product() {
        dispatch(fetchMedicinesId(id));
     }, [dispatch, id]);
 
-    const product = products.find(product => product._id === id); 
+    const product = products.find(product => product.id === id); 
 
     if (loading) {
       return <div>Loading...</div>; 
   }
 
   return (
+    <>
     <section className={style.sectionProduct}>
     {product ? (
         <div className={style.itemMedicine}>
@@ -43,7 +44,7 @@ function Product() {
                length={12} 
                />
             <div className={style.containerParagraph}>
-                <svg width={18} height={18} className={style.iconParagrapf}>
+                <svg width={22} height={22} className={style.iconParagrapf}>
                    <use xlinkHref={`${sprite}#icon-paragraph`} />
                 </svg>
                   <p className={style.price}>{product.price}</p>
@@ -57,10 +58,23 @@ function Product() {
          </div>
     ) : (
         <div className={style.containerNotification}>
-            <p className={style.notification}>No product available</p>
+          <p className={style.notification}>No product available</p>
         </div>
     )}
+
+    {/* descr/rev */}
+    <div className={style.tabsContainer}>
+      <button className={style.tabsBtn}>
+        Description
+      </button>
+
+      <button className={style.tabsBtn}>
+        Reviews
+      </button>
+
+    </div>
 </section>
+</>
   )
 };
 

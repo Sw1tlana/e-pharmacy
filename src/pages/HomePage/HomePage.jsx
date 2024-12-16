@@ -1,14 +1,14 @@
 import style from './HomePage.module.css';
 import Home from '../../components/Home/Home';
 import PromoBanners from '../../components/PromoBanners/PromoBanners';
-
-import React from 'react'
+import Reviews from '../../components/Reviews/Reviews';
 
 function HomePage() {
   return (
     <div>
       <Home/>
-      <PromoBanners/>  
+      <PromoBanners/> 
+      <Reviews/> 
     </div>
   )
 }

@@ -54,3 +54,10 @@ export const getMedicinesId = async (id) => {
   const { data } = await axios.get(`/products/${id}`); 
   return data;
 };
+
+// reviews
+
+export const getReviews = async() => {
+  const { data } = await axios.get('/customer-reviews');
+  return data;
+}

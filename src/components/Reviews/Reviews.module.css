@@ -1,0 +1,73 @@
+.sectionReviews {
+    max-width: 373px;
+    width: 100%;
+    padding: 80px 20px;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.titleReviews {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.textReviews {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.imgMedicine {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+}
+
+.listReviews {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.listReviews::-webkit-scrollbar {
+    display: none; 
+  }
+
+.itemReview {
+   display: flex;
+   flex-direction: column;
+   scroll-snap-align: start;
+   width: 335px;
+   padding: 0px 16px 40px 16px;
+   background: var(--bg-white-color);
+   border-radius: 27px;
+   border: 1px solid var(--light-grey-color);
+}
+
+.name {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.testimonial {
+    width: 302px;
+    height: 100px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--secondary-color);
+    text-align: center;
+}

@@ -25,9 +25,9 @@ export const fetchMedicines = createAsyncThunk(
 
 export const fetchMedicinesId = createAsyncThunk(
     "medicine/fetchMedicinesId",
-    async(id, thunkAPI) => {
+    async(_id, thunkAPI) => {
         try {
-            const response = await getMedicinesId(id);
+            const response = await getMedicinesId(_id);
             return response; 
 
         }catch(error) {

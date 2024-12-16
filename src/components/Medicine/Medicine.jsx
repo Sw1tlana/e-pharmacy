@@ -11,9 +11,11 @@ import { selectFilters,
  } from '../../redux/medicine/selectors';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useEffect, Suspense, lazy } from 'react';
+import { NavLink, Routes, Route } from 'react-router-dom';
 import EllipsisText from "react-ellipsis-text";
+
+const Product = lazy(() => import('../../components/Product/Product'));
 
 function Medicine() {
   const dispatch = useDispatch();
@@ -32,7 +34,8 @@ function Medicine() {
     console.log('Page:', page);
     console.log('Limit:', limit);
   
-    dispatch(fetchMedicines({ page, limit, filters }));
+    dispatch(fetchMedicines({ page, limit, filters }))
+
 
   }, [dispatch, page, limit, filters]);
 
@@ -71,7 +74,7 @@ function Medicine() {
               <div>             
               <div className={style.infobtn}>
             <button className={style.addToCard} type='button'>Add to cart</button>
-            <NavLink className={style.linkDetails} to={`/products/${medicine.id}`}>
+            <NavLink className={style.linkDetails} to={`/products/${medicine._id}`}>
               Details
             </NavLink>
                </div>
@@ -89,6 +92,13 @@ function Medicine() {
             </div>   
       )}       
     </section>
+    <div>
+        <Suspense fallback={<Loader/>}>
+          <Routes>
+            <Route path="products/:id" element={<Product/>} />
+          </Routes>
+        </Suspense>
+    </div>
     </>
   )
 };

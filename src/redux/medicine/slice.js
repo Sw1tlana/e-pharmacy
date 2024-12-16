@@ -15,6 +15,7 @@ const handleRejected = (state, action) => {
 
 const INITIAL_STATE = {
     medicines: [],
+    product: null,
     loading: false,
     error: null,
     filters: {},
@@ -58,8 +59,8 @@ const INITIAL_STATE = {
           .addCase(fetchMedicinesId.pending, handlePending)
           .addCase(fetchMedicinesId.fulfilled, (state, action) => {
             console.log('Payload:', action.payload); 
-            state.loading = false;
-            state.medicines = action.payload.products || []; 
+            state.product = action.payload;
+            state.loading = false;    
             })
             .addCase(fetchMedicinesId.rejected, handleRejected)
       },});

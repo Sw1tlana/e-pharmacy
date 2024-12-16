@@ -50,7 +50,7 @@ export const getMedicines = async(queryParams = '') => {
    return data;
 };
 
-export const getMedicinesId = async () => {
+export const getMedicinesId = async (id) => {
   const { data } = await axios.get(`/products/${id}`); 
   return data;
 };

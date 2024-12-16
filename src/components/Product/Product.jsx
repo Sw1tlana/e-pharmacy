@@ -6,20 +6,24 @@ import EllipsisText from "react-ellipsis-text";
 
 import Counter from '../../components/Counter/Counter';
 import { icons as sprite } from '../../shared/icons/index';
-import { selectMedicine, selectLoading } from '../../redux/medicine/selectors';
+import { selectProduct, selectLoading } from '../../redux/medicine/selectors';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
 
 function Product() {
     const { id } = useParams(); 
     const dispatch = useDispatch();
-    const products = useSelector(selectMedicine);
+    const product = useSelector(selectProduct);
     const loading = useSelector(selectLoading);
 
     useEffect(() => {
-       dispatch(fetchMedicinesId(id));
+      if (id) {
+        console.log('Fetching product with ID:', id);
+        dispatch(fetchMedicinesId(id));
+      }
     }, [dispatch, id]);
 
-    const product = products.find(product => product.id === id); 
+    console.log("Product from Redux:", product);  
+
 
     if (loading) {
       return <div>Loading...</div>; 

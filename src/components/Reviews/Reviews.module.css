@@ -25,24 +25,24 @@
 .listReviews {
     display: flex;
     flex-direction: row;
-    justify-content: start; 
+    justify-content: flex-start;
     gap: 16px;
-    overflow-x: auto; /* Дозволяє горизонтальну прокрутку */
-    padding-bottom: 16px;
+    overflow-x: auto; 
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; /* Плавна прокрутка на мобільних пристроях */
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; 
     width: 100%;  
+    padding-bottom: 16px;
 }
 
 .listReviews::-webkit-scrollbar {
-    display: none; /* Сховуємо смугу прокрутки */
+    display: none; 
 }
 
 .itemReview {
-  position: relative;
-  width: 335px;
-  flex-shrink: 0;
+  flex: 0 0 335px;
+  z-index: 1;
+  scroll-snap-align: start;
 }
 
 .containerInfo {
@@ -56,11 +56,12 @@
 }
 
 .reviewImage {
-    position: static;
-    top: 0;
-    left: 0;
+    position: relative; 
+    top: -32%;
+    left: 40%; 
     width: 64px;
     height: 64px;
+    z-index: 10;
     border-radius: 0;
     object-fit: initial;
     object-position: initial;
@@ -80,74 +81,53 @@
     font-weight: 400;
     line-height: 1.25;
     color: var(--secondary-color);
-    text-align: center;
+    text-align: center; 
+    text-align: justify;
 }
 
-/* @media (min-width: 768px) {
+@media (min-width: 768px) {
     .sectionReviews {
         max-width: 768px;
-        padding: 80px 20px;
-        background-color: var(--bg-color);
-        overflow: hidden;
+        padding: 120px 32px;
     }
     
     .titleReviews {
-        font-size: 28px;
-        font-weight: 600;
-        line-height: 1.1;
-        margin-bottom: 14px;
-        text-align: center;
-    }
-    
-    .textReviews {
-        font-size: 14px;
-        font-weight: 400;
+        font-size: 40px;
         line-height: 1.2;
-        color: var(--secondary-color);
-        text-align: center;
-        margin-bottom: 40px;
     }
-    
+
     .listReviews {
-        display: flex;
-        flex-direction: row;
-        gap: 16px;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none; 
-        -ms-overflow-style: none; 
+        gap: 28px;
     }
-    
-    .listReviews::-webkit-scrollbar {
-        display: none; 
-      }
+
+    .itemReview {
+        flex: 0 0 344px;
+    }
+      
+    .containerInfo {
+        width: 344px;
+        padding: 16px 16px 40px 16px;
+    }
+          
+    .textReviews {
+        font-size: 16px;
+        margin-bottom: 64px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .sectionReviews {
+        max-width: 1440px;
+        padding: 120px 120px;
+    }
+
+    .listReviews {
+        overflow-x: hidden;
+        scroll-snap-type: none;
+    }
     
     .itemReview {
-       display: flex;
-       flex-direction: column;
-       scroll-snap-align: start;
-       width: 335px;
-       padding: 0px 16px 40px 16px;
-       background: var(--bg-white-color);
-       border-radius: 27px;
-       border: 1px solid var(--light-grey-color);
+        flex: 0 0 382px;
     }
-    
-    .name {
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 1.5;
-        text-align: center;
-    }
-    
-    .testimonial {
-        width: 302px;
-        height: 100px;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 1.25;
-        color: var(--secondary-color);
-        text-align: center;
-    }
-} */
+
+}

@@ -2,7 +2,6 @@ import style from './Reviews.module.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectReviews, selectLoading } from '../../redux/reviews/selectors';
 import { useEffect } from 'react';
-import { useRef } from 'react';
 import { fetchReviews } from '../../redux/reviews/operations';
 import Loader from '../../shared/components/Loader/Loader';
 
@@ -15,25 +14,11 @@ function Reviews() {
     const reviews = useSelector(selectReviews);
     const loading = useSelector(selectLoading);
 
-    const reviewsContainerRef = useRef(null);
-
     const defaultImages = [maria2x, sergey2x, natalia2x];
 
   useEffect(() => {
    dispatch(fetchReviews());
   }, [dispatch]);
-
-  const handleWheel = (e) => {
-    if (e.deltaX !== 0) {
-        if (reviewsContainerRef.current) {
-            reviewsContainerRef.current.scrollBy({
-                left: e.deltaX > 0 ? 335 : -335,
-                behavior: 'smooth',
-            });
-        }
-    }
-};
-
 
   return (
     <section className={style.sectionReviews}>
@@ -44,11 +29,7 @@ function Reviews() {
         Search for Medicine, Filter by your location
       </p>
       {loading && <Loader/>}
-      <ul 
-       ref={reviewsContainerRef}
-       onWheel={handleWheel}
-       className={style.listReviews}
-      >
+      <ul className={style.listReviews}>
 
   {Array.isArray(reviews) && reviews.length > 0 ? (
     reviews.map((review, index) => (

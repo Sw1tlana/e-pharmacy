@@ -1,19 +1,30 @@
 import style from './Product.module.css';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import EllipsisText from "react-ellipsis-text";
 
 import Counter from '../../components/Counter/Counter';
 import { icons as sprite } from '../../shared/icons/index';
+import { selectReviews } from '../../redux/reviews/selectors';
 import { selectProduct, selectLoading } from '../../redux/medicine/selectors';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
+import Loader from '../../shared/components/Loader/Loader';
+
+import maria2x from '../../shared/images/reviews/maria@2x.png';
+import sergey2x from '../../shared/images/reviews/sergey@2x.png';
+import natalia2x from '../../shared/images/reviews/natalia@2x.png';
+
 
 function Product() {
     const { id } = useParams(); 
     const dispatch = useDispatch();
     const product = useSelector(selectProduct);
+    const reviews = useSelector(selectReviews);
     const loading = useSelector(selectLoading);
+    const [activeTab, setActiveTab] = useState('description');
+
+    const defaultImages = [maria2x, sergey2x, natalia2x];
 
     useEffect(() => {
       if (id) {
@@ -22,8 +33,7 @@ function Product() {
       }
     }, [dispatch, id]);
 
-    console.log("Product from Redux:", product);  
-
+    console.log("Product from Redux:", product); 
 
     if (loading) {
       return <div>Loading...</div>; 
@@ -68,13 +78,46 @@ function Product() {
 
     {/* descr/rev */}
     <div className={style.tabsContainer}>
-      <button className={style.tabsBtn}>
+      <button 
+          className={`${style.tabsBtn} ${activeTab === 'description' ? style.active : ''}`} 
+          onClick={() => setActiveTab('description')}
+      >
         Description
       </button>
 
-      <button className={style.tabsBtn}>
+      <button 
+          className={`${style.tabsBtn} ${activeTab === 'reviews' ? style.active : ''}`} 
+          onClick={() => setActiveTab('reviews')}
+      >
         Reviews
       </button>
+    <div>
+</div>
+{activeTab === 'reviews' && (
+        <div className={style.reviewsContainer}>
+          {reviews.length > 0 ? (
+            <ul className={style.listReviews}>
+              {reviews.map((review, index) => (
+                <li key={`${review.id}-${index}`} className={style.itemReview}>
+                  <div className={style.containerInfo}>
+                    <img
+                      src={defaultImages[index % defaultImages.length]}
+                      alt={`Review image ${index}`}
+                      className={style.reviewImage}
+                    />
+                    <h3 className={style.name}>{review.name}</h3>
+                    <p className={style.testimonial}>{review.testimonial}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className={style.containerNotification}>
+              <p className={style.notification}>No reviews available</p>
+            </div>
+          )}
+        </div>
+      )}
 
     </div>
 </section>

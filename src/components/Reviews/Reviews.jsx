@@ -21,13 +21,7 @@ function Reviews() {
   }, [dispatch]);
 
   return (
-    <section className={style.sectionReviews}>
-      <h2 className={style.titleReviews}>
-        Reviews
-      </h2>
-      <p className={style.textReviews}>
-        Search for Medicine, Filter by your location
-      </p>
+    <div className={style.containerReviews}>
       {loading && <Loader/>}
       <ul className={style.listReviews}>
 
@@ -51,7 +45,7 @@ function Reviews() {
     </div>
   )}
 </ul>
-    </section>
+    </div>
   )
 };
 

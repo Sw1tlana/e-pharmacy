@@ -1,14 +1,16 @@
 import style from './HomePage.module.css';
 import Home from '../../components/Home/Home';
 import PromoBanners from '../../components/PromoBanners/PromoBanners';
-import Reviews from '../../components/Reviews/Reviews';
+import Features from '../../components/Features/Features';
+import ReviewsList from '../../components/ReviewsList/ReviewsList';
 
 function HomePage() {
   return (
     <div>
       <Home/>
-      <PromoBanners/> 
-      <Reviews/> 
+      <PromoBanners/>
+      <Features/> 
+      <ReviewsList/> 
     </div>
   )
 }

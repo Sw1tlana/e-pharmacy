@@ -129,6 +129,11 @@
     color: var(--white-color);
 }
 
+.tabsContent {
+    display: flex;
+    flex-direction: row;
+}
+
 .containerNotification {
     width: 768px;
   }

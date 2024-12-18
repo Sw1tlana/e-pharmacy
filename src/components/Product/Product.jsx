@@ -10,6 +10,7 @@ import { selectReviews } from '../../redux/reviews/selectors';
 import { selectProduct, selectLoading } from '../../redux/medicine/selectors';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
 import Loader from '../../shared/components/Loader/Loader';
+import { reviews2x } from '../../shared/images/reviews'; 
 
 import maria2x from '../../shared/images/reviews/maria@2x.png';
 import sergey2x from '../../shared/images/reviews/sergey@2x.png';
@@ -78,6 +79,7 @@ function Product() {
 
     {/* descr/rev */}
     <div className={style.tabsContainer}>
+      <div className={style.containerBtn}>
       <button 
           className={`${style.tabsBtn} ${activeTab === 'description' ? style.active : ''}`} 
           onClick={() => setActiveTab('description')}
@@ -91,10 +93,9 @@ function Product() {
       >
         Reviews
       </button>
-    <div>
-</div>
-{activeTab === 'reviews' && (
-        <div className={style.reviewsContainer}>
+      </div>
+    {activeTab === 'reviews' && (
+      <>
           {reviews.length > 0 ? (
             <ul className={style.listReviews}>
               {reviews.map((review, index) => (
@@ -106,8 +107,18 @@ function Product() {
                       className={style.reviewImage}
                     />
                     <h3 className={style.name}>{review.name}</h3>
+                    <div className={style.containerSvgStar}>
+                      <svg width={16} height={16}>
+                        <use xlinkHref={`${sprite}#icon-star`} className={style.iconStar}/>
+                      </svg>
+                      <span>4</span>
+                      </div>
+                      <div className={style.containerSvg}>
+                      <img src={reviews2x} alt="reviews2x" />
+                      <span>4</span>
+                    </div>
+                    </div>
                     <p className={style.testimonial}>{review.testimonial}</p>
-                  </div>
                 </li>
               ))}
             </ul>
@@ -116,10 +127,9 @@ function Product() {
               <p className={style.notification}>No reviews available</p>
             </div>
           )}
-        </div>
+        </>
       )}
-
-    </div>
+</div>
 </section>
 </>
   )

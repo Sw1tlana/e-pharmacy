@@ -99,16 +99,22 @@
     justify-content: space-between;
 }
 
-/* descr/rew */
+/* descr/rew container */
 
 .tabsContainer {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 20px;
     max-width: 375px;
     width: 100%;
     padding: 20px 20px 80px 20px;
     border-radius: 27px;
     background-color: var(--white-color);
+}
+
+.containerBtn {
+    display: flex;
+    gap: 8px;
 }
 
 .tabsBtn {
@@ -120,7 +126,6 @@
     line-height: 1.2;
     letter-spacing: -0.05em;
     color: var(--green-accent-color);
-    margin-bottom: 20px;
 }
 
 .tabsBtn:active,
@@ -129,13 +134,61 @@
     color: var(--white-color);
 }
 
-.tabsContent {
+/* reviews */
+.listReviews {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.itemReview {
+   border: 1px solid var(--light-grey-color);
+   border-radius: 20px;
+   max-width: 295px;
+   width: 100%;
+   padding: 14px 28px;
+}
+
+.containerInfo {
+    display: flex;
+    align-items: start;
+    gap: 18px;
+    margin-bottom: 14px;
+}
+
+.reviewImage {
+    width: 44px;
+    height: 44px;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.containerSvgStar {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.containerSvg {
+    display: none;
+}
+
+.iconStar {
+    fill: var(--yellow-color);
+}
+
+.testimonial {
+    line-height: 1.2;
 }
 
 .containerNotification {
-    width: 768px;
+    width: 375px;
   }
 
   .notification {
@@ -156,72 +209,126 @@
     -webkit-text-fill-color: transparent; 
   }
 
-  @media (min-width: 768px) {
-    .sectionProduct {
-        max-width: 768px;
-        padding: 132px 32px 120px 32px;
-    }
+@media (min-width: 768px) {
+.sectionProduct {
+    max-width: 768px;
+    padding: 132px 32px 120px 32px;
+}
     
-    .itemMedicine {
-        flex-direction: row;
-        max-width: 704px;
-        gap: 16px;
-    }
+.itemMedicine {
+    flex-direction: row;
+    max-width: 704px;
+    gap: 16px;
+}
     
-    .imgMedicine {
-        max-width: 364px;
-    }
+.imgMedicine {
+    max-width: 364px;
+}
 
-    .infoContainer {
-        display: flex;
-        flex-direction: column;
-        gap: 140px;
-        width: 324px;
-        padding: 32px;       
-    }
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 140px;
+    width: 324px;
+    padding: 32px;       
+}
     
-    .infoText {
-        display: flex;                   
-        flex-direction: column;
-        align-items: normal;
-        justify-content: flex-start;
-        gap: 34px;        
-    }
+.infoText {
+    display: flex;                   
+    flex-direction: column;
+    align-items: normal;
+    justify-content: flex-start;
+    gap: 34px;        
+}
 
-    .textInfo {
-        font-size: 20px;
-    }
+.textInfo {
+    font-size: 20px;
+}
 
-    .containerParagraph {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        position: relative;
-    }
+.containerParagraph {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
    
-    .iconParagrapf {
-        position: absolute;
-        top: -4px;
-        left: -10px;
-        z-index: 10;
-        fill: var(--primary-color); 
-        height: 28px; 
-        width: 28px; 
-    }
+.iconParagrapf {
+    position: absolute;
+    top: -4px;
+    left: -10px;
+    z-index: 10;
+    fill: var(--primary-color); 
+    height: 28px; 
+    width: 28px; 
+}
 
-    .price {
-        padding-left: 20px;
-        font-size: 20px;
-        font-weight: 600;
-    }
-    
-    .containerNotification {
-        width: 768px;
-      }
-    
-  }
+.price {
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
 
-  @media (min-width: 1440px) {
+    /* reviews */
+.tabsContainer {
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    max-width: 704px;
+    padding: 32px 32px 80px 32px;
+}
+
+.listReviews {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+}
+
+.itemReview {
+   max-width: 580px;
+   padding: 14px 28px;
+}
+
+.containerInfo {
+    display: flex;
+    align-items: start;
+    gap: 18px;
+    margin-bottom: 14px;
+}
+
+.reviewImage {
+    width: 44px;
+    height: 44px;
+}
+
+.name {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.containerSvgStar {
+    display: none;
+}
+
+.containerSvg {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.iconStar {
+    fill: var(--yellow-color);
+}
+
+.testimonial {
+    line-height: 1.2;
+}
+}
+    
+@media (min-width: 1440px) {
     .sectionProduct {
         max-width: 1440px;
         padding: 170px 128px 120px 128px;

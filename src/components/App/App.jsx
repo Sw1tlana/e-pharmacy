@@ -1,5 +1,4 @@
-import { lazy } from 'react';
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
 import Loader from '../../shared/components/Loader/Loader';
@@ -24,6 +23,7 @@ function App() {
         <Route path="/store" element={<MedicineStorePage/>}/>
         <Route path="/products" element={<ShopPage/>}/>
         <Route path="/products/:id" element={<CartPage/>} /> 
+        <Route path="/cart" element={<ProductPage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="*" element={<Navigate to="/" replace />}/>

@@ -11,9 +11,12 @@ function Cart() {
 
     const [selectedOption, setSelectedOption] = useState("");
 
+    const onSubmit = (data) => {
+        console.log('Form data:', data);
+      };
+
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
-        reset();
       };
 
   return (
@@ -28,7 +31,7 @@ function Cart() {
             You can also send any other location where you send the products.
             </p>
 
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.containerInput}>
 
             <div>

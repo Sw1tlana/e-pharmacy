@@ -89,9 +89,9 @@
     transition: var(--animation);
 }
 
-.addToCard:active,
-.addToCard:hover {
-    background-color: var(--btn-green-accent-color);
+.tabsBtn.active {
+    background: var(--green-accent-color);
+    color: var(--white-color);
 }
 
 .containerButton {
@@ -185,6 +185,22 @@
 
 .testimonial {
     line-height: 1.2;
+}
+
+/* description */
+
+.detailsText {
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.detailsText:last-child {
+    margin-bottom: 0;
+}
+
+.detailsSubtext {
+    line-height: 1.2;
+    color: var(--subprimary-color);
 }
 
 .containerNotification {
@@ -400,6 +416,12 @@
         align-items: center;
         gap: 2px;
     }
+
+    /* description */
+    .productDetails {
+        max-height: 700px;
+        height: 100%;
+}
     
     .containerNotification {
         width: 1440pxpx;

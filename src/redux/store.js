@@ -3,6 +3,7 @@ import { authReducer } from "./auth/slice";
 import { storeReducer } from "./stores/slice";
 import { medicinesReducer } from "./medicine/slice";
 import { reviewsReducer } from "./reviews/slice";
+import { CartReducer, cartSlice } from "./cart/slice";
 
 import {
   persistStore,
@@ -27,7 +28,8 @@ export const store = configureStore({
     auth: persistReducer(authConfig, authReducer),
     stores: storeReducer,
     medicines: medicinesReducer,
-    reviews: reviewsReducer
+    reviews: reviewsReducer,
+    cart: CartReducer
   },
   
    middleware: (getDefaultMiddleware) =>

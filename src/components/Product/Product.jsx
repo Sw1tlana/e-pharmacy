@@ -37,7 +37,7 @@ function Product() {
     console.log("Product from Redux:", product); 
 
     if (loading) {
-      return <div>Loading...</div>; 
+      return <div><Loader/></div>; 
   }
 
   return (
@@ -93,6 +93,34 @@ function Product() {
         Reviews
       </button>
       </div>
+
+      {/* description */}
+      {activeTab === 'description' && (
+  <>
+    {product ? (
+      <div className={style.productDetails}>
+       <p className={style.detailsText}>
+        <span className={style.detailsSubtext}>Warning: </span>
+        {product.warning}
+      </p>
+       <p className={style.detailsText}>
+        <span className={style.detailsSubtext}>Recommendation: </span>
+        {product.recommendation}
+        </p>
+       <p className={style.detailsText}>
+        <span className={style.detailsSubtext}>Balance Approach: </span>
+        {product.balance_approach}
+        </p>
+      </div>
+    ) : (
+      <div className={style.containerNotification}>
+        <p className={style.notification}>Product information is not available.</p>
+      </div>
+    )}
+  </>
+      )}
+
+      {/* reviews */}
     {activeTab === 'reviews' && (
       <>
           {reviews.length > 0 ? (

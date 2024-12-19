@@ -61,3 +61,10 @@ export const getReviews = async() => {
   const { data } = await axios.get('/customer-reviews');
   return data;
 }
+
+// cart
+
+export const getCart = async() => {
+  const { data } = await axios.get('/cart');
+  return data;
+};

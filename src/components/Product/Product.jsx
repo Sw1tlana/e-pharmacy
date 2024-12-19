@@ -41,7 +41,6 @@ function Product() {
   }
 
   return (
-    <>
     <section className={style.sectionProduct}>
     {product ? (
         <div className={style.itemMedicine}>
@@ -131,7 +130,6 @@ function Product() {
       )}
 </div>
 </section>
-</>
   )
 };
 

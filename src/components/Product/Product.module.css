@@ -326,10 +326,20 @@
 .testimonial {
     line-height: 1.2;
 }
+
+.containerNotification {
+    width: 768px;
+  }
 }
     
 @media (min-width: 1440px) {
     .sectionProduct {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
         max-width: 1440px;
         padding: 170px 128px 120px 128px;
     }
@@ -346,7 +356,7 @@
 
     .infoContainer {
         flex-direction: column;
-        gap: 62px;
+        gap: 40px;
         width: 364px;
         padding: 20px;       
     }
@@ -355,37 +365,44 @@
         align-items: center;                
         flex-direction: row;
         gap: 130px;        
+    }   
+    
+    /* reviews */
+    .tabsContainer {
+        width: 600px;
+        padding: 40px 40px 112px 40px;
     }
-
-    .textInfo {
-        font-size: 20px;
+    
+    .itemReview {
+       width: 100%;
+       padding: 14px 28px;
     }
-
-    .containerParagraph {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        position: relative;
+    
+    .containerInfo {
+        align-items: start;
+        gap: 18px;
     }
-   
-    .iconParagrapf {
-        position: absolute;
-        top: -4px;
-        left: -10px;
-        z-index: 10;
-        fill: var(--primary-color); 
-        height: 28px; 
-        width: 28px; 
-    }
-
-    .price {
-        padding-left: 20px;
-        font-size: 20px;
+    
+    .name {
+        font-size: 16px;
         font-weight: 600;
+        line-height: 1.4;
+        white-space: nowrap;
+        width: 100%;
+    }
+    
+    .containerSvgStar {
+        display: none;
+    }
+    
+    .containerSvg {
+        display: flex;
+        align-items: center;
+        gap: 2px;
     }
     
     .containerNotification {
-        width: 768px;
+        width: 1440pxpx;
       }
   }
 

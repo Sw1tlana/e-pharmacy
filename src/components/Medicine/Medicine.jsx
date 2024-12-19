@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, Suspense, lazy } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import EllipsisText from "react-ellipsis-text";
+import { addToCart } from '../../redux/cart/slice';
 
 const Product = lazy(() => import('../../components/Product/Product'));
 
@@ -35,9 +36,11 @@ function Medicine() {
     console.log('Limit:', limit);
   
     dispatch(fetchMedicines({ page, limit, filters }))
-
-
   }, [dispatch, page, limit, filters]);
+
+  const handleAddToCart = (medicine) => {
+    dispatch(addToCart(medicine));
+  };
 
   return (
     <>
@@ -73,8 +76,18 @@ function Medicine() {
 
               <div>             
               <div className={style.infobtn}>
-            <button className={style.addToCard} type='button'>Add to cart</button>
-            <NavLink className={style.linkDetails} to={`/products/${medicine._id}`}>
+
+              <button 
+              className={style.addToCard} 
+              type='button'
+              onClick={() => handleAddToCart(medicine)}>
+              Add to cart
+              </button>
+
+            <NavLink 
+            className={style.linkDetails} 
+            to={`/products/${medicine._id}`}
+            >
               Details
             </NavLink>
                </div>

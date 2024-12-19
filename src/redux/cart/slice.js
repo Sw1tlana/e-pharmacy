@@ -13,6 +13,7 @@ const handleRejected = (state, action) => {
 
 const INITIAL_STATE = {
     cart: [],
+    items: [],
     loading: false,
     error: null,
 };
@@ -21,6 +22,14 @@ const INITIAL_STATE = {
       name: "cart",
       initialState: INITIAL_STATE,
 
+      reducers: {
+        addToCart: (state, action) => {
+          state.items.push(action.payload);
+        },
+        removeFromCart: (state, action) => {
+          state.items = state.items.filter(item => item.id !== action.payload.id);
+        },
+      },
         extraReducers: (builder) => {
         builder
             .addCase(fetchCart.pending, handlePending)
@@ -32,5 +41,10 @@ const INITIAL_STATE = {
             .addCase(fetchCart.rejected, handleRejected)
 
         },});
+        
+    export const {
+     addToCart,
+     removeFromCart
+    } = cartSlice.actions;
 
     export const CartReducer = cartSlice.reducer;

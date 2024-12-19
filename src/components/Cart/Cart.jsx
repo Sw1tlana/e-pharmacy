@@ -1,9 +1,27 @@
 import style from './Cart.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import Counter from '../Counter/Counter';
+import EllipsisText from "react-ellipsis-text";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMedicinesId } from '../../redux/medicine/operations';
+import { icons as sprite } from '../../shared/icons/index';
+import { selectItems } from '../../redux/cart/selectors';
 
 function Cart() {
+    const dispatch = useDispatch();
+    const items = useSelector(selectItems);
+    const { id } = useParams(); 
+
+    useEffect(() => {
+        if (id) {
+          console.log('Fetching product with ID:', id);
+          dispatch(fetchMedicinesId(id));
+        }
+      }, [dispatch, id]);
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver()
@@ -147,6 +165,29 @@ function Cart() {
       </form>
       </div>
 
+      <div>
+        {items.length > 0 ? (
+        items.map((item, index) => (
+            <div key={`${item.id}-${index}`} className={style.itemMedicine}>
+            <img className={style.imgMedicine} src={item.photo} alt={item.name} width={335} />
+            <div className={style.infoContainer}>
+            <EllipsisText className={style.textInfo} text={item.name} length={12} />
+            <p className={style.price}>{item.price}</p>
+            <button
+                className={style.removeButton}
+                onClick={() => handleRemoveFromCart(item)}
+                >
+                Remove
+                </button>
+            </div>
+            </div>
+            ))
+               ) : (
+                    <div className={style.containerNotification}>
+                        <p className={style.notification}>No products available in cart</p>
+                    </div>
+                )}
+            </div>
     </section>
   )
 };

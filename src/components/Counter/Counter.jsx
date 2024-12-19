@@ -1,23 +1,13 @@
 import style from './Counter.module.css';
 import { icons as sprite } from '../../shared/icons/index';
-import { useState } from "react";
 
-function Counter() {
-    const [count, setCount] = useState(0);
-
-    const handleIncrement = () => {
-       setCount(prevCount => prevCount + 1);
-    };
-
-    const handleDecrement = () => {
-       setCount(prevCount => prevCount - 1);
-    };
+function Counter({ quantity, onIncrement, onDecrement }) {
 
   return (
     <div className={style.counterContainer}>
         <button
             className={style.buttonCounter} 
-            onClick={handleIncrement}
+            onClick={onIncrement}
             aria-label="Decrease"
             >
             <svg width={20} height={20} className={style.iconIncrement}>
@@ -25,12 +15,13 @@ function Counter() {
             </svg>
         </button>
 
-        <span className={style.counter}>{count}</span>
+        <span className={style.counter}>{quantity}</span>
 
         <button
             className={style.buttonCounter} 
-            onClick={handleDecrement}
+            onClick={onDecrement}
             aria-label="Increase"
+            disabled={quantity <= 0}
         >
             <svg width={20} height={20} className={style.iconDecrement}>
                 <use xlinkHref={`${sprite}#icon-minus`} />

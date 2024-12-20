@@ -176,32 +176,37 @@ function Cart() {
     {items.length > 0 ? (
       items.map((item, index) => (
         <li key={`${item.id}-${index}`} className={style.itemCart}>
-
-            <div className={style.infoCart}>
           <img
             className={style.imgCart}
             src={item.photo}
             alt={item.name}
             width={335}
           />
+          <div className={style.infoCart}>
           <div className={style.info}>
                 <EllipsisText
                 className={style.textCart}
                 text={item.name}
                 length={12}
                 />
+
+              <div className={style.priceConteiner}>
                 <svg width={18} height={18} className={style.iconParagrapf}>
                   <use xlinkHref={`${sprite}#icon-paragraph`} />
                 </svg>
                    <p className={style.price}>{item.price}</p>
+              </div>
             </div>
-            <Counter />
+
+            <div className={style.btnCounter}>
+            <Counter isPage2={true}/>
             <button
               className={style.removeButton}
               onClick={() => handleRemoveFromCart(item)}
             >
               Remove
             </button>
+            </div>
             </div>
         </li>
       ))

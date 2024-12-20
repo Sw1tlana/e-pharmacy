@@ -2,13 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     border: 1px solid var(--border-grey-color);
     border-radius: 60px;
-    padding: 12px 18px;
-    max-width: 108px;
-    width: 100%;
+    gap: 10px;
 }
+
+.page1 {
+    height: 44px;
+    width: 108px;
+  }
+  
+  .page2 {
+    width: 94px;
+    height: 32px;
+  }
 
 .buttonCounter {
    border: none;

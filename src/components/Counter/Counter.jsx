@@ -1,10 +1,13 @@
 import style from './Counter.module.css';
 import { icons as sprite } from '../../shared/icons/index';
+import clsx from 'clsx';
 
-function Counter({ quantity, onIncrement, onDecrement }) {
+function Counter({ quantity, onIncrement, onDecrement, isPage2 }) {
+
+    const counterClass = isPage2 ? style.page2 : style.page1;
 
   return (
-    <div className={style.counterContainer}>
+    <div className={clsx(style.counterContainer, counterClass)}>
         <button
             className={style.buttonCounter} 
             onClick={onIncrement}
@@ -18,7 +21,7 @@ function Counter({ quantity, onIncrement, onDecrement }) {
         <span className={style.counter}>{quantity}</span>
 
         <button
-            className={style.buttonCounter} 
+            className={style.buttonCounter}
             onClick={onDecrement}
             aria-label="Increase"
             disabled={quantity <= 0}

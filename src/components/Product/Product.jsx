@@ -65,7 +65,7 @@ function Product() {
             </div>
          </div>
          <div className={style.containerButton}>
-            <Counter/>
+            <Counter isPage2={false}/>
             <button className={style.addToCard} type='button'>Add to cart</button>
          </div>
          </div>

@@ -121,7 +121,7 @@
   }
 
   .containerNotification {
-    width: 768px;
+    width: 375px;
   }
 
   .notification {
@@ -262,6 +262,10 @@
         top: -40px;
         left: 240px;
         z-index: 9;
-    }  
+    } 
+    
+    .containerNotification {
+        width: 1440px;
+    }
 }
 

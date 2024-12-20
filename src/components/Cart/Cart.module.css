@@ -2,7 +2,7 @@
     min-width: 320px;
     max-width: 375px;
     height: auto;
-    padding: 194px 20px 194px 20px;
+    padding: 194px 20px 80px 20px;
     background-color: var(--bg-color);
 }
 
@@ -166,6 +166,37 @@
     height: 1px; 
     background-color:  rgba(29, 30, 33, 0.1); 
     margin: 40px 0; 
+}
+
+/* addToCart */
+
+.addContainer {
+    max-width: 375px;
+    width: 100%;
+    padding: 80px 20px 0 20px;
+}
+
+.listCart {
+    display: flex;
+    flex-direction: column;
+}
+
+.itemCart {
+    display: flex;
+    max-width: 335px;
+    width: 100%;
+}
+
+.infoCart {
+    display: flex;
+    flex-direction: column;
+}
+
+.imgCart {
+    max-width: 120px;
+    border: 1px solid var(--light-grey-color);
+    border-radius: 27px;
+    background: url(image);
 }
 
 @media (min-width: 768px) {

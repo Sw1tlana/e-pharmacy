@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMedicinesId } from '../../redux/medicine/operations';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectItems } from '../../redux/cart/selectors';
+import { removeFromCart } from '../../redux/cart/slice';
 
 function Cart() {
     const dispatch = useDispatch();
@@ -36,6 +37,10 @@ function Cart() {
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
       };
+
+    const  handleRemoveFromCart = (medicine)  => {
+        dispatch(removeFromCart(medicine));
+    };
 
   return (
     <section className={style.sectionCart}>
@@ -165,28 +170,47 @@ function Cart() {
       </form>
       </div>
 
-      <div>
-        {items.length > 0 ? (
-        items.map((item, index) => (
-            <div key={`${item.id}-${index}`} className={style.itemMedicine}>
-            <img className={style.imgMedicine} src={item.photo} alt={item.name} width={335} />
-            <div className={style.infoContainer}>
-            <EllipsisText className={style.textInfo} text={item.name} length={12} />
-            <p className={style.price}>{item.price}</p>
+    {/* Cart */}
+      <div className={style.addContainer}>
+      <ul className={style.listCart}>
+    {items.length > 0 ? (
+      items.map((item, index) => (
+        <li key={`${item.id}-${index}`} className={style.itemCart}>
+
+            <div className={style.infoCart}>
+          <img
+            className={style.imgCart}
+            src={item.photo}
+            alt={item.name}
+            width={335}
+          />
+          <div className={style.info}>
+                <EllipsisText
+                className={style.textCart}
+                text={item.name}
+                length={12}
+                />
+                <svg width={18} height={18} className={style.iconParagrapf}>
+                  <use xlinkHref={`${sprite}#icon-paragraph`} />
+                </svg>
+                   <p className={style.price}>{item.price}</p>
+            </div>
+            <Counter />
             <button
-                className={style.removeButton}
-                onClick={() => handleRemoveFromCart(item)}
-                >
-                Remove
-                </button>
+              className={style.removeButton}
+              onClick={() => handleRemoveFromCart(item)}
+            >
+              Remove
+            </button>
             </div>
-            </div>
-            ))
-               ) : (
-                    <div className={style.containerNotification}>
-                        <p className={style.notification}>No products available in cart</p>
-                    </div>
-                )}
+        </li>
+      ))
+    ) : (
+      <div className={style.containerNotification}>
+        <p className={style.notification}>No products available in cart</p>
+      </div>
+    )}
+  </ul>
             </div>
     </section>
   )

@@ -24,7 +24,7 @@ function Cart() {
         }
       }, [dispatch, id]);
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const { register, handleSubmit, formState: { errors }} = useForm({
         resolver: yupResolver()
     });
 
@@ -44,7 +44,8 @@ function Cart() {
 
   return (
     <section className={style.sectionCart}>
-        <h2 className={style.titleCart}>Cart</h2>
+      <div>
+      <h2 className={style.titleCart}>Cart</h2>
         <div className={style.containerCart}>
             <h3 className={style.subTitleCart}>
             Enter shipping info 
@@ -169,6 +170,7 @@ function Cart() {
                 <button type='submit' className={style.buttonCart}>Place order</button>
       </form>
       </div>
+      </div>
 
     {/* Cart */}
       <div className={style.addContainer}>
@@ -199,7 +201,12 @@ function Cart() {
             </div>
 
             <div className={style.btnCounter}>
-            <Counter isPage2={true}/>
+            <Counter
+            quantity={quantity} 
+            // onIncrement={handleIncrement} 
+            // onDecrement={handleDecrement}  
+            // isPage2={true}
+            />
             <button
               className={style.removeButton}
               onClick={() => handleRemoveFromCart(item)}

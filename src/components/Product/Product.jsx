@@ -10,12 +10,12 @@ import { selectReviews } from '../../redux/reviews/selectors';
 import { selectProduct, selectLoading } from '../../redux/medicine/selectors';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
 import Loader from '../../shared/components/Loader/Loader';
+import AddToCart from '../AddToCart/AddToCart';
 import { reviews2x } from '../../shared/images/reviews'; 
 
 import maria2x from '../../shared/images/reviews/maria@2x.png';
 import sergey2x from '../../shared/images/reviews/sergey@2x.png';
 import natalia2x from '../../shared/images/reviews/natalia@2x.png';
-
 
 function Product() {
     const { id } = useParams(); 
@@ -65,8 +65,13 @@ function Product() {
             </div>
          </div>
          <div className={style.containerButton}>
-            <Counter isPage2={false}/>
-            <button className={style.addToCard} type='button'>Add to cart</button>
+            <Counter 
+            isPage2={false}
+            // quantity={quantity} 
+            // onIncrement={handleIncrement} 
+            // onDecrement={handleDecrement} 
+            />
+            <AddToCart medicine={product}/>
          </div>
          </div>
          </div>

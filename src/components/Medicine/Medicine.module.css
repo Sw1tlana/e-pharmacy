@@ -63,26 +63,6 @@
     overflow: hidden; 
 }
 
-.addToCard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10;
-    padding: 10px 16px;
-    border-radius: 24px;
-    background: var(--green-accent-color);
-    border: none;
-    color: var(--white-color);
-    font-weight: 500;
-    line-height: 1;
-    transition: var(--animation);
-}
-
-.addToCard:active,
-.addToCard:hover {
-    background-color: var(--btn-green-accent-color);
-}
-
 .linkDetails {
     font-size: 12px;
     font-weight: 400;

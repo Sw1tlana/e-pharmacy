@@ -29,6 +29,9 @@ const INITIAL_STATE = {
         removeFromCart: (state, action) => {
           state.items = state.items.filter(item => item.id !== action.payload.id);
         },
+        // cartQuantity: (state, active) => {
+        //   state.items = state.items.reduce((total, item) => total + item.quantity, 0);
+        // },
       },
         extraReducers: (builder) => {
         builder

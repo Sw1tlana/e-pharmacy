@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import EllipsisText from "react-ellipsis-text";
 
+import { selectItems } from '../../redux/cart/selectors';
+import { incrementItem, decrementItem } from '../../redux/cart/slice';
 import Counter from '../../components/Counter/Counter';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectReviews } from '../../redux/reviews/selectors';
@@ -17,15 +19,27 @@ import maria2x from '../../shared/images/reviews/maria@2x.png';
 import sergey2x from '../../shared/images/reviews/sergey@2x.png';
 import natalia2x from '../../shared/images/reviews/natalia@2x.png';
 
-function Product() {
+function Product({productId}) {
     const { id } = useParams(); 
     const dispatch = useDispatch();
     const product = useSelector(selectProduct);
     const reviews = useSelector(selectReviews);
     const loading = useSelector(selectLoading);
+  
+    const itemsInCart = useSelector(selectItems);
+    const quantity = itemsInCart[productId] || 0;
+    
     const [activeTab, setActiveTab] = useState('description');
 
     const defaultImages = [maria2x, sergey2x, natalia2x];
+
+    const handleIncrement = () => {
+      dispatch(incrementItem(productId))
+    };
+  
+    const handleDecrement = () => {
+      dispatch(decrementItem(productId));
+    };
 
     useEffect(() => {
       if (id) {
@@ -67,9 +81,9 @@ function Product() {
          <div className={style.containerButton}>
             <Counter 
             isPage2={false}
-            // quantity={quantity} 
-            // onIncrement={handleIncrement} 
-            // onDecrement={handleDecrement} 
+            quantity={quantity} 
+            onIncrement={handleIncrement} 
+            onDecrement={handleDecrement} 
             />
             <AddToCart medicine={product}/>
          </div>

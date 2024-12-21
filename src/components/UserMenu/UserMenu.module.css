@@ -15,6 +15,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
+    position: relative;
 }
 
 .cartIcon {
@@ -43,5 +44,22 @@
 .logout:hover {
     color: var(--white-color);
     background-color: var(--green-accent-color);
+}
+
+.cartCount {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 16px;
+   height: 16px;
+   border-radius: 50%;
+   background-color: var(--bg-green-lite);
+   color: var(--green-accent-color);
+   font-size: 12px;
+   font-weight: 700;
+   line-height: 1.2;
+   position: absolute;
+   top: -4px; 
+   right: -2px;
 }
 

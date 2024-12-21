@@ -359,7 +359,7 @@
 
 .price {
     font-size: 14px;
-    padding-left: 0;
+    padding-left: 2px;
 }
 
 .iconParagrapf {
@@ -390,7 +390,7 @@
     
     .itemCart {
         max-width: 460px;
-        align-items: last baseline;
+        align-items: flex-start;
     }
 }
 

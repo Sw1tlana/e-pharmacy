@@ -202,7 +202,7 @@ function Cart() {
 
             <div className={style.btnCounter}>
             <Counter
-            quantity={quantity} 
+            // quantity={quantity} 
             // onIncrement={handleIncrement} 
             // onDecrement={handleDecrement}  
             // isPage2={true}

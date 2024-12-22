@@ -19,36 +19,35 @@ import maria2x from '../../shared/images/reviews/maria@2x.png';
 import sergey2x from '../../shared/images/reviews/sergey@2x.png';
 import natalia2x from '../../shared/images/reviews/natalia@2x.png';
 
-function Product({productId}) {
+function Product() {
     const { id } = useParams(); 
     const dispatch = useDispatch();
     const product = useSelector(selectProduct);
     const reviews = useSelector(selectReviews);
     const loading = useSelector(selectLoading);
-  
     const itemsInCart = useSelector(selectItems);
-    const quantity = itemsInCart[productId] || 0;
     
     const [activeTab, setActiveTab] = useState('description');
+    const [quantity, setQuantity] = useState(1);
 
     const defaultImages = [maria2x, sergey2x, natalia2x];
 
-    const handleIncrement = () => {
-      dispatch(incrementItem(productId))
+    const handleIncrement = (id) => {
+      console.log("Incrementing item with id:", id);
+      dispatch(incrementItem(id));
+      setQuantity(prevQuantity => prevQuantity + 1);
     };
   
-    const handleDecrement = () => {
-      dispatch(decrementItem(productId));
+    const handleDecrement = (id) => {
+      dispatch(decrementItem(id));
+      setQuantity(prevQuantity => prevQuantity - 1);
     };
 
     useEffect(() => {
-      if (id) {
-        console.log('Fetching product with ID:', id);
-        dispatch(fetchMedicinesId(id));
-      }
-    }, [dispatch, id]);
+          dispatch(fetchMedicinesId(id));
+  }, [dispatch, id]);
 
-    console.log("Product from Redux:", product); 
+  console.log("Product from Redux:", product); 
 
     if (loading) {
       return <div><Loader/></div>; 
@@ -84,6 +83,7 @@ function Product({productId}) {
             quantity={quantity} 
             onIncrement={handleIncrement} 
             onDecrement={handleDecrement} 
+            productId={product.id}
             />
             <AddToCart medicine={product}/>
          </div>

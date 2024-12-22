@@ -68,3 +68,8 @@ export const getCart = async() => {
   const { data } = await axios.get('/cart');
   return data;
 };
+
+export const updateCart = async(productId, quantity) => {
+  const { data } = await axios.get('/update', { productId, quantity });
+  return data;
+};

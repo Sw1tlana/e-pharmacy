@@ -24,29 +24,28 @@ const INITIAL_STATE = {
 
       reducers: {
         addToCart: (state, action) => {
-          state.items.push(action.payload);
+          const existingItem = state.items.find(item => item.id === action.payload.id);
+          if (existingItem) {
+            existingItem.quantity += 1; // Якщо товар вже є в кошику, збільшуємо кількість
+          } else {
+            state.items.push({ ...action.payload, quantity: 1 }); // Якщо товару немає, додаємо його з кількістю 1
+          }
         },
         removeFromCart: (state, action) => {
-          state.items = state.items.filter(item => item.id !== action.payload.id);
+          state.items = state.items.filter(item => item.id !== action.payload.id); // Видаляємо товар за id
         },
         incrementItem: (state, action) => {
-          const id = action.payload;
-          const index = state.items.findIndex(item => item.id === id);
-          if (index !== -1) {
-            state.items[index].quantity += 1; // збільшуємо кількість товару в корзині
-          } else {
-            state.items.push({ id, quantity: 1 }); // додаємо новий товар з кількістю 1
+          const item = state.items.find(item => item.id === action.payload); // Знаходимо товар за id
+          if (item) {
+            item.quantity += 1; // Збільшуємо кількість товару
           }
-      },
-      decrementItem: (state, action) => {
-          const id = action.payload;
-          const index = state.items.findIndex(item => item.id === id); // шукаємо товар по id
-          if (index !== -1 && state.items[index].quantity > 1) {
-              state.items[index].quantity -= 1; // якщо товар є, зменшуємо кількість
-          } else {
-              state.items = state.items.filter(item => item.id !== id); // якщо кількість <= 1, видаляємо товар
+        },
+        decrementItem: (state, action) => {
+          const item = state.items.find(item => item.id === action.payload); // Знаходимо товар за id
+          if (item && item.quantity > 0) {
+            item.quantity -= 1; // Зменшуємо кількість товару
           }
-      },
+        },
       },
         extraReducers: (builder) => {
         builder

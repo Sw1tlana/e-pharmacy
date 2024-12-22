@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getCart } from '../services/authServices';
+import { getCart, 
+         updateCart
+ } from '../services/authServices';
 
 export const fetchCart = createAsyncThunk(
    "cart/fetchCart", 
@@ -11,5 +13,17 @@ export const fetchCart = createAsyncThunk(
     }catch(error) {
         return thunkAPI.rejectWithValue(error.message); 
     }
+   }
+);
+
+export const fetchUpdataCart = createAsyncThunk(
+   "cart/fetchUpdataCart",
+   async({ productId, quantity }, thunkAPI) => {
+      try {
+       const response = await updateCart(productId, quantity);
+       return response;
+      }catch(error) {
+         return thunkAPI.rejectWithValue(error.message); 
+      }
    }
 );

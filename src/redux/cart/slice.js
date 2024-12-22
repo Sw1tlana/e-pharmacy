@@ -12,7 +12,6 @@ const handleRejected = (state, action) => {
 };
 
 const INITIAL_STATE = {
-    cart: [],
     items: [],
     loading: false,
     error: null,
@@ -26,24 +25,24 @@ const INITIAL_STATE = {
         addToCart: (state, action) => {
           const existingItem = state.items.find(item => item.id === action.payload.id);
           if (existingItem) {
-            existingItem.quantity += 1; // Якщо товар вже є в кошику, збільшуємо кількість
+            existingItem.quantity += 1; 
           } else {
-            state.items.push({ ...action.payload, quantity: 1 }); // Якщо товару немає, додаємо його з кількістю 1
+            state.items.push({ ...action.payload, quantity: 1 });
           }
         },
         removeFromCart: (state, action) => {
-          state.items = state.items.filter(item => item.id !== action.payload.id); // Видаляємо товар за id
+          state.items = state.items.filter(item => item.id !== action.payload.id); 
         },
         incrementItem: (state, action) => {
-          const item = state.items.find(item => item.id === action.payload); // Знаходимо товар за id
+          const item = state.items.find(item => item.id === action.payload); 
           if (item) {
-            item.quantity += 1; // Збільшуємо кількість товару
+            item.quantity += 1; 
           }
         },
         decrementItem: (state, action) => {
-          const item = state.items.find(item => item.id === action.payload); // Знаходимо товар за id
+          const item = state.items.find(item => item.id === action.payload); 
           if (item && item.quantity > 0) {
-            item.quantity -= 1; // Зменшуємо кількість товару
+            item.quantity -= 1; 
           }
         },
       },
@@ -53,7 +52,7 @@ const INITIAL_STATE = {
             .addCase(fetchCart.fulfilled, (state, action) => {
             console.log('Payload:', action.payload); 
             state.loading = false;
-            state.cart = action.payload; 
+            state.items = [...state.items, ...action.payload];
             })
             .addCase(fetchCart.rejected, handleRejected)
 

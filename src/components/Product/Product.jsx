@@ -26,26 +26,33 @@ function Product() {
     const reviews = useSelector(selectReviews);
     const loading = useSelector(selectLoading);
     const itemsInCart = useSelector(selectItems);
+
+    const itemInCart = product ? itemsInCart.find(item => item.id === product.id) : null;
+    const quantity = itemInCart ? itemInCart.quantity : 0;
     
     const [activeTab, setActiveTab] = useState('description');
-    const [quantity, setQuantity] = useState(1);
 
     const defaultImages = [maria2x, sergey2x, natalia2x];
 
     const handleIncrement = (id) => {
       console.log("Incrementing item with id:", id);
       dispatch(incrementItem(id));
-      setQuantity(prevQuantity => prevQuantity + 1);
     };
   
     const handleDecrement = (id) => {
-      dispatch(decrementItem(id));
-      setQuantity(prevQuantity => prevQuantity - 1);
+      console.log("Decrementing item with id:", productId);
+      if (quantity > 0) {
+        dispatch(decrementItem(id));
+      }
     };
 
     useEffect(() => {
           dispatch(fetchMedicinesId(id));
   }, [dispatch, id]);
+
+      if (loading) {
+        return <Loader />; 
+    }
 
   console.log("Product from Redux:", product); 
 

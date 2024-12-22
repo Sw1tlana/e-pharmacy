@@ -2,20 +2,21 @@ import style from './Cart.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useParams } from 'react-router-dom';
-
-import Counter from '../Counter/Counter';
 import EllipsisText from "react-ellipsis-text";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+
+import Counter from '../Counter/Counter';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
+import { incrementItem, decrementItem } from '../../redux/cart/slice';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectItems } from '../../redux/cart/selectors';
 import { removeFromCart } from '../../redux/cart/slice';
 
 function Cart() {
+    const { id } = useParams(); 
     const dispatch = useDispatch();
     const items = useSelector(selectItems);
-    const { id } = useParams(); 
 
     useEffect(() => {
         if (id) {
@@ -41,6 +42,16 @@ function Cart() {
     const  handleRemoveFromCart = (medicine)  => {
         dispatch(removeFromCart(medicine));
     };
+
+    const handleIncrement = (productId) => {
+      dispatch(incrementItem(productId));
+    };
+  
+    const handleDecrement = (productId) => {
+      dispatch(decrementItem(productId));
+    };
+
+    const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <section className={style.sectionCart}>
@@ -165,8 +176,17 @@ function Cart() {
                 </p>
                 </div>
                 
-                <div className={style.containerTotal}></div>
-
+                <div className={style.containerTotal}>
+                <p className={style.total}>
+                  Total:
+                </p>
+                  <span className={style.total}>
+                    <svg width={24} height={2} className={style.iconParagrapf}>
+                      <use xlinkHref={`${sprite}#icon-paragraph`} />
+                  </svg>
+                  {total.toFixed(2)}
+                </span> 
+                </div>
                 <button type='submit' className={style.buttonCart}>Place order</button>
       </form>
       </div>
@@ -202,10 +222,11 @@ function Cart() {
 
             <div className={style.btnCounter}>
             <Counter
-            // quantity={quantity} 
-            // onIncrement={handleIncrement} 
-            // onDecrement={handleDecrement}  
-            // isPage2={true}
+            isPage2={false}
+            quantity={item.quantity}
+            onIncrement={() => handleIncrement(item.id)}
+            onDecrement={() => handleDecrement(item.id)}
+            productId={item.id}
             />
             <button
               className={style.removeButton}
@@ -223,7 +244,7 @@ function Cart() {
       </div>
     )}
   </ul>
-            </div>
+    </div>
     </section>
   )
 };

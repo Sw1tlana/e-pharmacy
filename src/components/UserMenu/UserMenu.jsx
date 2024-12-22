@@ -13,6 +13,9 @@ function UseMenu() {
   const itemsInCart = useSelector(selectItems);
   const totalItems = itemsInCart.length;
 
+  console.log("Is Logged In: ", isLoggedIn);
+  console.log("User: ", user);
+  console.log("Items in Cart: ", itemsInCart);
   console.log("Total Items: ", totalItems);
 
   const onLogOut = () => {
@@ -27,7 +30,7 @@ function UseMenu() {
             <use xlinkHref={`${sprite}#icon-shopping-cart`} />
           </svg>
             <span className={style.cartCount}>
-              {totalItems === 0 ? "0" : totalItems}
+               {totalItems > 0 ? totalItems : "0"}
             </span> 
         </Link>
         )}

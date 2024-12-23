@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCart } from "./operations";
+import { fetchCart, 
+         fetchUpdataCart 
+        } from "./operations";
 
 const handlePending = (state) => {
    state.loading = true;
@@ -33,18 +35,6 @@ const INITIAL_STATE = {
         removeFromCart: (state, action) => {
           state.items = state.items.filter(item => item.id !== action.payload.id); 
         },
-        incrementItem: (state, action) => {
-          const item = state.items.find(item => item.id === action.payload); 
-          if (item) {
-            item.quantity += 1; 
-          }
-        },
-        decrementItem: (state, action) => {
-          const item = state.items.find(item => item.id === action.payload); 
-          if (item && item.quantity > 0) {
-            item.quantity -= 1; 
-          }
-        },
       },
         extraReducers: (builder) => {
         builder
@@ -55,14 +45,20 @@ const INITIAL_STATE = {
             state.items = [...state.items, ...action.payload];
             })
             .addCase(fetchCart.rejected, handleRejected)
-
+            .addCase(fetchUpdataCart.pending, handlePending)
+            .addCase(fetchUpdataCart.fulfilled, (state, action) => {
+              state.loading = false;
+              const updatedItemIndex = state.items.findIndex(item => item.id === action.payload.productId);
+              if (updatedItemIndex !== -1) {
+                state.items[updatedItemIndex].quantity = action.payload.quantity;
+            }
+        })
+        .addCase(fetchUpdataCart.rejected, handleRejected)
         },});
         
     export const {
      addToCart,
      removeFromCart,
-     incrementItem, 
-     decrementItem
     } = cartSlice.actions;
 
     export const CartReducer = cartSlice.reducer;

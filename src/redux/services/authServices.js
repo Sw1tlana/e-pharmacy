@@ -69,7 +69,7 @@ export const getCart = async() => {
   return data;
 };
 
-export const updateCart = async(productId, quantity) => {
-  const { data } = await axios.get('/update', { productId, quantity });
+export const updateCart = async(userId, productId, quantity) => {
+  const { data } = await axios.put('/cart/update', { userId, updatedProducts: [{ productId, quantity }] });
   return data;
 };

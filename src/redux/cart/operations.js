@@ -18,9 +18,9 @@ export const fetchCart = createAsyncThunk(
 
 export const fetchUpdataCart = createAsyncThunk(
    "cart/fetchUpdataCart",
-   async({ productId, quantity }, thunkAPI) => {
+   async({userId, productId, quantity }, thunkAPI) => {
       try {
-       const response = await updateCart(productId, quantity);
+       const response = await updateCart(userId, productId, quantity);
        return response;
       }catch(error) {
          return thunkAPI.rejectWithValue(error.message); 

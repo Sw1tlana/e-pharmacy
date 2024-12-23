@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import Counter from '../Counter/Counter';
+import { fetchUpdataCart } from '../../redux/cart/operations';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
-import { incrementItem, decrementItem } from '../../redux/cart/slice';
+// import { incrementItem, decrementItem } from '../../redux/cart/slice';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectItems } from '../../redux/cart/selectors';
 import { removeFromCart } from '../../redux/cart/slice';
@@ -43,12 +44,16 @@ function Cart() {
         dispatch(removeFromCart(medicine));
     };
 
-    const handleIncrement = (productId) => {
-      dispatch(incrementItem(productId));
+    const handleIncrement = (productId, currentQuantity) => {
+      const newQuantity = currentQuantity + 1;
+      dispatch(fetchUpdataCart({ productId, quantity: newQuantity }));
     };
   
-    const handleDecrement = (productId) => {
-      dispatch(decrementItem(productId));
+    const handleDecrement = (productId, currentQuantity) => {
+      if (currentQuantity > 1) {
+        const newQuantity = currentQuantity - 1; 
+        dispatch(fetchUpdataCart({ productId, quantity: newQuantity })); 
+      }
     };
 
     const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -181,7 +186,7 @@ function Cart() {
                   Total:
                 </p>
                   <span className={style.total}>
-                    <svg width={24} height={2} className={style.iconParagrapf}>
+                    <svg width={24} height={24} className={style.iconParagrapf}>
                       <use xlinkHref={`${sprite}#icon-paragraph`} />
                   </svg>
                   {total.toFixed(2)}

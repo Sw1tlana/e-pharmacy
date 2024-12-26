@@ -3,7 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { requestSingUp,
          requestSingIn,
          requestLogOut,
-         clearAuthHeader
+         clearAuthHeader,
+         refreshAuthToken
  } from '../services/authServices.js';
 
 export const registerUser = createAsyncThunk(
@@ -32,6 +33,19 @@ export const loginUser = createAsyncThunk(
         }
     }
 
+);
+
+export const refreshToken = createAsyncThunk(
+  "auth/refreshToken",
+  async(_, thunkAPI) => {
+    try {
+        const response = await refreshAuthToken();
+        return response;
+
+    }catch(error) {
+        return thunkAPI.rejectWithValue(error.message);   
+    }
+  }
 );
 
 export const logout = createAsyncThunk(

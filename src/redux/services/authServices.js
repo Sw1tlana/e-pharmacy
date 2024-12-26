@@ -26,8 +26,15 @@ export const requestSingIn = async(formData) => {
   return data;
 };
 
+export const refreshAuthToken = async () => {
+  const { data } = await axios.post('/user/refresh-tokens');
+  setAuthHeader(data.token); 
+  return data;
+};
+
 export const requestLogOut = async() => {
     const { data } = await axios.post('/user/logout');
+    console.log('Logout Response:', data);
     return data;
 };
 

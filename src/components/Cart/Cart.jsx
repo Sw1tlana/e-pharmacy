@@ -48,14 +48,14 @@ function Cart() {
     const handleIncrement = (productId, currentQuantity) => {
       const newQuantity = currentQuantity + 1;
       console.log(`Increasing quantity for productId ${productId} to ${newQuantity}`);
-      dispatch(fetchUpdataCart({ productId, quantity: newQuantity }));
+      dispatch(fetchUpdataCart({ userId, productId, quantity: newQuantity }));
     };
   
     const handleDecrement = (productId, currentQuantity) => {
       if (currentQuantity > 1) {
         const newQuantity = currentQuantity - 1; 
         console.log(`Decreasing quantity for productId ${productId} to ${newQuantity}`);
-        dispatch(fetchUpdataCart({ productId, quantity: newQuantity })); 
+        dispatch(fetchUpdataCart({ userId, productId, quantity: newQuantity })); 
       }
     };
 

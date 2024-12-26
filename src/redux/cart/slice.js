@@ -47,6 +47,7 @@ const INITIAL_STATE = {
             .addCase(fetchCart.rejected, handleRejected)
             .addCase(fetchUpdataCart.pending, handlePending)
             .addCase(fetchUpdataCart.fulfilled, (state, action) => {
+              console.log("Action payload:", action.payload);
               state.loading = false;
               const updatedItemIndex = state.items.findIndex(item => item.id === action.payload.productId);
               if (updatedItemIndex !== -1) {

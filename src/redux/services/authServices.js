@@ -69,7 +69,17 @@ export const getCart = async() => {
   return data;
 };
 
-export const updateCart = async(userId, productId, quantity) => {
-  const { data } = await axios.put('/cart/update', { userId, updatedProducts: [{ productId, quantity }] });
+export const updateCart = async (userId, updatedProducts, paymentMethod = null) => {
+  console.log('userId:', userId); // Логування userId
+  console.log('updatedProducts:', updatedProducts); // Логування updatedProducts
+  console.log('Updating cart with payload:', { userId, updatedProducts, paymentMethod });
+  const payload = {
+    userId,
+    updatedProducts,
+    ...(paymentMethod && { paymentMethod })
+  };
+
+  const { data } = await axios.put('/cart/update', payload);
+  console.log('Response from server:', data);
   return data;
 };

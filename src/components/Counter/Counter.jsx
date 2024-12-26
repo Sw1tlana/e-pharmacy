@@ -10,7 +10,7 @@ function Counter({ quantity, onIncrement, onDecrement, isPage2, productId }) {
     <div className={clsx(style.counterContainer, counterClass)}>
         <button
             className={style.buttonCounter} 
-            onClick={() => onIncrement(productId)}
+            onClick={() => onIncrement(productId, quantity)}
             aria-label="Decrease"
             >
             <svg width={20} height={20} className={style.iconIncrement}>
@@ -22,9 +22,9 @@ function Counter({ quantity, onIncrement, onDecrement, isPage2, productId }) {
 
         <button
             className={style.buttonCounter}
-            onClick={() => onDecrement(productId)}
+            onClick={() => onDecrement(productId, quantity)}
             aria-label="Increase"
-            disabled={quantity <= 0}
+            disabled={quantity <= 1}
         >
             <svg width={20} height={20} className={style.iconDecrement}>
                 <use xlinkHref={`${sprite}#icon-minus`} />

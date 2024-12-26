@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Counter from '../Counter/Counter';
 import { fetchUpdataCart } from '../../redux/cart/operations';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
-// import { incrementItem, decrementItem } from '../../redux/cart/slice';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectItems } from '../../redux/cart/selectors';
 import { removeFromCart } from '../../redux/cart/slice';
@@ -41,17 +40,21 @@ function Cart() {
       };
 
     const  handleRemoveFromCart = (medicine)  => {
+      if (window.confirm(`Are you sure you want to remove ${medicine.name} from the cart?`)) {
         dispatch(removeFromCart(medicine));
+      }
     };
 
     const handleIncrement = (productId, currentQuantity) => {
       const newQuantity = currentQuantity + 1;
+      console.log(`Increasing quantity for productId ${productId} to ${newQuantity}`);
       dispatch(fetchUpdataCart({ productId, quantity: newQuantity }));
     };
   
     const handleDecrement = (productId, currentQuantity) => {
       if (currentQuantity > 1) {
         const newQuantity = currentQuantity - 1; 
+        console.log(`Decreasing quantity for productId ${productId} to ${newQuantity}`);
         dispatch(fetchUpdataCart({ productId, quantity: newQuantity })); 
       }
     };
@@ -229,8 +232,8 @@ function Cart() {
             <Counter
             isPage2={false}
             quantity={item.quantity}
-            onIncrement={() => handleIncrement(item.id)}
-            onDecrement={() => handleDecrement(item.id)}
+            onIncrement={() => handleIncrement(item.id, item.quantity)}
+            onDecrement={() => handleDecrement(item.id, item.quantity)}
             productId={item.id}
             />
             <button

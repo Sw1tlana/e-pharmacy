@@ -23,8 +23,6 @@ function LoginForm() {
     mode: 'onTouched'
 });
 
-console.log('Form errors:', errors);
-
 const onSubmit = async (data) => {
     dispatch(loginUser(data)).unwrap();
     console.log('Submitted data:', data);

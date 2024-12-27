@@ -1,7 +1,10 @@
 import axios from "../../helpers/axiosConfig";
+import { setToken } from '../auth/slice.js';
 
 export const setAuthHeader = (token) => {
+  console.log(token);
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    console.log('Token', token);
 };
 
 export const clearAuthHeader = () => {
@@ -26,13 +29,22 @@ export const requestSingIn = async(formData) => {
   return data;
 };
 
-export const refreshAuthToken = async () => {
-  const { data } = await axios.post('/user/refresh-tokens');
-  if (data && data.token) {
-    setAuthHeader(data.token);
-    return data;
-  } else {
-    throw new Error('Invalid refresh token response');
+export const getInfo = async() => {
+  const { data } = await axios.get('/user/user-info');
+  return data;
+};
+
+export const refreshAuthToken = async (dispatch, token, refreshToken) => {
+  try {
+    const response = await axios.post('/users/refresh-tokens', { refreshToken }, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const { token: newToken, refreshToken: newRefreshToken } = response.data;
+
+    dispatch(setToken({ token: newToken, refreshToken: newRefreshToken }));
+  } catch (error) {
+    console.error('Error fetching refresh token:', error);
   }
 };
 

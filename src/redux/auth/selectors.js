@@ -10,4 +10,6 @@ console.log('Is logged in:', selectIsLoggedIn);
 
 export const selectIsRefreshing = ((state) => state.auth.isRefreshing);
 
+export const selectRefreshToken = (state) => state.auth.refreshToken;
+
 export const selectAutchError = ((state) => state.auth.error);

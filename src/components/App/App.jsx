@@ -1,10 +1,11 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import { refreshToken } from '../../redux/auth/operations';
+import { refreshUser } from '../../redux/auth/operations';
+import { selectIsRefreshing } from '../../redux/auth/selectors';
 import Loader from '../../shared/components/Loader/Loader';
 import SharedLayout from '../SharedLayout/SharedLayout';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const ShopPage = lazy(() => import('../../pages/ShopPage/ShopPage'));
@@ -16,10 +17,16 @@ const CartPage = lazy(() => import('../../pages/CartPage/CartPage'));
 
 function App() {
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-   dispatch(refreshToken());
-  }, []);
+   dispatch(refreshUser());
+  }, [dispatch]);
+
+  if (isRefreshing) {
+    return <Loader />;
+  }
+
   
   return (
     <>
@@ -41,4 +48,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

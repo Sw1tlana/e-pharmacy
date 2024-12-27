@@ -5,8 +5,10 @@ import { requestSingUp,
          requestLogOut,
          clearAuthHeader,
          refreshAuthToken,
+         getInfo,
          setAuthHeader
  } from '../services/authServices.js';
+import { setToken } from './slice.js';
 
 export const registerUser = createAsyncThunk(
     "auth/register",
@@ -36,30 +38,74 @@ export const loginUser = createAsyncThunk(
 
 );
 
-export const refreshToken = createAsyncThunk( 
-    "auth/refresh",
+export const refreshUser = createAsyncThunk(
+    'auth/refresh',
     async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
+        const state = thunkAPI.getState();
+        const persistedToken = state.auth.token;
+        console.log('Перевірка токена з Redux:', persistedToken);
 
-    setAuthHeader(token);
-    try {
-      const response = await refreshAuthToken();
-      return response;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+        if (persistedToken === null) {
+            console.log('Токен не знайдено, не вдалося отримати дані користувача');
+            return thunkAPI.rejectWithValue('Unable to fetch user');
+        }
+        try {
+            console.log('Встановлюємо заголовок Authorization');
+            setAuthHeader(persistedToken);
+            console.log('Запит на отримання інформації про користувача...');
+            const res = await getInfo();
+            console.log('Отримано дані користувача:', res.data);
+            return res.data;
+        } catch (error) {
+            console.error('Помилка при отриманні даних користувача:', error.message);
+            return thunkAPI.rejectWithValue(error.message);
+        }
     }
-  },
-  {
-    condition: (_, thunkAPI) => {
+);
+
+export const refreshToken = createAsyncThunk(
+    "auth/refreshToken",
+    async (_, thunkAPI) => {
       const state = thunkAPI.getState();
       const token = state.auth.token;
+      const refreshToken = state.auth.refreshToken; 
+      console.log("Token from state:", token);
+      console.log("Refresh Token from state:", refreshToken);
 
-      if(!token) return false;
-      return true;
+      try {
+        if (!token || !refreshToken) {
+          console.error("Токен або refreshToken відсутній, неможливо оновити.");
+          return thunkAPI.rejectWithValue("Токен або refreshToken відсутній");
+        }
+
+        const response = await refreshAuthToken(token, refreshToken);  
+
+        if (response?.token) {
+          setToken(response.token);
+          return response.data;
+        } else {
+          throw new Error('Некоректна відповідь на токен');
+        }
+      } catch (error) {
+        console.error("Не вдалося оновити токен:", error.message);
+        return thunkAPI.rejectWithValue("Не вдалося оновити токен");
+      }
+    },
+    {
+      condition: (_, thunkAPI) => {
+        const state = thunkAPI.getState();
+        const token = state.auth.token;
+        const refreshToken = state.auth.refreshToken;
+        console.log("State after update:", state.auth);
+
+        if (!token || !refreshToken) {
+          console.warn("No token or refreshToken found in state. Aborting refresh.");
+          return false;
+        }
+        return true;
+      }
     }
-  }
-);
+  );
 
 export const logout = createAsyncThunk(
     "auth/logout",

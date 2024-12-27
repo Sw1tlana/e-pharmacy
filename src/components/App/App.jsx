@@ -1,8 +1,10 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
+import { refreshToken } from '../../redux/auth/operations';
 import Loader from '../../shared/components/Loader/Loader';
 import SharedLayout from '../SharedLayout/SharedLayout';
+import { useDispatch } from 'react-redux';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const ShopPage = lazy(() => import('../../pages/ShopPage/ShopPage'));
@@ -13,6 +15,11 @@ const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
 const CartPage = lazy(() => import('../../pages/CartPage/CartPage'));
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+   dispatch(refreshToken());
+  }, []);
   
   return (
     <>

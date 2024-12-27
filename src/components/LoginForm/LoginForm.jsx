@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { signInSchema } from '../../shemas/signInShema';
 import { formValuesSignIn } from '../../helpers/constants';
-import { loginUser, refreshToken  } from '../../redux/auth/operations';
+import { loginUser } from '../../redux/auth/operations';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { tablet2x } from '../../shared/images/authorizePage/index';
@@ -26,27 +26,10 @@ function LoginForm() {
 console.log('Form errors:', errors);
 
 const onSubmit = async (data) => {
-  
-  try {
-    const loginResponse = await dispatch(loginUser(data)).unwrap();
+    dispatch(loginUser(data)).unwrap();
     console.log('Submitted data:', data);
-    reset();
-
-    if (loginResponse.token) {     
-      try {
-        await dispatch(refreshToken()).unwrap();
-        console.log("Token refreshed");
-      } catch (error) {
-        toast.error("Failed to refresh token.");
-        console.error('Refresh token error:', error);
-      }
-    }
-
     toast.success("Logged in successfully!");
-  } catch (error) {
-    console.error('Login error:', error);
-    toast.error("Login failed. Please try again.");
-  }
+    reset();
 };
 
   return (

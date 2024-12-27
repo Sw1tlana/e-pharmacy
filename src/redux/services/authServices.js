@@ -28,8 +28,12 @@ export const requestSingIn = async(formData) => {
 
 export const refreshAuthToken = async () => {
   const { data } = await axios.post('/user/refresh-tokens');
-  setAuthHeader(data.token); 
-  return data;
+  if (data && data.token) {
+    setAuthHeader(data.token);
+    return data;
+  } else {
+    throw new Error('Invalid refresh token response');
+  }
 };
 
 export const requestLogOut = async() => {

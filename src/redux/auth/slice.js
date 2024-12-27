@@ -47,6 +47,7 @@ const INITIAL_STATE = {
       })
       .addCase(refreshToken.fulfilled, (state, action) => {
         state.token = action.payload.token; 
+        state.user = action.payload;
         state.isRefreshing = false; 
       })
       .addCase(refreshToken.rejected, (state) => {

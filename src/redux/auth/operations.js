@@ -4,7 +4,8 @@ import { requestSingUp,
          requestSingIn,
          requestLogOut,
          clearAuthHeader,
-         refreshAuthToken
+         refreshAuthToken,
+         setAuthHeader
  } from '../services/authServices.js';
 
 export const registerUser = createAsyncThunk(
@@ -35,15 +36,27 @@ export const loginUser = createAsyncThunk(
 
 );
 
-export const refreshToken = createAsyncThunk(
-  "auth/refreshToken",
-  async(_, thunkAPI) => {
-    try {
-        const response = await refreshAuthToken();
-        return response;
+export const refreshToken = createAsyncThunk( 
+    "auth/refresh",
+    async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
 
-    }catch(error) {
-        return thunkAPI.rejectWithValue(error.message);   
+    setAuthHeader(token);
+    try {
+      const response = await refreshAuthToken();
+      return response;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.message);
+    }
+  },
+  {
+    condition: (_, thunkAPI) => {
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+
+      if(!token) return false;
+      return true;
     }
   }
 );

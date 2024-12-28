@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
+import { useEffect, useId } from 'react';
 import style from './RegisterForm.module.css';
 
 import { useDispatch } from 'react-redux';
@@ -16,6 +16,11 @@ import { shadow } from '../../shared/images/shadow/index';
 
 function RegisterForm() {
     const dispatch = useDispatch();
+
+    const nameId = useId();
+    const emailId = useId();
+    const passwordId = useId();
+    const phoneId = useId();
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: formValuesSignUp,
@@ -56,7 +61,7 @@ function RegisterForm() {
             <div className={style.containerInput}>
             <div>
                 <input 
-                id="name"
+                id={nameId}
                 className={style.formInput}
                 placeholder="User Name"
                 {...register('name')}
@@ -67,7 +72,7 @@ function RegisterForm() {
             </div>
             <div>
                 <input
-                id="email"
+                id={emailId}
                 className={style.formInput}
                 placeholder="Email adrress"
                 {...register('email')}
@@ -78,7 +83,7 @@ function RegisterForm() {
             </div>
             <div>
                 <input
-                id="phone"
+                id={phoneId}
                 className={style.formInput}
                 placeholder="Phone number"
                 {...register('phone')}
@@ -89,7 +94,7 @@ function RegisterForm() {
             </div>
             <div>
                 <input
-                id="password"
+                id={passwordId}
                 className={style.formInput}
                 placeholder="Password"
                 {...register('password')}

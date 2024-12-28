@@ -29,9 +29,14 @@ export const requestSingIn = async(formData) => {
   return data;
 };
 
-export const getInfo = async() => {
-  const { data } = await axios.get('/user/user-info');
-  return data;
+export const getInfo = async (userId) => {
+  try {
+      const { data } = await axios.get(`/user/user-info?userId=${userId}`);
+      return data;
+  } catch (error) {
+      console.error('Помилка при запиті до API:', error.message);
+      throw new Error('Не вдалося отримати інформацію користувача');
+  }
 };
 
 export const refreshAuthToken = async (dispatch, token, refreshToken) => {

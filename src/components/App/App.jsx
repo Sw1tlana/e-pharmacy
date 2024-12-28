@@ -1,11 +1,10 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import { refreshUser } from '../../redux/auth/operations';
 import { selectIsRefreshing } from '../../redux/auth/selectors';
 import Loader from '../../shared/components/Loader/Loader';
 import SharedLayout from '../SharedLayout/SharedLayout';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const ShopPage = lazy(() => import('../../pages/ShopPage/ShopPage'));
@@ -16,12 +15,7 @@ const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
 const CartPage = lazy(() => import('../../pages/CartPage/CartPage'));
 
 function App() {
-  const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
-
-  useEffect(() => {
-   dispatch(refreshUser());
-  }, [dispatch]);
 
   if (isRefreshing) {
     return <Loader />;

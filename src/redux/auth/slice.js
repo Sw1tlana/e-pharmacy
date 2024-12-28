@@ -4,7 +4,6 @@ import {
     registerUser,
     loginUser,
     logout,
-    refreshToken,
     refreshUser } from './operations';
 
 
@@ -45,10 +44,6 @@ const INITIAL_STATE = {
         state.isLoggedIn = true;
         state.refreshToken = action.payload.refreshToken;
         toast.success('You are logged in✅');
-        dispatch(setToken({
-          token: action.payload.token,
-          refreshToken: action.payload.refreshToken
-        }));
     })
     .addCase(logout.fulfilled, () => {
         return INITIAL_STATE;
@@ -68,12 +63,12 @@ const INITIAL_STATE = {
         registerUser.pending, loginUser.pending, logout.pending),
         (state) => {
         state.error = false;
+        state.isRefreshing = false;
         })
         .addMatcher(isAnyOf(
             registerUser.rejected, loginUser.rejected, logout.rejected),
             (state) => {
               state.error = true;
-              toast.error('Oops! Something went wrong ❌');
             })
 
     },});

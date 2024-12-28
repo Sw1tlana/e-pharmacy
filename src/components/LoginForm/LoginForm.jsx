@@ -2,20 +2,26 @@ import style from './LoginForm.module.css';
 
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { signInSchema } from '../../shemas/signInShema';
 import { formValuesSignIn } from '../../helpers/constants';
-import { loginUser } from '../../redux/auth/operations';
+import { loginUser, refreshUser } from '../../redux/auth/operations';
+import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { tablet2x } from '../../shared/images/authorizePage/index';
 import { shadow } from '../../shared/images/shadow/index';
 import { Link } from 'react-router-dom';
+import { useEffect, useId, } from 'react';
 
 function LoginForm() {
 
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoggedIn);
+
+  const emailId = useId();
+  const passwordId = useId();
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     defaultValues: formValuesSignIn,
@@ -24,11 +30,16 @@ function LoginForm() {
 });
 
 const onSubmit = async (data) => {
-    dispatch(loginUser(data)).unwrap();
-    console.log('Submitted data:', data);
-    toast.success("Logged in successfully!");
-    reset();
-};
+    try {
+      await dispatch(loginUser(data)).unwrap();
+      await dispatch(refreshUser());
+      reset();
+      toast.success('You are logged in✅');
+    } catch (error) {
+      console.error('Login or refresh failed:', error);
+      toast.error('Login failed ❌');
+    }
+  };
 
   return (
     <section className={style.sectionLoginForm}>
@@ -42,7 +53,8 @@ const onSubmit = async (data) => {
             <div className={style.containerInput}>
             <div>
                 <input
-                id="email"
+                id={emailId}
+                name="email"
                 className={style.formInput}
                 placeholder="Email adrress"
                 {...register('email')}
@@ -53,7 +65,8 @@ const onSubmit = async (data) => {
             </div>
             <div>
                 <input
-                id="password"
+                id={passwordId}
+                name="password"
                 className={style.formInput}
                 placeholder="Password"
                 {...register('password')}

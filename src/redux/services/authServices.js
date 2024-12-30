@@ -12,21 +12,35 @@ export const clearAuthHeader = () => {
 };
 
 export const requestSingUp = async(formData) => {
+  try {
     console.log('Request data:', formData);
- const { data } = await axios.post('/user/register', formData);
- console.log('Response data:', data);
- if (data.user && data.token) {
-    setAuthHeader(data.token);
-    return data; 
-  } else {
-    throw new Error('Invalid API response: missing user or token');
-  }
+    const { data } = await axios.post('/user/register', formData);
+    console.log('Response data:', data);
+
+    if (data.token && data.user) {
+        setAuthHeader(data.token); // Зберігає токен в заголовках
+        return data;
+    } else {
+        throw new Error('Invalid API response: missing user or token');
+    }
+} catch (error) {
+    console.error('API Error:', error);  // Логування помилки
+    throw error;  // Проброс помилки для обробки в redux
+}
 };
 
 export const requestSingIn = async(formData) => {
-  const { data } = await axios.post('/user/login', formData);
-  setAuthHeader(data.token);
-  return data;
+  try {
+    const { data } = await axios.post('/user/login', formData);
+    if (data.token) {
+      setAuthHeader(data.token); 
+      return data;
+    } else {
+      throw new Error('Token is missing in the response');
+    }
+  } catch (error) {
+    throw new Error(error.message || 'Login failed');
+  }
 };
 
 export const getInfo = async (userId) => {

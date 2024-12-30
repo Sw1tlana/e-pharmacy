@@ -12,7 +12,7 @@ import { requestSingUp,
 import { setToken } from './slice.js';
 
 export const registerUser = createAsyncThunk(
-    "auth/register",
+    "auth/registerUser",
     async(formData, thunkAPI) => {
         console.log('Data sent to API:', formData);
         try {
@@ -27,12 +27,13 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-    "auth/login",
+    "auth/loginUser",
     async(formData, thunkAPI) => {
         try {
             const response = await requestSingIn(formData);
             return response;
         }catch(error) {
+          console.error('Login error:', error.message);
             return thunkAPI.rejectWithValue(error.message); 
         }
     }
@@ -40,7 +41,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const refreshUser = createAsyncThunk(
-    'auth/refresh',
+    'auth/refreshUser',
     async (_, thunkAPI) => {
         const state = thunkAPI.getState();
         const persistedToken = state.auth.token;

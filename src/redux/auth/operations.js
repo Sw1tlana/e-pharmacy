@@ -16,69 +16,63 @@ export const registerUser = createAsyncThunk(
     async(formData, thunkAPI) => {
         console.log('Data sent to API:', formData);
         try {
-            const response = await requestSingUp(formData);
-            console.log('API Response:', response);
-            return response;
-        }catch(error) {
-            console.error('API Error:', error);
-            return thunkAPI.rejectWithValue(error.message);
+          console.log('Data sent to API:', formData);
+          const response = await requestSingUp(formData);
+          console.log('API Response:', response);
+    
+          // Перевірка, чи є користувач і токен
+          if (response && response.token && response.user) {
+            // Зберігаємо токен у заголовках
+            setAuthHeader(response.token);
+            
+            // Повертаємо токен і користувача для збереження в Redux
+            return {
+              user: response.user,
+              token: response.token
+            };
+          } else {
+            throw new Error('Invalid API response');
+          }
+        } catch (error) {
+          console.error('API Error:', error);
+          return thunkAPI.rejectWithValue(error.message);
         }
-    }
+      }
 );
 
 export const loginUser = createAsyncThunk(
     "auth/loginUser",
-    async(formData, thunkAPI) => {
-        try {
-            const response = await requestSingIn(formData);
-            return response;
-        }catch(error) {
-          console.error('Login error:', error.message);
-            return thunkAPI.rejectWithValue(error.message); 
-        }
-    }
+    async (formData, thunkAPI) => {
+      try {
+        const response = await requestSingIn(formData);
+  
+        return response;
 
+      } catch (error) {
+        console.error("Login error:", error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
 );
 
 export const refreshUser = createAsyncThunk(
     'auth/refreshUser',
     async (_, thunkAPI) => {
-        const state = thunkAPI.getState();
-        const persistedToken = state.auth.token;
-        const userId = state.auth.user?.id;
-
-        console.log('Перевірка userId з Redux:', userId);
-        console.log('Перевірка токена з Redux:', persistedToken);
-
-        if (!userId) {
-          console.log('ID користувача не знайдено');
-          return thunkAPI.rejectWithValue('User ID is missing');
-        }
-    
-        console.log('Перевірка userId з Redux:', userId);
-        console.log('Перевірка токена з Redux:', persistedToken);
-    
-        if (!persistedToken) {
-          console.log('Токен не знайдено, не вдалося отримати дані користувача');
-          return thunkAPI.rejectWithValue('Unable to fetch user');
-        }
-        
-        try {
-            console.log('Встановлюємо заголовок Authorization');
-            setAuthHeader(persistedToken);
-            console.log('Запит на отримання інформації про користувача...');
-            const res = await getInfo(userId);
-            console.log('Отримано дані користувача:', res);
-
-            if (res && res.name && res.email) {
-              return res; 
-            } else {
-              return thunkAPI.rejectWithValue('Invalid user data format');
-            }
-        } catch (error) {
-            console.error('Помилка при отриманні даних користувача:', error.message);
-            return thunkAPI.rejectWithValue(error.message);
-        }
+      const state = thunkAPI.getState();
+      const refreshToken = state.auth.refreshToken;
+  
+      if (!refreshToken) {
+        return thunkAPI.rejectWithValue("No refresh token available");
+      }
+  
+      try {
+        const { data } = await axios.post("/user/refresh", { refreshToken });
+        setAuthHeader(data.token);  // Оновлюємо токен в заголовках
+        return data;
+      } catch (error) {
+        console.error("Refresh token error:", error);
+        return thunkAPI.rejectWithValue(error.message || "Refresh failed");
+      }
     }
 );
 

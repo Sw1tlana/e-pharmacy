@@ -13,7 +13,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { tablet2x } from '../../shared/images/authorizePage/index';
 import { shadow } from '../../shared/images/shadow/index';
 import { Link } from 'react-router-dom';
-import { useEffect, useId, } from 'react';
+import { useId, } from 'react';
 
 function LoginForm() {
 
@@ -30,16 +30,22 @@ function LoginForm() {
 });
 
 const onSubmit = async (data) => {
-    try {
-      await dispatch(loginUser(data)).unwrap();
-      await dispatch(refreshUser());
-      reset();
-      toast.success('You are logged in✅');
-    } catch (error) {
-      console.error('Login or refresh failed:', error);
-      toast.error('Login failed ❌');
+  try {
+    await dispatch(loginUser()).unwrap();
+    // await dispatch(refreshUser(data)).unwrap();
+    reset(); // Очищення форми після успішного логіну
+    toast.success('You are logged in✅');
+  } catch (error) {
+    console.error('Login or refresh failed:', error);
+
+    // Якщо це Axios помилка, то виводимо більш детальну інформацію
+    if (error.response) {
+      toast.error(`Login failed: ${error.response.data.message || 'Unknown server error'}`);
+    } else {
+      toast.error(`Login failed: ${error.message || 'An unknown error occurred'}`);
     }
-  };
+  }
+};
 
   return (
     <section className={style.sectionLoginForm}>

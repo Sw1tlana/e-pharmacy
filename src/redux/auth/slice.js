@@ -33,13 +33,13 @@ const INITIAL_STATE = {
     .addCase(registerUser.fulfilled, (state, action) => {
       console.log('Payload:', action.payload);
       state.user = action.payload.user;
-      state.token = action.payload.token;  // Правильне присвоєння токену
-      console.log(action.payload.token);   // Логування правильного токену
-      state.refreshToken = action.payload.refreshToken;
+      state.token = action.payload.token;  
+      console.log(action.payload.token);   
       state.isLoggedIn = true;
         toast.success('You have registered✅');
       })
     .addCase(loginUser.fulfilled, (state, action) => {
+      console.log('Payload of loginUser:', action.payload); 
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;

@@ -44,11 +44,20 @@ export const loginUser = createAsyncThunk(
     "auth/loginUser",
     async (formData, thunkAPI) => {
       try {
+        console.log('Login formData:', formData);
         const response = await requestSingIn(formData);
-  
-        return response;
+        console.log('Login successful:', response);
 
+        if (response && response.token && response.user && response.refreshToken) {
+          setAuthHeader(response.token);
+          return {
+            user: response.user,
+            token: response.token,
+            refreshToken: response.refreshToken,
+          };
+        }
       } catch (error) {
+        console.error("Login error:", error); 
         console.error("Login error:", error.message);
         return thunkAPI.rejectWithValue(error.message);
       }

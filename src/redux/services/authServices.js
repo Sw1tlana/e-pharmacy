@@ -31,14 +31,14 @@ export const requestSingUp = async(formData) => {
 
 export const requestSingIn = async(formData) => {
   try {
+    console.log("formData", formData);
     const { data } = await axios.post('/user/login', formData);
     console.log(data);
     
-    if (!data.token || !data.refreshToken) {
-      throw new Error('Token or refresh token is missing in the response');
+    if (!data.token || !data.refreshToken || !data.user) {
+      throw new Error('Token, refresh token or user data is missing in the response');
     }
-
-    setAuthHeader(data.token);
+    
     return data;
   } catch (error) {
     throw new Error(error.message || 'Login failed');

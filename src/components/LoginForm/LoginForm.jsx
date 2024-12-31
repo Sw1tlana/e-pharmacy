@@ -30,20 +30,13 @@ function LoginForm() {
 });
 
 const onSubmit = async (data) => {
+  console.log("Form data being submitted:", data);
   try {
-    await dispatch(loginUser()).unwrap();
-    // await dispatch(refreshUser(data)).unwrap();
-    reset(); // Очищення форми після успішного логіну
-    toast.success('You are logged in✅');
+    await dispatch(loginUser(data)).unwrap();
+    toast.success("Login successful");
+    reset();
   } catch (error) {
-    console.error('Login or refresh failed:', error);
-
-    // Якщо це Axios помилка, то виводимо більш детальну інформацію
-    if (error.response) {
-      toast.error(`Login failed: ${error.response.data.message || 'Unknown server error'}`);
-    } else {
-      toast.error(`Login failed: ${error.message || 'An unknown error occurred'}`);
-    }
+    console.error("Login failed:", error);
   }
 };
 

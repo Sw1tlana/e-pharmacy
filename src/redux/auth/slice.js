@@ -45,6 +45,7 @@ const INITIAL_STATE = {
         state.isLoggedIn = true;
         state.refreshToken = action.payload.refreshToken;
         toast.success('You are logged in✅');
+        console.log('Updated state:', state);
     })
     .addCase(logout.fulfilled, () => {
         return INITIAL_STATE;

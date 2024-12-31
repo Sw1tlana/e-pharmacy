@@ -41,27 +41,38 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-    "auth/loginUser",
-    async (formData, thunkAPI) => {
-      try {
-        console.log('Login formData:', formData);
-        const response = await requestSingIn(formData);
-        console.log('Login successful:', response);
+  "auth/loginUser",
+  async (formData, thunkAPI) => {
+    try {
+      console.log('Login formData:', formData);
+      const response = await requestSingIn(formData);
+      console.log('Login successful:', response);
 
-        if (response && response.token && response.user && response.refreshToken) {
-          setAuthHeader(response.token);
-          return {
-            user: response.user,
-            token: response.token,
-            refreshToken: response.refreshToken,
-          };
-        }
-      } catch (error) {
-        console.error("Login error:", error); 
-        console.error("Login error:", error.message);
-        return thunkAPI.rejectWithValue(error.message);
+      return response;
+      // Перевірка токенів у відповіді
+      if (response.token && response.refreshToken) {
+        setAuthHeader({
+          token: response.token,
+          refreshToken: response.refreshToken,
+        });
+      } else {
+        throw new Error('Token or refreshToken missing in the response');
       }
+
+      // Оновлення Redux
+    } catch (error) {
+      console.error("Login error:", error);
+
+      // Якщо є відповідь сервера
+      if (error.response) {
+        console.error("Server response:", error.response.data);
+        return thunkAPI.rejectWithValue(error.response.data.message || 'Server error');
+      }
+
+      // Помилка на рівні клієнта
+      return thunkAPI.rejectWithValue(error.message || 'Network error');
     }
+  }
 );
 
 export const refreshUser = createAsyncThunk(

@@ -32,10 +32,11 @@ function LoginForm() {
 const onSubmit = async (formData) => {
   try {
     const result = await dispatch(loginUser(formData)).unwrap();
-    console.log('Login successful:', result);
+    console.log(result);
+    toast.success('Login successful');
   } catch (error) {
-    console.error('Error during login:', error);
-    setErrorMessage(error); // Відображення помилки користувачеві
+    console.error(error); // Вивести всю помилку для аналізу
+    toast.error('Error during login: ' + (error.message || 'Unknown error'));
   }
 };
 
@@ -48,7 +49,7 @@ const onSubmit = async (formData) => {
             Your medication,  delivered Say goodbye to all<span className={style.spanColor}>your healthcare</span> worries with us
         </h2>
         </div>
-        <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)}>
+      <form className={style.formLogin} onSubmit={handleSubmit(onSubmit)}>
             <div className={style.containerInput}>
             <div>
                 <input

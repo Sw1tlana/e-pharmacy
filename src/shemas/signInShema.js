@@ -13,4 +13,5 @@ export const signInSchema = Yup.object().shape({
             passwordRegex,
             "Password must be at least 6 characters long, include one uppercase letter, one number, and one special character"
         )
+        .required("Password is required"),
 });

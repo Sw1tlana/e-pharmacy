@@ -46,10 +46,10 @@ export const loginUser = createAsyncThunk(
     try {
       console.log('Login formData:', formData);
       const response = await requestSingIn(formData);
-console.log(formData);
-      // Збереження токенів та користувача
-      setToken({token: response.token, 
-                 refreshToken: response.refreshToken});
+      console.log('Login response:', response);
+
+      setAuthHeader(response.token, response.refreshToken);
+      console.log('Set auth header:', response.token);
 
       return {
         token: response.token,
@@ -58,14 +58,13 @@ console.log(formData);
       };
     } catch (error) {
       console.error("Login error:", error);
-
-      // Якщо сервер повернув помилку
+      
+      // Перевіряємо, чи є відповідь від сервера
       if (error.response) {
         console.error("Server response:", error.response.data);
         return thunkAPI.rejectWithValue(error.response.data.message || 'Server error');
       }
 
-      // Загальна помилка
       return thunkAPI.rejectWithValue(error.message || 'Login failed');
     }
   }

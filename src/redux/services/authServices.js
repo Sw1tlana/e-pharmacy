@@ -1,7 +1,7 @@
 import axios from "../../helpers/axiosConfig";
 import { setToken } from '../auth/slice.js';
 
-export const setAuthHeader = (token) => {
+export const setAuthHeader = (token, refreshToken) => {
   console.log(token);
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     console.log('Token', token);
@@ -37,9 +37,12 @@ export const requestSingIn = async(formData) => {
     if (!formData.email || !formData.password) {
       throw new Error('Email and password are required');
     }
+    console.log('Response data from login:', formData);
 
     const { data } = await axios.post('/user/login', formData);
-    console.log("Response data:", data);
+    if (!data.token || !data.user) {
+      throw new Error('Invalid response from server');
+    }
     return data;
   } catch (error) {
     throw new Error(error.message || 'Login failed');

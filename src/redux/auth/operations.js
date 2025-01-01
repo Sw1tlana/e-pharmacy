@@ -46,31 +46,27 @@ export const loginUser = createAsyncThunk(
     try {
       console.log('Login formData:', formData);
       const response = await requestSingIn(formData);
-      console.log('Login successful:', response);
+console.log(formData);
+      // Збереження токенів та користувача
+      setToken({token: response.token, 
+                 refreshToken: response.refreshToken});
 
-      return response;
-      // Перевірка токенів у відповіді
-      if (response.token && response.refreshToken) {
-        setAuthHeader({
-          token: response.token,
-          refreshToken: response.refreshToken,
-        });
-      } else {
-        throw new Error('Token or refreshToken missing in the response');
-      }
-
-      // Оновлення Redux
+      return {
+        token: response.token,
+        refreshToken: response.refreshToken,
+        user: response.user,
+      };
     } catch (error) {
       console.error("Login error:", error);
 
-      // Якщо є відповідь сервера
+      // Якщо сервер повернув помилку
       if (error.response) {
         console.error("Server response:", error.response.data);
         return thunkAPI.rejectWithValue(error.response.data.message || 'Server error');
       }
 
-      // Помилка на рівні клієнта
-      return thunkAPI.rejectWithValue(error.message || 'Network error');
+      // Загальна помилка
+      return thunkAPI.rejectWithValue(error.message || 'Login failed');
     }
   }
 );

@@ -31,14 +31,15 @@ export const requestSingUp = async(formData) => {
 
 export const requestSingIn = async(formData) => {
   try {
-    console.log("formData", formData);
-    const { data } = await axios.post('/user/login', formData);
-    console.log(data);
-    
-    if (!data.token || !data.refreshToken || !data.user) {
-      throw new Error('Token, refresh token or user data is missing in the response');
+    console.log("formData:", formData);
+
+    // Валідація перед відправкою запиту
+    if (!formData.email || !formData.password) {
+      throw new Error('Email and password are required');
     }
-    
+
+    const { data } = await axios.post('/user/login', formData);
+    console.log("Response data:", data);
     return data;
   } catch (error) {
     throw new Error(error.message || 'Login failed');

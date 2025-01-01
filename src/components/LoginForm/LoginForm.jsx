@@ -29,16 +29,16 @@ function LoginForm() {
     mode: 'onTouched'
 });
 
-const onSubmit = async (data) => {
-  console.log("Form data being submitted:", data);
+const onSubmit = async (formData) => {
   try {
-    await dispatch(loginUser(data)).unwrap();
-    toast.success("Login successful");
-    reset();
+    const result = await dispatch(loginUser(formData)).unwrap();
+    console.log('Login successful:', result);
   } catch (error) {
-    console.error("Login failed:", error);
+    console.error('Error during login:', error);
+    setErrorMessage(error); // Відображення помилки користувачеві
   }
 };
+
 
   return (
     <section className={style.sectionLoginForm}>

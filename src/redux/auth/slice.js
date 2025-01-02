@@ -6,7 +6,6 @@ import {
     logout,
     refreshUser } from './operations';
 
-
 const INITIAL_STATE = {
     user: {
       name: null,
@@ -21,46 +20,37 @@ const INITIAL_STATE = {
   export const authSlice = createSlice({
     name: "auth",
     initialState: INITIAL_STATE,
-  //   reducers: {
-  //     setToken(state, action) {
-  //         state.token = action.payload.token;
-  //         state.refreshToken = action.payload.refreshToken;
-  //         state.isLoggedIn = true;
-  //     },
-  // },
+
     extraReducers: (builder) => {
     builder
-    .addCase(registerUser.fulfilled, (state, action) => {
-      console.log('Payload:', action.payload);
-      state.user = action.payload.user;
-      state.token = action.payload.token;  
-      console.log(action.payload.token);   
-      state.isLoggedIn = true;
-        toast.success('You have registered✅');
-      })
-    .addCase(loginUser.fulfilled, (state, action) => {
-      console.log('Payload of loginUser:', action.payload); 
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        state.refreshToken = action.payload.refreshToken;
+        toast.success('You have registered✅');
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
         toast.success('You are logged in✅');
-        console.log('Updated state:', state);
-    })
+      })
     .addCase(logout.fulfilled, () => {
         return INITIAL_STATE;
     })
-      .addCase(refreshUser.pending, (state) => {
-        state.isRefreshing = true;
+    .addCase(refreshUser.pending, (state) => {
+      state.isRefreshing = true;
+      state.error = false;
     })
     .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isLoggedIn = true;
-        state.isRefreshing = false;
+      state.isRefreshing = false;
+      state.user = action.payload;
+      state.isLoggedIn = true;
     })
     .addCase(refreshUser.rejected, (state) => {
-        state.isRefreshing = false;
-    })
+      state.isRefreshing = false;
+      state.error = true;
+    }) 
         .addMatcher(isAnyOf(
         registerUser.pending, loginUser.pending, logout.pending),
         (state) => {
@@ -75,5 +65,4 @@ const INITIAL_STATE = {
 
     },});
 
-export const { setToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;

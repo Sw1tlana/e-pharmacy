@@ -34,11 +34,11 @@ function UseMenu() {
             </span> 
         </Link>
         )}
-        {isLoggedIn && user && (
+        {isLoggedIn && user ? (
         <button type="button" className={style.logout} onClick={onLogOut}>
             Log out
         </button>
-        )}
+        ): null}
     </div>
   )
 };

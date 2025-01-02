@@ -1,5 +1,4 @@
 import axios from "../../helpers/axiosConfig";
-import { setToken } from '../auth/slice.js';
 
 export const setAuthHeader = (token) => {
   console.log(token);
@@ -12,41 +11,18 @@ export const clearAuthHeader = () => {
 };
 
 export const requestSingUp = async(formData) => {
-  try {
     console.log('Request data:', formData);
     const { data } = await axios.post('/user/register', formData);
     console.log('Response data:', data);
-
-    if (data.token && data.user) {
-      // Повертаємо повну відповідь
-      return data;
-    } else {
-      throw new Error('Invalid API response: missing user or token');
-    }
-  } catch (error) {
-    console.error('API Error:', error);
-    throw error;  // Проброс помилки
-  }
+    setAuthHeader(data.token);
+    return data;
 };
 
 export const requestSingIn = async(formData) => {
-  try {
-    console.log("formData:", formData);
-
-    // Валідація перед відправкою запиту
-    if (!formData.email || !formData.password) {
-      throw new Error('Email and password are required');
-    }
     console.log('Response data from login:', formData);
-
     const { data } = await axios.post('/user/login', formData);
-    if (!data.token || !data.user) {
-      throw new Error('Invalid response from server');
-    }
+    setAuthHeader(data.token);
     return data;
-  } catch (error) {
-    throw new Error(error.message || 'Login failed');
-  }
 };
 
 export const getInfo = async (userId) => {
@@ -59,18 +35,10 @@ export const getInfo = async (userId) => {
   }
 };
 
-export const refreshAuthToken = async (dispatch, token, refreshToken) => {
-  try {
-    const response = await axios.post('/users/refresh-tokens', { refreshToken }, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    const { token: newToken, refreshToken: newRefreshToken } = response.data;
-
-    dispatch(setToken({ token: newToken, refreshToken: newRefreshToken }));
-  } catch (error) {
-    console.error('Error fetching refresh token:', error);
-  }
+export const refreshAuthToken = async () => {
+    const {data} = await axios.post('/user/refresh-tokens');
+    console.log('New a ccess token:', data);
+   return data;
 };
 
 export const requestLogOut = async() => {

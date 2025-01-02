@@ -1,10 +1,9 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import { selectIsRefreshing } from '../../redux/auth/selectors';
 import Loader from '../../shared/components/Loader/Loader';
 import SharedLayout from '../SharedLayout/SharedLayout';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { refreshUser } from '../../redux/auth/operations';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
@@ -16,16 +15,11 @@ const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
 const CartPage = lazy(() => import('../../pages/CartPage/CartPage'));
 
 function App() {
-  const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(refreshUser());
   },[]);
-
-  if (isRefreshing) {
-    return <Loader />;
-  }
 
   return (
     <>

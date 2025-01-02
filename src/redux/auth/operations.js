@@ -13,31 +13,27 @@ import { setToken } from './slice.js';
 
 export const registerUser = createAsyncThunk(
     "auth/registerUser",
-    async(formData, thunkAPI) => {
-        console.log('Data sent to API:', formData);
-        try {
-          console.log('Data sent to API:', formData);
-          const response = await requestSingUp(formData);
-          console.log('API Response:', response);
-    
-          // Перевірка, чи є користувач і токен
-          if (response && response.token && response.user) {
-            // Зберігаємо токен у заголовках
-            setAuthHeader(response.token);
-            
-            // Повертаємо токен і користувача для збереження в Redux
-            return {
-              user: response.user,
-              token: response.token
-            };
-          } else {
-            throw new Error('Invalid API response');
-          }
-        } catch (error) {
-          console.error('API Error:', error);
-          return thunkAPI.rejectWithValue(error.message);
+    async (formData, thunkAPI) => {
+      console.log('Data sent to API:', formData);
+      try {
+        const response = await requestSingUp(formData);
+        console.log('API Response:', response);
+  
+        // Перевірка на наявність користувача і токена
+        if (response?.token && response?.user) {
+          setAuthHeader(response.token);
+          return {
+            user: response.user,
+            token: response.token
+          };
+        } else {
+          throw new Error('Invalid API response');
         }
+      } catch (error) {
+        console.error('API Error:', error);
+        return thunkAPI.rejectWithValue(error.message || 'Registration failed');
       }
+    }
 );
 
 export const loginUser = createAsyncThunk(
@@ -49,7 +45,8 @@ export const loginUser = createAsyncThunk(
       console.log('Login response:', response);
 
       setAuthHeader(response.token, response.refreshToken);
-      console.log('Set auth header:', response.token);
+      console.log('Token:', response.token);
+      console.log('Refresh Token:', response.refreshToken);
 
       return {
         token: response.token,
@@ -58,8 +55,7 @@ export const loginUser = createAsyncThunk(
       };
     } catch (error) {
       console.error("Login error:", error);
-      
-      // Перевіряємо, чи є відповідь від сервера
+
       if (error.response) {
         console.error("Server response:", error.response.data);
         return thunkAPI.rejectWithValue(error.response.data.message || 'Server error');
@@ -82,7 +78,7 @@ export const refreshUser = createAsyncThunk(
   
       try {
         const { data } = await axios.post("/user/refresh", { refreshToken });
-        setAuthHeader(data.token);  // Оновлюємо токен в заголовках
+        setAuthHeader(data.token);  // Оновлення токену в заголовках
         return data;
       } catch (error) {
         console.error("Refresh token error:", error);
@@ -97,24 +93,21 @@ export const refreshToken = createAsyncThunk(
       const state = thunkAPI.getState();
       const token = state.auth.token;
       const refreshToken = state.auth.refreshToken; 
-      console.log("Token from state:", token);
-      console.log("Refresh Token from state:", refreshToken);
-
+  
       try {
-        // Перевірка схеми для refreshToken
         await refreshTokenSchema.validate({ refreshToken });
   
         if (!token || !refreshToken) {
-          console.error("Токен або refreshToken відсутній, неможливо оновити.");
-          return thunkAPI.rejectWithValue("Токен або refreshToken відсутній");
+          console.error("Токен або refreshToken відсутні, неможливо оновити.");
+          return thunkAPI.rejectWithValue("Токен або refreshToken відсутні");
         }
   
-        const response = await refreshAuthToken(token, refreshToken);  
+        const response = await refreshAuthToken(token, refreshToken);
   
         if (response?.data?.token && response?.data?.refreshToken) {
           thunkAPI.dispatch(setToken({
-              token: response.data.token,
-              refreshToken: response.data.refreshToken
+            token: response.data.token,
+            refreshToken: response.data.refreshToken
           }));
           return response.data;
         } else {
@@ -130,8 +123,7 @@ export const refreshToken = createAsyncThunk(
         const state = thunkAPI.getState();
         const token = state.auth.token;
         const refreshToken = state.auth.refreshToken;
-        console.log("State after update:", state.auth);
-
+  
         if (!token || !refreshToken) {
           console.warn("No token or refreshToken found in state. Aborting refresh.");
           return false;
@@ -147,6 +139,7 @@ export const logout = createAsyncThunk(
         try {
            await requestLogOut();
             clearAuthHeader();
+            return {};
         }catch(error) {
             return thunkAPI.rejectWithValue(error.message);  
         }

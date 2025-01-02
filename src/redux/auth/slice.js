@@ -21,13 +21,13 @@ const INITIAL_STATE = {
   export const authSlice = createSlice({
     name: "auth",
     initialState: INITIAL_STATE,
-    reducers: {
-      setToken(state, action) {
-          state.token = action.payload.token;
-          state.refreshToken = action.payload.refreshToken;
-          state.isLoggedIn = true;
-      },
-  },
+  //   reducers: {
+  //     setToken(state, action) {
+  //         state.token = action.payload.token;
+  //         state.refreshToken = action.payload.refreshToken;
+  //         state.isLoggedIn = true;
+  //     },
+  // },
     extraReducers: (builder) => {
     builder
     .addCase(registerUser.fulfilled, (state, action) => {

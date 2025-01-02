@@ -1,7 +1,7 @@
 import axios from "../../helpers/axiosConfig";
 import { setToken } from '../auth/slice.js';
 
-export const setAuthHeader = (token, refreshToken) => {
+export const setAuthHeader = (token) => {
   console.log(token);
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     console.log('Token', token);

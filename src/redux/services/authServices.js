@@ -19,37 +19,28 @@ export const requestSingUp = async(formData) => {
 };
 
 export const requestSingIn = async(formData) => {
-    console.log('Response data from login:', formData);
+  try {
     const { data } = await axios.post('/user/login', formData);
     setAuthHeader(data.token);
     return data;
-};
-
-export const getInfo = async (userId) => {
-  try {
-      const { data } = await axios.get(`/user/user-info?userId=${userId}`);
-      return data;
   } catch (error) {
-      console.error('Помилка при запиті до API:', error.message);
-      throw new Error('Не вдалося отримати інформацію користувача');
+    console.error('Error in requestSingIn:', error.response?.data || error.message);
+    throw error; 
   }
 };
 
-export const refreshAuthToken = async (refreshToken) => {
-  try {
-    const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
-    console.log('New access token:', data);
-    setAuthHeader(data.token);
+export const getRefreshUser = async () => {
+    const { data } = await axios.get('/user/user-info');
     return data;
-  } catch (error) {
-    console.error('Error refreshing token:', error.message);
-    throw new Error('Не вдалося оновити токен');
-  }
 };
 
-export const requestLogOut = async() => {
+export const getRefreshToken = async (refreshToken) => {
+    const { data } = await axios.post('/users/refresh-tokens', { refreshToken });
+    return data;
+};
+
+export const requestLogOut = async () => {
     const { data } = await axios.post('/user/logout');
-    console.log('Logout Response:', data);
     return data;
 };
 

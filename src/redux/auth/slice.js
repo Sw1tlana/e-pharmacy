@@ -12,6 +12,7 @@ const INITIAL_STATE = {
       email: null,
     },
     token: null,
+    refreshToken: null,
     isLoggedIn: false,
     error: false,
     isRefreshing: false,
@@ -22,12 +23,11 @@ const INITIAL_STATE = {
     initialState: INITIAL_STATE,
     setToken(state, action) {
       const { token, refreshToken } = action.payload;
-      state.token = token; // Зберігаємо новий токен
-      state.refreshToken = refreshToken; // Зберігаємо refresh токен
-      state.isAuthenticated = true; // Оновлюємо статус автентифікації
+      state.token = token; 
+      state.refreshToken = refreshToken; 
+      state.isAuthenticated = true; 
     },
 
-    // Інші можливі редюсери, наприклад для logout
     clearToken(state) {
       state.token = null;
       state.refreshToken = null;
@@ -39,17 +39,21 @@ const INITIAL_STATE = {
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         toast.success('You have registered✅');
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         toast.success('You are logged in✅');
       })
-    .addCase(logout.fulfilled, () => {
-        return INITIAL_STATE;
+    .addCase(logout.fulfilled, (state) => {
+      state.user = { name: null, email: null };
+      state.token = null;
+      state.isLoggedIn = false;
     })
     .addCase(refreshUser.pending, (state) => {
       state.isRefreshing = true;

@@ -4,9 +4,9 @@ import { requestSingUp,
          requestSingIn,
          requestLogOut,
          clearAuthHeader,
-         refreshAuthToken,
-         getInfo,
-         setAuthHeader
+         setAuthHeader,
+         getRefreshUser,
+         getRefreshToken
  } from '../services/authServices.js';
 
 export const registerUser = createAsyncThunk(
@@ -40,41 +40,55 @@ export const loginUser = createAsyncThunk(
 );
 
 export const refreshUser = createAsyncThunk(
-    'auth/refreshUser',
-    async (_, thunkAPI) => {
-      const state = thunkAPI.getState();
-      const refreshToken = state.auth.refreshToken; // Ось тут потрібно використовувати refreshToken
-      
-      if (!refreshToken) {
-        return thunkAPI.rejectWithValue("No refresh token available");
-      }
-  
-      try {
-        const response = await refreshAuthToken(refreshToken);  // Потрібно передати refreshToken
-        return response;
-      } catch (err) {
-        return thunkAPI.rejectWithValue(err.message);
-      }
-    },
-    {
-      condition: (_, thunkAPI) => {
-        const state = thunkAPI.getState();
-        const token = state.auth.token;
-        if (!token) return false;  // Не потрібно оновлювати токен, якщо немає токена
-        return true;
-      }
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const { token } = state.auth;
+
+    if (!token) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
     }
+
+    try {
+      setAuthHeader(token);
+      const user = await getRefreshUser();
+      return user;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const refreshToken = createAsyncThunk(
+  'auth/refreshToken',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const { refreshToken } = state.auth;
+
+    if (!refreshToken) {
+      return thunkAPI.rejectWithValue('No refresh token available');
+    }
+
+    try {
+      const { token, refreshToken: newRefreshToken } = await getRefreshToken(refreshToken);
+      dispatch(setToken({ token, refreshToken: newRefreshToken }));
+      setAuthHeader(token);
+      return { token, refreshToken: newRefreshToken };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
 );
 
 export const logout = createAsyncThunk(
-    "auth/logout",
-    async(_, thunkAPI) => {
-        try {
-           await requestLogOut();
-            clearAuthHeader();
-            return {};
-        }catch(error) {
-            return thunkAPI.rejectWithValue(error.message);  
-        }
+  'auth/logout',
+  async (_, thunkAPI) => {
+    try {
+      await requestLogOut();
+      clearAuthHeader();
+      return {};
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
+  }
 );

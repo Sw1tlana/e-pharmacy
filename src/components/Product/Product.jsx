@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import EllipsisText from "react-ellipsis-text";
 
 import { selectItems } from '../../redux/cart/selectors';
-// import { incrementItem, decrementItem } from '../../redux/cart/slice';
 import Counter from '../../components/Counter/Counter';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectReviews } from '../../redux/reviews/selectors';

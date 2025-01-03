@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { signInSchema } from '../../shemas/signInShema';
 import { formValuesSignIn } from '../../helpers/constants';
-import { loginUser } from '../../redux/auth/operations';
+import { loginUser, refreshUser } from '../../redux/auth/operations';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,7 +18,7 @@ import { useId, } from 'react';
 function LoginForm() {
 
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const emailId = useId();
   const passwordId = useId();
@@ -39,7 +39,6 @@ const onSubmit = async (formData) => {
     toast.error('Error during login: ' + (error.message || 'Unknown error'));
   }
 };
-
 
   return (
     <section className={style.sectionLoginForm}>

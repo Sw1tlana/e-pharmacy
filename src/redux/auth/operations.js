@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { refreshTokenSchema } from '../../shemas/refreshTokenSchema.js';
 
 import { requestSingUp,
          requestSingIn,

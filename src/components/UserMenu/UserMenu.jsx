@@ -19,7 +19,9 @@ function UseMenu() {
   console.log("Total Items: ", totalItems);
 
   const onLogOut = () => {
-    dispatch(logout());
+    if (isLoggedIn) {
+      dispatch(logout());
+    }
   };
 
   return (

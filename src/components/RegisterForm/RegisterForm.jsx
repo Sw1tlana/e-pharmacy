@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useId } from 'react';
 import style from './RegisterForm.module.css';
+import { useNavigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'; 
@@ -16,6 +17,7 @@ import { shadow } from '../../shared/images/shadow/index';
 
 function RegisterForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const nameId = useId();
     const emailId = useId();
@@ -31,6 +33,7 @@ function RegisterForm() {
     const onSubmit = (data) => {
           dispatch(registerUser(data));
           reset();
+          navigate('/login');
       };
 
       useEffect(() => {

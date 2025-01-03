@@ -35,10 +35,16 @@ export const getInfo = async (userId) => {
   }
 };
 
-export const refreshAuthToken = async () => {
-    const {data} = await axios.post('/user/refresh-tokens');
-    console.log('New a ccess token:', data);
-   return data;
+export const refreshAuthToken = async (refreshToken) => {
+  try {
+    const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+    console.log('New access token:', data);
+    setAuthHeader(data.token);
+    return data;
+  } catch (error) {
+    console.error('Error refreshing token:', error.message);
+    throw new Error('Не вдалося оновити токен');
+  }
 };
 
 export const requestLogOut = async() => {

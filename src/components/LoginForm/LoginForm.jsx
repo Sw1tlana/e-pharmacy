@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { signInSchema } from '../../shemas/signInShema';
 import { formValuesSignIn } from '../../helpers/constants';
-import { loginUser, refreshUser } from '../../redux/auth/operations';
+import { loginUser } from '../../redux/auth/operations';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -35,7 +35,7 @@ const onSubmit = async (formData) => {
     console.log(result);
     toast.success('Login successful');
   } catch (error) {
-    console.error(error); // Вивести всю помилку для аналізу
+    console.error(error); 
     toast.error('Error during login: ' + (error.message || 'Unknown error'));
   }
 };

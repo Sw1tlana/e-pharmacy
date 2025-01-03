@@ -43,12 +43,14 @@ export const refreshUser = createAsyncThunk(
     'auth/refreshUser',
     async (_, thunkAPI) => {
       const state = thunkAPI.getState();
-      const token = state.auth.token;
-  
-      setAuthHeader(token);
+      const refreshToken = state.auth.refreshToken; // Ось тут потрібно використовувати refreshToken
       
+      if (!refreshToken) {
+        return thunkAPI.rejectWithValue("No refresh token available");
+      }
+  
       try {
-        const response = await refreshAuthToken();
+        const response = await refreshAuthToken(refreshToken);  // Потрібно передати refreshToken
         return response;
       } catch (err) {
         return thunkAPI.rejectWithValue(err.message);
@@ -58,8 +60,7 @@ export const refreshUser = createAsyncThunk(
       condition: (_, thunkAPI) => {
         const state = thunkAPI.getState();
         const token = state.auth.token;
-  
-        if(!token) return false;
+        if (!token) return false;  // Не потрібно оновлювати токен, якщо немає токена
         return true;
       }
     }

@@ -3,7 +3,7 @@ import { authReducer } from "./auth/slice";
 import { storeReducer } from "./stores/slice";
 import { medicinesReducer } from "./medicine/slice";
 import { reviewsReducer } from "./reviews/slice";
-import { CartReducer, cartSlice } from "./cart/slice";
+import { CartReducer } from "./cart/slice";
 
 import {
   persistStore,
@@ -20,7 +20,7 @@ import storage from "redux-persist/lib/storage";
 const authConfig = {
     key: "auth",
     storage,
-    whitelist: ["token"],
+    whitelist: ["token", "refreshToken"],
   };
 
 export const store = configureStore({

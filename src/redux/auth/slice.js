@@ -20,6 +20,19 @@ const INITIAL_STATE = {
   export const authSlice = createSlice({
     name: "auth",
     initialState: INITIAL_STATE,
+    setToken(state, action) {
+      const { token, refreshToken } = action.payload;
+      state.token = token; // Зберігаємо новий токен
+      state.refreshToken = refreshToken; // Зберігаємо refresh токен
+      state.isAuthenticated = true; // Оновлюємо статус автентифікації
+    },
+
+    // Інші можливі редюсери, наприклад для logout
+    clearToken(state) {
+      state.token = null;
+      state.refreshToken = null;
+      state.isAuthenticated = false;
+    },
 
     extraReducers: (builder) => {
     builder
@@ -65,4 +78,6 @@ const INITIAL_STATE = {
 
     },});
 
-export const authReducer = authSlice.reducer;
+    export const { setToken, clearToken } = authSlice.actions;
+
+    export const authReducer = authSlice.reducer;

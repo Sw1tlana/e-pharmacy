@@ -20,8 +20,10 @@ export const requestSingUp = async(formData) => {
 
 export const requestSingIn = async(formData) => {
   try {
+    console.log(formData);
     const { data } = await axios.post('/user/login', formData);
     setAuthHeader(data.token);
+    console.log(data);
     return data;
   } catch (error) {
     console.error('Error in requestSingIn:', error.response?.data || error.message);

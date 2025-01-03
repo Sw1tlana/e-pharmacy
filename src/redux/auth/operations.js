@@ -25,14 +25,15 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-  "auth/loginUser",
-  async (formData, thunkAPI) => {
+  'auth/login',
+  async (credentials, thunkAPI) => {
     try {
-      console.log('Login formData:', formData);
-      const response = await requestSingIn(formData);
-      console.log('Login response:', response);
-
-      return response;
+      const data = await requestSingIn(credentials); 
+      console.log('Login response:', response); 
+      const { token, refreshToken } = data; 
+      console.log('Login data:', data); 
+      thunkAPI.dispatch(setToken({ token, refreshToken }));
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -51,8 +52,8 @@ export const refreshUser = createAsyncThunk(
 
     try {
       setAuthHeader(token);
-      const user = await getRefreshUser();
-      return user;
+      const user = await getRefreshUser(); 
+      return { name: user.name, email: user.email };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -71,7 +72,7 @@ export const refreshToken = createAsyncThunk(
 
     try {
       const { token, refreshToken: newRefreshToken } = await getRefreshToken(refreshToken);
-      dispatch(setToken({ token, refreshToken: newRefreshToken }));
+      thunkAPI.dispatch(setToken({ token, refreshToken: newRefreshToken }));
       setAuthHeader(token);
       return { token, refreshToken: newRefreshToken };
     } catch (error) {

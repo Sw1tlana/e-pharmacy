@@ -21,17 +21,11 @@ const INITIAL_STATE = {
   export const authSlice = createSlice({
     name: "auth",
     initialState: INITIAL_STATE,
-    setToken(state, action) {
-      const { token, refreshToken } = action.payload;
-      state.token = token; 
-      state.refreshToken = refreshToken; 
-      state.isAuthenticated = true; 
-    },
-
-    clearToken(state) {
-      state.token = null;
-      state.refreshToken = null;
-      state.isAuthenticated = false;
+    reducers: {
+      setToken(state, action) {
+        state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
+      },
     },
 
     extraReducers: (builder) => {
@@ -39,30 +33,33 @@ const INITIAL_STATE = {
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
-        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         toast.success('You have registered✅');
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
+        console.log(action.payload.refreshToken);
+
         state.isLoggedIn = true;
         toast.success('You are logged in✅');
       })
     .addCase(logout.fulfilled, (state) => {
-      state.user = { name: null, email: null };
+      state.user = INITIAL_STATE.user;
       state.token = null;
-      state.isLoggedIn = false;
+      state.refreshToken = null;
+      toast.success('Logout successful');
     })
     .addCase(refreshUser.pending, (state) => {
       state.isRefreshing = true;
       state.error = false;
     })
     .addCase(refreshUser.fulfilled, (state, action) => {
-      state.isRefreshing = false;
-      state.user = action.payload;
-      state.isLoggedIn = true;
+      state.isLoading = false;
+      state.user = action.payload; 
+      toast.success('User data refreshed successfully');
     })
     .addCase(refreshUser.rejected, (state) => {
       state.isRefreshing = false;
@@ -82,6 +79,6 @@ const INITIAL_STATE = {
 
     },});
 
-    export const { setToken, clearToken } = authSlice.actions;
+    export const { setToken } = authSlice.actions;
 
     export const authReducer = authSlice.reducer;

@@ -16,7 +16,7 @@ export const registerUser = createAsyncThunk(
       try {
         const response = await requestSignUp(formData);
         console.log('API Response:', response);
-          return response
+          return response;
       } catch (error) {
         console.error('API Error:', error);
         return thunkAPI.rejectWithValue(error.message);
@@ -28,12 +28,12 @@ export const loginUser = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const data = await requestSignIn(credentials); 
+      const response = await requestSignIn(credentials); 
       console.log('Login response:', response); 
-      const { token, refreshToken } = data; 
+      const { token, refreshToken } = response.data; 
       console.log('Login data:', data); 
-      thunkAPI.dispatch(setToken({ token, refreshToken }));
-      return data;
+      dispatch(setToken({ token, refreshToken }));
+      console.log(store.getState());
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

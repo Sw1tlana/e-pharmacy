@@ -31,6 +31,7 @@ function LoginForm() {
 
 const onSubmit = async (formData) => {
   try {
+    console.log('Login result:', formData);
     const result = await dispatch(loginUser(formData)).unwrap();
     console.log(result);
     toast.success('Login successful');

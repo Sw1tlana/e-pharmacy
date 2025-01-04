@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { requestSingUp,
-         requestSingIn,
+import { requestSignUp,
+         requestSignIn,
          requestLogOut,
          clearAuthHeader,
          setAuthHeader,
@@ -14,7 +14,7 @@ export const registerUser = createAsyncThunk(
     async (formData, thunkAPI) => {
       console.log('Data sent to API:', formData);
       try {
-        const response = await requestSingUp(formData);
+        const response = await requestSignUp(formData);
         console.log('API Response:', response);
           return response
       } catch (error) {
@@ -28,7 +28,7 @@ export const loginUser = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const data = await requestSingIn(credentials); 
+      const data = await requestSignIn(credentials); 
       console.log('Login response:', response); 
       const { token, refreshToken } = data; 
       console.log('Login data:', data); 
@@ -76,7 +76,11 @@ export const refreshToken = createAsyncThunk(
       setAuthHeader(token);
       return { token, refreshToken: newRefreshToken };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      console.error('Error during token refresh:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+    });
     }
   }
 );

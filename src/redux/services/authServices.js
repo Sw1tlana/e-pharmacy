@@ -10,7 +10,31 @@ export const clearAuthHeader = () => {
     axios.defaults.headers.common.Authorization = '';
 };
 
-export const requestSingUp = async(formData) => {
+export const setupAxiosInterceptors = (store) => {
+  axios.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+          const originalRequest = error.config;
+          if (error.response.status === 401 && !originalRequest._retry) {
+              originalRequest._retry = true;
+              try {
+                  const { refreshToken } = store.getState().auth;
+                  const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+
+                  setAuthHeader(data.token);
+                  store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
+                  originalRequest.headers.Authorization = `Bearer ${data.token}`;
+                  return axios(originalRequest);
+              } catch (err) {
+                  return Promise.reject(err);
+              }
+          }
+          return Promise.reject(error);
+      }
+  );
+};
+
+export const requestSignUp = async(formData) => {
     console.log('Request data:', formData);
     const { data } = await axios.post('/user/register', formData);
     console.log('Response data:', data);
@@ -18,7 +42,7 @@ export const requestSingUp = async(formData) => {
     return data;
 };
 
-export const requestSingIn = async(formData) => {
+export const requestSignIn = async(formData) => {
   try {
     console.log(formData);
     const { data } = await axios.post('/user/login', formData);
@@ -37,7 +61,7 @@ export const getRefreshUser = async () => {
 };
 
 export const getRefreshToken = async (refreshToken) => {
-    const { data } = await axios.post('/users/refresh-tokens', { refreshToken });
+    const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
     return data;
 };
 

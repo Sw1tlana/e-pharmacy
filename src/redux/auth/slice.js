@@ -33,6 +33,7 @@ const INITIAL_STATE = {
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
         toast.success('You have registered✅');
       })
@@ -57,8 +58,10 @@ const INITIAL_STATE = {
       state.error = false;
     })
     .addCase(refreshUser.fulfilled, (state, action) => {
-      state.isLoading = false;
+      console.log('Stored refreshToken:', state.refreshToken);
+      state.isRefreshing = false; 
       state.user = action.payload; 
+      state.token = action.payload.token;
       toast.success('User data refreshed successfully');
     })
     .addCase(refreshUser.rejected, (state) => {

@@ -26,44 +26,22 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (credentials, thunkAPI) => {
-    console.log('Credentials for login:', credentials); 
     try {
-
-      const response = await requestSignIn(credentials); 
-      const { token, refreshToken, user } = response.data; 
+      const response = await requestSignIn(credentials);
+      const { token, refreshToken, user } = response;
 
       thunkAPI.dispatch(setToken({ token, refreshToken }));
-      console.log(token, refreshToken);
+      setAuthHeader(token);
 
       return { user, token, refreshToken };
     } catch (error) {
+      console.error('Login failed:', error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
 export const refreshUser = createAsyncThunk(
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const { refreshToken } = state.auth;
-
-    if (!refreshToken) {
-      return thunkAPI.rejectWithValue('No refresh token available.');
-    }
-
-    try {
-      const response = await getRefreshToken(refreshToken);
-      thunkAPI.dispatch(setToken(response));
-      const userResponse = await getUser();
-      return { user: userResponse, ...response };
-    } catch (error) {
-      toast.error('Failed to refresh user session.');
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const refreshToken = createAsyncThunk(
   'auth/refreshToken',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
@@ -75,14 +53,14 @@ export const refreshToken = createAsyncThunk(
 
     try {
       const { token, refreshToken: newRefreshToken } = await getRefreshToken(refreshToken);
+
       thunkAPI.dispatch(setToken({ token, refreshToken: newRefreshToken }));
+      setAuthHeader(token);
+
       return { token, refreshToken: newRefreshToken };
     } catch (error) {
-      console.error('Error during token refresh:', {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status,
-    });
+      console.error('Error during token refresh:', error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

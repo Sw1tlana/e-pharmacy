@@ -25,15 +25,18 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-  'auth/login',
+  'auth/loginUser',
   async (credentials, thunkAPI) => {
+    console.log('Credentials for login:', credentials); 
     try {
+
       const response = await requestSignIn(credentials); 
-      console.log('Login response:', response); 
-      const { token, refreshToken } = response.data; 
-      console.log('Login data:', data); 
+      const { token, refreshToken, user } = response.data; 
+
       dispatch(setToken({ token, refreshToken }));
-      console.log(store.getState());
+      console.log(token, refreshToken);
+
+      return { user, token, refreshToken };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -41,21 +44,27 @@ export const loginUser = createAsyncThunk(
 );
 
 export const refreshUser = createAsyncThunk(
-  'auth/refresh',
+  'auth/refreshUser',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const { token } = state.auth;
+    const { token, refreshToken } = state.auth; 
 
-    if (!token) {
+    if (!token || !refreshToken) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
 
     try {
-      setAuthHeader(token);
-      const user = await getRefreshUser(); 
-      return { name: user.name, email: user.email };
+      const userData = await getRefreshUser(token); 
+      const newToken = userData.token;
+      const newRefreshToken = userData.refreshToken; 
+
+     dispatch(setToken({ token: newToken, refreshToken: newRefreshToken }));
+
+      setAuthHeader(newToken);
+
+      return { token: newToken, refreshToken: newRefreshToken }; 
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message); 
     }
   }
 );

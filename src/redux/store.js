@@ -4,7 +4,6 @@ import { storeReducer } from "./stores/slice";
 import { medicinesReducer } from "./medicine/slice";
 import { reviewsReducer } from "./reviews/slice";
 import { CartReducer } from "./cart/slice";
-import { setupAxiosInterceptors } from '../redux/services/authServices';
 
 import {
   persistStore,
@@ -40,7 +39,5 @@ export const store = configureStore({
       },
     }),
 });
-
-setupAxiosInterceptors(store);
 
 export const persistor = persistStore(store);

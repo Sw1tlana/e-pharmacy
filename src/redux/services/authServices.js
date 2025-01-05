@@ -11,19 +11,6 @@ export const clearAuthHeader = () => {
     axios.defaults.headers.common.Authorization = '';
 };
 
-export const setupAxiosInterceptors = (store) => {
-  axios.interceptors.request.use(
-    (config) => {
-      const { token } = store.getState().auth;
-      if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
-      }
-      return config;
-    },
-    (error) => Promise.reject(error)
-  );
-};
-
 export const requestSignUp = async(formData) => {
     console.log('Request data:', formData);
     const { data } = await axios.post('/user/register', formData);
@@ -37,7 +24,11 @@ export const requestSignIn = async(formData) => {
   try {
     console.log(formData);
     const { data } = await axios.post('/user/login', formData);
-    setToken(data.token);
+
+    if (!data.token || !data.refreshToken || !data.user) {
+      throw new Error('Invalid response from server');
+    }
+    setAuthHeader(data.token);
     console.log(data);
     return data;
   } catch (error) {

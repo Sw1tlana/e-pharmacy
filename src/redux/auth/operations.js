@@ -4,10 +4,9 @@ import { requestSignUp,
          requestSignIn,
          requestLogOut,
          clearAuthHeader,
-         setAuthHeader,
-         getRefreshUser,
          getRefreshToken
  } from '../services/authServices.js';
+import { setToken } from './slice.js';
 
 export const registerUser = createAsyncThunk(
     "auth/registerUser",
@@ -33,7 +32,7 @@ export const loginUser = createAsyncThunk(
       const response = await requestSignIn(credentials); 
       const { token, refreshToken, user } = response.data; 
 
-      dispatch(setToken({ token, refreshToken }));
+      thunkAPI.dispatch(setToken({ token, refreshToken }));
       console.log(token, refreshToken);
 
       return { user, token, refreshToken };
@@ -44,27 +43,22 @@ export const loginUser = createAsyncThunk(
 );
 
 export const refreshUser = createAsyncThunk(
-  'auth/refreshUser',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const { token, refreshToken } = state.auth; 
+    const { refreshToken } = state.auth;
 
-    if (!token || !refreshToken) {
-      return thunkAPI.rejectWithValue('Unable to fetch user');
+    if (!refreshToken) {
+      return thunkAPI.rejectWithValue('No refresh token available.');
     }
 
     try {
-      const userData = await getRefreshUser(token); 
-      const newToken = userData.token;
-      const newRefreshToken = userData.refreshToken; 
-
-     dispatch(setToken({ token: newToken, refreshToken: newRefreshToken }));
-
-      setAuthHeader(newToken);
-
-      return { token: newToken, refreshToken: newRefreshToken }; 
+      const response = await getRefreshToken(refreshToken);
+      thunkAPI.dispatch(setToken(response));
+      const userResponse = await getUser();
+      return { user: userResponse, ...response };
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message); 
+      toast.error('Failed to refresh user session.');
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -82,7 +76,6 @@ export const refreshToken = createAsyncThunk(
     try {
       const { token, refreshToken: newRefreshToken } = await getRefreshToken(refreshToken);
       thunkAPI.dispatch(setToken({ token, refreshToken: newRefreshToken }));
-      setAuthHeader(token);
       return { token, refreshToken: newRefreshToken };
     } catch (error) {
       console.error('Error during token refresh:', {

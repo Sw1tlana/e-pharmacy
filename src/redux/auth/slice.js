@@ -40,13 +40,8 @@ const INITIAL_STATE = {
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log(action.payload);
         state.user = action.payload.user;
-        console.log(action.payload.user);
         state.token = action.payload.token;
-        console.log(action.payload.token);
         state.refreshToken = action.payload.refreshToken;
-        console.log(action.payload.refreshToken);
-        console.log(action.payload.refreshToken);
-
         state.isLoggedIn = true;
         toast.success('You are logged in✅');
       })

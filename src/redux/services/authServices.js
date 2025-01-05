@@ -22,22 +22,20 @@ export const requestSignUp = async(formData) => {
 
 export const requestSignIn = async(formData) => {
   try {
-    console.log(formData);
     const { data } = await axios.post('/user/login', formData);
-
-    if (!data.token || !data.refreshToken || !data.user) {
-      throw new Error('Invalid response from server');
+    if (data.token && data.refreshToken && data.user) {
+        setAuthHeader(data.token);
+        return data;
+    } else {
+        throw new Error('Invalid response from server');
     }
-    setAuthHeader(data.token);
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.error('Error in requestSingIn:', error.response?.data || error.message);
-    throw error; 
-  }
+} catch (error) {
+    console.error('Error during login:', error.response?.data || error.message);
+    throw error;
+}
 };
 
-export const getRefreshUser = async () => {
+export const getUser = async () => {
     const { data } = await axios.get('/user/user-info');
     return data;
 };

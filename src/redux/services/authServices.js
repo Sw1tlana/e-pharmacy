@@ -1,5 +1,4 @@
 import axios from "../../helpers/axiosConfig";
-import { setToken } from "../auth/slice";
 
 export const setAuthHeader = (token) => {
   console.log(token);
@@ -11,38 +10,53 @@ export const clearAuthHeader = () => {
     axios.defaults.headers.common.Authorization = '';
 };
 
-export const requestSignUp = async(formData) => {
-    console.log('Request data:', formData);
-    const { data } = await axios.post('/user/register', formData);
-    console.log('Response data:', formData);
-    setAuthHeader(data.token);
-    console.log(data);
-    return data;
+export const setupAxiosInterceptors = (store) => {
+  axios.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+          const originalRequest = error.config;
+          if (error.response?.status === 401 && !originalRequest._retry) {
+              originalRequest._retry = true;
+              try {
+                  const { refreshToken } = store.getState().auth;
+                  const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+
+                  setAuthHeader(data.token);
+                  store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
+
+                  originalRequest.headers.Authorization = `Bearer ${data.token}`;
+                  return axios(originalRequest);
+              } catch (err) {
+                  console.error('Error refreshing token:', err);
+                  return Promise.reject(err);
+              }
+          }
+          return Promise.reject(error);
+      }
+  );
 };
 
-export const requestSignIn = async(formData) => {
-  const { data } = await axios.post('/user/login', formData);
-
-  if (!data.token || !data.refreshToken || !data.user) {
-    throw new Error('Invalid response from server');
-  }
-
+export const requestSignUp = async (formData) => {
+  const { data } = await axios.post('/user/register', formData);
+  setAuthHeader(data.token);
   return data;
 };
 
-export const getUser = async () => {
-    const { data } = await axios.get('/user/user-info');
-    return data;
-};
-
-export const getRefreshToken = async (refreshToken) => {
-    const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
-    return data;
+export const requestSignIn = async (formData) => {
+  const { data } = await axios.post('/user/login', formData);
+  setAuthHeader(data.token);
+  const profileResponse = await axios.get('/user/user-info');
+  return { ...data, user: profileResponse.data };
 };
 
 export const requestLogOut = async () => {
-    const { data } = await axios.post('/user/logout');
-    return data;
+  await axios.post('/user/logout');
+  clearAuthHeader();
+};
+
+export const getRefreshToken = async (refreshToken) => {
+  const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+  return data;
 };
 
 // stores

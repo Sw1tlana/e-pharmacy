@@ -43,6 +43,7 @@ const INITIAL_STATE = {
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
+        console.log('State after login:', state);
         toast.success('You are logged in✅');
       })
     .addCase(logout.fulfilled, (state) => {

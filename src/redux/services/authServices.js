@@ -12,22 +12,25 @@ export const clearAuthHeader = () => {
 
 export const setupAxiosInterceptors = (store) => {
   axios.interceptors.response.use(
-      (response) => response,
+      (response) => response, 
       async (error) => {
           const originalRequest = error.config;
           if (error.response?.status === 401 && !originalRequest._retry) {
-              originalRequest._retry = true;
+              originalRequest._retry = true; 
+
               try {
                   const { refreshToken } = store.getState().auth;
+                  console.log('Trying to refresh tokens with refreshToken:', refreshToken);
                   const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
-
+                  console.log('Refreshed tokens:', data); 
+                  console.log('New tokens after refresh:', data);
                   setAuthHeader(data.token);
                   store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
 
                   originalRequest.headers.Authorization = `Bearer ${data.token}`;
-                  return axios(originalRequest);
+                  return axios(originalRequest); 
               } catch (err) {
-                  console.error('Error refreshing token:', err);
+                  console.error('Error refreshing token:', err.response?.data || err.message);
                   return Promise.reject(err);
               }
           }
@@ -37,16 +40,26 @@ export const setupAxiosInterceptors = (store) => {
 };
 
 export const requestSignUp = async (formData) => {
+  console.log('Registration form data:', formData);
   const { data } = await axios.post('/user/register', formData);
+  console.log('Server response after registration:', data);
   setAuthHeader(data.token);
   return data;
 };
 
-export const requestSignIn = async (formData) => {
-  const { data } = await axios.post('/user/login', formData);
-  setAuthHeader(data.token);
-  const profileResponse = await axios.get('/user/user-info');
-  return { ...data, user: profileResponse.data };
+export const requestSignIn = async (loginData) => {
+  const { email, password } = loginData;
+
+  try {
+    const response = await axios.post(
+        '/user/login',
+        { email, password }
+    );
+    return response.data;
+} catch (error) {
+    throw new Error(error.response?.data?.message || 'Server error');
+}
+
 };
 
 export const requestLogOut = async () => {
@@ -56,6 +69,7 @@ export const requestLogOut = async () => {
 
 export const getRefreshToken = async (refreshToken) => {
   const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+  console.log('New tokens from refresh:', data); 
   return data;
 };
 

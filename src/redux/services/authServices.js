@@ -1,58 +1,88 @@
 import axios from "../../helpers/axiosConfig";
+import { setToken } from "../auth/slice";
 
 export const setAuthHeader = (token) => {
-  console.log(token);
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    console.log('Token', token);
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 
+
 export const clearAuthHeader = () => {
-    axios.defaults.headers.common.Authorization = '';
+    axios.defaults.headers.common['Authorization'] = '';
 };
 
 export const setupAxiosInterceptors = (store) => {
-  axios.interceptors.request.use(
-    (config) => {
-      const state = store.getState();
-      const token = state.auth.token;
-      if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+  axios.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalRequest = error.config;
+      
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        const refreshToken = store.getState().auth.refreshToken;
+        try {
+          const newTokens = await store.dispatch(refreshUser({ refreshToken }));
+          setAuthHeader(newTokens.token);
+          originalRequest.headers['Authorization'] = `Bearer ${newTokens.token}`;
+          return axios(originalRequest);
+        } catch (err) {
+          toast.error('Token refresh failed');
+          return Promise.reject(err);
+        }
       }
-      return config;
-    },
-    (error) => {
+
       return Promise.reject(error);
     }
   );
 };
 
 export const requestSignUp = async (formData) => {
-  console.log('Registration form data:', formData);
-  const { data } = await axios.post('/user/register', formData);
-  console.log('Server response after registration:', data);
-  setAuthHeader(data.token);
-  return data;
+  try {
+    const { data } = await axios.post('/user/register', formData);
+    if (data && data.token) {
+      setAuthHeader(data.token);
+      return data;
+    } else {
+      toast.error('No token received during registration');
+    }
+  } catch (error) {
+    console.error('API error:', error);
+    if (error.response) {
+      toast.error(`Server error: ${error.response.data.message || 'Registration failed'}`);
+    } else {
+      toast.error('Unknown error occurred');
+    }
+  }
 };
 
 export const requestSignIn = async (email, password) => {
-  if (typeof email !== 'string' || typeof password !== 'string') {
-    console.error('Email and password must be strings');
-    throw new Error('Email and password must be strings');
+  try {
+    console.log('Login attempt:', { email, password });
+    const { data } = await axios.post('/user/login', { email, password });
+    console.log('Login response:', data);
+    return data;
+  } catch (error) {
+    console.error('Login error:', error);
+    toast.error(error.response?.data?.message || 'Login failed');
   }
-
-  const response = await axios.post('/user/login', { email, password });
-  return response.data;
 };
 
 export const requestLogOut = async () => {
-  await axios.post('/user/logout');
-  clearAuthHeader();
+  try {
+    await axios.post('/user/logout');
+    clearAuthHeader();
+  } catch (error) {
+    toast.error('Logout failed');
+  }
 };
 
 export const getRefreshToken = async (refreshToken) => {
-  const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
-  console.log('New tokens from refresh:', data); 
-  return data;
+  try {
+    const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+    return data;
+  } catch (error) {
+    toast.error('Failed to refresh token');
+    throw error;
+  }
 };
 
 // stores

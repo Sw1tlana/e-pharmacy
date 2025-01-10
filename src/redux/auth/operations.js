@@ -21,41 +21,41 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-    'auth/loginUser',
-    async ({ email, password }, { rejectWithValue }) => {
+  'auth/loginUser',
+  async ({ email, password }, { rejectWithValue }) => {
+    console.log('loginUser received:', { email, password });
+
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      console.error('Invalid types in loginUser:', { email, password });
+      return rejectWithValue('Email and password must be strings');
+    }
+
+    return requestSignIn(email, password);
+  }
+);
+
+ export const refreshUser = createAsyncThunk(
+    'auth/refreshToken',
+    async (_, thunkAPI) => {
+      const state = thunkAPI.getState();
+      const { refreshToken } = state.auth;
+  
+      if (!refreshToken) {
+        return thunkAPI.rejectWithValue('No refresh token available');
+      }
+  
       try {
-        if (typeof email !== 'string' || typeof password !== 'string') {
-          return rejectWithValue('Email and password must be strings');
-        }
-        const response = await requestSignIn(email, password); 
-        return response;
+        const { token, refreshToken: newRefreshToken } = await getRefreshToken(refreshToken);
+        setToken({ token, refreshToken: newRefreshToken });
+        setAuthHeader(token);
+        return { token, refreshToken: newRefreshToken };
       } catch (error) {
-        return rejectWithValue(error.message);
+        console.error('Error during token refresh:', error);
+        return thunkAPI.rejectWithValue(error.response?.data?.message || 'Token refresh failed');
       }
     }
   );
-
-export const refreshUser = createAsyncThunk(
-  'auth/refreshToken',
-  async (_, thunkAPI) => {
-      const state = thunkAPI.getState();
-      const { refreshToken } = state.auth;
-
-      if (!refreshToken) {
-          return thunkAPI.rejectWithValue('No refresh token available');
-      }
-
-      try {
-          const { token, refreshToken: newRefreshToken } = await getRefreshToken(refreshToken);
-          thunkAPI.dispatch(setToken({ token, refreshToken: newRefreshToken }));
-          setAuthHeader(token);
-          return { token, refreshToken: newRefreshToken };
-      } catch (error) {
-          console.error('Error during token refresh:', error);
-          return thunkAPI.rejectWithValue(error.response?.data?.message || 'Token refresh failed');
-      }
-  }
-);
+  
 
 export const logout = createAsyncThunk(
   'auth/logout',

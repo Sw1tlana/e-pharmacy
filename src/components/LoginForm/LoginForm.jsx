@@ -31,17 +31,15 @@ function LoginForm() {
 
 const onSubmit = (formData) => {
   console.log('Form data before dispatch:', formData);
-  console.log('Email:', formData.email);
-  console.log('Password:', formData.password);
 
-  // Перевірка типів перед викликом
   if (typeof formData.email !== 'string' || typeof formData.password !== 'string') {
     console.error('Email and password must be strings');
+    toast.error('Invalid email or password format');
     return;
   }
 
   dispatch(loginUser({ email: formData.email, password: formData.password }));
-};
+}
 
   return (
     <section className={style.sectionLoginForm}>
@@ -56,7 +54,7 @@ const onSubmit = (formData) => {
             <div>
                 <input
                 id={emailId}
-                name="email"
+                type="email"
                 className={style.formInput}
                 placeholder="Email adrress"
                 {...register('email')}
@@ -68,7 +66,7 @@ const onSubmit = (formData) => {
             <div>
                 <input
                 id={passwordId}
-                name="password"
+                type="password"
                 className={style.formInput}
                 placeholder="Password"
                 {...register('password')}

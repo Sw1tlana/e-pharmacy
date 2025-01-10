@@ -29,16 +29,18 @@ function LoginForm() {
     mode: 'onTouched'
 });
 
-const onSubmit = async (formData) => {
-  try {
-    console.log('Login result:', formData);
-    const result = await dispatch(loginUser(formData)).unwrap();
-    console.log(result);
-    toast.success('Login successful');
-  } catch (error) {
-    console.error(error); 
-    toast.error('Error during login: ' + (error.message || 'Unknown error'));
+const onSubmit = (formData) => {
+  console.log('Form data before dispatch:', formData);
+  console.log('Email:', formData.email);
+  console.log('Password:', formData.password);
+
+  // Перевірка типів перед викликом
+  if (typeof formData.email !== 'string' || typeof formData.password !== 'string') {
+    console.error('Email and password must be strings');
+    return;
   }
+
+  dispatch(loginUser({ email: formData.email, password: formData.password }));
 };
 
   return (

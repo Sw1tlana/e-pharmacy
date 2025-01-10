@@ -11,31 +11,18 @@ export const clearAuthHeader = () => {
 };
 
 export const setupAxiosInterceptors = (store) => {
-  axios.interceptors.response.use(
-      (response) => response, 
-      async (error) => {
-          const originalRequest = error.config;
-          if (error.response?.status === 401 && !originalRequest._retry) {
-              originalRequest._retry = true; 
-
-              try {
-                  const { refreshToken } = store.getState().auth;
-                  console.log('Trying to refresh tokens with refreshToken:', refreshToken);
-                  const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
-                  console.log('Refreshed tokens:', data); 
-                  console.log('New tokens after refresh:', data);
-                  setAuthHeader(data.token);
-                  store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
-
-                  originalRequest.headers.Authorization = `Bearer ${data.token}`;
-                  return axios(originalRequest); 
-              } catch (err) {
-                  console.error('Error refreshing token:', err.response?.data || err.message);
-                  return Promise.reject(err);
-              }
-          }
-          return Promise.reject(error);
+  axios.interceptors.request.use(
+    (config) => {
+      const state = store.getState();
+      const token = state.auth.token;
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
       }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
   );
 };
 
@@ -47,19 +34,14 @@ export const requestSignUp = async (formData) => {
   return data;
 };
 
-export const requestSignIn = async (loginData) => {
-  const { email, password } = loginData;
+export const requestSignIn = async (email, password) => {
+  if (typeof email !== 'string' || typeof password !== 'string') {
+    console.error('Email and password must be strings');
+    throw new Error('Email and password must be strings');
+  }
 
-  try {
-    const response = await axios.post(
-        '/user/login',
-        { email, password }
-    );
-    return response.data;
-} catch (error) {
-    throw new Error(error.response?.data?.message || 'Server error');
-}
-
+  const response = await axios.post('/user/login', { email, password });
+  return response.data;
 };
 
 export const requestLogOut = async () => {

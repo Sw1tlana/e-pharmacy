@@ -31,17 +31,19 @@ const INITIAL_STATE = {
     extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.refreshToken = action.payload.refreshToken;
+        const { user, token, refreshToken } = action.payload; 
+        state.user = user;
+        state.token = token;
+        state.refreshToken = refreshToken;
         state.isLoggedIn = true;
         toast.success('You have registered✅');
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         console.log(action.payload);
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.refreshToken = action.payload.refreshToken;
+        const { user, token, refreshToken } = action.payload;
+        state.user = user;
+        state.token = token;
+        state.refreshToken = refreshToken;
         state.isLoggedIn = true;
         console.log('State after login:', state);
         toast.success('You are logged in✅');
@@ -58,8 +60,9 @@ const INITIAL_STATE = {
     })
     .addCase(refreshUser.fulfilled, (state, action) => {
       console.log('Stored refreshToken:', state.refreshToken);
-      state.token = action.payload.token;
-      state.refreshToken = action.payload.refreshToken;
+      const { token, refreshToken } = action.payload;
+      state.token = token;
+      state.refreshToken = refreshToken;
       console.log('New refresh token:', action.payload.refreshToken);
       toast.success('Token refreshed successfully');
     })

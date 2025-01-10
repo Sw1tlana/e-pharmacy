@@ -21,19 +21,19 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-  'auth/loginUser',
-  async (credentials, thunkAPI) => {
+    'auth/loginUser',
+    async ({ email, password }, { rejectWithValue }) => {
       try {
-          const response = await requestSignIn(credentials);
-          const { token, refreshToken, user } = response;
-          thunkAPI.dispatch(setToken({ token, refreshToken }));
-          return { user, token, refreshToken };
+        if (typeof email !== 'string' || typeof password !== 'string') {
+          return rejectWithValue('Email and password must be strings');
+        }
+        const response = await requestSignIn(email, password); 
+        return response;
       } catch (error) {
-          console.error('Error during login:', error);
-          return thunkAPI.rejectWithValue(error.response?.data?.message || 'Login failed');
+        return rejectWithValue(error.message);
       }
-  }
-);
+    }
+  );
 
 export const refreshUser = createAsyncThunk(
   'auth/refreshToken',

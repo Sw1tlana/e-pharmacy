@@ -39,16 +39,18 @@ const INITIAL_STATE = {
         toast.success('You have registered✅');
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        if (action.payload && action.payload.user && action.payload.token) {
+        console.log('Login response payload:', action.payload);
+
+        if (action.payload && action.payload.user && action.payload.token && action.payload.refreshToken) {
           state.user = action.payload.user;
           state.token = action.payload.token;
-          state.refreshToken = action.payload.refreshToken;
+          state.refreshToken = action.payload.refreshToken; 
           state.isLoggedIn = true;
           toast.success('Ви увійшли✅');
-      } else {
+        } else {
           state.error = true;
           toast.error('Відсутні дані в відповіді сервера');
-      }
+        }
       })
     .addCase(logout.fulfilled, (state) => {
       state.user = INITIAL_STATE.user;
@@ -65,6 +67,7 @@ const INITIAL_STATE = {
       const { token, refreshToken } = action.payload;
       state.token = token;
       state.refreshToken = refreshToken;
+      state.isRefreshing = false; 
       console.log('New refresh token:', action.payload.refreshToken);
       toast.success('Token refreshed successfully');
     })

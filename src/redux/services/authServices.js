@@ -2,37 +2,36 @@ import axios from "../../helpers/axiosConfig";
 import { setToken } from "../auth/slice";
 
 export const setAuthHeader = (token) => {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 
 export const clearAuthHeader = () => {
-    axios.defaults.headers.common['Authorization'] = '';
+    axios.defaults.headers.common.Authorization = '';
 };
 
 export const setupAxiosInterceptors = (store) => {
   axios.interceptors.response.use(
     (response) => response,
     async (error) => {
-      const originalRequest = error.config;
-      
-      if (error.response.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
-        const refreshToken = store.getState().auth.refreshToken;
-        try {
-          const newTokens = await store.dispatch(refreshUser({ refreshToken }));
-          setAuthHeader(newTokens.token);
-          originalRequest.headers['Authorization'] = `Bearer ${newTokens.token}`;
-          return axios(originalRequest);
-        } catch (err) {
-          toast.error('Token refresh failed');
-          return Promise.reject(err);
-        }
-      }
+        const originalRequest = error.config;
+        if (error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            try {
+                const { refreshToken } = store.getState().auth;
+                const { data } = await axios.post('/users/refresh-tokens', { refreshToken });
 
-      return Promise.reject(error);
+                setAuthHeader(data.token);
+                store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
+                originalRequest.headers.Authorization = `Bearer ${data.token}`;
+                return axios(originalRequest);
+            } catch (err) {
+                return Promise.reject(err);
+            }
+        }
+        return Promise.reject(error);
     }
-  );
+);
 };
 
 export const requestSignUp = async (formData) => {
@@ -59,7 +58,13 @@ export const requestSignIn = async (email, password) => {
     console.log('Login attempt:', { email, password });
     const { data } = await axios.post('/user/login', { email, password });
     console.log('Login response:', data);
-    return data;
+
+    if (data && data.token && data.refreshToken) {
+      setAuthHeader(data.token);
+      return data;
+    } else {
+      toast.error('No token received during login');
+    }
   } catch (error) {
     console.error('Login error:', error);
     toast.error(error.response?.data?.message || 'Login failed');

@@ -1,5 +1,6 @@
 import axios from "../../helpers/axiosConfig";
 import { setToken } from "../auth/slice";
+import { toast } from 'react-hot-toast';
 
 export const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;

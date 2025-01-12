@@ -31,7 +31,12 @@ const INITIAL_STATE = {
     extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
-        const { user, token, refreshToken } = action.payload; 
+        if (!action.payload || !action.payload.user || !action.payload.token || !action.payload.refreshToken) {
+          console.error('Invalid payload received during registration:', action.payload);
+          return;
+        }
+      
+        const { user, token, refreshToken } = action.payload;
         state.user = user;
         state.token = token;
         state.refreshToken = refreshToken;

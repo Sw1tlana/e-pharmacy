@@ -22,15 +22,13 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
-  async ({ email, password }, { rejectWithValue }) => {
-    console.log('loginUser received:', { email, password });
-
-    if (typeof email !== 'string' || typeof password !== 'string') {
-      console.error('Invalid types in loginUser:', { email, password });
-      return rejectWithValue('Email and password must be strings');
-    }
-
-    return requestSignIn(email, password);
+  async ({ email, password }, thunkAPI) => {
+    try {
+const response = await requestSignIn(email, password);
+    return response;
+  }catch(error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || 'Login failed');
+}
   }
 );
 

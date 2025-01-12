@@ -36,40 +36,19 @@ export const setupAxiosInterceptors = (store) => {
 };
 
 export const requestSignUp = async (formData) => {
-  try {
     const { data } = await axios.post('/user/register', formData);
     if (data && data.token) {
       setAuthHeader(data.token);
       return data;
-    } else {
-      toast.error('No token received during registration');
     }
-  } catch (error) {
-    console.error('API error:', error);
-    if (error.response) {
-      toast.error(`Server error: ${error.response.data.message || 'Registration failed'}`);
-    } else {
-      toast.error('Unknown error occurred');
-    }
-  }
 };
 
 export const requestSignIn = async (email, password) => {
-  try {
     console.log('Login attempt:', { email, password });
     const { data } = await axios.post('/user/login', { email, password });
     console.log('Login response:', data);
-
-    if (data && data.token && data.refreshToken) {
       setAuthHeader(data.token);
       return data;
-    } else {
-      toast.error('No token received during login');
-    }
-  } catch (error) {
-    console.error('Login error:', error);
-    toast.error(error.response?.data?.message || 'Login failed');
-  }
 };
 
 export const requestLogOut = async () => {

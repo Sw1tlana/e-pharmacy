@@ -22,6 +22,7 @@ const authConfig = {
     key: "auth",
     storage,
     whitelist: ["token", "refreshToken"],
+    debug: true,
   };
 
 export const store = configureStore({

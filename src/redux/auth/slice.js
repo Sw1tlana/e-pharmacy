@@ -31,31 +31,20 @@ const INITIAL_STATE = {
     extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
-        if (!action.payload || !action.payload.user || !action.payload.token || !action.payload.refreshToken) {
-          console.error('Invalid payload received during registration:', action.payload);
-          return;
-        }
-      
-        const { user, token, refreshToken } = action.payload;
-        state.user = user;
-        state.token = token;
-        state.refreshToken = refreshToken;
-        state.isLoggedIn = true;
-        toast.success('You have registered✅');
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
+        state.isAuthenticated = true;
+        state.loading = false;
+        state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log('Login response payload:', action.payload);
-
-        if (action.payload && action.payload.user && action.payload.token && action.payload.refreshToken) {
-          state.user = action.payload.user;
-          state.token = action.payload.token;
-          state.refreshToken = action.payload.refreshToken; 
-          state.isLoggedIn = true;
-          toast.success('Ви увійшли✅');
-        } else {
-          state.error = true;
-          toast.error('Відсутні дані в відповіді сервера');
-        }
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
+        state.isAuthenticated = true;
+        state.loading = false;
+        state.error = null;
       })
     .addCase(logout.fulfilled, (state) => {
       state.user = INITIAL_STATE.user;

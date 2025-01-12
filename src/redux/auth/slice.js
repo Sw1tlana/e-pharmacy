@@ -34,7 +34,7 @@ const INITIAL_STATE = {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
-        state.isAuthenticated = true;
+        state.isLoggedIn = true;
         state.loading = false;
         state.error = null;
       })
@@ -42,7 +42,7 @@ const INITIAL_STATE = {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
-        state.isAuthenticated = true;
+        state.isLoggedIn = true;
         state.loading = false;
         state.error = null;
       })

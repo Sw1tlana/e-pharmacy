@@ -20,7 +20,7 @@ export const setupAxiosInterceptors = (store) => {
             originalRequest._retry = true;
             try {
                 const { refreshToken } = store.getState().auth;
-                const { data } = await axios.post('/users/refresh-tokens', { refreshToken });
+                const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
 
                 setAuthHeader(data.token);
                 store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
@@ -36,19 +36,22 @@ export const setupAxiosInterceptors = (store) => {
 };
 
 export const requestSignUp = async (formData) => {
-    const { data } = await axios.post('/user/register', formData);
-    if (data && data.token) {
-      setAuthHeader(data.token);
-      return data;
-    }
+  const { data } = await axios.post('/user/register', formData);
+  if (data && data.token) {
+    setAuthHeader(data.token);
+    
+    store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
+    return data;
+  }
 };
 
 export const requestSignIn = async (email, password) => {
-    console.log('Login attempt:', { email, password });
-    const { data } = await axios.post('/user/login', { email, password });
-    console.log('Login response:', data);
-      setAuthHeader(data.token);
-      return data;
+  console.log('Login attempt:', { email, password });
+  const { data } = await axios.post('/user/login', { email, password });
+  console.log('Login response:', data);
+  setAuthHeader(data.token);
+  store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
+  return data;
 };
 
 export const requestLogOut = async () => {

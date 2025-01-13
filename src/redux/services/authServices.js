@@ -15,24 +15,28 @@ export const setupAxiosInterceptors = (store) => {
   axios.interceptors.response.use(
     (response) => response,
     async (error) => {
-        const originalRequest = error.config;
-        if (error.response.status === 401 && !originalRequest._retry) {
-            originalRequest._retry = true;
-            try {
-                const { refreshToken } = store.getState().auth;
-                const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+      const originalRequest = error.config;
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        try {
+          const { refreshToken } = store.getState().auth;
+          if (!refreshToken) {
+            return Promise.reject(new Error('No refresh token available'));
+          }
+          const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
 
-                setAuthHeader(data.token);
-                store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
-                originalRequest.headers.Authorization = `Bearer ${data.token}`;
-                return axios(originalRequest);
-            } catch (err) {
-                return Promise.reject(err);
-            }
+          setAuthHeader(data.token);
+          store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
+          originalRequest.headers['Authorization'] = `Bearer ${data.token}`;
+          return axios(originalRequest);
+        } catch (err) {
+          console.error('Token refresh error:', err);
+          return Promise.reject(err);
         }
-        return Promise.reject(error);
+      }
+      return Promise.reject(error);
     }
-);
+  );
 };
 
 export const requestSignUp = async (formData) => {

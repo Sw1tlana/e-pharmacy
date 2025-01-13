@@ -3,12 +3,12 @@ import { setToken } from "../auth/slice";
 import { toast } from 'react-hot-toast';
 
 export const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 
 
 export const clearAuthHeader = () => {
-    axios.defaults.headers.common.Authorization = '';
+  axios.defaults.headers.common['Authorization'] = '';
 };
 
 export const setupAxiosInterceptors = (store) => {

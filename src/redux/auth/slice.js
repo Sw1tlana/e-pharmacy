@@ -50,6 +50,7 @@ const INITIAL_STATE = {
       state.user = INITIAL_STATE.user;
       state.token = null;
       state.refreshToken = null;
+      state.isLoggedIn = false;
       toast.success('Logout successful');
     })
     .addCase(refreshUser.pending, (state) => {

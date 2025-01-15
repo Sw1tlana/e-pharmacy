@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'; 
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 import { signUpSchema } from '../../../shemas/singUpShema';
 import { formValuesSignUp } from '../../../helpers/constants';
@@ -13,6 +14,7 @@ import { registerUser } from '../../../redux/auth/operations';
 
 function ModalRegisterForm() {
 const dispatch = useDispatch();
+const navigate = useNavigate();
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: formValuesSignUp,
@@ -23,6 +25,7 @@ const dispatch = useDispatch();
     const onSubmit = (data) => {
         dispatch(registerUser(data));
         reset();
+        navigate('/login');
     };
 
     useEffect(() => {

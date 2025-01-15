@@ -1,13 +1,12 @@
 import style from './LoginForm.module.css';
 
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { signInSchema } from '../../shemas/signInShema';
 import { formValuesSignIn } from '../../helpers/constants';
 import { loginUser } from '../../redux/auth/operations';
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { tablet2x } from '../../shared/images/authorizePage/index';
@@ -16,9 +15,8 @@ import { Link } from 'react-router-dom';
 import { useId, } from 'react';
 
 function LoginForm() {
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const emailId = useId();
   const passwordId = useId();
@@ -31,15 +29,9 @@ function LoginForm() {
 
 const onSubmit = (formData) => {
   console.log('Form data before dispatch:', formData);
-
-  if (typeof formData.email !== 'string' || typeof formData.password !== 'string') {
-    console.error('Email and password must be strings');
-    toast.error('Invalid email or password format');
-    return;
-  }
-
   dispatch(loginUser({ email: formData.email, password: formData.password }));
   reset();
+  navigate('/');
 };
 
   return (

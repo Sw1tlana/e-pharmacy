@@ -59,7 +59,7 @@
 }
 
 .errorMsg {
-    color: var(----btn-bg-red-color);
+    color: var(--btn-bg-red-color);
 }
 
 .textForm {

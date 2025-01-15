@@ -1,16 +1,14 @@
 import style from './ModalLoginForm.module.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 import { signInSchema } from '../../../shemas/signInShema.js';
 import { formValuesSignIn } from '../../../helpers/constants.js';
 import { loginUser } from '../../../redux/auth/operations.js';
 
 function ModalLoginForm() {
-
     const dispatch = useDispatch();
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
@@ -18,21 +16,11 @@ function ModalLoginForm() {
         resolver: yupResolver(signInSchema),
         mode: 'onTouched'
     });
-    
-console.log('Form errors:', errors);
-
 
     const onSubmit = async (data) => {
         console.log("Submitted data:", data); 
-        try {
           await dispatch(loginUser(data)).unwrap();
-          console.log('Submitted data:', data);
-          reset();  
-          toast.success("Logged in successfully!");
-        } catch (error) {
-            console.error('Login error:', error); 
-          toast.error("Login failed. Please try again.");
-        }
+          reset();
       };
 
   return (

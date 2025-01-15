@@ -20,7 +20,7 @@ export const setupAxiosInterceptors = (store) => {
         originalRequest._retry = true;
         try {
           const { refreshToken } = store.getState().auth;
-          const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+          const { data } = await axios.post('/refresh-tokens', { refreshToken });
   
           setAuthHeader(data.token);
           store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
@@ -63,7 +63,7 @@ export const requestLogOut = async () => {
 
 export const getRefreshToken = async (refreshToken) => {
   try {
-    const { data } = await axios.post('/user/refresh-tokens', { refreshToken });
+    const { data } = await axios.post('/refresh-tokens', { refreshToken });
     return data;
   } catch (error) {
     toast.error('Failed to refresh token');

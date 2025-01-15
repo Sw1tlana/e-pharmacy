@@ -3,7 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { requestSignUp,
          requestSignIn,
          requestLogOut,
-         getRefreshToken
+         getRefreshToken,
+         setAuthHeader
  } from '../services/authServices.js';
 import { setToken } from './slice.js';
 

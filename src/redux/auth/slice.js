@@ -37,6 +37,7 @@ const INITIAL_STATE = {
         state.isLoggedIn = true;
         state.loading = false;
         state.error = null;
+        toast.success('Register successful');
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -45,6 +46,7 @@ const INITIAL_STATE = {
         state.isLoggedIn = true;
         state.loading = false;
         state.error = null;
+        toast.success('Login successful');
       })
     .addCase(logout.fulfilled, (state) => {
       state.user = INITIAL_STATE.user;
@@ -58,19 +60,16 @@ const INITIAL_STATE = {
       state.error = false;
     })
     .addCase(refreshUser.fulfilled, (state, action) => {
-      console.log('Stored refreshToken:', state.refreshToken);
       const { token, refreshToken } = action.payload;
       state.token = token;
       state.refreshToken = refreshToken;
       state.isRefreshing = false; 
       console.log('New refresh token:', action.payload.refreshToken);
-      toast.success('Token refreshed successfully');
     })
     .addCase(refreshUser.rejected, (state) => {
       state.token = null;
       state.refreshToken = null;
       state.isLoggedIn = false;
-      toast.error('Failed to refresh token');
     }) 
         .addMatcher(isAnyOf(
         registerUser.pending, loginUser.pending, logout.pending),

@@ -116,6 +116,10 @@
     left: 138px;
 }
 
+.errorMsg {
+    color: var(--btn-bg-red-color);
+}
+
 @media (min-width: 768px) {
     .sectionLoginForm {
         max-height: 1024px;

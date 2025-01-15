@@ -39,7 +39,8 @@ const onSubmit = (formData) => {
   }
 
   dispatch(loginUser({ email: formData.email, password: formData.password }));
-}
+  reset();
+};
 
   return (
     <section className={style.sectionLoginForm}>

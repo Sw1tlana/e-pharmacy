@@ -7,9 +7,11 @@ import { Link } from 'react-router-dom';
 import { signInSchema } from '../../../shemas/signInShema.js';
 import { formValuesSignIn } from '../../../helpers/constants.js';
 import { loginUser } from '../../../redux/auth/operations.js';
+import { useModalContext } from '../../../context/useModalContext.jsx';
 
 function ModalLoginForm() {
     const dispatch = useDispatch();
+    const { closeModal } = useModalContext();
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: formValuesSignIn,
@@ -18,9 +20,9 @@ function ModalLoginForm() {
     });
 
     const onSubmit = async (data) => {
-        console.log("Submitted data:", data); 
           await dispatch(loginUser(data)).unwrap();
           reset();
+          closeModal();
       };
 
   return (

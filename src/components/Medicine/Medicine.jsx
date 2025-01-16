@@ -15,6 +15,7 @@ import { useEffect, Suspense, lazy } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import EllipsisText from "react-ellipsis-text";
 import AddToCart from '../AddToCart/AddToCart';
+import Pagination from '../Pagination/Pagination';
 
 const Product = lazy(() => import('../../components/Product/Product'));
 
@@ -93,10 +94,15 @@ function Medicine() {
           ) : (
             <div className={style.containerNotification}>
                <p className={style.notification}>
-               No products available
+               Nothing was found for you request
               </p>
             </div>   
-      )}       
+      )} 
+    <Pagination
+    currentPage={page}
+    totalPages={totalPages}
+    onPageChange={(newPage) => dispatch(fetchMedicines({ page: newPage, limit, filters }))}
+  />      
     </section>
     <div>
         <Suspense fallback={<Loader/>}>

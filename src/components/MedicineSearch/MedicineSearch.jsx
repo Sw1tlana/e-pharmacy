@@ -2,11 +2,17 @@ import style from './MedicineSearch.module.css';
 import { useState } from 'react';
 import Select from 'react-select';
 import { icons as sprite } from '../../shared/icons';
+import { fetchMedicines } from '../../redux/medicine/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMedicine, selectSearchQuery } from '../../redux/medicine/selectors';
+import { setSearchQuery } from '../../redux/medicine/slice';
 
 function MedicineSearch() {
+  const dispatch = useDispatch();
+  const searchQuery = useSelector(selectSearchQuery);
+  const medicines = useSelector(selectMedicine);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
 
   const categoryOption = [
     { value: "Medicine", label: "Medicine" },
@@ -18,14 +24,12 @@ function MedicineSearch() {
     { value: "Skin Care", label: "Skin Care" }
   ];
     
-
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    dispatch(setSearchQuery(query)); 
   };
+  
 
-  const filteredCategories = categoryOption.filter((option) =>
-    option.label.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   const isMobile = window.innerWidth <= 768;
 
@@ -103,7 +107,7 @@ function MedicineSearch() {
                   type="text"
                   id="searchInput"
                   placeholder="Search medicine"
-                  value={searchQuery}
+                  // value={searchQuery}
                   onChange={handleSearchChange}
                   className={style.searchInput}
               />

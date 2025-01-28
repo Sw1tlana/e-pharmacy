@@ -17,29 +17,54 @@
 .iconParagrapf {
     fill: transparent;
     stroke: var(--border-pagination-color);
+    transition: stroke 0.3s ease;
  }
 
-.iconParagrapf:hover,
-.iconParagrapf:active,
-.iconParagrapf.activeParagraf{
-   stroke: var(--primary-color);
- }
-
-.pageCircle {
-    width: 44px;
-    height: 44px; 
-    border: 1px solid var(--border-pagination-color);
-    border-radius: 50%;
-    background-color: transparent; 
-    color: inherit; 
-    transition: background-color 0.3s, color 0.3s; 
+ .iconParagrapf:active,
+ .iconParagrapf:hover {
+    stroke: var(--primary-color);
+    cursor: pointer;
+  }
+  
+  .iconParagrapf.activeLeft {
+    stroke: var(--primary-color); /* Постійно підсвічена стрілка вліво */
 }
 
- .pageCircle:hover,
- .pageCircle.activeCircle {
-     background-color: var(--green-accent-color); 
-     color: var(--white-color); 
- }
+.iconParagrapf.activeRight {
+    stroke: var(--primary-color); 
+}
+
+.iconParagrapf.disabled {
+    stroke: var(--border-pagination-color); /* Сірий колір для вимкненої кнопки */
+    pointer-events: none; /* Вимикає кліки */
+    opacity: 0.5; /* Робить стрілку напівпрозорою */
+}
+
+ .pageCircle {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-pagination-color);
+    border-radius: 50%;
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .pageCircle:hover,
+  .pageCircle:hover {
+    background-color: var(--hover-color); 
+    color: var(--white-color);
+  }
+  
+  .pageCircle.activeCircle {
+    background-color: var(--green-accent-color); 
+    color: var(--white-color);
+  }
+  
+  .pageCircle.activeCircle:hover {
+    background-color: var(--hover-active-color); 
+  }
  
  .disabled {
     opacity: 0.5; 

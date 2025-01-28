@@ -91,6 +91,9 @@ export const getMedicines = async(queryParams = '') => {
 };
 
 export const getMedicinesId = async (id) => {
+  if (!id || isNaN(id)) { 
+    throw new Error('Invalid product ID');
+}
   const { data } = await axios.get(`/products/${id}`); 
   return data;
 };

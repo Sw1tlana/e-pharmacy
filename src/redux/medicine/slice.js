@@ -21,7 +21,8 @@ const INITIAL_STATE = {
     filters: {},
     page: 1,
     limit: 12,
-    totalPages: 0
+    totalPages: 0,
+    searchQuery: ''
   };
 
   export const medicinesSlice = createSlice({
@@ -43,7 +44,10 @@ const INITIAL_STATE = {
       },
       setTotalPages: (state, action) => {
           state.totalPages = action.payload;
-      }
+      },
+      setSearchQuery: (state, action) => {
+        state.searchQuery = action.payload;
+      },
       },
     
       extraReducers: (builder) => {
@@ -54,6 +58,8 @@ const INITIAL_STATE = {
           state.loading = false;
           state.medicines = action.payload.products || []; 
           state.totalPages = Math.ceil(action.payload.total / state.limit);
+
+          state.page = action.meta.arg.page; 
           })
           .addCase(fetchMedicines.rejected, handleRejected)
           .addCase(fetchMedicinesId.pending, handlePending)
@@ -71,5 +77,6 @@ const INITIAL_STATE = {
         resetFilters,
         setPage,
         setLimit,
-        setTotalPages
+        setTotalPages,
+        setSearchQuery
     } = medicinesSlice.actions;

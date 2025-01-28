@@ -11,7 +11,6 @@ function Pagination({ totalPages, onPageChange, currentPage }) {
      }
      return pages;
     };
-
     const handlePrevious = () => {
        if(currentPage > 1) {
         onPageChange(currentPage -1);
@@ -32,8 +31,9 @@ function Pagination({ totalPages, onPageChange, currentPage }) {
       width={44} height={44} 
       className={clsx(style.iconParagrapf, {
         [style.disabled]: currentPage === 1,
-        [style.activeParagraf]: currentPage > 1,  
-      })}>
+        [style.activeLeft]: currentPage > 1,  
+      })}
+      style={{ pointerEvents: currentPage === 1 ? 'none' : 'auto' }}>
         <use xlinkHref={`${sprite}#icon-slider-left-two`} />
       </svg>
 
@@ -42,8 +42,9 @@ function Pagination({ totalPages, onPageChange, currentPage }) {
       width={44} height={44} 
       className={clsx(style.iconParagrapf, {
         [style.disabled]: currentPage === 1,
-        [style.activeParagraf]: currentPage > 1, 
-      })}>
+        [style.activeLeft]: currentPage > 1, 
+      })}
+      style={{ pointerEvents: currentPage === 1 ? 'none' : 'auto' }}>
         <use xlinkHref={`${sprite}#icon-slider-left`} />
       </svg>
 
@@ -55,9 +56,10 @@ function Pagination({ totalPages, onPageChange, currentPage }) {
               [style.activeCircle]: page === currentPage, 
           })}
           onClick={() => {
+            console.log(`Зміна сторінки на: ${page}`); 
             onPageChange(page);
         }}>
-                {page}
+              {page}
             </button>
         ))}
     </div>
@@ -67,7 +69,7 @@ function Pagination({ totalPages, onPageChange, currentPage }) {
       width={44} height={44} 
       className={clsx(style.iconParagrapf, {
         [style.disabled]: currentPage === totalPages,
-        [style.activeNext]: currentPage < totalPages, 
+        [style.activeRight]: currentPage < totalPages, 
       })}>
          <use xlinkHref={`${sprite}#icon-slider-right`} />
       </svg>
@@ -77,9 +79,8 @@ function Pagination({ totalPages, onPageChange, currentPage }) {
        width={44} height={44} 
        className={clsx(style.iconParagrapf, {
         [style.disabled]: currentPage === totalPages,
-        [style.activeNext]: currentPage < totalPages, 
-      })}
-       >
+        [style.activeRight]: currentPage < totalPages, 
+      })}>
           <use xlinkHref={`${sprite}#icon-slider-right-two`} />
       </svg>
     </div>

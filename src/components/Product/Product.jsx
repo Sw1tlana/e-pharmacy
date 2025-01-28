@@ -55,10 +55,6 @@ function Product() {
 
   console.log("Product from Redux:", product); 
 
-    if (loading) {
-      return <div><Loader/></div>; 
-  }
-
   return (
     <section className={style.sectionProduct}>
     {product ? (

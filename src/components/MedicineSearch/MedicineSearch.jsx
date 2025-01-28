@@ -3,8 +3,7 @@ import Select from 'react-select';
 import { icons as sprite } from '../../shared/icons';
 import { fetchMedicines } from '../../redux/medicine/operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMedicine, 
-         selectSearchQuery, 
+import { selectSearchQuery, 
          selectSelectedCategory } 
          from '../../redux/medicine/selectors';
 import { setSearchQuery, setSelectedCategory } from '../../redux/medicine/slice';
@@ -28,9 +27,9 @@ function MedicineSearch() {
     dispatch(setSelectedCategory(selectedOption));
   
     const query = searchQuery.trim() || null;
-
+  
     const filters = {
-      category: selectedOption ? selectedOption.value : undefined,
+      category: selectedOption ? selectedOption.value : undefined,  // Якщо категорія не вибрана, відправляємо undefined
       query: query,
       page: 1,
       limit: 12,
@@ -38,7 +37,7 @@ function MedicineSearch() {
   
     console.log("Filters being sent to API:", filters);
   
-    dispatch(fetchMedicines(filters));
+    dispatch(fetchMedicines(filters));  // Запит з фільтрами
   };
   
   const handleSearchChange = (e) => {
@@ -48,15 +47,15 @@ function MedicineSearch() {
   
   const handleFilter = () => {
     const filters = {
-      category: selectedCategory ? selectedCategory.value : undefined,
-      query: searchQuery.trim() || undefined,
+      category: selectedCategory ? selectedCategory.value : undefined, // якщо вибрана категорія
+      query: searchQuery.trim() || undefined,  // пошуковий запит
       page: 1,
       limit: 12,
     };
   
     console.log("Filters being sent to API:", filters);
   
-    dispatch(fetchMedicines(filters)); 
+    dispatch(fetchMedicines(filters));  // Запит до API
   };
 
   const isMobile = window.innerWidth <= 768;

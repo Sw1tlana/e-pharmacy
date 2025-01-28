@@ -7,8 +7,14 @@ export const fetchMedicines = createAsyncThunk(
     "medicine/fetchMedicines",
     async ({ page, limit, filters = {} }, thunkAPI) => {
         try {
-            const queryParams = new URLSearchParams({ page, limit, ...filters }).toString();
+            const queryParams = new URLSearchParams({
+                page,
+                limit,
+                category: filters.category || '', 
+                query: filters.query || '', 
+            }).toString();
             const response = await getMedicines(`?${queryParams}`);
+            console.log("API Response:", response);
             return response;
         } catch (error) {
 
@@ -18,7 +24,7 @@ export const fetchMedicines = createAsyncThunk(
                 data: error.response?.data || null,
             };
 
-            return thunkAPI.rejectWithValue(error.message);
+            return thunkAPI.rejectWithValue(errorDetails);
         }
     }
 );

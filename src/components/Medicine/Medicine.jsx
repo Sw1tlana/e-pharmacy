@@ -28,20 +28,29 @@ function Medicine() {
   const medicines = useSelector(selectMedicine);
   const loading = useSelector(selectLoading);
 
+  const fetchMedicinesData = (newPage = page) => {
+    dispatch(fetchMedicines({ page: newPage, limit, filters }))
+      .unwrap()
+      .catch((error) => {
+        console.error("Помилка під час завантаження ліків:", error);
+      });
+  };
+  
   useEffect(() => {
     console.log('Fetching medicines with params:', { page, limit, filters });
-    console.log('Before fetch: medicines =', medicines);
+    fetchMedicinesData();
+  }, [page, limit, filters]);
 
-    console.log('Filters:', filters);
-    console.log('Page:', page);
-    console.log('Limit:', limit);
-  
-    dispatch(fetchMedicines({ page, limit, filters }))
-  }, [dispatch, page, limit, filters]);
 
   if (loading) {
-    return <div><Loader/></div>; 
-};
+    return (
+      <div>
+        <Loader />
+        <p>Loading medicines...</p>
+      </div>
+    );
+  }
+
 
   return (
     <>
@@ -99,9 +108,9 @@ function Medicine() {
             </div>   
       )} 
     <Pagination
-    currentPage={page}
-    totalPages={totalPages}
-    onPageChange={(newPage) => dispatch(fetchMedicines({ page: newPage, limit, filters }))}
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={fetchMedicinesData}
   />      
     </section>
     <div>

@@ -1,18 +1,18 @@
 import style from './MedicineSearch.module.css';
-import { useState } from 'react';
 import Select from 'react-select';
 import { icons as sprite } from '../../shared/icons';
 import { fetchMedicines } from '../../redux/medicine/operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMedicine, selectSearchQuery } from '../../redux/medicine/selectors';
-import { setSearchQuery } from '../../redux/medicine/slice';
+import { selectMedicine, 
+         selectSearchQuery, 
+         selectSelectedCategory } 
+         from '../../redux/medicine/selectors';
+import { setSearchQuery, setSelectedCategory } from '../../redux/medicine/slice';
 
 function MedicineSearch() {
   const dispatch = useDispatch();
   const searchQuery = useSelector(selectSearchQuery);
-  const medicines = useSelector(selectMedicine);
-
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const selectedCategory = useSelector(selectSelectedCategory);
 
   const categoryOption = [
     { value: "Medicine", label: "Medicine" },
@@ -24,12 +24,40 @@ function MedicineSearch() {
     { value: "Skin Care", label: "Skin Care" }
   ];
     
-  const handleSearchChange = (e) => {
-    const query = e.target.value;
-    dispatch(setSearchQuery(query)); 
+  const handleCategoryChange = (selectedOption) => {
+    dispatch(setSelectedCategory(selectedOption));
+  
+    const query = searchQuery.trim() || null;
+
+    const filters = {
+      category: selectedOption ? selectedOption.value : undefined,
+      query: query,
+      page: 1,
+      limit: 12,
+    };
+  
+    console.log("Filters being sent to API:", filters);
+  
+    dispatch(fetchMedicines(filters));
   };
   
-
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    dispatch(setSearchQuery(query));
+  };
+  
+  const handleFilter = () => {
+    const filters = {
+      category: selectedCategory ? selectedCategory.value : undefined,
+      query: searchQuery.trim() || undefined,
+      page: 1,
+      limit: 12,
+    };
+  
+    console.log("Filters being sent to API:", filters);
+  
+    dispatch(fetchMedicines(filters)); 
+  };
 
   const isMobile = window.innerWidth <= 768;
 
@@ -78,10 +106,6 @@ function MedicineSearch() {
     }),
   };
 
-  const handleCategoryChange = (selectedOption) => {
-    setSelectedCategory(selectedOption);
-  };
-
   return (
     <section className={style.sectionSearch}>
       <h2 className={style.titleMedicine}>Medicine</h2>
@@ -90,7 +114,7 @@ function MedicineSearch() {
       <div className={style.containerSearchCategory}>
               <Select
                 id="categoryFilter"
-                value={selectedCategory}
+                value={selectedCategory} 
                 onChange={handleCategoryChange}
                 options={categoryOption}
                 styles={customStyles}
@@ -107,13 +131,16 @@ function MedicineSearch() {
                   type="text"
                   id="searchInput"
                   placeholder="Search medicine"
-                  // value={searchQuery}
+                  value={searchQuery}
                   onChange={handleSearchChange}
                   className={style.searchInput}
               />
           </div>
     </div>
-    <button className={style.btnMedicine}>
+    <button 
+      type="button"
+      onClick={handleFilter} 
+      className={style.btnMedicine}>
         <svg width={18} height={18} className={style.iconFilter}>
             <use xlinkHref={`${sprite}#icon-filter`} />
         </svg>

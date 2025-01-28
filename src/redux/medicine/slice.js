@@ -22,7 +22,8 @@ const INITIAL_STATE = {
     page: 1,
     limit: 12,
     totalPages: 0,
-    searchQuery: ''
+    searchQuery: '',
+    selectedCategory: null, 
   };
 
   export const medicinesSlice = createSlice({
@@ -47,6 +48,9 @@ const INITIAL_STATE = {
       },
       setSearchQuery: (state, action) => {
         state.searchQuery = action.payload;
+      },
+      setSelectedCategory: (state, action) => {
+        state.selectedCategory = action.payload; 
       },
       },
     
@@ -78,5 +82,6 @@ const INITIAL_STATE = {
         setPage,
         setLimit,
         setTotalPages,
-        setSearchQuery
+        setSearchQuery,
+        setSelectedCategory,
     } = medicinesSlice.actions;

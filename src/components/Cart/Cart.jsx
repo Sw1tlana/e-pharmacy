@@ -7,16 +7,20 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import Counter from '../Counter/Counter';
-import { fetchUpdataCart } from '../../redux/cart/operations';
+import { fetchUpdateCart } from '../../redux/cart/operations';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectItems } from '../../redux/cart/selectors';
 import { removeFromCart } from '../../redux/cart/slice';
+import { selectUser } from '../../redux/auth/selectors'; 
 
 function Cart() {
     const { id } = useParams(); 
     const dispatch = useDispatch();
     const items = useSelector(selectItems);
+    const user = useSelector(selectUser);
+
+    const userId = user?.id || 'defaultUserId';
 
     useEffect(() => {
         if (id) {
@@ -48,14 +52,16 @@ function Cart() {
     const handleIncrement = (productId, currentQuantity) => {
       const newQuantity = currentQuantity + 1;
       console.log(`Increasing quantity for productId ${productId} to ${newQuantity}`);
-      dispatch(fetchUpdataCart({ userId, productId, quantity: newQuantity }));
+      const updatedProducts = [{ productId, quantity: newQuantity }];
+      dispatch(fetchUpdateCart({ userId, updatedProducts }));
     };
-  
+    
     const handleDecrement = (productId, currentQuantity) => {
       if (currentQuantity > 1) {
-        const newQuantity = currentQuantity - 1; 
+        const newQuantity = currentQuantity - 1;
         console.log(`Decreasing quantity for productId ${productId} to ${newQuantity}`);
-        dispatch(fetchUpdataCart({ userId, productId, quantity: newQuantity })); 
+        const updatedProducts = [{ productId, quantity: newQuantity }];
+        dispatch(fetchUpdateCart({ userId, updatedProducts }));
       }
     };
 
@@ -230,11 +236,11 @@ function Cart() {
 
             <div className={style.btnCounter}>
             <Counter
+            productId={item.id}
             isPage2={false}
             quantity={item.quantity}
             onIncrement={() => handleIncrement(item.id, item.quantity)}
             onDecrement={() => handleDecrement(item.id, item.quantity)}
-            productId={item.id}
             />
             <button
               className={style.removeButton}

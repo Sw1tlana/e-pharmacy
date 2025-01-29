@@ -34,9 +34,6 @@ const INITIAL_STATE = {
       setFilters: (state, action) => {
           state.filters = action.payload;
       },
-      resetFilters: (state) => {
-           state.filters = {};
-      },
       setPage: (state, action) => {
           state.page = action.payload;
       },
@@ -58,7 +55,6 @@ const INITIAL_STATE = {
       builder
         .addCase(fetchMedicines.pending, handlePending)
         .addCase(fetchMedicines.fulfilled, (state, action) => {
-          console.log('Payload:', action.payload); 
           state.loading = false;
           state.medicines = action.payload.products || []; 
           state.totalPages = Math.ceil(action.payload.total / state.limit);
@@ -68,7 +64,6 @@ const INITIAL_STATE = {
           .addCase(fetchMedicines.rejected, handleRejected)
           .addCase(fetchMedicinesId.pending, handlePending)
           .addCase(fetchMedicinesId.fulfilled, (state, action) => {
-            console.log('Payload:', action.payload); 
             state.product = action.payload;
             state.loading = false;    
             })

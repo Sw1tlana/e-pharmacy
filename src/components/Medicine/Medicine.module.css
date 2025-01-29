@@ -1,6 +1,5 @@
 .sectionMedicine {
-    max-width: 375px;
-    width: 100%;
+    width: 375px;
     padding: 40px 20px 80px 20px;
     background-color: var(--bg-color);
 }
@@ -95,7 +94,7 @@
 
 @media (min-width: 768px) {
     .sectionMedicine {
-        max-width: 768px;
+        width: 768px;
         padding: 0px 32px 120px 32px;
     }
     
@@ -136,7 +135,7 @@
 @media (min-width: 1440px) {
 
     .sectionMedicine {
-        max-width: 1440px;
+        width: 1440px;
         padding: 0 128px 120px 128px;
     }
     

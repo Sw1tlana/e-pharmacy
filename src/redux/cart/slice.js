@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCart, 
-         fetchUpdataCart 
+         fetchUpdateCart 
         } from "./operations";
 
 const handlePending = (state) => {
@@ -42,19 +42,19 @@ const INITIAL_STATE = {
             .addCase(fetchCart.fulfilled, (state, action) => {
             console.log('Payload:', action.payload); 
             state.loading = false;
-            state.items = [...state.items, ...action.payload];
+            state.items = action.payload;
             })
             .addCase(fetchCart.rejected, handleRejected)
-            .addCase(fetchUpdataCart.pending, handlePending)
-            .addCase(fetchUpdataCart.fulfilled, (state, action) => {
+            .addCase(fetchUpdateCart.pending, handlePending)
+            .addCase(fetchUpdateCart.fulfilled, (state, action) => {
               console.log("Action payload:", action.payload);
               state.loading = false;
               const updatedItemIndex = state.items.findIndex(item => item.id === action.payload.productId);
               if (updatedItemIndex !== -1) {
                 state.items[updatedItemIndex].quantity = action.payload.quantity;
-            }
+              }
         })
-        .addCase(fetchUpdataCart.rejected, handleRejected)
+        .addCase(fetchUpdateCart.rejected, handleRejected)
         },});
         
     export const {

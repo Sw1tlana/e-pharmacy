@@ -16,6 +16,7 @@ import { NavLink, Routes, Route } from 'react-router-dom';
 import EllipsisText from "react-ellipsis-text";
 import AddToCart from '../AddToCart/AddToCart';
 import Pagination from '../Pagination/Pagination';
+import { selectSearchQuery, selectSelectedCategory } from '../../redux/medicine/selectors';
 
 const Product = lazy(() => import('../../components/Product/Product'));
 
@@ -27,7 +28,19 @@ function Medicine() {
   const limit = useSelector(selectLimit);
   const medicines = useSelector(selectMedicine);
   const loading = useSelector(selectLoading);
+  const searchQuery = useSelector(selectSearchQuery);
+  const selectedCategory = useSelector(selectSelectedCategory); 
 
+  const filteredProducts = medicines.filter(product => {
+    const matchesSearch = product.name?.toLowerCase().includes(searchQuery?.toLowerCase() || "");
+  
+    const matchesCategory = selectedCategory?.value
+      ? (product.category ? product.category.trim().toLowerCase() : "") === selectedCategory.value.trim().toLowerCase()
+      : true;
+  
+    return matchesSearch && matchesCategory;
+  });
+  
   const fetchMedicinesData = (newPage = page) => {
     dispatch(fetchMedicines({ page: newPage, limit, filters }))
       .unwrap()
@@ -56,9 +69,9 @@ function Medicine() {
     <>
     <MedicineSearch/>
     <section className={style.sectionMedicine}>
-      {Array.isArray(medicines) && medicines.length > 0 ? (
+      {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
         <ul className={style.listMedicine}>
-          {medicines.map((medicine, index) => (
+          {filteredProducts.map((medicine, index) => (
             <li 
             className={style.itemMedicine} 
             key={`${medicine._id}-${index}`}

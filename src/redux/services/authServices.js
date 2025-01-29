@@ -115,8 +115,8 @@ export const updateCart = async (userId, updatedProducts, paymentMethod = null) 
   console.log('Updating cart with payload:', { userId, updatedProducts, paymentMethod });
   const payload = {
     userId,
-    updatedProducts,
-    ...(paymentMethod && { paymentMethod })
+    updatedProducts: Array.isArray(updatedProducts) ? updatedProducts : [updatedProducts],
+    ...(paymentMethod && { paymentMethod }),
   };
 
   const { data } = await axios.put('/cart/update', payload);

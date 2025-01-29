@@ -16,14 +16,14 @@ export const fetchCart = createAsyncThunk(
    }
 );
 
-export const fetchUpdataCart = createAsyncThunk(
+export const fetchUpdateCart = createAsyncThunk(
   'cart/fetchUpdataCart',
-  async ({ userId, productId, quantity }, { rejectWithValue }) => {
+  async ({ userId, updatedProducts }, { rejectWithValue }) => {
     try {
-      const response = await updateCart(userId, productId, { quantity });
-      return { productId, quantity: response.data.quantity };
+      const response = await updateCart(userId, updatedProducts);
+      return { updatedProducts: response.data };  
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      return rejectWithValue(error.response?.data?.message || 'Something went wrong');
     }
   }
 );

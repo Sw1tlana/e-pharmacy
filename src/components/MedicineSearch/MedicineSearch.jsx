@@ -29,15 +29,13 @@ function MedicineSearch() {
     const query = searchQuery.trim() || null;
   
     const filters = {
-      category: selectedOption ? selectedOption.value : undefined,  // Якщо категорія не вибрана, відправляємо undefined
+      category: selectedOption ? selectedOption.value : undefined,  
       query: query,
       page: 1,
       limit: 12,
     };
   
-    console.log("Filters being sent to API:", filters);
-  
-    dispatch(fetchMedicines(filters));  // Запит з фільтрами
+    dispatch(fetchMedicines(filters));  
   };
   
   const handleSearchChange = (e) => {
@@ -47,15 +45,13 @@ function MedicineSearch() {
   
   const handleFilter = () => {
     const filters = {
-      category: selectedCategory ? selectedCategory.value : undefined, // якщо вибрана категорія
-      query: searchQuery.trim() || undefined,  // пошуковий запит
+      category: selectedCategory ? selectedCategory.value : undefined, 
+      query: searchQuery.trim() || undefined,  
       page: 1,
       limit: 12,
     };
   
-    console.log("Filters being sent to API:", filters);
-  
-    dispatch(fetchMedicines(filters));  // Запит до API
+    dispatch(fetchMedicines(filters));  
   };
 
   const isMobile = window.innerWidth <= 768;

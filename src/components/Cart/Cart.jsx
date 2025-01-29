@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useParams } from 'react-router-dom';
 import EllipsisText from "react-ellipsis-text";
-import { useEffect, useState } from 'react';
+import { useEffect, useId } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import Counter from '../Counter/Counter';
@@ -13,12 +13,19 @@ import { icons as sprite } from '../../shared/icons/index';
 import { selectItems } from '../../redux/cart/selectors';
 import { removeFromCart } from '../../redux/cart/slice';
 import { selectUser } from '../../redux/auth/selectors'; 
+import { cartSchema } from '../../shemas/cartSchema';
 
 function Cart() {
     const { id } = useParams(); 
     const dispatch = useDispatch();
     const items = useSelector(selectItems);
     const user = useSelector(selectUser);
+
+    const nameId = useId();
+    const emailId = useId();
+    const addressId = useId();
+    const phoneId = useId();
+
 
     const userId = user?.id || 'defaultUserId';
 
@@ -29,18 +36,17 @@ function Cart() {
         }
       }, [dispatch, id]);
 
-    const { register, handleSubmit, formState: { errors }} = useForm({
-        resolver: yupResolver()
+    const { register, handleSubmit, formState: { errors }, reset} = useForm({
+        resolver: yupResolver(cartSchema)
     });
 
-    const [selectedOption, setSelectedOption] = useState("");
-
     const onSubmit = (data) => {
-        console.log('Form data:', data);
+      dispatch(fetchUpdateCart(data));
+        reset();
       };
 
     const handleOptionChange = (event) => {
-        setSelectedOption(event.target.value);
+        dispatch(fetchUpdateCart())
       };
 
     const  handleRemoveFromCart = (medicine)  => {
@@ -49,19 +55,13 @@ function Cart() {
       }
     };
 
-    const handleIncrement = (productId, currentQuantity) => {
+    const handleIncrement = (currentQuantity) => {
       const newQuantity = currentQuantity + 1;
-      console.log(`Increasing quantity for productId ${productId} to ${newQuantity}`);
-      const updatedProducts = [{ productId, quantity: newQuantity }];
-      dispatch(fetchUpdateCart({ userId, updatedProducts }));
-    };
+    }
     
-    const handleDecrement = (productId, currentQuantity) => {
+    const handleDecrement = (currentQuantity) => {
       if (currentQuantity > 1) {
         const newQuantity = currentQuantity - 1;
-        console.log(`Decreasing quantity for productId ${productId} to ${newQuantity}`);
-        const updatedProducts = [{ productId, quantity: newQuantity }];
-        dispatch(fetchUpdateCart({ userId, updatedProducts }));
       }
     };
 
@@ -88,7 +88,7 @@ function Cart() {
                     Name
                 </label>
                 <input 
-                id="name"
+                id={nameId}
                 className={style.formInput}
                 {...register('name')}
                 aria-required="true"
@@ -102,7 +102,7 @@ function Cart() {
                     Email
                 </label>
                 <input
-                id="email"
+                id={emailId}
                 className={style.formInput}
                 {...register('email')}
                 aria-required="true"
@@ -116,7 +116,7 @@ function Cart() {
                     Phone
                 </label>
                 <input
-                id="phone"
+                id={phoneId}
                 className={style.formInput}
                 {...register('phone')}
                 aria-required="true"
@@ -130,7 +130,7 @@ function Cart() {
                     Address
                 </label>
                 <input
-                id="password"
+                id={addressId}
                 className={style.formInput}
                 {...register('password')}
                 aria-required="true"
@@ -156,7 +156,7 @@ function Cart() {
                     <input
                         type="radio"
                         value="cash"
-                        checked={selectedOption === "cash"}
+                        checked={paymentMethod === "cash"}
                         onChange={handleOptionChange}
                         className={style.radioInput}
                     />
@@ -169,7 +169,7 @@ function Cart() {
                     <input
                         type="radio"
                         value="bank"
-                        checked={selectedOption === "bank"}
+                        checked={paymentMethod === "bank"}
                         onChange={handleOptionChange}
                         className={style.radioInput}
                     />
@@ -236,11 +236,11 @@ function Cart() {
 
             <div className={style.btnCounter}>
             <Counter
-            productId={item.id}
-            isPage2={false}
-            quantity={item.quantity}
-            onIncrement={() => handleIncrement(item.id, item.quantity)}
-            onDecrement={() => handleDecrement(item.id, item.quantity)}
+              productId={item.id} 
+              quantity={item.quantity}
+              isPage2={false}
+              onIncrement={handleIncrement} 
+              onDecrement={handleDecrement} 
             />
             <button
               className={style.removeButton}

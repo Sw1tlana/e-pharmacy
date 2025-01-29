@@ -17,6 +17,8 @@ const INITIAL_STATE = {
     items: [],
     loading: false,
     error: null,
+    paymentMethod: "cash",
+    quantity: 1
 };
 
   export const cartSlice = createSlice({
@@ -42,7 +44,8 @@ const INITIAL_STATE = {
             .addCase(fetchCart.fulfilled, (state, action) => {
             console.log('Payload:', action.payload); 
             state.loading = false;
-            state.items = action.payload;
+            state.items = action.payload.updatedProducts;
+            state.paymentMethod = action.payload.paymentMethod || "cash"; 
             })
             .addCase(fetchCart.rejected, handleRejected)
             .addCase(fetchUpdateCart.pending, handlePending)

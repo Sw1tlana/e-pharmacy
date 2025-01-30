@@ -128,4 +128,4 @@ export const updateCart = async (userId, updatedProducts, paymentMethod = null) 
 export const checkoutCart = async (formData) => {
   const { data } = await axios.post('/cart/checkout', formData);
   return data;
-}
+};

@@ -47,14 +47,21 @@ function Cart() {
         resolver: yupResolver(cartSchema)
     });
 
-    const onSubmit = (data) => {
-  // Перевіряємо актуальний стан товарів у кошику
+    const checkoutData = {
+      products: items.map(item => ({
+        productId: item.id,  
+        quantity: item.quantity || 1  
+      })),
+      paymentMethod: "cash"  
+    };
+
+  const onSubmit = (data) => {
   const updatedProducts = items.map(item => ({
     id: item.id,
     quantity: item.quantity,
   }));
 
-  // Оновлюємо кошик
+
   dispatch(fetchUpdateCart({
     userId: userId,
     updatedProducts,
@@ -62,17 +69,9 @@ function Cart() {
     ...data
   }));
 
-  // Тепер викликаємо чекаут
-  dispatch(fetchCheckoutData({
-    userId: userId,
-    paymentMethod: paymentMethod,
-    customer: data
-  }));
-
-  // Очищуємо форму
-  reset();
-     reset(); // очищуємо форму
-      };
+  dispatch(fetchCheckoutData(checkoutData));
+     reset(); 
+};
 
     const handleOptionChange = (event) => {
         dispatch(setPaymentMethod(event.target.value));

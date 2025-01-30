@@ -18,6 +18,6 @@ export const cartSchema = Yup.object().shape({
         )
         .required("Required"),
     address: Yup.string()
-        .min(3, "Address must be at least 5 characters long") 
+        .min(5, "Address must be at least 5 characters long") 
         .required("Required"),
 });

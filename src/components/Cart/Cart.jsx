@@ -19,7 +19,9 @@ import { removeFromCart,
          from '../../redux/cart/slice';
 import { selectUser } from '../../redux/auth/selectors'; 
 import { cartSchema } from '../../shemas/cartSchema';
-import { selectPaymentMethod } from '../../redux/cart/selectors';
+import { selectPaymentMethod, 
+         selectTotalAmount } 
+         from '../../redux/cart/selectors';
 
 function Cart() {
     const { id } = useParams(); 
@@ -27,14 +29,18 @@ function Cart() {
     const items = useSelector(selectItems);
     const user = useSelector(selectUser);
     const paymentMethod = useSelector(selectPaymentMethod);
+    const totalAmount = useSelector(selectTotalAmount);
 
+    console.log(user);
+    
     const nameId = useId();
     const emailId = useId();
     const addressId = useId();
     const phoneId = useId();
 
 
-    const userId = user?.id || 'defaultUserId';
+    const userId = user?.id || null;
+    console.log(userId);
 
     useEffect(() => {
         if (id) {
@@ -47,31 +53,55 @@ function Cart() {
         resolver: yupResolver(cartSchema)
     });
 
-    const checkoutData = {
-      products: items.map(item => ({
-        productId: item.id,  
-        quantity: item.quantity || 1  
-      })),
-      paymentMethod: "cash"  
+    const onSubmit = async (data) => {
+      const updatedProducts = items.map(item => ({
+        productId: item.id,
+        quantity: item.quantity,
+      }));
+    
+      const totalAmount = items.reduce((acc, item) => acc + item.price * item.quantity, 0); 
+      const customer = { name: data.name, email: data.email, phone: data.phone, address: data.address }; 
+      
+      try {
+        console.log("Updating cart with payload:", { userId, updatedProducts, paymentMethod });
+    
+        // Оновлюємо кошик
+        const updateResponse = await dispatch(fetchUpdateCart({
+          userId,
+          updatedProducts,
+          paymentMethod,
+          ...data
+        }));
+    
+        if (updateResponse.error) {
+          throw new Error(updateResponse.error.message || 'Failed to update cart');
+        }
+    
+        const formData = {
+          userId,
+          products: updatedProducts,
+          totalAmount,
+          status: 'Pending',
+          order_date: new Date(),
+          paymentMethod,
+          customer,
+        };
+    
+        // Викликаємо checkoutCart для оформлення замовлення
+        const checkoutResponse = await fetchCheckoutData(formData);
+        
+        if (checkoutResponse?.error) {
+          throw new Error(checkoutResponse.error.message || 'Failed to checkout');
+        }
+    
+        // Якщо все успішно, очищуємо форму
+        reset();
+    
+      } catch (error) {
+        console.error('Error during checkout:', error.message);
+        alert('An error occurred during checkout. Please try again.');
+      }
     };
-
-  const onSubmit = (data) => {
-  const updatedProducts = items.map(item => ({
-    id: item.id,
-    quantity: item.quantity,
-  }));
-
-
-  dispatch(fetchUpdateCart({
-    userId: userId,
-    updatedProducts,
-    paymentMethod: paymentMethod,
-    ...data
-  }));
-
-  dispatch(fetchCheckoutData(checkoutData));
-     reset(); 
-};
 
     const handleOptionChange = (event) => {
         dispatch(setPaymentMethod(event.target.value));
@@ -92,8 +122,6 @@ function Cart() {
         dispatch(updateQuantity({  productId, quantity: currentQuantity - 1 }));
       }
     };
-
-    const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <section className={style.sectionCart}>
@@ -226,7 +254,7 @@ function Cart() {
                     <svg width={24} height={24} className={style.iconParagrapf}>
                       <use xlinkHref={`${sprite}#icon-paragraph`} />
                   </svg>
-                  {total.toFixed(2)}
+                  {totalAmount.toFixed(2)}
                 </span> 
                 </div>
                 <button type='submit' className={style.buttonCart}>Place order</button>

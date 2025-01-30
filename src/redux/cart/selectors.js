@@ -10,4 +10,7 @@ export const selectUpdateQuantity = (state) => state.cart.updateQuantity;
 
 export const selectCheckout = (state) => state.cart.checkout;
 
+export const selectTotalAmount = (state) => 
+    state.cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 

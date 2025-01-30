@@ -119,7 +119,7 @@ export const updateCart = async (userId, updatedProducts, paymentMethod = null) 
     updatedProducts: updatedProducts, 
     ...(paymentMethod && { paymentMethod }), 
   };
-
+  console.log('Updating cart with payload:', { userId, updatedProducts, paymentMethod });
   const { data } = await axios.put('/cart/update', payload);
   console.log('Response from server:', data);
   return data;

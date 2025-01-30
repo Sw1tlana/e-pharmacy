@@ -7,12 +7,12 @@ function Counter({productId, quantity, isPage2, onIncrement, onDecrement  }) {
     const counterClass = isPage2 ? style.page2 : style.page1;
 
     const handleIncrement = () => {
-        onIncrement(productId, quantity + 1);
+        onIncrement(productId, quantity);
     };
 
     const handleDecrement = () => {
         if (quantity > 1) {
-            onDecrement(productId, quantity - 1);
+            onDecrement(productId, quantity);
         }
     };
 

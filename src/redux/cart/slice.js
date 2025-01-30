@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCart, 
-         fetchUpdateCart 
+         fetchUpdateCart,
+         fetchCheckoutData
         } from "./operations";
 
 const handlePending = (state) => {
@@ -18,7 +19,8 @@ const INITIAL_STATE = {
     loading: false,
     error: null,
     paymentMethod: "cash",
-    quantity: 1
+    quantity: 1,
+    checkout: []
 };
 
   export const cartSlice = createSlice({
@@ -37,32 +39,65 @@ const INITIAL_STATE = {
         removeFromCart: (state, action) => {
           state.items = state.items.filter(item => item.id !== action.payload.id); 
         },
+        setPaymentMethod: (state, action) => {
+          state.paymentMethod = action.payload;
+        },
+        updateQuantity: (state, action) => {
+          const { productId, quantity } = action.payload;
+          if (quantity < 1) return; 
+          const item = state.items.find((item) => item.id === productId);
+          if (item) {
+            item.quantity = quantity;
+          }
+        },
       },
-        extraReducers: (builder) => {
+      
+      extraReducers: (builder) => {
         builder
-            .addCase(fetchCart.pending, handlePending)
-            .addCase(fetchCart.fulfilled, (state, action) => {
-            console.log('Payload:', action.payload); 
+          .addCase(fetchCart.pending, handlePending)
+          .addCase(fetchCart.fulfilled, (state, action) => {
+            console.log('Payload:', action.payload);
             state.loading = false;
-            state.items = action.payload.updatedProducts;
-            state.paymentMethod = action.payload.paymentMethod || "cash"; 
-            })
-            .addCase(fetchCart.rejected, handleRejected)
-            .addCase(fetchUpdateCart.pending, handlePending)
-            .addCase(fetchUpdateCart.fulfilled, (state, action) => {
-              console.log("Action payload:", action.payload);
-              state.loading = false;
-              const updatedItemIndex = state.items.findIndex(item => item.id === action.payload.productId);
-              if (updatedItemIndex !== -1) {
-                state.items[updatedItemIndex].quantity = action.payload.quantity;
-              }
-        })
-        .addCase(fetchUpdateCart.rejected, handleRejected)
-        },});
+            state.items = action.payload;
+          })
+          .addCase(fetchCart.rejected, handleRejected)
+    
+          .addCase(fetchUpdateCart.pending, handlePending)
+          .addCase(fetchUpdateCart.fulfilled, (state, action) => {
+            state.loading = false;
+    
+            if (action.payload?.updatedProducts) {
+              action.payload.updatedProducts.forEach((updatedItem) => {
+                const existingItem = state.items.find(item => item.id === updatedItem.id);
+                if (existingItem) {
+                  existingItem.quantity = updatedItem.quantity;
+                }
+              });
+            }
+          })
+          .addCase(fetchUpdateCart.rejected, handleRejected)
+          .addCase(fetchCheckoutData.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+          })
+          .addCase(fetchCheckoutData.fulfilled, (state, action) => {
+            console.log('Checkout response:', action.payload);
+            state.loading = false;
+            state.items = []; 
+            state.checkout = action.payload; 
+          })
+          .addCase(fetchCheckoutData.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+          });
+      },
+    });
         
     export const {
      addToCart,
      removeFromCart,
+     updateQuantity,
+     setPaymentMethod
     } = cartSlice.actions;
 
     export const CartReducer = cartSlice.reducer;

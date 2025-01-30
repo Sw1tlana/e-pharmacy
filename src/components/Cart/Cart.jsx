@@ -7,19 +7,26 @@ import { useEffect, useId } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import Counter from '../Counter/Counter';
-import { fetchUpdateCart } from '../../redux/cart/operations';
+import { fetchCheckoutData, 
+         fetchUpdateCart } 
+         from '../../redux/cart/operations';
 import { fetchMedicinesId } from '../../redux/medicine/operations';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectItems } from '../../redux/cart/selectors';
-import { removeFromCart } from '../../redux/cart/slice';
+import { removeFromCart, 
+         setPaymentMethod,
+         updateQuantity } 
+         from '../../redux/cart/slice';
 import { selectUser } from '../../redux/auth/selectors'; 
 import { cartSchema } from '../../shemas/cartSchema';
+import { selectPaymentMethod } from '../../redux/cart/selectors';
 
 function Cart() {
     const { id } = useParams(); 
     const dispatch = useDispatch();
     const items = useSelector(selectItems);
     const user = useSelector(selectUser);
+    const paymentMethod = useSelector(selectPaymentMethod);
 
     const nameId = useId();
     const emailId = useId();
@@ -41,12 +48,34 @@ function Cart() {
     });
 
     const onSubmit = (data) => {
-      dispatch(fetchUpdateCart(data));
-        reset();
+  // Перевіряємо актуальний стан товарів у кошику
+  const updatedProducts = items.map(item => ({
+    id: item.id,
+    quantity: item.quantity,
+  }));
+
+  // Оновлюємо кошик
+  dispatch(fetchUpdateCart({
+    userId: userId,
+    updatedProducts,
+    paymentMethod: paymentMethod,
+    ...data
+  }));
+
+  // Тепер викликаємо чекаут
+  dispatch(fetchCheckoutData({
+    userId: userId,
+    paymentMethod: paymentMethod,
+    customer: data
+  }));
+
+  // Очищуємо форму
+  reset();
+     reset(); // очищуємо форму
       };
 
     const handleOptionChange = (event) => {
-        dispatch(fetchUpdateCart())
+        dispatch(setPaymentMethod(event.target.value));
       };
 
     const  handleRemoveFromCart = (medicine)  => {
@@ -55,13 +84,13 @@ function Cart() {
       }
     };
 
-    const handleIncrement = (currentQuantity) => {
-      const newQuantity = currentQuantity + 1;
+    const handleIncrement = (productId, currentQuantity) => {
+      dispatch(updateQuantity({  productId, quantity: currentQuantity + 1 }));
     }
     
-    const handleDecrement = (currentQuantity) => {
+    const handleDecrement = (productId, currentQuantity) => {
       if (currentQuantity > 1) {
-        const newQuantity = currentQuantity - 1;
+        dispatch(updateQuantity({  productId, quantity: currentQuantity - 1 }));
       }
     };
 
@@ -132,11 +161,11 @@ function Cart() {
                 <input
                 id={addressId}
                 className={style.formInput}
-                {...register('password')}
+                {...register('address')}
                 aria-required="true"
                 />
-                {errors.password && 
-                <p className={style.errorMsg}>{errors.password.message}</p>}
+                {errors.address && 
+                <p className={style.errorMsg}>{errors.address.message}</p>}
             </div>
             </div>
 

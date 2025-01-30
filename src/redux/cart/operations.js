@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getCart, 
-         updateCart
+         updateCart,
+         checkoutCart
  } from '../services/authServices';
 
 export const fetchCart = createAsyncThunk(
@@ -18,10 +19,22 @@ export const fetchCart = createAsyncThunk(
 
 export const fetchUpdateCart = createAsyncThunk(
   'cart/fetchUpdataCart',
-  async ({ userId, updatedProducts }, { rejectWithValue }) => {
+  async ({ userId, updatedProducts, paymentMethod  }, { rejectWithValue }) => {
     try {
-      const response = await updateCart(userId, updatedProducts);
+      const response = await updateCart(userId, updatedProducts, paymentMethod );
       return { updatedProducts: response.data };  
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Something went wrong');
+    }
+  }
+);
+
+export const fetchCheckoutData = createAsyncThunk(
+  'cart/fetchCheckoutData',
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await checkoutCart(formData);
+      return response.cart;  
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Something went wrong');
     }

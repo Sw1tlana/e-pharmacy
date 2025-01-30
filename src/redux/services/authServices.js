@@ -111,15 +111,21 @@ export const getCart = async() => {
 
 export const updateCart = async (userId, updatedProducts, paymentMethod = null) => {
   console.log('userId:', userId); // Логування userId
-  console.log('updatedProducts:', updatedProducts); // Логування updatedProducts
+  console.log('updatedProducts:', updatedProducts); 
   console.log('Updating cart with payload:', { userId, updatedProducts, paymentMethod });
+
   const payload = {
     userId,
-    updatedProducts: Array.isArray(updatedProducts) ? updatedProducts : [updatedProducts],
-    ...(paymentMethod && { paymentMethod }),
+    updatedProducts: updatedProducts, 
+    ...(paymentMethod && { paymentMethod }), 
   };
 
   const { data } = await axios.put('/cart/update', payload);
   console.log('Response from server:', data);
   return data;
 };
+
+export const checkoutCart = async (formData) => {
+  const { data } = await axios.post('/cart/checkout', formData);
+  return data;
+}

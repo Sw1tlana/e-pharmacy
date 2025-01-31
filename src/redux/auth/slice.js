@@ -8,7 +8,6 @@ import {
 
 const INITIAL_STATE = {
     user: {
-      _id: null,
       name: null,
       email: null,
     },
@@ -26,22 +25,12 @@ const INITIAL_STATE = {
       setToken(state, action) {
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
-        if (action.payload.user?._id) {
-          state.user._id = action.payload.user._id;
-          state.user.name = action.payload.user.name;
-          state.user.email = action.payload.user.email;
-        }
       },
     },
 
     extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.user = {
-          _id: action.payload.user._id, 
-          name: action.payload.user.name,
-          email: action.payload.user.email,
-      };
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
@@ -50,12 +39,6 @@ const INITIAL_STATE = {
         toast.success('Register successful');
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log("Full response from API:", action.payload);
-        state.user = {
-          _id: action.payload.user._id, 
-          name: action.payload.user.name,
-          email: action.payload.user.email,
-      };
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;

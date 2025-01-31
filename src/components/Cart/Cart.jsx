@@ -32,13 +32,9 @@ function Cart() {
   const phoneId = useId();
 
   console.log("User data from Redux:", JSON.stringify(user, null, 2));
-  const userId = user?._id;
+  const userId = user._id;
   console.log("User data from Redux:", user);
   console.log("Extracted userId:", userId);
-
-  useEffect(() => {
-    console.log("User updated in Cart:", user);
-  }, [user]);
 
   useEffect(() => {
     if (id) {
@@ -55,58 +51,54 @@ function Cart() {
     const updatedProducts = items.map(item => ({
       productId: item.id,
       quantity: item.quantity,
+      price: item.price,
+      totalPrice: item.price * item.quantity
     }));
 
     const totalAmount = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const customer = { name: data.name, email: data.email, phone: data.phone, address: data.address };
+    const customer = { 
+      name: data.name, 
+      email: data.email,
+      phone: data.phone, 
+      address: data.address
+    };
 
-    // Перевірка наявності userId
     if (!userId) {
-      console.error("User ID відсутній. Неможливо оновити кошик.");
-      alert("Будь ласка, увійдіть в систему, щоб оновити кошик.");
+      alert("Please log in to proceed with the checkout.");
       return;
     }
 
     try {
       const payload = {
-        userId: userId, // Передаємо userId
-        updatedProducts: updatedProducts,
-        paymentMethod: paymentMethod,
-        ...data // Додаткові дані з форми
+        userId: user.id,  
+        updatedProducts,
+        totalAmount,
+        status: 'Pending', 
+        order_date: new Date(),
+        customer
       };
-
-      console.log("Оновлення кошика з payload:", payload);
 
       // Оновлення кошика
-      const updateResponse = await dispatch(fetchUpdateCart(payload));
-      if (updateResponse.error) {
-        console.error("Помилка оновлення кошика:", updateResponse.error);
-        throw new Error(updateResponse.error.message || 'Не вдалося оновити кошик');
-      }
-
-      const formData = {
-        userId,
-        products: updatedProducts,
-        totalAmount,
-        status: 'Pending',
-        order_date: new Date(),
-        paymentMethod,
-        customer,
-      };
+      dispatch(fetchUpdateCart(payload));
 
       // Оформлення замовлення
-      const checkoutResponse = await dispatch(fetchCheckoutData(formData));
-      if (checkoutResponse.error) {
-        throw new Error(checkoutResponse.error.message || 'Не вдалося оформити замовлення');
-      }
-      console.log(checkoutResponse);
+      const formData = { 
+        userId: user.id, 
+        products: updatedProducts, 
+        totalAmount, 
+        status: 'Pending', 
+        order_date: new Date(), 
+        customer 
+      };
+      dispatch(fetchCheckoutData(formData));
 
       reset();
+      alert('Order placed successfully');
     } catch (error) {
-      console.error('Помилка під час оформлення замовлення:', error);
-      alert('Сталася помилка під час оформлення замовлення. Будь ласка, спробуйте ще раз.');
+      alert('An error occurred during checkout: ' + error.message);
     }
   };
+
 
   const handleOptionChange = (event) => {
     dispatch(setPaymentMethod(event.target.value));

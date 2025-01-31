@@ -17,11 +17,12 @@ import { removeFromCart,
          setPaymentMethod,
          updateQuantity } 
          from '../../redux/cart/slice';
-import { selectUser } from '../../redux/auth/selectors'; 
+import { selectUser, selectUserId } from '../../redux/auth/selectors'; 
 import { cartSchema } from '../../shemas/cartSchema';
 import { selectPaymentMethod, 
          selectTotalAmount } 
          from '../../redux/cart/selectors';
+import toast from 'react-hot-toast';
 
 function Cart() {
     const { id } = useParams(); 
@@ -30,6 +31,7 @@ function Cart() {
     const user = useSelector(selectUser);
     const paymentMethod = useSelector(selectPaymentMethod);
     const totalAmount = useSelector(selectTotalAmount);
+    const userId = useSelector(selectUserId);
 
     console.log(user);
     
@@ -37,10 +39,6 @@ function Cart() {
     const emailId = useId();
     const addressId = useId();
     const phoneId = useId();
-
-
-    const userId = user?.id || null;
-    console.log(userId);
 
     useEffect(() => {
         if (id) {
@@ -54,29 +52,44 @@ function Cart() {
     });
 
     const onSubmit = async (data) => {
+      // Перевірка наявності userId та заповнених полів
+      if (!user || !user.token) {
+        toast.error("Будь ласка, увійдіть в систему для продовження!");
+        return;
+      }
+  
+      if (!userId || !data.name || !data.email || !data.phone || !data.address) {
+        toast.error("Будь ласка, заповніть усі поля форми!");
+        return;
+      }
+  
+      // Перевірка заповнених даних
+      console.log('Submitted data:', data);
+  
       const updatedProducts = items.map(item => ({
         productId: item.id,
         quantity: item.quantity,
       }));
-    
-      const totalAmount = items.reduce((acc, item) => acc + item.price * item.quantity, 0); 
-      const customer = { name: data.name, email: data.email, phone: data.phone, address: data.address }; 
-      
+  
+      const totalAmount = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      const customer = { name: data.name, email: data.email, phone: data.phone, address: data.address };
+  
       try {
-        console.log("Updating cart with payload:", { userId, updatedProducts, paymentMethod });
-    
-        // Оновлюємо кошик
-        const updateResponse = await dispatch(fetchUpdateCart({
-          userId,
-          updatedProducts,
-          paymentMethod,
+        const payload = {
+          userId, 
+          updatedProducts, 
+          paymentMethod, 
           ...data
-        }));
-    
+        };
+  
+        // Оновлення кошика
+        const updateResponse = await dispatch(fetchUpdateCart(payload));
         if (updateResponse.error) {
-          throw new Error(updateResponse.error.message || 'Failed to update cart');
+          toast.error("Помилка оновлення кошика: " + updateResponse.error.message);
+          throw new Error(updateResponse.error.message || 'Не вдалося оновити кошик');
         }
-    
+  
+        // Оформлення замовлення
         const formData = {
           userId,
           products: updatedProducts,
@@ -86,20 +99,18 @@ function Cart() {
           paymentMethod,
           customer,
         };
-    
-        // Викликаємо checkoutCart для оформлення замовлення
+  
         const checkoutResponse = await fetchCheckoutData(formData);
-        
         if (checkoutResponse?.error) {
-          throw new Error(checkoutResponse.error.message || 'Failed to checkout');
+          toast.error("Помилка оформлення замовлення: " + checkoutResponse.error.message);
+          throw new Error(checkoutResponse.error.message || 'Не вдалося оформити замовлення');
         }
-    
-        // Якщо все успішно, очищуємо форму
+  
         reset();
-    
+        toast.success("Замовлення оформлено успішно!");
       } catch (error) {
-        console.error('Error during checkout:', error.message);
-        alert('An error occurred during checkout. Please try again.');
+        console.error('Помилка під час оформлення замовлення:', error);
+        toast.error('Сталася помилка під час оформлення замовлення. Будь ласка, спробуйте ще раз.');
       }
     };
 

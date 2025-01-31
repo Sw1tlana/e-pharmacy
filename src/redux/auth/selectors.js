@@ -10,3 +10,5 @@ export const selectIsRefreshing = (state) => state.auth.isRefreshing;
 
 export const selectAutchError = (state) => state.auth.error;
 
+export const selectUserId = (state) => state.auth.user?.userId;
+

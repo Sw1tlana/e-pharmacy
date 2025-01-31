@@ -115,7 +115,7 @@ export const updateCart = async (userId, updatedProducts, paymentMethod = null) 
   console.log('Updating cart with payload:', { userId, updatedProducts, paymentMethod });
 
   const payload = {
-    userId,
+    userId: user?.id,
     updatedProducts: updatedProducts, 
     ...(paymentMethod && { paymentMethod }), 
   };

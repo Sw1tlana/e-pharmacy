@@ -39,6 +39,8 @@ export const loginUser = createAsyncThunk(
       console.log('RefreshToken:', refreshToken);
       console.log('User:', user);
 
+      console.log('User object from server:', user);
+
       thunkAPI.dispatch(setToken({ token, refreshToken }));
       return { user, token, refreshToken };
     } catch (error) {

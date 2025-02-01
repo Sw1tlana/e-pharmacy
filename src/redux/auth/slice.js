@@ -31,6 +31,7 @@ const INITIAL_STATE = {
     extraReducers: (builder) => {
     builder
       .addCase(registerUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
@@ -39,6 +40,7 @@ const INITIAL_STATE = {
         toast.success('Register successful');
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
         state.token = action.payload.token;
         state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;

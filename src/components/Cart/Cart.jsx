@@ -32,9 +32,6 @@ function Cart() {
   const phoneId = useId();
 
   console.log("User data from Redux:", JSON.stringify(user, null, 2));
-  const userId = user._id;
-  console.log("User data from Redux:", user);
-  console.log("Extracted userId:", userId);
 
   useEffect(() => {
     if (id) {
@@ -48,57 +45,70 @@ function Cart() {
   });
 
   const onSubmit = async (data) => {
+    // Перевірте, чи items не порожні
+    if (!items || items.length === 0) {
+      console.error("Корзина порожня.");
+      return;
+    }
+  
     const updatedProducts = items.map(item => ({
       productId: item.id,
       quantity: item.quantity,
       price: item.price,
       totalPrice: item.price * item.quantity
     }));
-
+  
+    console.log("Updated Products:", updatedProducts);
+  
     const totalAmount = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const customer = { 
       name: data.name, 
-      email: data.email,
+      email: data.email,  
       phone: data.phone, 
       address: data.address
     };
-
-    if (!userId) {
-      alert("Please log in to proceed with the checkout.");
+  
+    if (!data.email) {
+      alert("Будь ласка, увійдіть у систему, щоб продовжити оформлення замовлення.");
       return;
     }
-
+  
     try {
       const payload = {
-        userId: user.id,  
-        updatedProducts,
+        email: data.email,
+        products: updatedProducts, // використовуємо правильне ім'я ключа
         totalAmount,
         status: 'Pending', 
         order_date: new Date(),
         customer
       };
-
+    
+      console.log("Checkout payload:", JSON.stringify(payload, null, 2));
+  
       // Оновлення кошика
       dispatch(fetchUpdateCart(payload));
-
+  
       // Оформлення замовлення
       const formData = { 
-        userId: user.id, 
-        products: updatedProducts, 
+        email: data.email,
+        products: updatedProducts, // використовуємо правильне ім'я ключа
         totalAmount, 
         status: 'Pending', 
         order_date: new Date(), 
         customer 
       };
+    
+      console.log("Checkout form data:", JSON.stringify(formData, null, 2));
+  
       dispatch(fetchCheckoutData(formData));
-
       reset();
-      alert('Order placed successfully');
     } catch (error) {
-      alert('An error occurred during checkout: ' + error.message);
+      console.error('Помилка оформлення замовлення:', error.response ? error.response.data : error.message);
+      alert('Сталася помилка під час оформлення замовлення: ' + (error.response ? error.response.data.message : error.message));
     }
   };
-
+   
+  
 
   const handleOptionChange = (event) => {
     dispatch(setPaymentMethod(event.target.value));

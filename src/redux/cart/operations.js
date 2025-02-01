@@ -19,9 +19,12 @@ export const fetchCart = createAsyncThunk(
 
 export const fetchUpdateCart = createAsyncThunk(
   'cart/fetchUpdataCart',
-  async ({ userId, updatedProducts, paymentMethod  }, { rejectWithValue }) => {
+  async ({ email, updatedProducts, paymentMethod }, { rejectWithValue }) => {
     try {
-      const response = await updateCart(userId, updatedProducts, paymentMethod );
+      if (!updatedProducts || !Array.isArray(updatedProducts) || updatedProducts.length === 0) {
+        throw new Error('Updated products are required and should be an array.');
+      }
+      const response = await updateCart(email, updatedProducts, paymentMethod);
       return { updatedProducts: response.data };  
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Something went wrong');
@@ -29,12 +32,13 @@ export const fetchUpdateCart = createAsyncThunk(
   }
 );
 
+
 export const fetchCheckoutData = createAsyncThunk(
   'cart/fetchCheckoutData',
   async (formData, { rejectWithValue }) => {
     try {
       const response = await checkoutCart(formData);
-      return response.cart;  
+      return response;  
     } catch (error) {
       console.error("Checkout error:", error.response?.data?.message || error.message);
       return rejectWithValue(error.response?.data?.message || 'Something went wrong');

@@ -51,7 +51,7 @@ function Cart() {
     }
   
     const updatedProducts = items.map(item => ({
-      productId: item.id,
+      productId: item._id,
       quantity: item.quantity,
       price: item.price,
       totalPrice: item.price * item.quantity
@@ -77,7 +77,6 @@ function Cart() {
         email: data.email,
         products: updatedProducts,
         totalAmount,
-        status: 'Pending',
         order_date: new Date().toISOString(),
         customer
       };
@@ -90,9 +89,9 @@ function Cart() {
         products: updatedProducts,
         email: data.email,
         totalAmount,
-        status: 'Pending',
         order_date: new Date().toISOString(),
-        customer
+        customer,
+        paymentMethod: "cash" 
       };
       
       console.log("Checkout form data:", JSON.stringify(formData, null, 2));

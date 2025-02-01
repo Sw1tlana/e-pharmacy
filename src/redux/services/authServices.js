@@ -126,6 +126,8 @@ export const updateCart = async (email, updatedProducts, paymentMethod = null) =
 
 
 export const checkoutCart = async (formData) => {
+  console.log('Sending request to /cart/checkout with formData:', formData);
   const { data } = await axios.post('/cart/checkout', formData);
+  console.log('Received response from /cart/checkout:', data);
   return data;
 };

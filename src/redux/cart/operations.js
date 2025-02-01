@@ -38,7 +38,8 @@ export const fetchCheckoutData = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await checkoutCart(formData);
-      return response;  
+    console.log('Checkout success:', response);
+      return response.data;  
     } catch (error) {
       console.error("Checkout error:", error.response?.data?.message || error.message);
       return rejectWithValue(error.response?.data?.message || 'Something went wrong');

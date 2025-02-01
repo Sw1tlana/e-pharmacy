@@ -44,8 +44,7 @@ function Cart() {
     resolver: yupResolver(cartSchema)
   });
 
-  const onSubmit = async (data) => {
-    // Перевірте, чи items не порожні
+  const onSubmit = (data) => {
     if (!items || items.length === 0) {
       console.error("Корзина порожня.");
       return;
@@ -76,40 +75,36 @@ function Cart() {
     try {
       const payload = {
         email: data.email,
-        products: updatedProducts, // використовуємо правильне ім'я ключа
+        products: updatedProducts,
         totalAmount,
-        status: 'Pending', 
-        order_date: new Date(),
+        status: 'Pending',
+        order_date: new Date().toISOString(),
         customer
       };
-    
+      
       console.log("Checkout payload:", JSON.stringify(payload, null, 2));
   
-      // Оновлення кошика
       dispatch(fetchUpdateCart(payload));
   
-      // Оформлення замовлення
-      const formData = { 
+      const formData = {
+        products: updatedProducts,
         email: data.email,
-        products: updatedProducts, // використовуємо правильне ім'я ключа
-        totalAmount, 
-        status: 'Pending', 
-        order_date: new Date(), 
-        customer 
+        totalAmount,
+        status: 'Pending',
+        order_date: new Date().toISOString(),
+        customer
       };
-    
+      
       console.log("Checkout form data:", JSON.stringify(formData, null, 2));
   
       dispatch(fetchCheckoutData(formData));
       reset();
     } catch (error) {
-      console.error('Помилка оформлення замовлення:', error.response ? error.response.data : error.message);
+      console.error("Checkout error:", error);
       alert('Сталася помилка під час оформлення замовлення: ' + (error.response ? error.response.data.message : error.message));
     }
-  };
-   
+  };      
   
-
   const handleOptionChange = (event) => {
     dispatch(setPaymentMethod(event.target.value));
   };

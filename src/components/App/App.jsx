@@ -13,6 +13,7 @@ const MedicineStorePage = lazy(() => import('../../pages/MedicineStorePage/Medic
 const RegisterPage = lazy(() => import('../../pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
 const CartPage = lazy(() => import('../../pages/CartPage/CartPage'));
+const FeaturePage = lazy(() => import('../../pages/FeaturePage/FeaturePage'));
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
         <Route path="/products" element={<ShopPage/>}/>
         <Route path="/products/:id" element={<CartPage/>} /> 
         <Route path="/cart" element={<ProductPage/>}/>
+        <Route path="/feature" element={<FeaturePage/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="*" element={<Navigate to="/" replace />}/>

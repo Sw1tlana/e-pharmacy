@@ -7,11 +7,19 @@ import { nearestStores } from '../../redux/stores/operation';
 import { selectStores, selectLoading } from '../../redux/stores/selectors';
 import { shadow } from '../../shared/images/shadow';
 import { icons as sprite } from '../../shared/icons';
+import { useNavigate } from 'react-router-dom';
+import { useModalContext } from '../../context/useModalContext.jsx';
+import ModalShop from '../Modals/ModalShop/ModalShop.jsx';
+import toast from 'react-hot-toast';
 
 function PromoBanners() {
     const dispatch = useDispatch();
     const stores = useSelector(selectStores);
     const loading = useSelector(selectLoading);
+
+    const { openModal } = useModalContext();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(nearestStores());
@@ -28,6 +36,18 @@ function PromoBanners() {
         return currentTime >= storeOpenTime && currentTime <= storeCloseTime;
       };
 
+      const handleClickDiskount = () => {
+        toast.error('There are no discounts at the moment. Stay tuned for updates!')
+      };
+
+      const handleRedirect = () => {
+        navigate('/feature'); 
+      };
+
+      const handleStoreClick = (store) => {
+        openModal(<ModalShop store={store} />); 
+    };
+
   return (
     <section className={style.sectionBanners}>
         <div className={style.bannersWrapper}>
@@ -38,7 +58,12 @@ function PromoBanners() {
             </div>
             <div className={style.containerBannersMini}>
                 <p className={style.bannersText}>70 &#37;</p>
-                <button type='submit'className={style.bannersBtn}>Shop now</button>
+                <button 
+                onClick={handleClickDiskount}
+                type='button'
+                className={style.bannersBtn}>
+                  Shop now
+                  </button>
             </div>
         </div>
 
@@ -49,7 +74,12 @@ function PromoBanners() {
             </div>
             <div className={style.containerBannersMini}>
                 <p className={style.bannersText}>100 &#37;</p>
-                <button type='submit'className={style.bannersBtn}>Read more</button>
+                <button 
+                onClick={handleRedirect}
+                type='button'
+                className={style.bannersBtn}>
+                  Read more
+                </button>
             </div>
         </div>
 
@@ -60,7 +90,11 @@ function PromoBanners() {
             </div>
             <div className={style.containerBannersMini}>
                 <p className={style.bannersText}>35 &#37;</p>
-                <button type='submit'className={style.bannersBtn}>Shop now</button>
+                <button
+                onClick={handleClickDiskount} 
+                type='button'
+                className={style.bannersBtn}>
+                Shop now</button>
             </div>
         </div>
         </div>
@@ -76,7 +110,8 @@ function PromoBanners() {
         <ul className={style.listStores}>
           {stores.map((store, index) => (
             <li key={`${store.id}-${index}`}
-            className={style.itemStores}>  
+            className={style.itemStores}
+            onClick={handleStoreClick}>  
                <EllipsisText 
                className={style.nameStores} 
                text={store.name} 

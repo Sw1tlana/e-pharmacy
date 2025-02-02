@@ -1,11 +1,11 @@
 .sectionAddMedicines {
-    max-width: 335px;
-    width: 100%;
+    width: 335px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 32px;
     background-color: var(--green-accent-color);
     color: var(--light-grey-color);
+    margin-bottom: 50px;
 }
 
 .containerAddMedicines {
@@ -77,7 +77,7 @@
 
 @media (min-width: 768px) {
     .sectionAddMedicines {
-        max-width: 704px;
+        width: 704px;
         padding: 40px 48px;
     }
 
@@ -105,7 +105,7 @@
 
 @media (min-width: 1440px) { 
     .sectionAddMedicines {
-        max-width: 1248px;
+        width: 1248px;
         padding: 40px 80px;
     }
 

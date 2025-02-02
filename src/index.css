@@ -34,6 +34,7 @@ body {
     font-size: 14px;
     letter-spacing: 0%;
     color: var(--primary-color);
+    background-color: var(--bg-color);
 
     display: flex;
     justify-content: center;

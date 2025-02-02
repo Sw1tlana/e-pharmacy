@@ -39,15 +39,12 @@ export const requestSignUp = async (formData) => {
   const { data } = await axios.post('/user/register', formData);
   if (data && data.token) {
     setAuthHeader(data.token);
-    console.log('Response from server:', data);
     return data;
   }
 };
 
 export const requestSignIn = async (email, password) => {
-  console.log('Login attempt:', { email, password });
   const { data } = await axios.post('/user/login', { email, password });
-  console.log('Login response:', data);
   setAuthHeader(data.token);
   return data;
 };
@@ -110,9 +107,6 @@ export const getCart = async() => {
 };
 
 export const updateCart = async (email, updatedProducts, paymentMethod = null) => {
-  console.log('email:', email);
-  console.log('updatedProducts:', updatedProducts);
-  console.log('Updating cart with payload:', { email, updatedProducts, paymentMethod });
 
   const payload = {
     email: email,
@@ -120,14 +114,11 @@ export const updateCart = async (email, updatedProducts, paymentMethod = null) =
     ...(paymentMethod && { paymentMethod }),
   };
   const { data } = await axios.put('/cart/update', payload);
-  console.log('Response from server:', data);
   return data;
 };
 
 
 export const checkoutCart = async (formData) => {
-  console.log('Sending request to /cart/checkout with formData:', formData);
   const { data } = await axios.post('/cart/checkout', formData);
-  console.log('Received response from /cart/checkout:', data);
   return data;
 };

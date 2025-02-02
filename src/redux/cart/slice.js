@@ -3,6 +3,7 @@ import { fetchCart,
          fetchUpdateCart,
          fetchCheckoutData
         } from "./operations";
+import toast from "react-hot-toast";
 
 const handlePending = (state) => {
    state.loading = true;
@@ -56,7 +57,6 @@ const INITIAL_STATE = {
         builder
           .addCase(fetchCart.pending, handlePending)
           .addCase(fetchCart.fulfilled, (state, action) => {
-            console.log('Payload:', action.payload);
             state.loading = false;
             state.items = action.payload;
           })
@@ -81,10 +81,10 @@ const INITIAL_STATE = {
             state.error = null;
           })
           .addCase(fetchCheckoutData.fulfilled, (state, action) => {
-            console.log('Checkout response:', action.payload);
             state.loading = false;
             state.items = []; 
             state.checkout = action.payload; 
+            toast.success("Your order has been placed successfully!🎉");
           })
           .addCase(fetchCheckoutData.rejected, (state, action) => {
             state.loading = false;

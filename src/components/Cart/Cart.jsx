@@ -15,6 +15,7 @@ import { removeFromCart, setPaymentMethod, updateQuantity } from '../../redux/ca
 import { selectUser } from '../../redux/auth/selectors';
 import { cartSchema } from '../../shemas/cartSchema';
 import { selectPaymentMethod, selectTotalAmount } from '../../redux/cart/selectors';
+import toast from 'react-hot-toast';
 
 function Cart() {
   const { id } = useParams();
@@ -46,7 +47,7 @@ function Cart() {
 
   const onSubmit = (data) => {
     if (!items || items.length === 0) {
-      console.error("Корзина порожня.");
+      toast.error("Your basket is empty!");
       return;
     }
   
@@ -57,8 +58,6 @@ function Cart() {
       totalPrice: item.price * item.quantity
     }));
   
-    console.log("Updated Products:", updatedProducts);
-  
     const totalAmount = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const customer = { 
       name: data.name, 
@@ -68,7 +67,7 @@ function Cart() {
     };
   
     if (!data.email) {
-      alert("Будь ласка, увійдіть у систему, щоб продовжити оформлення замовлення.");
+      toast.error("Please log in to continue placing your order!");
       return;
     }
   
@@ -100,7 +99,7 @@ function Cart() {
       reset();
     } catch (error) {
       console.error("Checkout error:", error);
-      alert('Сталася помилка під час оформлення замовлення: ' + (error.response ? error.response.data.message : error.message));
+      toast.error('An error occurred during the checkout process: ' + (error.response ? error.response.data.message : error.message));
     }
   };      
   

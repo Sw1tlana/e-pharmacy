@@ -14,7 +14,6 @@ export const fetchMedicines = createAsyncThunk(
                 query: filters.query || '', 
             }).toString();
             const response = await getMedicines(`?${queryParams}`);
-            console.log("API Response:", response);
             return response;
         } catch (error) {
 

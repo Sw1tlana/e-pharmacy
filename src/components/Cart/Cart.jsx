@@ -34,8 +34,6 @@ function Cart() {
   const addressId = useId();
   const phoneId = useId();
 
-  console.log("User data from Redux:", JSON.stringify(user, null, 2));
-
   useEffect(() => {
     if (id) {
       console.log('Fetching product with ID:', id);
@@ -50,6 +48,11 @@ function Cart() {
   const onSubmit = (data) => {
     if (!items || items.length === 0) {
       toast.error("Your basket is empty!");
+      return;
+    }
+
+    if (!data.name || !data.email || !data.phone || !data.address) {
+      toast.error("Please fill in all the required fields!");
       return;
     }
   
@@ -314,7 +317,7 @@ function Cart() {
                       <svg width={18} height={18} className={style.iconParagrapf}>
                         <use xlinkHref={`${sprite}#icon-paragraph`} />
                       </svg>
-                      <p className={style.price}>{item.price}</p>
+                      <p className={style.price}>{(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   </div>
 

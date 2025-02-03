@@ -37,7 +37,6 @@ function Header({ isWhiteBackground, isLogoOnly, isBlackText, hideMenu  }) {
             </button>
           </>
         )}
-
       </header>
 </div>
   )

@@ -1,6 +1,7 @@
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useLocation } from "react-router-dom";
+import ScrollWrapper from '../../shared/components/scrollWrapper/scrollWrapper';
 
 function SharedLayout({ children }) {
   const location = useLocation();
@@ -17,7 +18,9 @@ function SharedLayout({ children }) {
       hideMenu={hideHeaderFooter}
       />
       {hideHeaderFooter && <Header hideMenu={hideHeaderFooter}/> }
-      <main>{children}</main>
+      <ScrollWrapper>
+        <main style={{ minHeight: '100vh' }}>{children}</main>
+      </ScrollWrapper>
       {!hideHeaderFooter && <Footer />}
     </div>
   )

@@ -63,3 +63,18 @@
    right: -2px;
 }
 
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--green-accent-color);
+    border: none;
+    background-color: transparent;
+    border: 1px solid var(--light-grey-color);
+    background-color: var(--white-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    position: relative;
+  }
+

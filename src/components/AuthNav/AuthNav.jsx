@@ -61,8 +61,7 @@ function AuthNav() {
             </NavLink>
             </>
             )}
-        </div>
-
+       </div>
   )
 };
 

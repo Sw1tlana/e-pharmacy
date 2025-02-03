@@ -34,6 +34,12 @@ const INITIAL_STATE = {
       setFilters: (state, action) => {
           state.filters = action.payload;
       },
+      resetFilters: (state) => {
+        state.filters = {};
+        state.searchQuery = '';
+        state.selectedCategory = null;
+        state.page = 1;
+      },
       setPage: (state, action) => {
           state.page = action.payload;
       },

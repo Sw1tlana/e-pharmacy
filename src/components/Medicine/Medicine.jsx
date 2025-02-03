@@ -44,13 +44,9 @@ function Medicine() {
   const fetchMedicinesData = (newPage = page) => {
     dispatch(fetchMedicines({ page: newPage, limit, filters }))
       .unwrap()
-      .catch((error) => {
-        console.error("Помилка під час завантаження ліків:", error);
-      });
   };
   
   useEffect(() => {
-    console.log('Fetching medicines with params:', { page, limit, filters });
     fetchMedicinesData();
   }, [page, limit, filters]);
 
@@ -62,7 +58,6 @@ function Medicine() {
       </div>
     );
   }
-
 
   return (
     <>

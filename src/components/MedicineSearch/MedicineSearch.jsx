@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectSearchQuery, 
          selectSelectedCategory } 
          from '../../redux/medicine/selectors';
-import { setSearchQuery, setSelectedCategory } from '../../redux/medicine/slice';
+import { resetFilters, setSearchQuery, setSelectedCategory } from '../../redux/medicine/slice';
 
 function MedicineSearch() {
   const dispatch = useDispatch();
@@ -44,6 +44,8 @@ function MedicineSearch() {
   };
   
   const handleFilter = () => {
+    dispatch(resetFilters());  
+
     const filters = {
       category: selectedCategory ? selectedCategory.value : undefined, 
       query: searchQuery.trim() || undefined,  
@@ -51,7 +53,7 @@ function MedicineSearch() {
       limit: 12,
     };
   
-    dispatch(fetchMedicines(filters));  
+    dispatch(fetchMedicines(filters)); 
   };
 
   const isMobile = window.innerWidth <= 768;

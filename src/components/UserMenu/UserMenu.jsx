@@ -24,24 +24,33 @@ function UseMenu() {
     }
   };
 
+  const getInitial = (name) => {
+    return name ? name.charAt(0).toUpperCase() : '';
+  };
+
   return (
-    <div className={style.containerUserMenu}>
-      {isLoggedIn && user && (
-        <Link to="cart" className={style.btnCart} >
+  <div className={style.containerUserMenu}>
+    {isLoggedIn && user && (
+      <>
+        <div className={style.avatar}>
+          {getInitial(user.name)}
+        </div>
+
+        <Link to="cart" className={style.btnCart}>
           <svg width={14} height={14} className={style.cartIcon}>
             <use xlinkHref={`${sprite}#icon-shopping-cart`} />
           </svg>
-            <span className={style.cartCount}>
-               {totalItems > 0 ? totalItems : "0"}
-            </span> 
+          <span className={style.cartCount}>
+            {totalItems > 0 ? totalItems : "0"}
+          </span>
         </Link>
-        )}
-        {isLoggedIn && user ? (
+
         <button type="button" className={style.logout} onClick={onLogOut}>
-            Log out
+          Log out
         </button>
-        ): null}
-    </div>
+      </>
+    )}
+  </div>
   )
 };
 

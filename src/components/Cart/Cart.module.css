@@ -238,6 +238,11 @@
     position: relative;  
 }
 
+/* .icon-paragraph {
+    margin-top: 40px;
+
+} */
+
 .price {
     font-size: 12px;
     font-weight: 500;
@@ -272,6 +277,48 @@
     color: var(--white-color);
     background-color: var(--btn-bg-red-color);
 }
+
+/* confirmAlert */
+.modalDeleteCart {
+   width: 300px;
+   padding: 20px;
+   background: var(--border-button-color);
+   border-radius: 8px; 
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.containerModalCart {
+   display: flex;
+   justify-content: space-between;
+   padding: 20px;
+}
+
+.titleModalCart {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.textModalCart {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.buttonYes {
+    background-color: var(--btn-bg-red-color);
+    color: var(--white-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .buttonNo {
+    background-color: var(--green-accent-color);
+    color: var(--white-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+  }
 
 @media (min-width: 768px) {
 
@@ -376,6 +423,11 @@
 .removeButton {
     width: 108px;
 }
+
+.modalDeleteCart {
+    width: 500px;
+}
+
 }
 
 @media (min-width: 1440px) {
@@ -400,6 +452,10 @@
     .itemCart {
         max-width: 460px;
         align-items: flex-start;
+    }
+
+    .modalDeleteCart {
+        width: 600px;
     }
 }
 

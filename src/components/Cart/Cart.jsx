@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom';
 import EllipsisText from "react-ellipsis-text";
 import { useEffect, useId } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import toast from 'react-hot-toast';
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import Counter from '../Counter/Counter';
 import { fetchCheckoutData, fetchUpdateCart } from '../../redux/cart/operations';
@@ -15,7 +18,6 @@ import { removeFromCart, setPaymentMethod, updateQuantity } from '../../redux/ca
 import { selectUser } from '../../redux/auth/selectors';
 import { cartSchema } from '../../shemas/cartSchema';
 import { selectPaymentMethod, selectTotalAmount } from '../../redux/cart/selectors';
-import toast from 'react-hot-toast';
 
 function Cart() {
   const { id } = useParams();
@@ -79,8 +81,6 @@ function Cart() {
         order_date: new Date().toISOString(),
         customer
       };
-      
-      console.log("Checkout payload:", JSON.stringify(payload, null, 2));
   
       dispatch(fetchUpdateCart(payload));
   
@@ -92,13 +92,10 @@ function Cart() {
         customer,
         paymentMethod: "cash" 
       };
-      
-      console.log("Checkout form data:", JSON.stringify(formData, null, 2));
   
       dispatch(fetchCheckoutData(formData));
       reset();
     } catch (error) {
-      console.error("Checkout error:", error);
       toast.error('An error occurred during the checkout process: ' + (error.response ? error.response.data.message : error.message));
     }
   };      
@@ -108,9 +105,40 @@ function Cart() {
   };
 
   const handleRemoveFromCart = (medicine) => {
-    if (window.confirm(`Are you sure you want to remove ${medicine.name} from the cart?`)) {
-      dispatch(removeFromCart(medicine));
-    }
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div className={style.modalDeleteCart }>
+            <h3 className={style.titleModalCart}>Confirm</h3>
+            <p 
+            className={style.textModalCart}>
+              {`Are you sure you want to remove ${medicine.name} from the cart?`}
+              </p>
+            <div className={style.containerModalCart}>
+              <button
+              className={style.buttonYes}
+                onClick={() => {
+                  dispatch(removeFromCart(medicine)); 
+                  toast.success(`${medicine.name} has been removed from the cart.`);
+                  onClose();
+                }}
+              >
+                Yes
+              </button>
+              <button
+              className={style.buttonNo}
+                onClick={() => {
+                  toast.success(`Removal of ${medicine.name} was canceled.`);
+                  onClose(); 
+                }}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        );
+      },
+    });
   };
 
   const handleIncrement = (productId, currentQuantity) => {

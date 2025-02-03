@@ -1,94 +1,90 @@
-.sectionShop {
+.modalContainer {
     display: flex;
-    justify-content: center;  
-    align-items: center;     
-    width: 376px;            
-    height: 100vh;           
-    padding: 20px;            
-    box-sizing: border-box;   
-    background-color: var(--green-accent-color); 
+    flex-direction: column;
+    justify-content: center;
+    gap: 300px;
+    align-items: center;
+    padding: 204px 38px 40px 38px;
+    max-width: 300px;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--border-button-color);
+}  
+
+.containerInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.modalContainer {
-    margin: 0 auto;
-    background-color: var(--bg-color);
-    padding: 100px 20px;
-    border-radius: 16px;
-    box-shadow: 8px 8px 0px var(--grey-secondary-color);
-    width: 400px;          
-    height: 400px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-  
 .modalTitle {
-    text-align: center;
-    font-size: 20px;
-    color: var(--btn-bg-red-color);
-    font-weight: 600;
-    margin: 0 0 10px 0;
-    animation: fadeInUp 0.5s ease-out;
+  text-align: center;
+  font-size: 20px;
+  color: var(--light-grey-color);
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: var(--green-accent-color);
+  box-shadow: 0 8px 10px var(--primary-color);
+  animation: fadeInUp 0.5s ease-out;
 }
 
 .capsule {
-    width: 300px;
-    height: 200px;
+  width: 100%;              
+  max-width: 300px;
+  height: auto;
 }
-  
+
 @media (min-width: 768px) {
-    .sectionShop {
-        width: 100vw;   
-    }
+  .modalContainer {
+    padding: 204px 38px 40px 38px;
+    max-width: 500px;
+  }
 
-    .modalContainer {
-        width: 700px;    
-        height: 600px;
-    }
+  .modalTitle {
+      font-size: 34px;     
+  }
 
-    .modalTitle {
-        font-size: 34px;     
-        margin-bottom: 20px;
-    }
-
-    .capsule {
-        width: 400px;         
-        height: 250px;
-    }
+  .capsule {
+      max-width: 400px;     
+  }
 }
 
 @media (min-width: 1440px) {
-    .sectionShop {
-        width: 100vw;  
-    }
+  .modalContainer {
+    padding: 204px 38px 40px 38px;
+    max-width: 600px;
+  }
 
-    .modalTitle {
-        font-size: 40px;    
-    }
+  .modalTitle {
+      font-size: 40px;    
+  }
 }
 
 @keyframes fadeInUp {
-    from {
+  from {
       opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
+      transform: translateY(40px);
+  }
+  to {
       opacity: 1;
       transform: translateY(0);
-    }
   }
-  
-  .modalContainer:exit {
-    animation: fadeOutDown 0.5s ease-out forwards;
-  }
-  
-  @keyframes fadeOutDown {
-    from {
+}
+
+.modalContainer:exit {
+  animation: fadeOutDown 0.7s ease-out forwards;
+}
+
+@keyframes fadeOutDown {
+  from {
       opacity: 1;
       transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(20px);
-    }
   }
+  to {
+      opacity: 0;
+      transform: translateY(40px);
+  }
+}

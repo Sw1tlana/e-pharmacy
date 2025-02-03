@@ -59,7 +59,6 @@ function Medicine() {
     return (
       <div>
         <Loader />
-        <p>Loading medicines...</p>
       </div>
     );
   }

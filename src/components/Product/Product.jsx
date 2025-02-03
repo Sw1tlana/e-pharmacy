@@ -17,6 +17,8 @@ import { reviews2x } from '../../shared/images/reviews';
 import maria2x from '../../shared/images/reviews/maria@2x.png';
 import sergey2x from '../../shared/images/reviews/sergey@2x.png';
 import natalia2x from '../../shared/images/reviews/natalia@2x.png';
+import { updateQuantity } from '../../redux/cart/slice';
+import { selectTotalAmount } from '../../redux/cart/selectors';
 
 function Product() {
     const { id } = useParams(); 
@@ -25,6 +27,7 @@ function Product() {
     const reviews = useSelector(selectReviews);
     const loading = useSelector(selectLoading);
     const itemsInCart = useSelector(selectItems);
+    const totalAmount = useSelector(selectTotalAmount);
 
     const itemInCart = product ? itemsInCart.find(item => item.id === product.id) : null;
     const quantity = itemInCart ? itemInCart.quantity : 0;
@@ -33,27 +36,23 @@ function Product() {
 
     const defaultImages = [maria2x, sergey2x, natalia2x];
 
-    const handleIncrement = (id) => {
-      console.log("Incrementing item with id:", id);
-      dispatch(incrementItem(id));
-    };
-  
-    const handleDecrement = (id) => {
-      console.log("Decrementing item with id:", productId);
-      if (quantity > 0) {
-        dispatch(decrementItem(id));
-      }
-    };
-
     useEffect(() => {
           dispatch(fetchMedicinesId(id));
   }, [dispatch, id]);
 
       if (loading) {
         return <Loader />; 
-    }
+    };
 
-  console.log("Product from Redux:", product); 
+   const handleIncrement = (productId, currentQuantity) => {
+     dispatch(updateQuantity({ productId, quantity: currentQuantity + 1 }));
+   }
+ 
+   const handleDecrement = (productId, currentQuantity) => {
+     if (currentQuantity > 1) {
+       dispatch(updateQuantity({ productId, quantity: currentQuantity - 1 }));
+     }
+   };
 
   return (
     <section className={style.sectionProduct}>
@@ -76,16 +75,16 @@ function Product() {
                 <svg width={22} height={22} className={style.iconParagrapf}>
                    <use xlinkHref={`${sprite}#icon-paragraph`} />
                 </svg>
-                  <p className={style.price}>{product.price}</p>
+                  <p className={style.price}>{totalAmount.toFixed(2)}</p>
             </div>
          </div>
          <div className={style.containerButton}>
             <Counter 
-            isPage2={false}
-            quantity={quantity} 
-            onIncrement={handleIncrement} 
-            onDecrement={handleDecrement} 
-            productId={product.id}
+              productId={product.id}
+              quantity={quantity}
+              isPage2={false}
+              onIncrement={handleIncrement}
+              onDecrement={handleDecrement}
             />
             <AddToCart medicine={product}/>
          </div>

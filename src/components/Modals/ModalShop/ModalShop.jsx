@@ -6,7 +6,6 @@ import { capsule2x } from '../../../shared/images/homePage/index';
 function ModalShop() {
  
   return (
-    <section className={style.sectionShop}>
     <motion.div 
       className={style.modalContainer}
       initial={{ opacity: 0, scale: 0.8 }}
@@ -14,13 +13,14 @@ function ModalShop() {
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
-      <h2 className={style.modalTitle}>
-        Call back by phone
-        or visit us at the address on the card!
-      </h2>
-      <img className={style.capsule} src={capsule2x} alt="example" />
+      <div className={style.containerInfo}>
+        <h2 className={style.modalTitle}>
+          Call back by phone
+          or visit us at the address on the card!
+        </h2>
+        <img className={style.capsule} src={capsule2x} alt="example" />
+      </div>
     </motion.div>
-    </section>
   )
 };
 

@@ -26,7 +26,7 @@ function Header({ isWhiteBackground, isLogoOnly, hideMenu }) {
   };
 
   const headerClass = isWhiteBackground ? style.white : style.green;
-  const burgerMenuClass = isHomePage ? style.burgerMenuWhite : style.burgerMenuGreen
+  const burgerMenuClass = isHomePage ? style.burgerMenuWhite : style.burgerMenuGreen;
 
   const handleClick = () => {
     openModal(<ModalBurger />);

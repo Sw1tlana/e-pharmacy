@@ -6,6 +6,7 @@ import ModalLoginForm from '../Modals/ModalLoginForm/ModalLoginForm';
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'
 import clsx from 'clsx';
 
 const getNavLinkClass = ({ isActive }) => {
@@ -16,9 +17,13 @@ const getNavLinkClass = ({ isActive }) => {
 
 function AuthNav() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const { openModal } = useModalContext();
   const [isMobile, setIsMobile] = useState(false);
+
+  const appBarClass = isHomePage ? style.appBarWhite : style.appBarGreen;
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,7 +38,7 @@ function AuthNav() {
   }, []);
 
   return (
-        <div className={style.containerNav}>
+        <div className={clsx(style.containerNav, appBarClass)}>
           {!isLoggedIn && (
             <>
           <NavLink 

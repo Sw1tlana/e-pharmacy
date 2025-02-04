@@ -42,6 +42,36 @@ body {
     min-height: 100vh;
 }
 
+body.is-hidden {
+    overflow: auto;
+  }
+  
+  body::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: var(--grey-secondary-color);
+    border-radius: 20px;
+  }
+  
+  body::-webkit-scrollbar-track {
+    background-color: var(--bg-white-color);
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
+  }
+
 button {
     cursor: pointer;
 }

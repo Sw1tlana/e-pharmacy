@@ -6,6 +6,9 @@ import SharedLayout from '../SharedLayout/SharedLayout';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from '../../redux/auth/operations';
 
+import RestrictedRoute from '../../components/RestrictedRoute/RestrictedRoute';
+import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
+
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const ShopPage = lazy(() => import('../../pages/ShopPage/ShopPage'));
 const ProductPage = lazy(() => import('../../pages/ProductPage/ProductPage'));
@@ -31,10 +34,22 @@ function App() {
         <Route path="/store" element={<MedicineStorePage/>}/>
         <Route path="/products" element={<ShopPage/>}/>
         <Route path="/products/:id" element={<CartPage/>} /> 
-        <Route path="/cart" element={<ProductPage/>}/>
+        <Route path="/cart" element={
+          <PrivateRoute>
+            <ProductPage/>
+          </PrivateRoute>
+        }/>
         <Route path="/feature" element={<FeaturePage/>}/>
-        <Route path="/register" element={<RegisterPage/>}/>
-        <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/register" element={
+          <RestrictedRoute>
+            <RegisterPage/>
+          </RestrictedRoute>
+          }/>
+        <Route path="/login" element={
+          <RestrictedRoute>
+            <LoginPage/>
+          </RestrictedRoute>
+        }/>
         <Route path="*" element={<Navigate to="/" replace />}/>
       </Routes>
   </Suspense>

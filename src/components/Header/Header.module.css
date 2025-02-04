@@ -14,6 +14,14 @@
    display: none; 
 }
 
+.appBarWhite {
+   color: red; 
+ }
+ 
+ .appBarGreen {
+   color: green; 
+ }
+
 .burgerMenu {
    display: block;
    position: relative; 

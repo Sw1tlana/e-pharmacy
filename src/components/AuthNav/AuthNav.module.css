@@ -1,5 +1,7 @@
 .containerNav {
     display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .headerLink {
@@ -24,8 +26,15 @@
     text-decoration: none;
 }
 
+@media (min-width: 768px) {
+.containerNav {
+   flex-direction: row;
+}
+}
+
 @media (min-width: 1440px) {
     .containerNav {
         display: flex;
+        margin-left: 240px;
     } 
 }

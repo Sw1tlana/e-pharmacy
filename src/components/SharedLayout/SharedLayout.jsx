@@ -18,8 +18,8 @@ function SharedLayout({ children }) {
       hideMenu={hideHeaderFooter}
       />
       {hideHeaderFooter && <Header hideMenu={hideHeaderFooter}/> }
-      <ScrollWrapper>
-        <main style={{ minHeight: '100vh' }}>{children}</main>
+      <ScrollWrapper wrapClassName="main-scroll">
+        <main style={{ flex: '1 0 auto' }}>{children}</main>
       </ScrollWrapper>
       {!hideHeaderFooter && <Footer />}
     </div>

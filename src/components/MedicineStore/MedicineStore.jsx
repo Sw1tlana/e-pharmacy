@@ -7,21 +7,21 @@ import EllipsisText from "react-ellipsis-text";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchStores } from '../../redux/stores/operation';
+import ModalShop from '../../components/Modals/ModalShop/ModalShop';
 
 import { selectStores, 
          selectError, 
          selectLoading } from '../../redux/stores/selectors';
+import { useModalContext } from '../../context/useModalContext';
 
 function MedicineStore() {
-
   const dispatch = useDispatch();
   const stores = useSelector(selectStores);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-  console.log(stores);
+   const { openModal } = useModalContext();
 
   useEffect(() => {
-    console.log("Dispatching fetchStores...");
     dispatch(fetchStores());
   }, [dispatch]);
 
@@ -35,6 +35,14 @@ function MedicineStore() {
   
     return currentTime >= storeOpenTime && currentTime <= storeCloseTime;
   };
+
+  const handleClickStore = () => {
+     openModal(<ModalShop/>);
+  };
+
+  if(!loading) {
+    return <Loader/>
+  }
 
   return (
     <section className={style.sectionStore}>
@@ -69,8 +77,11 @@ function MedicineStore() {
               <p className={style.textStores}>{store.phone}</p>
               </div>
 
-              <button className={style.btnVisit} type='button'>
-                Visit Store
+              <button 
+              className={style.btnVisit}
+              onClick={handleClickStore} 
+              type='button'>
+              Visit Store
               </button>
 
               <div className={`${style.textStores} ${style.ratingContainer}`}>

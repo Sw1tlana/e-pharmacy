@@ -1,8 +1,9 @@
 .featureSection {                     
-    width: 375px;                 
+    width: 375px; 
+    height: 800px;                 
     margin: 0 auto;                  
     padding: 80px 10px;
-    background: linear-gradient(90deg, #7fefa8, #aecef5);
+    background: linear-gradient(90deg, #f2f9f5, #ebf1f8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,7 +36,7 @@
     display: block;
     text-align: center;
     margin-top: 20px;
-    color: var(--bg-white-color);
+    color: var(--btn-green-accent-color);
     transition: var(--animation);
   }
 
@@ -46,7 +47,8 @@
 
   @media (min-width: 768px) { 
     .featureSection {
-        width: 768px;       
+        width: 768px;
+        height: 900px;       
         padding: 120px 20px;
       }
 

@@ -1,15 +1,13 @@
 .header {
    display: flex;
    align-items: center;
-   justify-content: space-between; 
-   max-width: 375px; 
+   width: 375px; 
    position: absolute;
    top: 28px;
    left: 50%;
    transform: translateX(-50%);
    z-index: 9;
    padding: 0 16px; 
-   width: 100%;
 }
 
 .nav {
@@ -20,10 +18,17 @@
    display: block;
    position: relative; 
    z-index: 10;
-   margin-left: auto; 
-   stroke: var(--white-color);
+   margin-left: 10px; 
    background: none; 
    border: none;
+}
+
+.burgerMenuWhite .iconBurger {
+   stroke: var(--white-color);
+ }
+
+.burgerMenuGreen .iconBurger {
+   stroke: var(--green-accent-color);
 }
 
 .iconBurger {
@@ -33,14 +38,79 @@
    fill: none;
 }
 
+.userCartContainer {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.btnCart {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border: none;
+   background-color: transparent;
+   border: 1px solid var(--light-grey-color);
+   background-color: var(--white-color);
+   width: 44px;
+   height: 44px;
+   border-radius: 50%;
+   position: relative;
+}
+
+.cartIcon {
+   fill: transparent;
+   stroke: var(--green-accent-color);
+}
+
+.btnCart:active {
+   background-color: var(--bg-green-lite); 
+}
+
+.cartCount {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 16px;
+   height: 16px;
+   border-radius: 50%;
+   background-color: var(--bg-green-lite);
+   color: var(--green-accent-color);
+   font-size: 12px;
+   font-weight: 700;
+   line-height: 1.2;
+   position: absolute;
+   top: -4px; 
+   right: -2px;
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--green-accent-color);
+    border: none;
+    background-color: transparent;
+    border: 1px solid var(--light-grey-color);
+    background-color: var(--white-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    position: relative;
+  }
+
 @media (min-width: 768px) {
    .header {
-      max-width: 768px; 
+      width: 768px; 
       padding: 0 32px; 
    }
 
    .nav {
       display: none; 
+   }
+
+   .userCartContainer {
+      /* margin-left: 250px; */
    }
 
    .burgerMenu {
@@ -55,15 +125,21 @@
     }
 
    .header {
-      max-width: 1440px; 
+      width: 1440px; 
       padding: 28px 100px; 
-      justify-content: space-between; 
    }
 
    .nav {
       display: flex;
       align-items: center;
-      justify-content: space-between; 
+      margin-left: auto;
+   }
+
+   .userCartContainer {
+      display: flex;
+      align-items: center;
+      margin-left: 194px;
+      margin-right: 10px;
    }
 
    .burgerMenu {

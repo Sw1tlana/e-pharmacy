@@ -1,26 +1,27 @@
 .myScroll {
-    height: 100vh;
-    overflow: auto; 
-}
-
-.myScroll .os-scrollbar {
-    --os-size: 8px;
-    --os-track-bg: #FFFFFF;
-    --os-track-bg-hover: #FFFFFF;
-    --os-handle-bg: #323F47;
-    --os-track-border-radius: 9px;
-    --os-handle-border-radius: 9px;
-    --os-handle-max-size: 150px;
-    --os-handle-bg-hover: #323F47;
-    --os-handle-bg-active: #323F47;
-}
-
-.myScroll .os-scrollbar:hover {
-    cursor: pointer;
-}
-
-@media (min-width: 768px) {
-    .myScroll .os-scrollbar {
-        --os-handle-max-size: 235px;
-    }
-}
+    height: 100%;
+    overflow: hidden; /* Замість overflow: auto */
+  }
+  
+  /* Для налаштування зовнішнього вигляду скролбару */
+  .myScroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .myScroll::-webkit-scrollbar-track {
+    background: #FFFFFF;
+    border-radius: 9px;
+  }
+  
+  .myScroll::-webkit-scrollbar-thumb {
+    background: #323F47;
+    border-radius: 9px;
+  }
+  
+  .myScroll::-webkit-scrollbar-thumb:hover {
+    background: #323F47;
+  }
+  
+  .myScroll::-webkit-scrollbar-thumb:active {
+    background: #323F47;
+  }

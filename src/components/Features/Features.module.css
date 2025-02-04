@@ -1,6 +1,5 @@
 .featuresWrapper {
-    max-width: 375px;
-    width: 100%;
+    width: 375px;
     overflow: hidden;
     position: relative;
     white-space: nowrap;
@@ -17,13 +16,13 @@
 
 @media (min-width: 768px) {
     .featuresWrapper {
-     max-width: 768px;
+     width: 768px;
     } 
 }
 
 @media (min-width: 1440px) {
     .featuresWrapper {
-     max-width: 1440px;
+     width: 1440px;
      padding: 0 140px;
      background: var(--bg-color);
     } 

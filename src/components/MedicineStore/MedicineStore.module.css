@@ -1,5 +1,5 @@
 .sectionStore {
-    max-width: 375px;
+    width: 375px;
     width: 100%;
     padding: 120px 20px 80px 20px;
     background-color: var(--bg-color);
@@ -144,7 +144,7 @@
 
   @media (min-width: 768px) {
     .sectionStore {
-        max-width: 768px;
+        width: 768px;
         padding: 152px 32px 120px 32px;
     }
     
@@ -218,7 +218,7 @@
 
 @media (min-width: 1440px) {
     .sectionStore {
-        max-width: 1440px;
+        width: 1440px;
         padding: 172px 128px 120px 128px;
     }
     

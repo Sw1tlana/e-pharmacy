@@ -1,20 +1,12 @@
-import 'overlayscrollbars/styles/overlayscrollbars.css';
-import './ScrollWrapper.module.css';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { Scrollbars } from 'rc-scrollbars';
 import clsx from 'clsx';
+import style from './ScrollWrapper.module.css';
 
 const ScrollWrapper = ({ children, wrapClassName }) => {
   return (
-    <OverlayScrollbarsComponent
-      element="div"
-      className={clsx('myScroll', wrapClassName && wrapClassName)}
-      options={{
-        scrollbars: { autoHide: 'never', theme: 'no-theme' },
-      }}
-      defer
-    >
+    <Scrollbars className={clsx(style.myScroll, wrapClassName && wrapClassName)} style={{ height: '100vh', width: '100%' }}>
       {children}
-    </OverlayScrollbarsComponent>
+    </Scrollbars>
   );
 };
 

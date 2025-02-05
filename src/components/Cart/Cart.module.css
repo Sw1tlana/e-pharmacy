@@ -1,6 +1,5 @@
 .sectionCart {
-    min-width: 320px;
-    max-width: 375px;
+    width: 375px;
     height: auto;
     padding: 120px 20px 80px 20px;
     background-color: var(--bg-color);
@@ -320,7 +319,7 @@
 @media (min-width: 768px) {
 
     .sectionCart {
-        min-width: 768px;
+        width: 768px;
         padding: 148px 32px 120px 32px;
     }
 
@@ -432,7 +431,7 @@
     .sectionCart {
         display: flex;
         justify-content: space-between;
-        max-width: 1440px;
+        width: 1440px;
         padding: 172px 128px 120px 128px;
     }
 

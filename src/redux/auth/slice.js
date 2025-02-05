@@ -64,7 +64,6 @@ const INITIAL_STATE = {
       state.token = token;
       state.refreshToken = refreshToken;
       state.isRefreshing = false; 
-      console.log('New refresh token:', action.payload.refreshToken);
     })
     .addCase(refreshUser.rejected, (state) => {
       state.token = null;

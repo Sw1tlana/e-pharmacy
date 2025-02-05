@@ -27,14 +27,12 @@ export const storeSlice = createSlice({
     builder
       .addCase(fetchStores.pending, handlePending)
       .addCase(fetchStores.fulfilled, (state, action) => {
-        console.log('Payload:', action.payload);
           state.stores = action.payload;
           state.isLoggedIn = true;
         })
         .addCase(fetchStores.rejected, handleRejected)
         .addCase(nearestStores.pending, handlePending)
         .addCase(nearestStores.fulfilled, (state, action) => {
-          console.log('Payload:', action.payload);
             state.stores = action.payload;
             state.isLoggedIn = true;
           })

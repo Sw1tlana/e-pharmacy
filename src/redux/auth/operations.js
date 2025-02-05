@@ -21,7 +21,6 @@ export const registerUser = createAsyncThunk(
 
       return { user, token, refreshToken };
     } catch (error) {
-      console.error('Error during registration:', error);
       return thunkAPI.rejectWithValue(error.response?.data?.message || 'Register failed');
     }
   }
@@ -32,19 +31,11 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await requestSignIn(email, password);
-      console.log('Response from server:', response);
       const { token, refreshToken, user } = response;
-
-      console.log('Token:', token);
-      console.log('RefreshToken:', refreshToken);
-      console.log('User:', user);
-
-      console.log('User object from server:', user);
 
       thunkAPI.dispatch(setToken({ token, refreshToken }));
       return { user, token, refreshToken };
     } catch (error) {
-      console.error('Login error:', error.message);
       return thunkAPI.rejectWithValue(error.response?.data?.message || 'Login failed');
     }
   }
@@ -66,7 +57,6 @@ export const loginUser = createAsyncThunk(
         setAuthHeader(token);
         return { token, refreshToken: newRefreshToken };
       } catch (error) {
-        console.error('Error during token refresh:', error);
         return thunkAPI.rejectWithValue(error.response?.data?.message || 'Token refresh failed');
       }
     }
@@ -80,7 +70,6 @@ export const logout = createAsyncThunk(
           await requestLogOut();
           return {};
       } catch (error) {
-          console.error('Error during logout:', error);
           return thunkAPI.rejectWithValue(error.response?.data?.message || 'Logout failed');
       }
   }

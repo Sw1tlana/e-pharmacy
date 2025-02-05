@@ -6,6 +6,7 @@ function AddMedicines() {
   const navigate = useNavigate();
 
   const handleBuyMedicineClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     navigate('/store'); 
   };
 

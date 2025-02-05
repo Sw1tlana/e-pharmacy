@@ -41,6 +41,7 @@ function PromoBanners() {
       };
 
       const handleRedirect = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         navigate('/feature'); 
       };
 
@@ -160,6 +161,7 @@ function PromoBanners() {
         </ul>
       ) : (
         <div className={style.containerNotification}>
+        <Loader/>
         <p className={style.notification}>No stores available</p>
         </div>   
       )}

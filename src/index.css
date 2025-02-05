@@ -42,6 +42,10 @@ body {
     min-height: 100vh;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body.is-hidden {
     overflow: auto;
   }

@@ -25,7 +25,6 @@ const INITIAL_STATE = {
         builder
             .addCase(fetchReviews.pending, handlePending)
             .addCase(fetchReviews.fulfilled, (state, action) => {
-            console.log('Payload:', action.payload); 
             state.loading = false;
             state.reviews = action.payload; 
             })

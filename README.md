@@ -55,5 +55,7 @@ This technology stack allows the creation of high-performance, adaptive, and sec
 ### Developers:
 
 [@Sw1tlana](https://github.com/Sw1tlana)
+
 [GitHub Repository BackEnd](https://github.com/Sw1tlana/e-pharmacy-api)
+
 [GitHub Repository FronEnd](https://github.com/Sw1tlana/e-pharmacy)

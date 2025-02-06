@@ -20,6 +20,7 @@
 .appBarWhite .headerLink {
     color: var(--white-color);
     border: 1px solid var(--border-authorisation-color);
+    text-decoration: none;
   }
 
 .appBarWhite .headerLink:hover,
@@ -27,12 +28,13 @@
 .appBarWhite .headerLink:active,
 .appBarWhite .headerLink.activeHeader { 
     border: none;
-    text-decoration: none;
+    text-decoration: underline;
 }
   
   .appBarGreen .headerLink {
     color: var(--green-accent-color);
     border: 1px solid var(--green-accent-color);
+    text-decoration: none;
   }
 
 .appBarGreen .headerLink:hover,
@@ -40,7 +42,7 @@
 .appBarGreen .headerLink:active,
 .appBarGreen .headerLink.activeHeader { 
     border: none;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 @media (min-width: 768px) {

@@ -15,7 +15,6 @@ import { fetchMedicinesId } from '../../redux/medicine/operations';
 import { icons as sprite } from '../../shared/icons/index';
 import { selectItems } from '../../redux/cart/selectors';
 import { removeFromCart, setPaymentMethod, updateQuantity } from '../../redux/cart/slice';
-import { selectUser } from '../../redux/auth/selectors';
 import { cartSchema } from '../../shemas/cartSchema';
 import { selectPaymentMethod, selectTotalAmount } from '../../redux/cart/selectors';
 
@@ -23,11 +22,8 @@ function Cart() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const items = useSelector(selectItems);
-  const user = useSelector(selectUser);
   const paymentMethod = useSelector(selectPaymentMethod);
   const totalAmount = useSelector(selectTotalAmount);
-
-  console.log(user);
 
   const nameId = useId();
   const emailId = useId();
@@ -36,7 +32,6 @@ function Cart() {
 
   useEffect(() => {
     if (id) {
-      console.log('Fetching product with ID:', id);
       dispatch(fetchMedicinesId(id));
     }
   }, [dispatch, id]);
@@ -282,7 +277,7 @@ function Cart() {
                 Total:
               </p>
               <span className={style.total}>
-                <svg width={24} height={24} className={style.iconParagrapf}>
+                <svg width={24} height={24} className={style.iconParagrapfTotal}>
                   <use xlinkHref={`${sprite}#icon-paragraph`} />
                 </svg>
                 {totalAmount.toFixed(2)}

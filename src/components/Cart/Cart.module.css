@@ -13,7 +13,7 @@
 }
 
 .containerCart {
-    max-width: 1022px;
+    width: 320px;
     height: 100%;
     border-radius: 27px;
     background-color: var(--white-color);
@@ -171,6 +171,12 @@
     line-height: 1.4;
 }
 
+.iconParagrapfTotal {
+    position: relative;
+    top: -2px;
+    right: 0;
+}
+
 .horizontalLine {
     position: relative; 
     width: 100%; 
@@ -182,8 +188,7 @@
 /* addToCart */
 
 .addContainer {
-    max-width: 375px;
-    width: 100%;
+    width: 320px;
     padding-top: 80px;
 }
 
@@ -233,13 +238,19 @@
     line-height: 1.4;
 }
 
+.iconParagrapf {
+    position: relative; 
+    top: 6px;
+    left: 4px;
+}
+
 .price {
     font-size: 12px;
     font-weight: 500;
     line-height: 1.2;
     position: relative;
-    top: -20px;
-    left: 40px;
+    top: -12px;
+    left: 24px;
 }
 
 .btnCounter {
@@ -318,54 +329,53 @@
 
 @media (min-width: 768px) {
 
-    .sectionCart {
-        width: 768px;
-        padding: 148px 32px 120px 32px;
-    }
+.sectionCart {
+    width: 768px;
+    padding: 148px 32px 120px 32px;
+}
 
-    .titleCart {
-        margin-bottom: 32px;
-    }
+.titleCart {
+    margin-bottom: 32px;
+}
 
-    .containerCart {
-        max-width: 704px;
-        padding: 40px 78px;
-    }
+.containerCart {
+    width: 704px;
+    padding: 40px 78px;
+}
 
-    .subTitleCart {
-        font-size: 20px;
-    }
+.subTitleCart {
+    font-size: 20px;
+}
 
-    .textCart {
-        font-size: 16px;
-    }
+.textCart {
+    font-size: 16px;
+}
 
-    .containerInput {
-        grid-template-columns: repeat(2, 1fr);     
-    }
+.containerInput {
+    grid-template-columns: repeat(2, 1fr);     
+}
 
-    .label {
-        margin-left: 14px;
-    }
+.label {
+    margin-left: 14px;
+}
 
-    .radioInput {
-        width: 20px;
-        height: 20px;
-    }
+.radioInput {
+    width: 20px;
+    height: 20px;
+}
 
-    .radioInput:checked::before { 
-        width: 12px;
-        height: 12px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+.radioInput:checked::before { 
+    width: 12px;
+    height: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
     /* addToCart */
 
 .addContainer {
-    max-width: 768px;
-    width: 100%;
+    width: 704px;
     padding: 80px 20px 0 20px;
 }
 
@@ -375,15 +385,10 @@
     align-self: center;
 }
 
-.itemCart {
-    max-width: 704px;
-}
-
 .infoCart {
     display: flex;
     flex-direction: column;
-    max-width: 704px;
-    width: 100%;
+    width: 704px;
 }
 
 .info {
@@ -409,14 +414,14 @@
 .price {
     font-size: 14px;
     top: 2px;
-    left: 10px;
+    left: -6px;
 }
 
 .iconParagrapf {
-    position: relative; 
     top: -2px;
-    left: 0;
+    left: -10px;
 }
+
 .removeButton {
     width: 108px;
 }
@@ -428,32 +433,44 @@
 }
 
 @media (min-width: 1440px) {
-    .sectionCart {
-        display: flex;
-        justify-content: space-between;
-        width: 1440px;
-        padding: 172px 128px 120px 128px;
-    }
+.sectionCart {
+    display: flex;
+    width: 1440px;
+    justify-content: space-between;
+    padding: 172px 128px 120px 128px;
+}
 
-    .containerCart {
-        max-width: 628px;
-        padding: 40px;
-    }
+.containerCart {
+     width: 628px;
+    padding: 40px;
+}
 
 /* addToCart */
-    .addContainer {
-        max-width: 460px;
-        padding: 80px 20px 0 20px;
-    }
-    
-    .itemCart {
-        max-width: 460px;
-        align-items: flex-start;
-    }
+.addContainer {
+    width: 460px;
+    padding: 80px 20px 0 20px;
+}
 
-    .modalDeleteCart {
-        width: 600px;
-    }
+.price {
+    left: -6px;
+}
+    
+.iconParagrapf {
+    left: -8px;
+}
+    
+.textCart {
+    font-size: 18px;
+}
+    
+.btnCounter {
+    display: flex;
+    justify-content: space-between;
+}
+    
+.modalDeleteCart {
+    width: 600px;
+}
 }
 
 

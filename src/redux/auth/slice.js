@@ -80,6 +80,7 @@ const INITIAL_STATE = {
             registerUser.rejected, loginUser.rejected, logout.rejected),
             (state) => {
               state.error = true;
+              toast.error('Incorrect email or password');
             })
 
     },});

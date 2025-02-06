@@ -12,14 +12,25 @@ return clsx(style.footerLink, {
 };
 
 function NavLinks({ context = 'header' }) {
+
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div  className={clsx({
         [style.containerFooterLink]: context === 'footer',
         [style.containerHeaderLink]: context === 'header',  
       })}>
-      <NavLink className={(props) => getNavLinkClass({...props, context})} to="/">Home</NavLink>
-      <NavLink className={(props) => getNavLinkClass({...props, context})} to="/store">Medicine store</NavLink>
-      <NavLink className={(props) => getNavLinkClass({...props, context})} to="/products">Medicine</NavLink>
+      <NavLink className={(props) => getNavLinkClass({ ...props, context })} to="/" onClick={handleClick}>
+        Home
+      </NavLink>
+      <NavLink className={(props) => getNavLinkClass({ ...props, context })} to="/store" onClick={handleClick}>
+        Medicine store
+      </NavLink>
+      <NavLink className={(props) => getNavLinkClass({ ...props, context })} to="/products" onClick={handleClick}>
+        Medicine
+      </NavLink>
     </div>
   )
 };

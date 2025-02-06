@@ -28,7 +28,6 @@ function LoginForm() {
 });
 
 const onSubmit = (formData) => {
-  console.log('Form data before dispatch:', formData);
   dispatch(loginUser({ email: formData.email, password: formData.password }));
   reset();
   navigate('/');

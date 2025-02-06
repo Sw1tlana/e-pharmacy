@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectSearchQuery, 
          selectSelectedCategory } 
          from '../../redux/medicine/selectors';
-import { resetFilters, setSearchQuery, setSelectedCategory } from '../../redux/medicine/slice';
+import { resetFilters,
+         setSearchQuery, 
+         setSelectedCategory } from '../../redux/medicine/slice';
 
 function MedicineSearch() {
   const dispatch = useDispatch();

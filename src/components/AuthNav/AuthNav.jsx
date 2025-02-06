@@ -13,7 +13,7 @@ const getNavLinkClass = ({ isActive }) => {
   return clsx(style.headerLink, {
     [style.activeHeader]: isActive,
   })
-}
+};
 
 function AuthNav() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -22,8 +22,6 @@ function AuthNav() {
 
   const { openModal } = useModalContext();
   const [isMobile, setIsMobile] = useState(false);
-
-  const appBarClass = isHomePage ? style.appBarWhite : style.appBarGreen;
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,8 +35,13 @@ function AuthNav() {
     };
   }, []);
 
+  const appBarClass = clsx({
+    [style.appBarWhite]: isHomePage || isMobile,
+    [style.appBarGreen]: !isHomePage && !isMobile,
+  });
+
   return (
-        <div className={clsx(style.containerNav, appBarClass)}>
+    <div className={clsx(style.containerNav, appBarClass)}>
           {!isLoggedIn && (
             <>
           <NavLink 
@@ -47,7 +50,7 @@ function AuthNav() {
           onClick={(e) => {
             if (isMobile) {
               e.preventDefault(); 
-              openModal(<ModalRegisterForm/>, { color: 'black' });
+              openModal(<ModalRegisterForm/>);
             }
           }}>
             Register
@@ -59,7 +62,7 @@ function AuthNav() {
           onClick={(e) => {
           if (isMobile) {
             e.preventDefault(); 
-            openModal(<ModalLoginForm />, { color: 'black' });
+            openModal(<ModalLoginForm />);
           }
         }}>
             Log In

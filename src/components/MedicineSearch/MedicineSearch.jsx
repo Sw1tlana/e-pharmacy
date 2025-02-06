@@ -43,11 +43,13 @@ function MedicineSearch() {
   const handleSearchChange = (e) => {
     const query = e.target.value;
     dispatch(setSearchQuery(query));
+
+    if (!query.trim()) {
+      dispatch(resetFilters()); 
+    }
   };
   
   const handleFilter = () => {
-    dispatch(resetFilters());  
-
     const filters = {
       category: selectedCategory ? selectedCategory.value : undefined, 
       query: searchQuery.trim() || undefined,  
@@ -55,7 +57,8 @@ function MedicineSearch() {
       limit: 12,
     };
   
-    dispatch(fetchMedicines(filters)); 
+    dispatch(fetchMedicines(filters));
+
   };
 
   const isMobile = window.innerWidth <= 768;

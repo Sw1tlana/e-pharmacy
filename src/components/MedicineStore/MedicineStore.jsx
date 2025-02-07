@@ -40,7 +40,7 @@ function MedicineStore() {
      openModal(<ModalShop/>);
   };
 
-  if(!loading) {
+  if(loading) {
     return <Loader/>
   }
 

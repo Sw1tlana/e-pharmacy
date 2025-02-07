@@ -106,7 +106,7 @@ function PromoBanners() {
         </div>
 
          <div className={style.wrapperList}>
-        {!loading && <Loader/>}  
+        {loading && <Loader/>}  
         {Array.isArray(stores) && stores.length > 0 ? (
         <ul className={style.listStores}>
           {stores.map((store, index) => (

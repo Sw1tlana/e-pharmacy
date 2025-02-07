@@ -10,7 +10,7 @@ const handlePending = (state) => {
   
   const handleRejected = (state, action) => {
     state.loading = false;
-    state.error = action.error.message;;
+    state.error = action.payload || action.error.message;
   };
 
 const INITIAL_STATE = {
@@ -28,13 +28,13 @@ export const storeSlice = createSlice({
       .addCase(fetchStores.pending, handlePending)
       .addCase(fetchStores.fulfilled, (state, action) => {
           state.stores = action.payload;
-          state.isLoggedIn = true;
+          state.loading = false;
         })
         .addCase(fetchStores.rejected, handleRejected)
         .addCase(nearestStores.pending, handlePending)
         .addCase(nearestStores.fulfilled, (state, action) => {
             state.stores = action.payload;
-            state.isLoggedIn = true;
+            state.loading = false;
           })
           .addCase(nearestStores.rejected, handleRejected)
 

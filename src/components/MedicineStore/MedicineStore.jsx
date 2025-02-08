@@ -40,14 +40,11 @@ function MedicineStore() {
      openModal(<ModalShop/>);
   };
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
     <section className={style.sectionStore}>
       <h2 className={style.titleStore}>Medicine store</h2>
-
+      
+       {loading && <Loader/>}
       {error && <p className={style.error}>Error: {error}</p>} 
       {Array.isArray(stores) && stores.length > 0 ? (
         <ul className={style.listStores}>

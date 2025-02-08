@@ -50,18 +50,10 @@ function Medicine() {
     fetchMedicinesData();
   }, [page, limit, filters]);
 
-
-  if (loading) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
-  }
-
   return (
     <>
     <MedicineSearch/>
+    {loading && <Loader/>}
     <section className={style.sectionMedicine}>
       {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
         <ul className={style.listMedicine}>
